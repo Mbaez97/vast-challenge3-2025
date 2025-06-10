@@ -31,4 +31,32 @@ We have a knowledge graph describing the last two weeks on the island, this grap
   - `backend/`: Backend code for data processing and analysis.
   - `frontend/`: Frontend code for visualizations and user interface.
 - `README.md`: This file, providing an overview of the project.
-- `requirements.txt`: List of Python dependencies for the project.
+- `pyproject.toml`: List of Python dependencies for the project.
+
+## UV quick guide:
+
+* Install UV:
+
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+or
+
+```
+pip install uv
+```
+
+* Install dependencies and create venv:
+
+```
+uv sync
+```
+
+* Add dependency
+
+```
+uv add numpy
+```
+
+I also recomend pyenv installed on the machine to manage the instalation of different python versions.
