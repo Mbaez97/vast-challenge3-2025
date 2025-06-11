@@ -1,0 +1,275 @@
+{
+  "files": [
+    {
+      "name": "marieboucher-sample-dataset.pao",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Contracts - Marie Boucher sample-dataset"
+    },
+    {
+      "name": "marieboucher-somefixedlocations-hypergraph.pao",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Contracts - Marie Boucher some fixed locations hypergraph"
+    },
+    {
+      "name": "aviz_ilda_hg.json",
+      "data-type": "PUB_HG",
+      "owner": "Master",
+      "description": "Publications - AVIZ and ILDA teams"
+    },
+    {
+      "name": "aviz_hg.json",
+      "data-type": "PUB_HG",
+      "owner": "Master",
+      "description": "Publications - AVIZ team"
+    },
+    {
+      "name": "alliances_SXX.csv",
+      "data-type": "Csv",
+      "owner": "Master",
+      "description": "Formal Interstate Alliance"
+    },
+    {
+      "name": "tao_hg.json",
+      "data-type": "PUB_HG",
+      "owner": "Master",
+      "description": "Publications - TAO team"
+    },
+    {
+      "name": "ilda_hg.json",
+      "data-type": "PUB_HG",
+      "owner": "Master",
+      "description": "Publications - ILDA team"
+    },
+    {
+      "name": "CommunitySizePaovis.json",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Community - Size Paovis"
+    },
+    {
+      "name": "marieboucher-small.pao",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Contracts - Marie Boucher small"
+    },
+    {
+      "name": "marieboucher-somefixedlocations-modif.pao",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Contracts - Marie Boucher some fixed locations modif"
+    },
+    {
+      "name": "IEEE_VIS_2007_2016.json",
+      "data-type": "PUB_HG",
+      "owner": "Master",
+      "description": "Publications IEEE Vis"
+    },
+    {
+      "name": "IEEE_VIS_2007_2016_InfoVis.json",
+      "data-type": "PUB_HG",
+      "owner": "Master",
+      "description": "Publications IEEE Vis"
+    },
+    {
+      "name": "IEEE_VIS_2007_2016_VAST.json",
+      "data-type": "PUB_HG",
+      "owner": "Master",
+      "description": "Publications IEEE Vis"
+    },
+    {
+      "name": "IEEE_VIS_2012_2016_InfoVis.json",
+      "data-type": "PUB_HG",
+      "owner": "Master",
+      "description": "Publications IEEE Vis"
+    },
+    {
+      "name": "EuroVis_Data.json",
+      "data-type": "PUB_HG",
+      "owner": "Master",
+      "description": "Publications EuroVis"
+    },
+    {
+      "name": "EuroVis_Data_2000_2015.json",
+      "data-type": "PUB_HG",
+      "owner": "Master",
+      "description": "Publications - EuroVis 2000-2015"
+    },
+    {
+      "name": "ex_4TS.json",
+      "data-type" : "EEG",
+      "owner": "Master",
+      "description": "EEG simple sample"
+    },
+    {
+      "name": "ex_3TS.json",
+      "data-type" : "EEG",
+      "owner": "Master",
+      "description": "EEG simple sample"
+    },
+    {
+      "name": "CommunitySize0-0.json",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Community - Size 0-0"
+    },
+    {
+      "name": "CommunitySpotting0-0.json",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Community - Spotting 0-0"
+    },
+    {
+      "name": "TrackCommunity0-0.json",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Community - Track 0-0"
+    },
+    {
+      "name": "CommunitySize0-1.json",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Community - Size 0-1"
+    },
+    {
+      "name": "CommunitySpotting0-1.json",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Community Spotting 0-1"
+    },
+    {
+      "name": "TrackCommunity0-1.json",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Community - Track 0-1"
+    },
+    {
+      "name": "email.json",
+      "data-type" : "Email",
+      "owner": "Master",
+      "description": "Email Enron"
+    },
+    {
+      "name": "email-Eu.json",
+      "data-type" : "Email",
+      "owner": "Master",
+      "description": "Email - EU Core"
+    },
+    {
+      "name": "email-Eu-core2_8_9_wav.json",
+      "data-type" : "Email",
+      "owner": "Master",
+      "description": "Email - EU core 2"
+    },
+    {
+      "name": "email-Eu-core-Dept3_0_2_wav.json",
+      "data-type" : "Email",
+      "owner": "Master",
+      "description": "Email - EU Core dept 3-0-2"
+    },
+    {
+      "name": "email-Eu-small.json",
+      "data-type" : "Email",
+      "owner": "Master",
+      "description": "Email - EU small"
+    },
+    {
+      "name": "email-Eu-very-small.json",
+      "data-type" : "Email",
+      "owner": "Master",
+      "description": "Email - EU very small"
+    },
+    {
+      "name": "eeg.json",
+      "data-type": "EEG dataset",
+      "owner": "Master",
+      "description": "EEG dataset"
+    },
+    {
+      "name": "eeg_1.json",
+      "data-type": "EEG dataset",
+      "owner": "Master",
+      "description": "EEG 1"
+    },
+    {
+      "name": "chb04_28_1.json",
+      "data-type": "EEG dataset",
+      "owner": "Master",
+      "description": "EEG - chb01"
+    },
+
+    {
+      "name": "JD1.json",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Publications - JD1"
+    },
+    {
+      "name": "JD2.json",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Publications - JD2"
+    },
+    {
+      "name": "aviz.json",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Publications - AVIZ"
+    },
+    {
+      "name": "mixed-n9-t7.pao",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Synthetic - 9 nodes; 7 TSs"
+    },
+    {
+      "name": "mixed-n10-t8.pao",
+      "data-type": "PUB",
+      "owner": "Master",
+      "description": "Synthetic - 10 nodes; 8 TSs"
+    },
+    {
+      "name": "MarieBoucher-hypergraph-draft.json",
+      "data-type": "vistorian",
+      "owner": "Nicole",
+      "description": "csv and converted in JSON, not really a paovis dataset"
+    },
+    {
+      "name": "UNIBA_GOT.csv",
+      "data-type": "movies",
+      "owner": "Paolo",
+      "description": "csv with GoT battles"
+    },
+    {
+      "name": "UNIBA_GOT_battles_IDB.csv",
+      "data-type": "movies",
+      "owner": "Paolo",
+      "description": "csv with GoT battles by IDB"
+    },
+    {
+      "name": "UNIBA_GOT_years.csv",
+      "data-type": "movies",
+      "owner": "Paolo",
+      "description": "csv with GoT battles by years"
+    },
+    {
+      "name": "UNIBA_LOTR.csv",
+      "data-type": "movies",
+      "owner": "Paolo",
+      "description": "csv with Lord of The Rings battles"
+    },
+    {
+      "name": "UNIBA_TrackersDomainsGroupInterests.csv",
+      "data-type": "tracker",
+      "owner": "Paolo",
+      "description": "csv with tracker information"
+    },
+    {
+      "name": "movies_racanati.csv",
+      "data-type": "SciFi movies",
+      "owner": "Amedeo",
+      "description": "SciFi movies with actor roles from 1927 to 2016"
+    }
+  ]
+}

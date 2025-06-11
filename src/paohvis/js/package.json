@@ -1,0 +1,8 @@
+{
+  "name": "paohvis-frontend",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "fastbitset": "^0.2.7"
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<link href="css/node-link.css" rel="stylesheet">
+
+
+<body>
+<div id ="nl-vis" class="container">
+    <div id="nodelink"></div>
+    <div id="timeslider"></div>
+    <!--<div id="right">
+        <div id="timeslider"></div>
+        <div id="timeseries"></div>
+    </div>-->
+
+</div>
+
+</body>
+
+<script src="lib/d3.min.js"></script>
+
+<script src="js/slider.js"></script>
+<script src="js/time-series.js"></script>
+<script src="js/node-link.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+    var dispatch = d3.dispatch("nodechange", "timechange");
+    var FILENAME = "./data/trial1.json"
+    init(FILENAME);
+</script>

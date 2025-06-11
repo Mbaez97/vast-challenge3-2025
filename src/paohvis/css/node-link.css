@@ -1,0 +1,101 @@
+
+div.container {
+    width: 100%;
+    font: 10px sans-serif;
+}
+
+#nodelink{
+    float: left;
+    width: 600px;
+}
+
+#right {
+    margin-left: 410px;
+    padding: 1em;
+    overflow: hidden;
+}
+
+.links line {
+    stroke: #999;
+    stroke-opacity: .5;
+}
+
+.links line.selected {
+    stroke: steelblue;
+    stroke-opacity: .9;
+}
+.links line.unselected {
+    stroke: #999;
+    stroke-opacity: .5;
+}
+
+.nodes circle {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+
+path {
+    stroke: black;
+    stroke-width: 1;
+    fill: none;
+}
+
+div#tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 5px;
+    font: 12px sans-serif;
+    background: rgba(233, 150, 122, .3);
+    /*opacity: .7;*/
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+#nodelink{
+    float: left;
+}
+#timeseries{
+    float: left;
+    cursor: default;
+}
+.ticks {
+    font: 12px sans-serif;
+    font-family: Helvetica;
+    cursor: default;
+}
+
+.track,
+.track-inset,
+.track-overlay {
+    stroke-linecap: round;
+}
+
+.track {
+    stroke: #000;
+    stroke-opacity: 0.3;
+    stroke-width: 10px;
+}
+
+.track-inset {
+    stroke: #ddd;
+    stroke-width: 8px;
+}
+
+.track-overlay {
+    pointer-events: stroke;
+    stroke-width: 20px;
+    cursor: crosshair;
+}
+
+.handle {
+    fill: #fff;
+    stroke: #000;
+    stroke-opacity: 0.5;
+    stroke-width: 1.25px;
+}
+
+#visNodelink {
+    display: none;
+}
