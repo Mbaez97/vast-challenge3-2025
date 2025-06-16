@@ -33,6 +33,12 @@ We have a knowledge graph describing the last two weeks on the island, this grap
 - `README.md`: This file, providing an overview of the project.
 - `pyproject.toml`: List of Python dependencies for the project.
 
+## Running flask app
+
+```
+flask run --debug
+```
+
 ## UV quick guide:
 
 * Install UV:

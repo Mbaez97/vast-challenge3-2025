@@ -1,0 +1,20 @@
+.links line {
+    cursor: pointer;
+}
+
+.nodes circle {
+    cursor: grab;
+    transition: r 0.2s;
+}
+
+.nodes circle:hover {
+    r: 14;
+    fill: #3b82f6;
+}
+
+.labels text {
+    pointer-events: none;
+    font-family: sans-serif;
+    fill: #1f2937;
+    font-weight: 500;
+}
