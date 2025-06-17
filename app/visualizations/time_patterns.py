@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 import logging
 from collections import defaultdict
+from flask import current_app
 
 # Metadata
 NAME = "time_patterns"
@@ -15,15 +16,11 @@ logger = logging.getLogger(__name__)
 
 def get_data():
     try:
+        data_file = current_app.config["DATA_FILE"]
         # Load the MC3 graph data
-        base_dir = os.path.dirname(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        )
-        data_path = os.path.join(base_dir, "data", "MC3_graph.json")
+        logger.info(f"Loading graph data from: {data_file}")
 
-        logger.info(f"Loading graph data from: {data_path}")
-
-        with open(data_path, "r") as f:
+        with open(data_file, "r") as f:
             graph_data = json.load(f)
 
         # Create node lookup dictionary
