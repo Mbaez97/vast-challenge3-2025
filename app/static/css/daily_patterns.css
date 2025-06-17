@@ -1,0 +1,53 @@
+#daily-patterns-vis {
+    flex: 1;
+    position: relative;
+}
+
+.day-band {
+    fill: #f8fafc;
+    stroke: #cbd5e1;
+    stroke-width: 1;
+}
+
+.marker {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.marker:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #f9fafb;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border-radius: 3px;
+}
+
+.coords-label {
+    font-size: 10px;
+    font-family: monospace;
+}
