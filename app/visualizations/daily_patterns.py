@@ -65,6 +65,8 @@ def get_data():
                     if dt.year == 2040 and dt.month == 10:
                         # Find source entity by looking for "sent" edges
                         source_entity = None
+                        target_entities = []
+                        content = node_data.get("content", "")
 
                         # Check all incoming edges to this event
                         for predecessor, _, edge_data in G.in_edges(node_id, data=True):
@@ -79,6 +81,19 @@ def get_data():
                                     entities[predecessor] = source_entity
                                     break
 
+                        # Find target entities by looking for "received" edges
+                        for _, successor, edge_data in G.out_edges(node_id, data=True):
+                            if edge_data.get("type") == "received":
+                                succ_data = G.nodes[successor]
+                                if succ_data.get("type") == "Entity":
+                                    target_entity = {
+                                        "id": successor,
+                                        "sub_type": succ_data.get("sub_type"),
+                                        "label": succ_data.get("label", ""),
+                                    }
+                                    entities[successor] = target_entity
+                                    target_entities.append(successor)
+
                         if source_entity:
                             # Convert datetime objects to string representations
                             october_events.append(
@@ -90,6 +105,8 @@ def get_data():
                                     "time": dt.time().isoformat(),  # Convert to ISO time string
                                     "day": dt.day,
                                     "datetime": dt.isoformat(),  # Full datetime for frontend
+                                    "content": content,
+                                    "target_entities": target_entities,
                                 }
                             )
                 except (ValueError, TypeError) as e:
