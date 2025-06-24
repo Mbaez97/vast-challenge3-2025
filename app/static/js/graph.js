@@ -19,7 +19,7 @@ function init_graph() {
     let selectedNodes = new Set();  // now a Set for multi-selection
 
     // Prepare nodes & links
-    const nodesData = data.nodes.map(n => ({ id: n.id }));
+    const nodesData = data.nodes.map(n => ({ id: n.id, type: n.sub_type }));
     const links = allEdges.map(e => ({
       id: e.event_id,
       source: e.source,
@@ -48,11 +48,33 @@ function init_graph() {
       .data(nodesData)
       .join("circle")
         .attr("r", 10)
-        .attr("fill", d => color(d.id))
+        .attr("fill", d => color(d.type))
         .attr("stroke", "#1e40af")
         .attr("stroke-width", 2)
         .call(drag(simulation));
+    const types = Array.from(new Set(nodesData.map(d => d.type)));
+    // legend group, positioned in top-right (adjust x offset as needed)
+    const legend = svg.append("g")
+        .attr("class", "legend")
+        .attr("transform", `translate(${width - 140}, 20)`);
 
+    types.forEach((t, i) => {
+        const row = legend.append("g")
+        .attr("transform", `translate(0, ${i * 20})`);
+        // color box
+        row.append("rect")
+        .attr("width", 14)
+        .attr("height", 14)
+        .attr("fill", color(t));
+        // label
+        row.append("text")
+        .attr("x", 18)
+        .attr("y", 12)
+        .text(t)
+        .attr("font-size", "12px")
+        .attr("fill", "#1f2937")
+        .attr("font-family", "sans-serif");
+    });
     // Draw labels
     const label = g.append("g").attr("class", "labels")
       .selectAll("text")
