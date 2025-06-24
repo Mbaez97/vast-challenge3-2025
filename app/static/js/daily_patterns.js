@@ -36,18 +36,28 @@ function init_daily_patterns() {
     // Store visualization state
     let allEvents = [];
     let allEntities = [];
+    let allKeywords = [];
     let selectedEntityIds = [];
+    let selectedKeywordId = null;
+    let customKeyword = "";
     let letterMaps = {};
     let entityLookup = {};
+    let eventContentLookup = {};
 
     // Fetch data from Flask endpoint
     d3.json("/data/daily_patterns").then(data => {
         allEvents = data.events;
         allEntities = data.entities;
+        allKeywords = data.keywords || [];
 
         // Create entity lookup
         allEntities.forEach(entity => {
             entityLookup[entity.id] = entity;
+        });
+
+        // Create event content lookup
+        allEvents.forEach(event => {
+            eventContentLookup[event.id] = event.content || "";
         });
 
         // Calculate communication count for each entity
@@ -182,6 +192,34 @@ function init_daily_patterns() {
                 eventsToShow = allEvents;
             }
 
+            // Calculate keyword frequencies if a keyword is selected
+            let maxFreq = 0;
+            let termFreq = {};
+            let currentTerm = "";
+
+            // Use custom keyword if entered, otherwise use selected keyword
+            if (customKeyword) {
+                currentTerm = customKeyword.toLowerCase();
+            } else if (selectedKeywordId) {
+                const keyword = allKeywords.find(kw => kw.id === selectedKeywordId);
+                currentTerm = keyword ? keyword.term.toLowerCase() : "";
+            }
+
+            if (currentTerm) {
+                // Escape special regex characters
+                const escapedTerm = currentTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp(`\\b${escapedTerm}\\b`, "g");
+
+                // Calculate frequencies for events to show
+                eventsToShow.forEach(event => {
+                    const content = eventContentLookup[event.id].toLowerCase();
+                    const matches = content.match(regex);
+                    const freq = matches ? matches.length : 0;
+                    termFreq[event.id] = freq;
+                    if (freq > maxFreq) maxFreq = freq;
+                });
+            }
+
             const filteredEventsByDay = {};
             eventsToShow.forEach(event => {
                 const day = event.day;
@@ -245,11 +283,22 @@ function init_daily_patterns() {
                         stack.forEach((event, eventIndex) => {
                             const yPosInStack = yPos + eventIndex * (markerSize_v + markerSpacing);
 
+                            // Calculate opacity based on keyword frequency
+                            let opacity = 1;
+                            if (currentTerm) {
+                                const freq = termFreq[event.id] || 0;
+                                if (maxFreq > 0) {
+                                    // Scale opacity between 0.3 and 1.0
+                                    opacity = 0.3 + 0.7 * (freq / maxFreq);
+                                }
+                            }
+
                             // Create group with clip path and mouse events
                             const markerGroup = svg.append("g")
                                 .attr("class", "marker-group")
                                 .attr("transform", `translate(${stackXPos},${yPosInStack})`)
                                 .attr("clip-path", "url(#marker-clip)")
+                                .style("opacity", opacity)
                                 .on("mouseover", function (e) {
                                     // Show tooltip
                                     const source = event.entity_id;
@@ -270,11 +319,26 @@ function init_daily_patterns() {
                                     markerGroup.selectAll("rect")
                                         .attr("stroke", "#000")
                                         .attr("stroke-width", 1);
+
+                                    // Increase opacity on hover
+                                    d3.select(this).style("opacity", 1);
                                 })
                                 .on("mouseout", function () {
                                     tooltip.classed("hidden", true);
                                     markerGroup.selectAll("rect")
                                         .attr("stroke", null);
+
+                                    // Restore original opacity
+                                    if (currentTerm) {
+                                        const freq = termFreq[event.id] || 0;
+                                        if (maxFreq === 0) {
+                                            d3.select(this).style("opacity", 1);
+                                        } else {
+                                            d3.select(this).style("opacity", 0.3 + 0.7 * (freq / maxFreq));
+                                        }
+                                    } else {
+                                        d3.select(this).style("opacity", 1);
+                                    }
                                 });
 
                             // Get entities and letters
@@ -333,7 +397,7 @@ function init_daily_patterns() {
         // Create legend
         const legendScrollContainer = legendContainer.append("div")
             .attr("class", "overflow-y-auto")
-            .style("max-height", "690px");
+            .style("max-height", "400px");
 
         const legendItems = legendScrollContainer.selectAll(".legend-item")
             .data(allEntities)
@@ -354,6 +418,8 @@ function init_daily_patterns() {
 
         legendItems.append("div")
             .attr("class", "legend-color flex-shrink-0")
+            .style("width", "16px")
+            .style("height", "16px")
             .style("background-color", d => colors[d.sub_type] || "#777");
 
         legendItems.append("div")
@@ -383,6 +449,93 @@ function init_daily_patterns() {
                     .classed("bg-blue-100 border border-blue-300", false);
                 drawVisualization();
             });
+
+        // Add keyword section
+        if (allKeywords.length > 0) {
+            const keywordContainer = legendContainer.append("div")
+                .attr("class", "mt-6 pt-4 border-t border-gray-200");
+
+            keywordContainer.append("div")
+                .attr("class", "font-medium text-sm mb-2")
+                .text("Key Expressions");
+
+            keywordContainer.append("div")
+                .attr("class", "text-xs text-gray-500 mb-3")
+                .html("Click to highlight communications<br>by frequency of expression");
+
+            const keywordList = keywordContainer.append("div")
+                .attr("class", "flex flex-wrap gap-2");
+
+            keywordList.selectAll(".keyword-tag")
+                .data(allKeywords)
+                .enter()
+                .append("div")
+                .attr("class", d =>
+                    `keyword-tag px-2 py-1 rounded-full text-xs cursor-pointer transition-all ${selectedKeywordId === d.id && !customKeyword
+                        ? "bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium"
+                        : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                    }`)
+                .text(d => d.term)
+                .on("click", function (event, d) {
+                    selectedKeywordId = d.id === selectedKeywordId && !customKeyword ? null : d.id;
+                    customKeyword = "";
+                    $customInput.property("value", "");
+                    drawVisualization();
+
+                    // Update UI
+                    d3.selectAll(".keyword-tag")
+                        .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", false)
+                        .classed("bg-gray-100 text-gray-700", true);
+
+                    if (selectedKeywordId && !customKeyword) {
+                        d3.select(this)
+                            .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", true)
+                            .classed("bg-gray-100 text-gray-700", false);
+                    }
+                });
+
+            // Add custom expression input
+            const inputGroup = keywordContainer.append("div")
+                .attr("class", "flex gap-2 mt-3");
+
+            // Store reference to input element
+            const $customInput = inputGroup.append("input")
+                .attr("type", "text")
+                .attr("placeholder", "Type an expression...")
+                .attr("class", "flex-1 px-2 py-1 border border-gray-300 rounded text-sm")
+                .on("keypress", function (event) {
+                    if (event.key === "Enter") {
+                        customKeyword = $customInput.property("value").trim();
+                        selectedKeywordId = null;
+                        drawVisualization();
+                        d3.selectAll(".keyword-tag")
+                            .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", false);
+                    }
+                });
+
+            inputGroup.append("button")
+                .attr("class", "px-2 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600")
+                .text("Apply")
+                .on("click", function () {
+                    customKeyword = $customInput.property("value").trim();
+                    selectedKeywordId = null;
+                    drawVisualization();
+                    d3.selectAll(".keyword-tag")
+                        .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", false);
+                });
+
+            keywordContainer.append("button")
+                .attr("class", "mt-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-xs w-full")
+                .text("Reset Highlight")
+                .on("click", function () {
+                    selectedKeywordId = null;
+                    customKeyword = "";
+                    $customInput.property("value", "");
+                    drawVisualization();
+                    d3.selectAll(".keyword-tag")
+                        .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", false);
+                });
+        }
 
     }).catch(error => {
         console.error("Error loading daily patterns data:", error);

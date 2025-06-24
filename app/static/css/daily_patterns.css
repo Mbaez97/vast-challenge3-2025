@@ -54,8 +54,6 @@
 
 #daily-patterns-legend {
     min-width: 250px;
-    max-height: 800px;
-    overflow-y: auto;
     background: #f9fafb;
     border: 1px solid #e2e8f0;
     border-radius: 0.5rem;
@@ -80,4 +78,13 @@
 
 #daily-patterns-legend::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
+}
+
+.keyword-tag {
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.marker-group {
+    transition: opacity 0.3s ease;
 }
