@@ -11,8 +11,6 @@ body {
 
 .visualization-container {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Tab styles */
@@ -28,4 +26,12 @@ body {
 
 .nav-link:hover:not(.active) {
     border-color: #d1d5db;
+}
+
+.nav-tabs {
+    margin: 0 10px;
+}
+
+.tab-content {
+    margin-top: -25px;
 }

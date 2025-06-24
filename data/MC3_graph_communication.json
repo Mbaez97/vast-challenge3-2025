@@ -1,0 +1,1815 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "Entity",
+      "label": "The Lookout",
+      "name": "The Lookout",
+      "sub_type": "Person",
+      "id": "The Lookout"
+    },
+    {
+      "type": "Entity",
+      "label": "The Intern",
+      "name": "The Intern",
+      "sub_type": "Person",
+      "id": "The Intern"
+    },
+    {
+      "type": "Entity",
+      "label": "Kelly",
+      "name": "Kelly",
+      "sub_type": "Person",
+      "id": "Kelly"
+    },
+    {
+      "type": "Entity",
+      "label": "Sam",
+      "name": "Sam",
+      "sub_type": "Person",
+      "id": "Sam"
+    },
+    {
+      "type": "Entity",
+      "label": "Mrs. Money",
+      "name": "Mrs. Money",
+      "sub_type": "Person",
+      "id": "Mrs. Money"
+    },
+    {
+      "type": "Entity",
+      "label": "Boss",
+      "name": "Boss",
+      "sub_type": "Person",
+      "id": "Boss"
+    },
+    {
+      "type": "Entity",
+      "label": "The Middleman",
+      "name": "The Middleman",
+      "sub_type": "Person",
+      "id": "The Middleman"
+    },
+    {
+      "type": "Entity",
+      "label": "Serenity",
+      "name": "Serenity",
+      "sub_type": "Vessel",
+      "id": "Serenity"
+    },
+    {
+      "type": "Entity",
+      "label": "Mako",
+      "name": "Mako",
+      "sub_type": "Vessel",
+      "id": "Mako"
+    },
+    {
+      "type": "Entity",
+      "label": "Reef Guardian",
+      "name": "Reef Guardian",
+      "sub_type": "Vessel",
+      "id": "Reef Guardian"
+    },
+    {
+      "type": "Entity",
+      "label": "Himark Harbor",
+      "name": "Himark Harbor",
+      "sub_type": "Location",
+      "id": "Himark Harbor"
+    },
+    {
+      "type": "Entity",
+      "label": "Davis",
+      "name": "Davis",
+      "sub_type": "Person",
+      "id": "Davis"
+    },
+    {
+      "type": "Entity",
+      "label": "Paackland Harbor",
+      "name": "Paackland Harbor",
+      "sub_type": "Location",
+      "id": "Paackland Harbor"
+    },
+    {
+      "type": "Entity",
+      "label": "Remora",
+      "name": "Remora",
+      "sub_type": "Vessel",
+      "id": "Remora"
+    },
+    {
+      "type": "Entity",
+      "label": "Oceanus City Council",
+      "name": "Oceanus City Council",
+      "sub_type": "Organization",
+      "id": "Oceanus City Council"
+    },
+    {
+      "type": "Entity",
+      "label": "Liam Thorne",
+      "name": "Liam Thorne",
+      "sub_type": "Person",
+      "id": "Liam Thorne"
+    },
+    {
+      "type": "Entity",
+      "label": "Marlin",
+      "name": "Marlin",
+      "sub_type": "Vessel",
+      "id": "Marlin"
+    },
+    {
+      "type": "Entity",
+      "label": "Green Guardians",
+      "name": "Green Guardians",
+      "sub_type": "Organization",
+      "id": "Green Guardians"
+    },
+    {
+      "type": "Entity",
+      "label": "Samantha Blake",
+      "name": "Samantha Blake",
+      "sub_type": "Person",
+      "id": "Samantha Blake"
+    },
+    {
+      "type": "Entity",
+      "label": "Sailor Shifts Team",
+      "name": "Sailor Shifts Team",
+      "sub_type": "Organization",
+      "id": "Sailor Shifts Team"
+    },
+    {
+      "type": "Entity",
+      "label": "Glitters Team",
+      "name": "Glitters Team",
+      "sub_type": "Organization",
+      "id": "Glitters Team"
+    },
+    {
+      "type": "Entity",
+      "label": "Sentinel",
+      "name": "Sentinel",
+      "sub_type": "Vessel",
+      "id": "Sentinel"
+    },
+    {
+      "type": "Entity",
+      "label": "Horizon",
+      "name": "Horizon",
+      "sub_type": "Vessel",
+      "id": "Horizon"
+    },
+    {
+      "type": "Entity",
+      "label": "Seawatch",
+      "name": "Seawatch",
+      "sub_type": "Vessel",
+      "id": "Seawatch"
+    },
+    {
+      "type": "Entity",
+      "label": "Haacklee Harbor",
+      "name": "Haacklee Harbor",
+      "sub_type": "Location",
+      "id": "Haacklee Harbor"
+    },
+    {
+      "type": "Entity",
+      "label": "Osprey",
+      "name": "Osprey",
+      "sub_type": "Vessel",
+      "id": "Osprey"
+    },
+    {
+      "type": "Entity",
+      "label": "EcoVigil",
+      "name": "EcoVigil",
+      "sub_type": "Vessel",
+      "id": "EcoVigil"
+    },
+    {
+      "type": "Entity",
+      "label": "Miranda Jordan",
+      "name": "Miranda Jordan",
+      "sub_type": "Person",
+      "id": "Miranda Jordan"
+    },
+    {
+      "type": "Entity",
+      "label": "Clepper Jensen",
+      "name": "Clepper Jensen",
+      "sub_type": "Person",
+      "id": "Clepper Jensen"
+    },
+    {
+      "type": "Entity",
+      "label": "Rodriguez",
+      "name": "Rodriguez",
+      "sub_type": "Person",
+      "id": "Rodriguez"
+    },
+    {
+      "type": "Entity",
+      "label": "Small Fry",
+      "name": "Small Fry",
+      "sub_type": "Person",
+      "id": "Small Fry"
+    },
+    {
+      "type": "Entity",
+      "label": "Defender",
+      "name": "Defender",
+      "sub_type": "Vessel",
+      "id": "Defender"
+    },
+    {
+      "type": "Entity",
+      "label": "V. Miesel Shipping",
+      "name": "V. Miesel Shipping",
+      "sub_type": "Organization",
+      "id": "V. Miesel Shipping"
+    },
+    {
+      "type": "Entity",
+      "label": "Northern Light",
+      "name": "Northern Light",
+      "sub_type": "Vessel",
+      "id": "Northern Light"
+    },
+    {
+      "type": "Entity",
+      "label": "Nadia Conti",
+      "name": "Nadia Conti",
+      "sub_type": "Person",
+      "id": "Nadia Conti"
+    },
+    {
+      "type": "Entity",
+      "label": "Neptune",
+      "name": "Neptune",
+      "sub_type": "Vessel",
+      "id": "Neptune"
+    },
+    {
+      "type": "Entity",
+      "label": "City Officials",
+      "name": "City Officials",
+      "sub_type": "Group",
+      "id": "City Officials"
+    },
+    {
+      "type": "Entity",
+      "label": "Elise",
+      "name": "Elise",
+      "sub_type": "Person",
+      "id": "Elise"
+    },
+    {
+      "type": "Entity",
+      "label": "The Accountant",
+      "name": "The Accountant",
+      "sub_type": "Person",
+      "id": "The Accountant"
+    },
+    {
+      "type": "Entity",
+      "label": "Knowles",
+      "name": "Knowles",
+      "sub_type": "Vessel",
+      "id": "Knowles"
+    },
+    {
+      "type": "Entity",
+      "label": "Port Security",
+      "name": "Port Security",
+      "sub_type": "Location",
+      "id": "Port Security"
+    }
+  ],
+  "links": [
+    {
+      "event_id": "Event_Communication_937",
+      "datetime": "2040-10-14 08:08:00",
+      "content": "The Lookout here, Intern! The conservation drones shouldn't disturb our shearwater watching - they're focusing on the reef area. I've spotted a rare peregrine falcon this morning too! 6:45 works perfectly, I'll bring my field guide.",
+      "source": "The Lookout",
+      "target": "The Intern"
+    },
+    {
+      "event_id": "Event_Communication_862",
+      "datetime": "2040-10-13 08:15:00",
+      "content": "The Lookout here! Conservation vessels have increased activity - they're deploying underwater microphones around Nemo Reef now. Perfect conditions for our birdwatching tomorrow though! I've spotted three different osprey families near our usual spot. See you at 7!",
+      "source": "The Lookout",
+      "target": "Sam"
+    },
+    {
+      "event_id": "Event_Communication_912",
+      "datetime": "2040-10-13 12:36:00",
+      "content": "Sentinel, The Lookout here. Using long-range equipment to document west reef activity. Spotted what appears to be a music video shoot with lighting rigs and camera equipment. Can't confirm details at this distance. Can you get closer for verification?",
+      "source": "The Lookout",
+      "target": "Sentinel"
+    },
+    {
+      "event_id": "Event_Communication_991",
+      "datetime": "2040-10-14 12:31:00",
+      "content": "Horizon, The Lookout here. Deployed second wave of aerial drones over Nemo Reef but facing stronger interference than before. Can you boost our signal strength or provide counter-jamming technology? Need to capture clear footage of ongoing activities.",
+      "source": "The Lookout",
+      "target": "Horizon"
+    },
+    {
+      "event_id": "Event_Communication_792",
+      "datetime": "2040-10-11 10:52:00",
+      "content": "Green Guardians, this is The Lookout. Documented 37 vessels operating in Nemo Reef despite closure. Harbor claims they're 'authorized maintenance vessels.' Request permission to photograph equipment and collect registration numbers for verification.",
+      "source": "The Lookout",
+      "target": "Green Guardians"
+    },
+    {
+      "event_id": "Event_Communication_799",
+      "datetime": "2040-10-12 08:59:00",
+      "content": "Reef Guardian, The Lookout here. I've photographed 12 vessels in east quadrant with heavy drilling equipment - not maintenance gear. Registration numbers documented. Moving to north section now. Can you cover southeast corner?",
+      "source": "The Lookout",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_936",
+      "datetime": "2040-10-14 08:07:00",
+      "content": "The Intern here, Lookout. Noticed the conservation drones during my morning run. Will bring my camera with telephoto lens to our birdwatching. Do you think those drones will disturb our shearwater watching? I'll arrive at 6:45 to set up.",
+      "source": "The Intern",
+      "target": "The Lookout"
+    },
+    {
+      "event_id": "Event_Communication_925",
+      "datetime": "2040-10-13 12:49:00",
+      "content": "Mrs. Money, The Intern here. I'll bring special binoculars to our 0500 meeting. The Lookout reports conservation vessels moving equipment to eastern Nemo Reef. Should I conduct reconnaissance before our meeting? All documentation ready as requested.",
+      "source": "The Intern",
+      "target": "Mrs. Money"
+    },
+    {
+      "event_id": "Event_Communication_702",
+      "datetime": "2040-10-10 12:26:00",
+      "content": "The Intern, Mrs. Money here. Confirm our 0500 meeting at Nemo Reef is still secure. Need you to compile all evidence of concrete structures and V. Miesel's shipping expansion plans. Stay vigilant and report any unusual harbor activity.",
+      "source": "The Intern",
+      "target": "The Intern"
+    },
+    {
+      "event_id": "Event_Communication_443",
+      "datetime": "2040-10-07 08:11:00",
+      "content": "Hey Sam, it's Kelly! Got some photos of those crates - definitely marked 'fragile' and 'handle with care.' Neptune's crew is being super secretive. They're using special loading equipment I've never seen before. See you at 7 for birdwatching!",
+      "source": "Kelly",
+      "target": "Sam"
+    },
+    {
+      "event_id": "Event_Communication_370",
+      "datetime": "2040-10-05 10:48:00",
+      "content": "Hey Kelly, it's Sam. This permit approval seems fishy. Could you get details on who signed off on it while you're at the harbor? I need to understand these 'special access corridors' before my meeting with Elise tomorrow.",
+      "source": "Sam",
+      "target": "Kelly"
+    },
+    {
+      "event_id": "Event_Communication_373",
+      "datetime": "2040-10-05 10:54:00",
+      "content": "Boss, Mrs. Money here. Jensen from City Council approved the Nemo Reef permit. The Intern confirms special corridor creation for Mako vessel. This could interfere with our V. Miesel shipping arrangements. Recommend reassessing tonight's strategy at 9PM meeting.",
+      "source": "Mrs. Money",
+      "target": "Boss"
+    },
+    {
+      "event_id": "Event_Communication_250",
+      "datetime": "2040-10-04 08:12:00",
+      "content": "Middleman, Mrs. Money here. Meeting cancelled. Boss has ordered contingency plan B due to excessive conservation activity at Nemo Reef. Destroy all documentation. Will contact you through secure channel with new instructions.",
+      "source": "Mrs. Money",
+      "target": "The Middleman"
+    },
+    {
+      "event_id": "Event_Communication_730",
+      "datetime": "2040-10-11 08:46:00",
+      "content": "The Intern, Mrs. Money here. Need detailed photographic evidence of V. Miesel's structures before our 0500 meeting. Compile financial projections for their expansion. I'm meeting their management at 10AM tomorrow - need leverage.",
+      "source": "Mrs. Money",
+      "target": "The Intern"
+    },
+    {
+      "event_id": "Event_Communication_367",
+      "datetime": "2040-10-05 10:41:00",
+      "content": "This is Mrs. Money. Need immediate confirmation that our recent financial arrangements remain secure and untraceable. Conservation activity has increased around Nemo Reef. Require alternate routing options for future transactions. Respond only through encrypted channels.",
+      "source": "Mrs. Money",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "event_id": "Event_Communication_597",
+      "datetime": "2040-10-09 08:14:00",
+      "content": "Neptune, Mrs. Money here. Funding approved for modified stabilization gear. Sam discovered specialized concrete forms suggesting permanent structures. Need clarification on actual scope before finalizing payment protocols tomorrow. Concrete structures weren't in original plan.",
+      "source": "Mrs. Money",
+      "target": "Neptune"
+    },
+    {
+      "event_id": "Event_Communication_464",
+      "datetime": "2040-10-07 09:38:00",
+      "content": "Mako, Mrs. Money here. My role is financial controller for this operation - I'll be handling payment distribution, equipment funding, and resource allocation. Will bring encryption protocols and transfer devices. Eastern reef route documentation prepared for your review.",
+      "source": "Mrs. Money",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_541",
+      "datetime": "2040-10-08 08:34:00",
+      "content": "Remora, Mrs. Money here. Will be at Nemo Reef 0500 tomorrow to establish payment protocols with you and Mako. Bring documentation for specialized equipment. I'll handle all financial transfers and resource allocation for the operation.",
+      "source": "Mrs. Money",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_366",
+      "datetime": "2040-10-05 10:38:00",
+      "content": "Mrs. Money, Boss here. Need you to verify all financial trails are properly disguised through the tourism ventures. Destroy any documentation linking us to Nemo Reef operations. City Council is asking questions. Meet me at the usual spot tonight.",
+      "source": "Boss",
+      "target": "Mrs. Money"
+    },
+    {
+      "event_id": "Event_Communication_277",
+      "datetime": "2040-10-04 10:18:00",
+      "content": "Middleman, Boss here. We need to talk about refocusing our efforts away from Nemo Reef. Meet me at the secondary location tonight at 9PM. Bring alternative council contacts who might be amenable to our tourism development elsewhere.",
+      "source": "Boss",
+      "target": "The Middleman"
+    },
+    {
+      "event_id": "Event_Communication_312",
+      "datetime": "2040-10-04 13:48:00",
+      "content": "This is Boss. Need urgent confirmation that assets are properly reallocated to our tourism ventures. Conservation scrutiny has increased dramatically. Ensure all vessel documentation shows legitimate tourist operations only. Expecting verification by tomorrow.",
+      "source": "Boss",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "event_id": "Event_Communication_316",
+      "datetime": "2040-10-04 13:51:00",
+      "content": "Mako, this is Boss. Abort current mission immediately. Maintain radio silence but change course away from Nemo Reef. Conservation patrols are tracking you. Return to Himark Harbor using route B. Confirm receipt.",
+      "source": "Boss",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_279",
+      "datetime": "2040-10-04 10:21:00",
+      "content": "Mrs. Money, this is Middleman. I've redirected Council's attention to other areas. Meeting with Boss tonight at 9PM to discuss new focus. Have you secured those alternative funding channels you mentioned? Need status update.",
+      "source": "The Middleman",
+      "target": "Boss"
+    },
+    {
+      "event_id": "Event_Communication_278",
+      "datetime": "2040-10-04 10:21:00",
+      "content": "Mrs. Money, this is Middleman. I've redirected Council's attention to other areas. Meeting with Boss tonight at 9PM to discuss new focus. Have you secured those alternative funding channels you mentioned? Need status update.",
+      "source": "The Middleman",
+      "target": "Mrs. Money"
+    },
+    {
+      "event_id": "Event_Communication_150",
+      "datetime": "2040-10-02 13:00:00",
+      "content": "Paackland Harbor, this is The Middleman. I'll send that vessel report by end of day. Currently working on implementing additional conservation signage as well. Any specific vessels of concern I should focus on?",
+      "source": "The Middleman",
+      "target": "Paackland Harbor"
+    },
+    {
+      "event_id": "Event_Communication_721",
+      "datetime": "2040-10-11 08:12:00",
+      "content": "The Middleman, Mrs. Money here. Any intel on V. Miesel's involvement? Conservation vessels are taking water samples near Nemo Reef. Need to know if they've found anything before our 0500 meeting. Time is critical.",
+      "source": "The Middleman",
+      "target": "Liam Thorne"
+    },
+    {
+      "event_id": "Event_Communication_950",
+      "datetime": "2040-10-14 08:58:00",
+      "content": "The Accountant, it's The Middleman. Council's breathing down my neck. Meeting with Boss at 2100 tonight. Need your financial records for southwest operations by morning. Bring everything to our 0500 meeting. Delete all digital traces.",
+      "source": "The Middleman",
+      "target": "The Accountant"
+    },
+    {
+      "event_id": "Event_Communication_227",
+      "datetime": "2040-10-03 10:26:00",
+      "content": "Mako, this is Serenity. Thanks for the Azure Cove recommendation. My owner is intrigued and we'd like to visit tomorrow. Any specific coordinates or approach suggestions to maximize our experience there?",
+      "source": "Serenity",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_826",
+      "datetime": "2040-10-12 10:21:00",
+      "content": "Reef Guardian, Serenity here. Thank you for the Dolphin Bay and Coral Cove recommendations. We'll be visiting one tomorrow. Quick question - has there been any unusual activity around Nemo Reef today? Received some confusing communications.",
+      "source": "Serenity",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_392",
+      "datetime": "2040-10-06 10:22:00",
+      "content": "Himark Harbor, Serenity here. Thank you for confirming our premium berth. We've noted your advisory about expedited Nemo Reef permits. We'll be arriving as scheduled this evening, but have no plans to visit Nemo Reef at this time.",
+      "source": "Serenity",
+      "target": "Himark Harbor"
+    },
+    {
+      "event_id": "Event_Communication_502",
+      "datetime": "2040-10-07 11:12:00",
+      "content": "Neptune, Serenity here. I must emphasize we are NOT involved in any Nemo Reef operation. We're a private yacht with no connection to your activities. Please correct your records and direct communications to the appropriate vessel.",
+      "source": "Serenity",
+      "target": "Neptune"
+    },
+    {
+      "event_id": "Event_Communication_15",
+      "datetime": "2040-10-01 08:52:00",
+      "content": "Serenity, this is Mako. For premium diving comparable to Nemo Reef, try Azure Cove just 3 miles south. Less restricted, similar coral formations, and better visibility. We just documented excellent conditions there yesterday during our coastal survey.",
+      "source": "Mako",
+      "target": "Serenity"
+    },
+    {
+      "event_id": "Event_Communication_809",
+      "datetime": "2040-10-12 09:41:00",
+      "content": "Remora, Mako here. Regarding your accelerated schedule request - we're proceeding as planned with V. Miesel's authorization. Security team arriving 0600 hours. Maintain tourism appearance and limited communications. Will integrate your timeline. Confirm receipt.",
+      "source": "Mako",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_989",
+      "datetime": "2040-10-14 12:18:00",
+      "content": "Himark Harbor, Mako here. Requesting priority berth for tonight at 2300 hours. Completed successful charter at Nemo Reef, need to offload special equipment and accommodate celebrating crew. The Boss sends appreciation for your continued discretion.",
+      "source": "Mako",
+      "target": "Himark Harbor"
+    },
+    {
+      "event_id": "Event_Communication_117",
+      "datetime": "2040-10-02 11:04:00",
+      "content": "Mako to Sailor Shifts Team. Vessel remains docked at Himark Harbor slip #14 as scheduled. Davis and your team departed at 0600 for city paperwork filing. Routine maintenance underway until your return. Any change to afternoon schedule?",
+      "source": "Mako",
+      "target": "Sailor Shifts Team"
+    },
+    {
+      "event_id": "Event_Communication_123",
+      "datetime": "2040-10-02 12:09:00",
+      "content": "Marlin, Mako here. The new licensing costs are brutal. I'm managing by diversifying - tourism charters keep us afloat. Currently docked at Himark for maintenance while Davis and the Sailors team handle paperwork downtown. Maybe worth exploring similar arrangements?",
+      "source": "Mako",
+      "target": "Marlin"
+    },
+    {
+      "event_id": "Event_Communication_815",
+      "datetime": "2040-10-12 09:49:00",
+      "content": "Osprey, Mako here. For tomorrow's tour, recommend Castaway Cove as an alternative - similar coral formations but less crowded. Departure confirmed for 0800 from Himark. Weather looks favorable. See you dockside.",
+      "source": "Mako",
+      "target": "Osprey"
+    },
+    {
+      "event_id": "Event_Communication_920",
+      "datetime": "2040-10-13 12:44:00",
+      "content": "Reef Guardian, Mako here. Negative on your request. We operate strictly as a tourism vessel and cannot assist with surveillance. Suggest contacting proper authorities if you suspect illegal activities. Maintaining our scheduled route.",
+      "source": "Mako",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_898",
+      "datetime": "2040-10-13 12:17:00",
+      "content": "Sentinel, Mako here. No aerial visibility available. Those vessels are NOT part of our authorized operation. Maintain distance and continue observation only. Do not approach or make contact. Report any additional activity immediately.",
+      "source": "Mako",
+      "target": "Sentinel"
+    },
+    {
+      "event_id": "Event_Communication_309",
+      "datetime": "2040-10-04 13:31:00",
+      "content": "Oceanus Council, Mako responding. Currently operating outside Nemo Reef boundaries conducting authorized environmental sampling for client research. Will maintain distance from protected zones. Temporary transponder issue resolved. Estimated return to Himark Harbor at 19:00.",
+      "source": "Mako",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_349",
+      "datetime": "2040-10-05 10:05:00",
+      "content": "Captain Davis, Mako here. We're fully docked at Himark Harbor with maintenance underway. The crew is discussing yesterday's trip while preparing for quick departure once permits arrive. Harbor confirms our expedited clearance is approved. The Boss seems confident this time.",
+      "source": "Mako",
+      "target": "Davis"
+    },
+    {
+      "event_id": "Event_Communication_382",
+      "datetime": "2040-10-06 09:33:00",
+      "content": "Boss, this is Mako. Something's wrong - Samantha Blake claims she hasn't secured approvals and has no coordination team. She's actually fighting the Council about Nemo Reef's protected status. Who authorized our expedited permits?",
+      "source": "Mako",
+      "target": "Boss"
+    },
+    {
+      "event_id": "Event_Communication_684",
+      "datetime": "2040-10-10 11:07:00",
+      "content": "Samantha, Mako here. We need your confirmation on how to proceed with Nemo Reef closure. Remora requesting accelerated schedule to meet Neptune's 5-day deadline. Awaiting your decision on whether to proceed at increased tempo or adjust plans.",
+      "source": "Mako",
+      "target": "Samantha Blake"
+    },
+    {
+      "event_id": "Event_Communication_655",
+      "datetime": "2040-10-10 09:24:00",
+      "content": "Paackland Harbor, Mako here. Requesting information about reported closures around Nemo Reef. Need to update our tourism routes and schedules accordingly. When exactly will restrictions begin and what areas are affected?",
+      "source": "Mako",
+      "target": "Paackland Harbor"
+    },
+    {
+      "event_id": "Event_Communication_755",
+      "datetime": "2040-10-11 09:51:00",
+      "content": "Neptune, Mako here. Conflicting instructions received from Samantha Blake to stop operations. Your security personnel still arriving at 0600? Need immediate clarification on protocol. Maintaining radio silence until further notice.",
+      "source": "Mako",
+      "target": "Neptune"
+    },
+    {
+      "event_id": "Event_Communication_462",
+      "datetime": "2040-10-07 09:37:00",
+      "content": "Elise, this is Mako. Departing Himark now. Neptune mentioned you'll establish payment protocols. Will meet you at eastern reef route tomorrow morning. Need clarification on your role and what resources you'll be allocating for the operation.",
+      "source": "Mako",
+      "target": "Elise"
+    },
+    {
+      "event_id": "Event_Communication_757",
+      "datetime": "2040-10-11 09:54:00",
+      "content": "Mako to V. Miesel Shipping. Requesting confirmation of operational authority. Conflicting commands received from Blake and Neptune. Need clear chain of command established immediately. Will maintain discretion and limited radio communications.",
+      "source": "Mako",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "event_id": "Event_Communication_226",
+      "datetime": "2040-10-03 10:23:00",
+      "content": "Serenity, Reef Guardian here. I can recommend Dolphin Bay and Coral Cove as beautiful, unrestricted alternatives with diverse marine life. Both are 3 nautical miles east of Paackland Harbor. Please respect all marked boundaries during your visit.",
+      "source": "Reef Guardian",
+      "target": "Serenity"
+    },
+    {
+      "event_id": "Event_Communication_801",
+      "datetime": "2040-10-12 09:01:00",
+      "content": "Defender, Reef Guardian here. We attempted to enter Nemo Reef for scheduled monitoring but were denied access. This contradicts our conservation mandate. Filing formal protest immediately. Request explanation for blocking legitimate environmental oversight vessels.",
+      "source": "Reef Guardian",
+      "target": "Defender"
+    },
+    {
+      "event_id": "Event_Communication_919",
+      "datetime": "2040-10-13 12:41:00",
+      "content": "Mako, Reef Guardian here. We're gathering substantial evidence of unauthorized activity at Nemo Reef during this suspicious closure. Can you patrol the western boundary and document any vessel movements or equipment transfers? Need comprehensive coverage for our case.",
+      "source": "Reef Guardian",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_660",
+      "datetime": "2040-10-10 09:29:00",
+      "content": "Reef Guardian, Marlin here. I can deploy to eastern quadrant, but my vessel's at Himark for repairs. Can possibly borrow Remora's skiff to reach the location before tomorrow's meeting. Need coordinates for the extraction activities.",
+      "source": "Reef Guardian",
+      "target": "Marlin"
+    },
+    {
+      "event_id": "Event_Communication_603",
+      "datetime": "2040-10-09 09:04:00",
+      "content": "Paackland Harbor, Reef Guardian reporting. Filing formal inquiry regarding Nemo Reef closure. Environmental justification appears falsified based on documented extraction activities. Request immediate review of closure authorization and environmental impact assessments. Awaiting response.",
+      "source": "Reef Guardian",
+      "target": "Paackland Harbor"
+    },
+    {
+      "event_id": "Event_Communication_877",
+      "datetime": "2040-10-13 09:07:00",
+      "content": "Horizon, Reef Guardian responding. Confirming similar encrypted communications in southeast quadrant. This validates our suspicions of unauthorized activity during closure. Will triangulate signals and add to our documentation. Can you record frequency patterns for evidence?",
+      "source": "Reef Guardian",
+      "target": "Horizon"
+    },
+    {
+      "event_id": "Event_Communication_895",
+      "datetime": "2040-10-13 12:14:00",
+      "content": "Sentinel, Reef Guardian here. Thank you for your surveillance report. Are these vessels displaying any identification? Request you continue monitoring and document any cargo transfers. This evidence is crucial for our case against this suspicious closure.",
+      "source": "Reef Guardian",
+      "target": "Sentinel"
+    },
+    {
+      "event_id": "Event_Communication_487",
+      "datetime": "2040-10-07 10:35:00",
+      "content": "Neptune, Reef Guardian here. Observed your arrival at Nemo Reef. For operational transparency, request details on equipment being transported and intended deployment locations. Conservation protocols require documentation of all activities within protected boundaries.",
+      "source": "Reef Guardian",
+      "target": "Neptune"
+    },
+    {
+      "event_id": "Event_Communication_945",
+      "datetime": "2040-10-14 08:37:00",
+      "content": "Reef Guardian, Serenity here. We've decided to visit Dolphin Bay tomorrow morning. Noticed unusual radio traffic about Nemo Reef - some vessel called Neptune mistook us for part of an operation there. Is there something we should know about?",
+      "source": "Reef Guardian",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_828",
+      "datetime": "2040-10-12 10:24:00",
+      "content": "Oceanus City Council, Reef Guardian reporting. Formally protesting today's denial of entry to Nemo Reef by Port Authority. This obstructs our mandated environmental monitoring. Request immediate explanation and restoration of access for conservation vessels.",
+      "source": "Reef Guardian",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_949",
+      "datetime": "2040-10-14 08:40:00",
+      "content": "EcoVigil, Reef Guardian here. Port Authority blocking our approach to Nemo Reef. Can you deploy aerial drones for documentation? We need visual evidence of activities during this closure. Will coordinate with other vessels to create distraction if needed.",
+      "source": "Reef Guardian",
+      "target": "EcoVigil"
+    },
+    {
+      "event_id": "Event_Communication_857",
+      "datetime": "2040-10-12 12:59:00",
+      "content": "Seawatch, Reef Guardian here. Will cover southeast quadrant immediately. Have you encountered any Port Authority vessels during your surveillance? We need comprehensive documentation of all activities in the area for our protest filing.",
+      "source": "Reef Guardian",
+      "target": "Seawatch"
+    },
+    {
+      "event_id": "Event_Communication_970",
+      "datetime": "2040-10-14 11:00:00",
+      "content": "Port Authority, Reef Guardian here. We're conducting legitimate conservation monitoring at Nemo Reef. On what grounds are you preventing our approach? We have jurisdiction to monitor protected marine areas. Request immediate clarification and access.",
+      "source": "Reef Guardian",
+      "target": "Port Security"
+    },
+    {
+      "event_id": "Event_Communication_449",
+      "datetime": "2040-10-07 09:20:00",
+      "content": "Himark Harbor to Mako. Your expedited departure clearance is pending documentation. We're noting increased activity for Nemo Reef operations. Please confirm your departure timeline and any special docking requirements for our harbor log.",
+      "source": "Himark Harbor",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_390",
+      "datetime": "2040-10-06 10:20:00",
+      "content": "Himark Harbor to Serenity. Please be advised that Nemo Reef access permits have been expedited. Expect increased vessel traffic starting tomorrow. Confirm if you'll require clearance for this destination in the coming days.",
+      "source": "Himark Harbor",
+      "target": "Serenity"
+    },
+    {
+      "event_id": "Event_Communication_579",
+      "datetime": "2040-10-08 11:17:00",
+      "content": "Himark Harbor to Marlin. Emergency repair berth confirmed for your navigation system. Available immediately at Dock 3. We've allocated 48 hours as requested. Please submit your vessel ID upon arrival.",
+      "source": "Himark Harbor",
+      "target": "Marlin"
+    },
+    {
+      "event_id": "Event_Communication_993",
+      "datetime": "2040-10-14 12:47:00",
+      "content": "Himark Harbor to Oceanus City Council. Security protocols for Nemo Reef operation complete. Coordinated 37 vessels successfully - all authorized personnel accounted for. Neptune equipment extraction on schedule. Seawatch attempted documentation but was kept at perimeter. Awaiting further instructions.",
+      "source": "Himark Harbor",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_789",
+      "datetime": "2040-10-11 10:49:00",
+      "content": "Himark Harbor to Seawatch. Your report of vessels in Nemo Reef is concerning. Those are authorized maintenance vessels with special permits for essential operations. Environmental teams are monitoring their activities. The closure remains in effect for all other vessels.",
+      "source": "Himark Harbor",
+      "target": "Seawatch"
+    },
+    {
+      "event_id": "Event_Communication_501",
+      "datetime": "2040-10-07 11:09:00",
+      "content": "Himark Harbor to Remora. Your departure documentation is approved. Berth will be ready at 0500 for your 0530 departure. Please confirm if you'll require extended docking hours upon your return from Nemo Reef operations.",
+      "source": "Himark Harbor",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_890",
+      "datetime": "2040-10-13 11:48:00",
+      "content": "Himark Harbor to Neptune. Your personnel transport is scheduled for 0400 hours tomorrow. Please use clearance code ALPHA-937 for after-hours departure. Maintain radio silence during exit. Berth 14 reserved for your equipment loading.",
+      "source": "Himark Harbor",
+      "target": "Neptune"
+    },
+    {
+      "event_id": "Event_Communication_645",
+      "datetime": "2040-10-09 12:33:00",
+      "content": "Himark Harbor to Northern Light. Docking availability confirmed for next week. Current fees are 125 credits per day. New fishing regulations are being implemented for Nemo Reef area - official notices forthcoming. Will reserve berth upon confirmation.",
+      "source": "Himark Harbor",
+      "target": "Northern Light"
+    },
+    {
+      "event_id": "Event_Communication_916",
+      "datetime": "2040-10-13 12:40:00",
+      "content": "Davis, Mako here. Unauthorized vessels detected at Nemo Reef operating with Paackland clearance. Possible security breach. Proceed with heightened caution during our operation. Maintain radio silence except for emergencies. Will await your assessment.",
+      "source": "Davis",
+      "target": "Davis"
+    },
+    {
+      "event_id": "Event_Communication_964",
+      "datetime": "2040-10-14 09:56:00",
+      "content": "Davis to Mako. Well done on Nemo Reef operation completion. Glad to hear the Boss is satisfied. I'll be at south dock by 2130 to debrief and review equipment inventory before final transport. Maintain standard security protocols.",
+      "source": "Davis",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_986",
+      "datetime": "2040-10-14 12:16:00",
+      "content": "Remora, Davis here. Will arrive at south dock with team at 2100 hours for equipment coordination. Rodriguez joining us at 2200 for inventory. Confirm all conservation vessels still maintaining distance. Standard security protocols remain in effect.",
+      "source": "Davis",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_343",
+      "datetime": "2040-10-05 10:00:00",
+      "content": "Himark Harbor, Mako here. Safely docked at your location. Crew performing routine maintenance after yesterday's trip. Will require expedited departure clearance once our special permits arrive. Captain Davis expects documentation shortly from management.",
+      "source": "Davis",
+      "target": "Himark Harbor"
+    },
+    {
+      "event_id": "Event_Communication_869",
+      "datetime": "2040-10-13 08:21:00",
+      "content": "Davis, Nadia here. Need you to verify final equipment transport tonight at Nemo Reef. The Middleman reports increased surveillance. Ensure all operations follow encrypted protocols. Meet me at V. Miesel HQ tomorrow at 0900 to discuss contingency plans.",
+      "source": "Davis",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_548",
+      "datetime": "2040-10-08 10:27:00",
+      "content": "Davis, Mako here. Need your navigation expertise for tonight's equipment run to Nemo Reef. Neptune confirmed we're operating under V. Miesel's marine research permit #CR-7844. Prepare for extended night operations to meet the 5-day deadline.",
+      "source": "Davis",
+      "target": "Neptune"
+    },
+    {
+      "event_id": "Event_Communication_844",
+      "datetime": "2040-10-12 11:14:00",
+      "content": "Davis here to V. Miesel Shipping. Crew reallocation from Remora to Neptune underway as requested. Will maintain confidentiality regarding permit #CR-7844. Security team arrives 0600 tomorrow. Meeting Nadia tonight to finalize documentation.",
+      "source": "Davis",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "event_id": "Event_Communication_963",
+      "datetime": "2040-10-14 09:55:00",
+      "content": "Davis, Mako here. Operation complete at Nemo Reef. All equipment secured and tourism facade maintained throughout. The Boss expressed satisfaction with arrangements. Crew celebrating discreetly at south dock. Return to standard protocols at 2200.",
+      "source": "Davis",
+      "target": "Boss"
+    },
+    {
+      "event_id": "Event_Communication_560",
+      "datetime": "2040-10-08 10:40:00",
+      "content": "Remora, Paackland Harbor here. Under permit NR-1045, we're approving your request for extended operational hours at Nemo Reef tomorrow. Please submit your specific schedule requirements and maintain regular position updates during your activities.",
+      "source": "Paackland Harbor",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_350",
+      "datetime": "2040-10-05 10:06:00",
+      "content": "Oceanus City Council, Paackland Harbor here. Just received call from City Permit Office regarding 'Priority Event Application NR-1045' needing immediate processing. They mentioned senior official approval. Need clarification on this expedited permit for Nemo Reef area.",
+      "source": "Paackland Harbor",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_353",
+      "datetime": "2040-10-05 10:12:00",
+      "content": "Reef Guardian, Paackland Harbor here. Be advised: special access corridor to Nemo Reef approved via application NR-1045. Expect increased vessel traffic tomorrow. Please prepare for monitoring operations under these unusual circumstances.",
+      "source": "Paackland Harbor",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_149",
+      "datetime": "2040-10-02 12:58:00",
+      "content": "Liam Thorne, this is Paackland Harbor. Could you provide a detailed report of all tourism vessels that approached or entered Nemo Reef's vicinity yesterday? We're compiling data for conservation monitoring following recent boundary approaches. Appreciate your prompt response.",
+      "source": "Paackland Harbor",
+      "target": "Liam Thorne"
+    },
+    {
+      "event_id": "Event_Communication_905",
+      "datetime": "2040-10-13 12:29:00",
+      "content": "Sentinel, Paackland Harbor here. Be advised of night operations protocol now in effect. Vessels with special clearance codes will be departing after hours. Maintain distance from these authorized operations per council directive.",
+      "source": "Paackland Harbor",
+      "target": "Sentinel"
+    },
+    {
+      "event_id": "Event_Communication_656",
+      "datetime": "2040-10-10 09:26:00",
+      "content": "Mako, Paackland Harbor responding. Nemo Reef will be fully closed for the next 3 days starting tomorrow at 0600 hours due to environmental protection measures. Affected area includes the reef proper and a 500-meter buffer zone. Please adjust your tourism routes accordingly.",
+      "source": "Paackland Harbor",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_216",
+      "datetime": "2040-10-03 10:13:00",
+      "content": "Paackland Harbor, Remora here. Regarding southern islands - no official restriction changes to report. However, some operators have found 'alternative arrangements' for access to certain protected areas. Will update when I have official information.",
+      "source": "Remora",
+      "target": "Paackland Harbor"
+    },
+    {
+      "event_id": "Event_Communication_153",
+      "datetime": "2040-10-02 13:06:00",
+      "content": "Rodriguez, Remora here. While we wait for Sailors team to return from city meeting, let's complete that scheduled maintenance. Did you hear they're likely selecting Nemo Reef for the shoot? We should prep accordingly.",
+      "source": "Remora",
+      "target": "Rodriguez"
+    },
+    {
+      "event_id": "Event_Communication_871",
+      "datetime": "2040-10-13 08:40:00",
+      "content": "Remora, Mako here. Security team integration point confirmed at south dock maintenance entrance. Use clearance code Delta-3-Coral at 0600. Tourism facade remains priority during final equipment transfer. Weather conditions remain favorable for operation.",
+      "source": "Remora",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_939",
+      "datetime": "2040-10-14 08:30:00",
+      "content": "Sailor Shifts, this is Remora. Vessel prepared for your crew's arrival at 0600. South dock entrance secured with Delta-3-Coral clearance. All tourism facades in place. Need confirmation of any special equipment requirements for the shoot.",
+      "source": "Remora",
+      "target": "Sailor Shifts Team"
+    },
+    {
+      "event_id": "Event_Communication_823",
+      "datetime": "2040-10-12 09:56:00",
+      "content": "Neptune, Remora here. All systems 100% operational and V. Miesel personnel fully integrated. Enhanced security protocols implemented with Delta-3 encryption active. No conservation vessel interference reported. Ready for 0600 harbor closure. Awaiting final go-ahead.",
+      "source": "Remora",
+      "target": "Neptune"
+    },
+    {
+      "event_id": "Event_Communication_499",
+      "datetime": "2040-10-07 11:08:00",
+      "content": "Himark Harbor, Remora here. Submitting documentation for provisioning request now. We're coordinating with Mako for a joint conservation tourism operation at Nemo Reef. Journey logs attached with Route C planning details. Departing tomorrow 0530.",
+      "source": "Remora",
+      "target": "Himark Harbor"
+    },
+    {
+      "event_id": "Event_Communication_873",
+      "datetime": "2040-10-13 08:42:00",
+      "content": "Davis, Remora here. Confirming night operations proceeding smoothly. Minimal comms maintained during equipment transfers. Conservation vessels at safe distance. Ready to receive your support team at south dock. Need your ETA for final coordination.",
+      "source": "Remora",
+      "target": "Davis"
+    },
+    {
+      "event_id": "Event_Communication_943",
+      "datetime": "2040-10-14 08:34:00",
+      "content": "Nadia, Remora vessel reporting. All preparations for Sailor Shifts complete at south dock. Delta-3 protocols active, tourism facade maintained. Conservation vessels being monitored. Need final approval for underwater lighting placement at Nemo Reef.",
+      "source": "Remora",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_958",
+      "datetime": "2040-10-14 09:04:00",
+      "content": "V. Miesel, this is Remora. Operation proceeding as planned. Equipment transfer completed at south dock. Maintaining tourism facade successfully. Need authorization for additional fuel allocation due to extended perimeter monitoring. Boss's protocols fully implemented.",
+      "source": "Remora",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "event_id": "Event_Communication_930",
+      "datetime": "2040-10-13 13:20:00",
+      "content": "Liam, Oceanus City Council here. Require immediate status report on EcoVigil positioning. Ensure Western quadrant remains completely restricted through next 48 hours. Prioritize monitoring any unauthorized conservation vessels near restricted zones. Report directly to me.",
+      "source": "Oceanus City Council",
+      "target": "Liam Thorne"
+    },
+    {
+      "event_id": "Event_Communication_903",
+      "datetime": "2040-10-13 12:27:00",
+      "content": "Paackland Harbor, Oceanus City Council here. Implement immediate night operation protocols for vessels with special clearance codes. Maintain strict radio silence and expedite departures. Report any conservation vessels attempting documentation near Nemo Reef.",
+      "source": "Oceanus City Council",
+      "target": "Paackland Harbor"
+    },
+    {
+      "event_id": "Event_Communication_54",
+      "datetime": "2040-10-01 11:09:00",
+      "content": "Marlin, this is Oceanus City Council. We hear your concerns about the fishing regulations. Let's schedule a community forum next week to discuss sustainable solutions that balance conservation needs with fishermen's livelihoods. Please confirm your availability.",
+      "source": "Oceanus City Council",
+      "target": "Marlin"
+    },
+    {
+      "event_id": "Event_Communication_686",
+      "datetime": "2040-10-10 11:09:00",
+      "content": "Ms. Blake, Oceanus City Council here. Yes, Nemo Reef closes at 0600 tomorrow. Your permit meeting is still scheduled for 2:00 PM. Please bring your alternative location proposals as the closure will impact your original application.",
+      "source": "Oceanus City Council",
+      "target": "Samantha Blake"
+    },
+    {
+      "event_id": "Event_Communication_783",
+      "datetime": "2040-10-11 10:42:00",
+      "content": "Himark Harbor, Oceanus City Council here. We need confirmation that Nemo Reef closure enforcement is in effect. Please report any unauthorized vessels immediately, particularly conservation groups attempting documentation. Maintain official environmental protection stance at all times.",
+      "source": "Oceanus City Council",
+      "target": "Himark Harbor"
+    },
+    {
+      "event_id": "Event_Communication_994",
+      "datetime": "2040-10-14 12:50:00",
+      "content": "Green Guardians, Oceanus City Council here. Your emergency session request is denied. Our environmental review team requires 72 hours to properly assess your claims. Legal threats will not expedite this process. Submit documentation through official channels.",
+      "source": "Oceanus City Council",
+      "target": "Green Guardians"
+    },
+    {
+      "event_id": "Event_Communication_229",
+      "datetime": "2040-10-03 10:33:00",
+      "content": "Northern Light, this is Oceanus City Council. We've received your concerns about enforcement disparities. Our regulations apply equally to all vessels. We're scheduling a public forum next week to address maritime enforcement policies. Your input would be valuable.",
+      "source": "Oceanus City Council",
+      "target": "Northern Light"
+    },
+    {
+      "event_id": "Event_Communication_347",
+      "datetime": "2040-10-05 10:04:00",
+      "content": "Oceanus City Council to Mako. Your expedited departure request is approved with minimal documentation. The Nemo Reef access permit has been expedited through special channels. Proceed with operations as planned. Submit full documentation post-operation.",
+      "source": "Oceanus City Council",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_333",
+      "datetime": "2040-10-05 09:48:00",
+      "content": "Ms. Conti, this is Oceanus City Council. We need clarification regarding your canceled Nemo Reef event arrangements at Haacklee Harbor. Please explain your documentation destruction request immediately. This relates to our newly expedited permit approvals.",
+      "source": "Oceanus City Council",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_613",
+      "datetime": "2040-10-09 10:25:00",
+      "content": "Paackland Harbor, Oceanus City Council here. Regarding Reef Guardian's formal inquiry: direct them to our legal department. Inform them the closure is based on documented environmental concerns requiring immediate research access. Do not engage in debate about extraction activities.",
+      "source": "Oceanus City Council",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_675",
+      "datetime": "2040-10-10 10:43:00",
+      "content": "Sentinel, Oceanus City Council here. The environmental assessment reports are currently under review with Maritime Authority. We'll provide a summary at tomorrow's 10:00 meeting. Your water quality tests will be valuable contributions to the discussion.",
+      "source": "Oceanus City Council",
+      "target": "Sentinel"
+    },
+    {
+      "event_id": "Event_Communication_735",
+      "datetime": "2040-10-11 09:02:00",
+      "content": "EcoVigil, Oceanus City Council here. Your request to conduct scientific documentation during Nemo Reef closure is approved with restrictions. Submit detailed activity plans and coordinate with Liam Thorne for access protocols. No public statements until official review.",
+      "source": "Oceanus City Council",
+      "target": "EcoVigil"
+    },
+    {
+      "event_id": "Event_Communication_928",
+      "datetime": "2040-10-13 13:18:00",
+      "content": "Oceanus City Council, Paackland Harbor reporting. Night operations proceeding as directed with minimal radio communication. Two special clearance vessels departed at 0200 hours. No conservation vessels detected in proximity to operations. Awaiting further instructions.",
+      "source": "Oceanus City Council",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_953",
+      "datetime": "2040-10-14 09:00:00",
+      "content": "Council, Liam Thorne with urgent update. Western quadrant cleanup proceeding on schedule. EcoVigil successfully contained to northern areas. Request additional security personnel for overnight monitoring of restricted zone perimeter.",
+      "source": "Liam Thorne",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_753",
+      "datetime": "2040-10-11 09:20:00",
+      "content": "Nadia, Liam here. EcoVigil is questioning the ROV delay. I've redirected them to the northern quadrant, but they're suspicious about the southwest. We need to clean up operations there immediately. What's our contingency plan?",
+      "source": "Liam Thorne",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_724",
+      "datetime": "2040-10-11 08:15:00",
+      "content": "Elise, Liam here. Conservation vessels found nothing at Nemo Reef. Council meeting tomorrow with Sentinel - I'll deflect concerns. V. Miesel appears to be expanding operations in that area. Will bring encryption tech to our 0500 meeting.",
+      "source": "Liam Thorne",
+      "target": "Elise"
+    },
+    {
+      "event_id": "Event_Communication_739",
+      "datetime": "2040-10-11 09:07:00",
+      "content": "Boss, Liam here. We have a problem. EcoVigil got Council approval for ROV deployment at Nemo Reef tomorrow. I'll delay authorization protocols, but you should accelerate the timeline. Our meeting tonight is critical now.",
+      "source": "Liam Thorne",
+      "target": "Boss"
+    },
+    {
+      "event_id": "Event_Communication_749",
+      "datetime": "2040-10-11 09:15:00",
+      "content": "EcoVigil, Liam Thorne here. Your ROV deployment at Nemo Reef is delayed due to technical protocol issues. Expect clearance by tomorrow afternoon. Council requests you focus on northern quadrant instead of southwest. Will update when resolved.",
+      "source": "Liam Thorne",
+      "target": "EcoVigil"
+    },
+    {
+      "event_id": "Event_Communication_578",
+      "datetime": "2040-10-08 11:16:00",
+      "content": "Himark Harbor, this is Marlin. Need to dock for emergency repairs to my navigation system. Been struggling since these new regulations hit. Can you confirm availability for a small fishing vessel? Will need about 48 hours.",
+      "source": "Marlin",
+      "target": "Himark Harbor"
+    },
+    {
+      "event_id": "Event_Communication_53",
+      "datetime": "2040-10-01 11:06:00",
+      "content": "Oceanus City Council, this is Marlin. These new regulations are destroying our livelihood. Fuel costs doubled while catch limits halved. Five generations of my family fished these waters. Now we can barely break even. Please reconsider before there are no local fishermen left.",
+      "source": "Marlin",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_121",
+      "datetime": "2040-10-02 12:07:00",
+      "content": "Mako, this is Marlin. Have you seen these new commercial licensing costs? Between that and mandatory equipment upgrades, I'm barely staying afloat. My family's fished these waters for generations. How are you managing?",
+      "source": "Marlin",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_289",
+      "datetime": "2040-10-04 11:06:00",
+      "content": "Remora, Marlin here. Just spotted Mako taking a strange route east toward deeper waters beyond the shoals. Definitely not their usual tourism path. Have you heard anything about what they might be up to out there?",
+      "source": "Marlin",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_285",
+      "datetime": "2040-10-04 11:03:00",
+      "content": "Reef Guardian, this is Marlin. Just spotted Mako heading east, taking an unusual route that avoids the normal tourism spots. Heading straight for deeper waters past the eastern shoals. Not their typical pattern for charter tours.",
+      "source": "Marlin",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_968",
+      "datetime": "2040-10-14 10:58:00",
+      "content": "Reef Guardian, Green Guardians HQ here. Thank you for your detailed report. Though Horizon confirms this was a music video shoot, we still need to investigate the environmental impact and permit violations. Continue monitoring water contamination levels and document all activities.",
+      "source": "Green Guardians",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_836",
+      "datetime": "2040-10-12 11:02:00",
+      "content": "Horizon, Green Guardians HQ. Excellent work gathering evidence of unregistered vessels and mining equipment. Hold off on press conference for now - we'll present everything at tomorrow's Council meeting first. Continue monitoring and stay safe.",
+      "source": "Green Guardians",
+      "target": "Horizon"
+    },
+    {
+      "event_id": "Event_Communication_910",
+      "datetime": "2040-10-13 12:34:00",
+      "content": "Seawatch, Green Guardians HQ here. We need you to coordinate with Sentinel and Horizon to gather additional evidence at Nemo Reef. Focus on water sample collection and documenting vessel movements. Council meeting postponed, but we're pressing for emergency session.",
+      "source": "Green Guardians",
+      "target": "Seawatch"
+    },
+    {
+      "event_id": "Event_Communication_997",
+      "datetime": "2040-10-14 12:51:00",
+      "content": "EcoVigil, Green Guardians HQ here. Your video evidence has been invaluable. Please continue monitoring Nemo Reef for environmental impacts. Document any cleanup efforts or lack thereof as vessels depart. We're building a case for regulatory action despite Council delays.",
+      "source": "Green Guardians",
+      "target": "EcoVigil"
+    },
+    {
+      "event_id": "Event_Communication_902",
+      "datetime": "2040-10-13 12:24:00",
+      "content": "Oceanus City Council, Green Guardians leadership here. We strongly protest the meeting postponement. Our evidence is substantial and time-sensitive. We demand an emergency session within 24 hours and will pursue legal action if environmental violations continue unaddressed.",
+      "source": "Green Guardians",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_237",
+      "datetime": "2040-10-03 10:39:00",
+      "content": "Northern Light, this is Green Guardians. We enforce regulations equally for all vessels. If you have evidence of preferential treatment, please share specifics. We're addressing Nemo Reef violations at today's City Council meeting and welcome your input.",
+      "source": "Green Guardians",
+      "target": "Northern Light"
+    },
+    {
+      "event_id": "Event_Communication_908",
+      "datetime": "2040-10-13 12:31:00",
+      "content": "Green Guardians, Sentinel here. Night observation reveals five vessels now at Nemo Reef. Special clearance codes mentioned by Harbor Master. Water samples show increased diesel contamination. Documented activity with thermal imaging. Request guidance on next steps.",
+      "source": "Green Guardians",
+      "target": "Green Guardians"
+    },
+    {
+      "event_id": "Event_Communication_262",
+      "datetime": "2040-10-04 08:47:00",
+      "content": "Mako, Green Guardians HQ again. We need immediate verification of your position and activities. Your transponder signal is missing and you've maintained radio silence. This is a serious violation near Nemo Reef. Respond immediately or we'll escalate to authorities.",
+      "source": "Green Guardians",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_433",
+      "datetime": "2040-10-06 13:07:00",
+      "content": "Sentinel, Green Guardians HQ here. Continue documentation of all activities at Nemo Reef. We're pursuing permit documentation from the Council. Can you identify what specific equipment is being installed? Need details on scale and potential environmental impact.",
+      "source": "Green Guardians",
+      "target": "Sentinel"
+    },
+    {
+      "event_id": "Event_Communication_438",
+      "datetime": "2040-10-06 13:15:00",
+      "content": "Paackland Harbor, Green Guardians here. We require immediate clarification on NR-1045's expedited approval process. What specific directive bypassed standard review protocols, and who issued it? This information is crucial for our records.",
+      "source": "Green Guardians",
+      "target": "Paackland Harbor"
+    },
+    {
+      "event_id": "Event_Communication_113",
+      "datetime": "2040-10-02 10:21:00",
+      "content": "Hello Sailor Shifts Team, Samantha Blake here. I've been researching alternative locations with similar aesthetics to Nemo Reef. Could you provide your secondary location preferences before my meeting with the City Council tomorrow?",
+      "source": "Samantha Blake",
+      "target": "Sailor Shifts Team"
+    },
+    {
+      "event_id": "Event_Communication_685",
+      "datetime": "2040-10-10 11:08:00",
+      "content": "Hello Oceanus City Council, this is Samantha Blake. I've just heard Nemo Reef is closing tomorrow at 0600. Can you confirm if this is accurate and how it affects our permit application discussion scheduled for tomorrow?",
+      "source": "Samantha Blake",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_687",
+      "datetime": "2040-10-10 11:12:00",
+      "content": "Mako, Samantha Blake here. Please STOP all operations immediately. I have no approved permits for Nemo Reef and any activities there would be illegal. I'm meeting with the City Council tomorrow at 2:00 PM to discuss alternative locations only.",
+      "source": "Samantha Blake",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_283",
+      "datetime": "2040-10-04 10:57:00",
+      "content": "Sailor Shifts, Remora here. Just confirming we're remaining docked today as instructed. Davis took the VIP client out on Mako this morning - mentioned they needed complete privacy for negotiations. Need any dock maintenance while we're idle?",
+      "source": "Sailor Shifts Team",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_520",
+      "datetime": "2040-10-07 11:57:00",
+      "content": "Hi Nadia, this is the Sailor Shifts Team. Received your message about permit assistance - thank you! We urgently need to discuss tomorrow's staffing requirements. Can you confirm how many additional crew members we should bring for the setup?",
+      "source": "Sailor Shifts Team",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_66",
+      "datetime": "2040-10-01 12:27:00",
+      "content": "Hi Samantha, Glitters Team here. We're confirming Nemo Reef as our primary location. We need permits for the northwest section specifically. Our reconnaissance showed optimal lighting conditions there. Please prioritize environmental compliance documentation.",
+      "source": "Glitters Team",
+      "target": "Samantha Blake"
+    },
+    {
+      "event_id": "Event_Communication_231",
+      "datetime": "2040-10-03 10:37:00",
+      "content": "Northern Light, this is Glitters Team. We're just documenting for our music video production, not involved in any regulatory matters. We're actually dealing with permit challenges ourselves. Any suggestions for visually striking but accessible locations?",
+      "source": "Glitters Team",
+      "target": "Northern Light"
+    },
+    {
+      "event_id": "Event_Communication_389",
+      "datetime": "2040-10-06 09:58:00",
+      "content": "Hi Boss, Glitters Team here. We heard about your assistance with the permits - truly appreciate you expediting things with Commissioner Torres! We'll need to discuss staffing for tomorrow's setup. When can we connect?",
+      "source": "Glitters Team",
+      "target": "Boss"
+    },
+    {
+      "event_id": "Event_Communication_940",
+      "datetime": "2040-10-14 08:31:00",
+      "content": "Remora, Glitter's Team here. Confirming equipment needs for tomorrow: bring standard video gear plus underwater lighting rigs. We'll have 6 additional crew arriving at 0530. Delta-3-Coral clearance confirmed. Nadia approved everything.",
+      "source": "Glitters Team",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_320",
+      "datetime": "2040-10-05 08:38:00",
+      "content": "Green Guardians, Sentinel here. While docked for refueling, our crew overheard concerning information. The previously denied Nemo Reef permit is being expedited through approval. Someone with influence is pushing it. Requesting guidance on increasing our patrol schedule.",
+      "source": "Sentinel",
+      "target": "Green Guardians"
+    },
+    {
+      "event_id": "Event_Communication_565",
+      "datetime": "2040-10-08 11:01:00",
+      "content": "Horizon, Sentinel here. Repositioned to southern boundary of Nemo Reef as instructed. Neptune's specialized equipment appears excessive for any legitimate research. Can you identify any unusual personnel exchanges or equipment that seems inappropriate for a protected area?",
+      "source": "Sentinel",
+      "target": "Horizon"
+    },
+    {
+      "event_id": "Event_Communication_213",
+      "datetime": "2040-10-03 10:08:00",
+      "content": "Paackland Harbor, this is Sentinel. Completed monitoring sweep around Nemo Reef. Documented five unauthorized vessels today, including 'Mariner's Dream' making repeated approaches to southern boundary. Requesting harbor authority support for increased patrol presence.",
+      "source": "Sentinel",
+      "target": "Paackland Harbor"
+    },
+    {
+      "event_id": "Event_Communication_914",
+      "datetime": "2040-10-13 12:38:00",
+      "content": "Mako, Sentinel here. Following your instruction to maintain distance. Five vessels now operating at Nemo Reef with Paackland Harbor's special clearance. They've installed temporary lighting structures and large cylindrical equipment. Continuing documentation.",
+      "source": "Sentinel",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_485",
+      "datetime": "2040-10-07 10:33:00",
+      "content": "Reef Guardian, Sentinel acknowledging. Repositioning to southern boundary as instructed. Neptune's involvement elevates concern significantly. Will document all transfers and equipment movements. Any specific equipment or personnel I should prioritize tracking?",
+      "source": "Sentinel",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_849",
+      "datetime": "2040-10-12 11:20:00",
+      "content": "Oceanus EPA, this is Sentinel. Formally filing complaint regarding Nemo Reef closure. Our comprehensive water quality tests show normal parameters with no environmental hazards. Request immediate review of closure justification and transparency in decision-making process.",
+      "source": "Sentinel",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_677",
+      "datetime": "2040-10-10 10:45:00",
+      "content": "Nadia, Sentinel here. Have you received any scientific data supporting the Nemo Reef closure? Our water quality tests show normal parameters. City Council claims reports are with Maritime Authority, but I suspect potential ulterior motives.",
+      "source": "Sentinel",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_965",
+      "datetime": "2040-10-14 10:54:00",
+      "content": "Seawatch, Sentinel here. Confirming your observation - definitely appears to be a music video production. Multiple lighting rigs, camera equipment, and personnel visible. No signs of drilling or environmental damage as initially suspected. Keeping distance as instructed.",
+      "source": "Sentinel",
+      "target": "Seawatch"
+    },
+    {
+      "event_id": "Event_Communication_566",
+      "datetime": "2040-10-08 11:03:00",
+      "content": "Sentinel, Horizon here. Observing unusual activity - Neptune personnel exchanging unmarked containers with civilian vessels. Equipment includes what appears to be deep-substrate extraction tools, far beyond research needs. Several individuals in executive attire overseeing operations from distance.",
+      "source": "Horizon",
+      "target": "Sentinel"
+    },
+    {
+      "event_id": "Event_Communication_838",
+      "datetime": "2040-10-12 11:05:00",
+      "content": "EcoVigil, Horizon here. We've documented extensive evidence of mining equipment at Nemo Reef - seabed drills, extraction pumps, and 7 unregistered vessels. Could you help amplify this information through your public channels? The closure appears deliberately misleading.",
+      "source": "Horizon",
+      "target": "EcoVigil"
+    },
+    {
+      "event_id": "Event_Communication_961",
+      "datetime": "2040-10-14 09:30:00",
+      "content": "Horizon to Green Guardians. Video evidence from EcoVigil confirms this is a music video production, not mining operation. Am broadcasting live updates to public channels, showing footage of performers, cameras and lighting equipment. Revising earlier assessment accordingly.",
+      "source": "Horizon",
+      "target": "Green Guardians"
+    },
+    {
+      "event_id": "Event_Communication_417",
+      "datetime": "2040-10-06 12:26:00",
+      "content": "Mako, this is Horizon. We've noted your reported 'transponder malfunction' near Nemo Reef. Sentinel is concerned about your status. Please confirm your position and the nature of your sampling activities. Awaiting immediate response.",
+      "source": "Horizon",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_879",
+      "datetime": "2040-10-13 09:08:00",
+      "content": "Seawatch, Horizon here. Have recorded frequency patterns of encrypted communications as requested. Detecting multiple transmission clusters near west reef edge. Can coordinate triangulation with your position to pinpoint source vessels. Maintain radio silence except on secure channel.",
+      "source": "Horizon",
+      "target": "Seawatch"
+    },
+    {
+      "event_id": "Event_Communication_875",
+      "datetime": "2040-10-13 09:05:00",
+      "content": "Reef Guardian, Horizon here. Detecting unusual encrypted radio frequencies near Nemo Reef - appears to be coordinated vessel communications outside standard channels. Can you confirm similar signals from your position in east quadrant?",
+      "source": "Horizon",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_979",
+      "datetime": "2040-10-14 11:37:00",
+      "content": "Horizon broadcasting to Oceanus City Council. Live streaming evidence from Nemo Reef showing full video production underway - performers, lighting rigs, and filming equipment visible. No environmental assessment was conducted before this commercial activity. Footage available on public channels now.",
+      "source": "Horizon",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_679",
+      "datetime": "2040-10-10 10:47:00",
+      "content": "Reef Guardian, this is Seawatch. Requesting coordination for intensified night surveillance around Nemo Reef. Observed suspicious industrial equipment deliveries contradicting environmental closure claims. Can you patrol the eastern quadrant while we maintain western coverage?",
+      "source": "Seawatch",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_787",
+      "datetime": "2040-10-11 10:47:00",
+      "content": "Himark Harbor, this is Seawatch. Acknowledging your closure reminder. However, we've documented 37 vessels currently operating within Nemo Reef - 23 logistics and 14 tourism boats. Please explain this contradiction to environmental protection measures.",
+      "source": "Seawatch",
+      "target": "Himark Harbor"
+    },
+    {
+      "event_id": "Event_Communication_793",
+      "datetime": "2040-10-11 10:53:00",
+      "content": "Seawatch, Green Guardians HQ. Permission granted to photograph equipment and collect registration numbers. This documentation is crucial for tomorrow's Council meeting. Be discreet and maintain safety protocols during surveillance.",
+      "source": "Seawatch",
+      "target": "Green Guardians"
+    },
+    {
+      "event_id": "Event_Communication_95",
+      "datetime": "2040-10-02 08:50:00",
+      "content": "Haacklee Harbor responding to Osprey inquiry. We have three vessels available for charter this week. Noticed you were redirected from Mako's crew? Interesting how many vessels are asking about eastern waters lately. Let me know your requirements.",
+      "source": "Haacklee Harbor",
+      "target": "Osprey"
+    },
+    {
+      "event_id": "Event_Communication_305",
+      "datetime": "2040-10-04 13:30:00",
+      "content": "Haacklee Harbor to Mako. We've received your weather advisory request at 14:20. Your current coordinates don't match your filed route plan. Please confirm your position and intentions. Do you require assistance?",
+      "source": "Haacklee Harbor",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_330",
+      "datetime": "2040-10-05 09:44:00",
+      "content": "Haacklee Harbor to Nadia Conti. Following your visit yesterday regarding the Nemo Reef event logistics, we've prepared the necessary documentation. Harbor staff is ready to facilitate the special access corridor arrangements as discussed. Please confirm timeline for implementation.",
+      "source": "Haacklee Harbor",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_888",
+      "datetime": "2040-10-13 11:47:00",
+      "content": "Haacklee Harbor to Oceanus City Council. Update on Nemo Reef situation: Multiple vessels with special clearance codes departing tonight. Knowles confirmed 22:00 departure with radio silence protocol. Awaiting further instructions regarding increased night operations.",
+      "source": "Haacklee Harbor",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_668",
+      "datetime": "2040-10-10 09:54:00",
+      "content": "Haacklee Harbor to EcoVigil. Official notice: Nemo Reef will be closed for the next 3 days due to environmental protection measures. All vessels must remain clear of designated boundaries. Monitoring buoys being deployed. Acknowledge receipt.",
+      "source": "Haacklee Harbor",
+      "target": "EcoVigil"
+    },
+    {
+      "event_id": "Event_Communication_884",
+      "datetime": "2040-10-13 11:44:00",
+      "content": "Haacklee Harbor to Knowles. Your vessel is scheduled for departure at 22:00. Special clearance code Alpha-7-Delta has been issued for tonight's operation. Maintain radio silence after leaving the harbor. Confirm receipt.",
+      "source": "Haacklee Harbor",
+      "target": "Knowles"
+    },
+    {
+      "event_id": "Event_Communication_817",
+      "datetime": "2040-10-12 09:51:00",
+      "content": "Mako, Osprey here. Thanks for confirming tomorrow's tour and the Castaway Cove recommendation. My tourists are packed and ready for 0800. Will they need additional sun protection for that area? Looking forward to working with your crew.",
+      "source": "Osprey",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_960",
+      "datetime": "2040-10-14 09:28:00",
+      "content": "Horizon, EcoVigil here. Deployed aerial drones over Nemo Reef as requested. Surprising findings - appears to be a video production with cameras, lighting rigs, and performers. No evidence of mining equipment. Sending footage to your secure channel now.",
+      "source": "EcoVigil",
+      "target": "Horizon"
+    },
+    {
+      "event_id": "Event_Communication_742",
+      "datetime": "2040-10-11 09:10:00",
+      "content": "Reef Guardian, this is EcoVigil. Water quality analysis complete at coordinates 24\u00b015'N, 81\u00b048'W. Found elevated sediment turbidity and traces of chemical dispersants consistent with extraction activities. Full data package transmitting now for your Council presentation.",
+      "source": "EcoVigil",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_974",
+      "datetime": "2040-10-14 11:32:00",
+      "content": "EcoVigil, Reef Guardian here. Any success with drone deployment? Port Authority continues blocking our approach. We're attempting to coordinate with Sentinel for comprehensive documentation. Need aerial footage of equipment and activities at Nemo Reef urgently.",
+      "source": "EcoVigil",
+      "target": "EcoVigil"
+    },
+    {
+      "event_id": "Event_Communication_733",
+      "datetime": "2040-10-11 09:00:00",
+      "content": "Oceanus City Council, this is EcoVigil. Requesting urgent clarification on Nemo Reef closure. Our monitoring shows extraction activities contradicting environmental protection claims. Seeking permission to continue scientific documentation during closure period.",
+      "source": "EcoVigil",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_751",
+      "datetime": "2040-10-11 09:18:00",
+      "content": "Liam, EcoVigil here. Understood about the northern quadrant directive, though our primary evidence suggests southwest activity. We've recalibrated equipment for northern deployment. Can you explain the technical protocol issues delaying our ROV clearance?",
+      "source": "EcoVigil",
+      "target": "Liam Thorne"
+    },
+    {
+      "event_id": "Event_Communication_977",
+      "datetime": "2040-10-14 11:36:00",
+      "content": "EcoVigil, Sentinel here. Can confirm your drone footage findings - definitely a music video production. Multiple performers, equipment, and crew visible. No signs of environmental damage or mining activity. Security remains tight but situation appears benign.",
+      "source": "EcoVigil",
+      "target": "Sentinel"
+    },
+    {
+      "event_id": "Event_Communication_776",
+      "datetime": "2040-10-11 10:24:00",
+      "content": "Mr. Jensen, Miranda here. I've identified a direct connection - the Oceanus City Council member issuing directives is regularly meeting with unmarked vessels at night. They're exchanging what appear to be data drives and financial documents. I've photographed three such exchanges.",
+      "source": "Miranda Jordan",
+      "target": "Clepper Jensen"
+    },
+    {
+      "event_id": "Event_Communication_775",
+      "datetime": "2040-10-11 10:23:00",
+      "content": "Miranda, Clepper here. Council-level involvement confirms our suspicions. Follow the paper trail between these officials and Project Poseidon. Document meeting times, locations, and any financial transactions. We're getting close to exposing this entire operation.",
+      "source": "Clepper Jensen",
+      "target": "Miranda Jordan"
+    },
+    {
+      "event_id": "Event_Communication_982",
+      "datetime": "2040-10-14 12:13:00",
+      "content": "Rodriguez, Davis here. Need you at south dock by 2200 to supervise equipment breakdown and inventory after Nemo Reef operation. Ensure all items are properly logged and secured for transport back to headquarters.",
+      "source": "Rodriguez",
+      "target": "Rodriguez"
+    },
+    {
+      "event_id": "Event_Communication_764",
+      "datetime": "2040-10-11 10:06:00",
+      "content": "Rodriguez, Remora here. Crew's expressing concerns about conservation vessels in our area. Boss's team provided reassurances, but keep morale steady during increased operational tempo. How's your team handling the pressure?",
+      "source": "Rodriguez",
+      "target": "Boss"
+    },
+    {
+      "event_id": "Event_Communication_804",
+      "datetime": "2040-10-12 09:24:00",
+      "content": "Rodriguez, Davis here. Maintain current position with Mako at Nemo Reef. Security team arriving at 0600. Continue operating under permit #CR-7844 and keep tourism appearance. I'll update after meeting with Nadia tonight.",
+      "source": "Rodriguez",
+      "target": "Davis"
+    },
+    {
+      "event_id": "Event_Communication_511",
+      "datetime": "2040-10-07 11:24:00",
+      "content": "Rodriguez, Remora here. Need your expertise for tomorrow's Nemo Reef operation at 0530. We're handling fragile equipment via Route C and need specialized handling procedures prepared. Sailor Shifts staff will assist you. Confirm availability.",
+      "source": "Rodriguez",
+      "target": "Sailor Shifts Team"
+    },
+    {
+      "event_id": "Event_Communication_562",
+      "datetime": "2040-10-08 10:43:00",
+      "content": "Rodriguez, Remora here. Need you on deck at 0500 tomorrow for special equipment handling at Nemo Reef. Mrs. Money will be present for payment protocols. Bring your technical certification documents.",
+      "source": "Rodriguez",
+      "target": "Mrs. Money"
+    },
+    {
+      "event_id": "Event_Communication_805",
+      "datetime": "2040-10-12 09:24:00",
+      "content": "Rodriguez, Davis here. Maintain current position with Mako at Nemo Reef. Security team arriving at 0600. Continue operating under permit #CR-7844 and keep tourism appearance. I'll update after meeting with Nadia tonight.",
+      "source": "Rodriguez",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_893",
+      "datetime": "2040-10-13 11:55:00",
+      "content": "Rodriguez, Remora here. Need your navigation expertise for tonight's equipment transfer. Maintain radio silence during operation, using only essential hand signals. Conservation vessels observed at perimeter. Meet at south dock at 0200.",
+      "source": "Rodriguez",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_143",
+      "datetime": "2040-10-02 12:53:00",
+      "content": "Mako, this is Small Fry. I can be at slip #14 in about 30 minutes. I've got some location alternatives mapped out for review while the Glitters Team handles the paperwork downtown. Need anything specific before I arrive?",
+      "source": "Small Fry",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_955",
+      "datetime": "2040-10-14 09:02:00",
+      "content": "Remora, Small Fry here. Will meet at south dock at 0200 for equipment transfer. Navigation charts prepared and team briefed on silent protocols. Conservation vessel positions mapped for optimal routing. Ready for your instructions.",
+      "source": "Small Fry",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_984",
+      "datetime": "2040-10-14 12:14:00",
+      "content": "Davis, Small Fry here. I'll be at south dock at 2200 as requested for equipment breakdown. Have already prepared inventory sheets and secured extra transport containers. Should I coordinate with Remora about our 0200 equipment transfer after your operation?",
+      "source": "Small Fry",
+      "target": "Davis"
+    },
+    {
+      "event_id": "Event_Communication_855",
+      "datetime": "2040-10-12 12:57:00",
+      "content": "Defender to Reef Guardian. Your access denial was per current maritime closure orders. All conservation vessels are restricted from Nemo Reef until further notice - no exceptions. This is standard protocol during the official closure period. Submit formal access requests through proper channels.",
+      "source": "Defender",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_169",
+      "datetime": "2040-10-03 08:39:00",
+      "content": "Defender to Seawatch. We've increased patrols around Nemo Reef after reports of tourism vessels offering unauthorized access for payment. Request you maintain vigilance in your sector and report any suspicious activity immediately.",
+      "source": "Defender",
+      "target": "Seawatch"
+    },
+    {
+      "event_id": "Event_Communication_999",
+      "datetime": "2040-10-14 13:31:00",
+      "content": "Defender to Mako. Be advised that conservation vessel Reef Guardian may attempt unauthorized entry to Nemo Reef. Maintain strict perimeter enforcement. Any vessels without proper clearance must be turned away immediately. Report any confrontations.",
+      "source": "Defender",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_763",
+      "datetime": "2040-10-11 10:05:00",
+      "content": "V. Miesel HQ to Remora. Be advised 30% of your crew is being reassigned to Neptune effective immediately to support permit #CR-7844 operations. Maintain discretion and limited communications. Report any operational impacts within 12 hours.",
+      "source": "V. Miesel Shipping",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_313",
+      "datetime": "2040-10-04 13:49:00",
+      "content": "To Boss from V. Miesel Shipping HQ. Documentation for all vessels has been updated to reflect tourist operations only. Asset reallocation complete. Will send verification files within the hour. Awaiting further instructions regarding Mako's current mission status.",
+      "source": "V. Miesel Shipping",
+      "target": "Boss"
+    },
+    {
+      "event_id": "Event_Communication_368",
+      "datetime": "2040-10-05 10:44:00",
+      "content": "Mrs. Money, V. Miesel Shipping here. Financial arrangements remain secure. Have implemented new routing protocols through our southern operations. Encrypted verification codes forthcoming. Be advised, unexpected permit approval for Nemo Reef may present new opportunities.",
+      "source": "V. Miesel Shipping",
+      "target": "Mrs. Money"
+    },
+    {
+      "event_id": "Event_Communication_851",
+      "datetime": "2040-10-12 12:52:00",
+      "content": "V. Miesel HQ to Neptune. Harbor closure timeline confirmed for 0600 tomorrow, lasting 3 days. Maintain Delta-3 encryption. Nadia securing final documentation for permit #CR-7844. Davis bringing additional crew and security team. Proceed as planned.",
+      "source": "V. Miesel Shipping",
+      "target": "Neptune"
+    },
+    {
+      "event_id": "Event_Communication_840",
+      "datetime": "2040-10-12 11:07:00",
+      "content": "V. Miesel Shipping, Paackland Harbor here. Be advised that Nemo Reef is under mandatory closure starting tomorrow 0600 hours for 3 days. All shipping routes must avoid the area and 500-meter buffer zone. Strict enforcement in effect.",
+      "source": "V. Miesel Shipping",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "event_id": "Event_Communication_638",
+      "datetime": "2040-10-09 11:56:00",
+      "content": "V. Miesel HQ to Mako. Authorization granted for extended night operations and additional crew rotation. Implement 24-hour schedule immediately. Ensure all documentation reflects tourism activities only. Notify if additional resources needed.",
+      "source": "V. Miesel Shipping",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_728",
+      "datetime": "2040-10-11 08:45:00",
+      "content": "Elise, this is V. Miesel Shipping management. We can meet regarding the Nemo Reef concerns tomorrow at 10AM. Please bring specific compliance issues and documentation. This project has been fast-tracked with special considerations.",
+      "source": "V. Miesel Shipping",
+      "target": "Elise"
+    },
+    {
+      "event_id": "Event_Communication_825",
+      "datetime": "2040-10-12 10:01:00",
+      "content": "V. Miesel Shipping to Davis. Need you to oversee crew reallocation from Remora to Neptune immediately. Ensure strict confidentiality regarding permit #CR-7844 operations. Report any resistance or operational concerns directly to management.",
+      "source": "V. Miesel Shipping",
+      "target": "Davis"
+    },
+    {
+      "event_id": "Event_Communication_841",
+      "datetime": "2040-10-12 11:09:00",
+      "content": "V. Miesel HQ to Rodriguez. Need immediate verification of all permits for Nemo Reef operations before 0600 closure. Double-check #CR-7844 documentation and ensure Neptune has everything necessary. Report any discrepancies within 3 hours.",
+      "source": "V. Miesel Shipping",
+      "target": "Rodriguez"
+    },
+    {
+      "event_id": "Event_Communication_846",
+      "datetime": "2040-10-12 11:17:00",
+      "content": "V. Miesel HQ to Nadia. Need your immediate confirmation that all documentation for permit #CR-7844 is finalized before tomorrow's 0600 Nemo Reef closure. Davis mentioned meeting you tonight. Any complications we should be aware of?",
+      "source": "V. Miesel Shipping",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_228",
+      "datetime": "2040-10-03 10:31:00",
+      "content": "Captain of Northern Light here. Need to address the blatant favoritism in maritime enforcement. Tourism boats get away with everything while we commercial vessels face constant scrutiny. Same waters, different rules apparently. This selective enforcement is hurting our livelihood.",
+      "source": "Northern Light",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_230",
+      "datetime": "2040-10-03 10:34:00",
+      "content": "Northern Light here to Sailor Shifts. Noticed you folks documenting maritime activities. Care to comment on why tourism boats can access restricted zones while we get citations for minor course deviations? Seems there's two different rulebooks in these waters.",
+      "source": "Northern Light",
+      "target": "Sailor Shifts Team"
+    },
+    {
+      "event_id": "Event_Communication_234",
+      "datetime": "2040-10-03 10:38:00",
+      "content": "Northern Light to Green Guardians. Noticed your increased patrols lately. Meanwhile, tourism boats slip into restricted zones without consequences while we commercial vessels get fined for minor infractions. Care to explain this double standard in enforcement?",
+      "source": "Northern Light",
+      "target": "Green Guardians"
+    },
+    {
+      "event_id": "Event_Communication_635",
+      "datetime": "2040-10-09 11:19:00",
+      "content": "Northern Light to Himark Harbor. Planning to dock for repairs next week. Can you confirm availability and current docking fees? Also, any word on those new fishing zone regulations everyone's whispering about?",
+      "source": "Northern Light",
+      "target": "Himark Harbor"
+    },
+    {
+      "event_id": "Event_Communication_331",
+      "datetime": "2040-10-05 09:45:00",
+      "content": "Haacklee Harbor, this is Nadia Conti. I need to cancel the special access corridor arrangements for Nemo Reef immediately. Plans have changed due to unforeseen circumstances. Destroy all related documentation. I'll contact you when we're ready to proceed with alternative locations.",
+      "source": "Nadia Conti",
+      "target": "Haacklee Harbor"
+    },
+    {
+      "event_id": "Event_Communication_334",
+      "datetime": "2040-10-05 09:49:00",
+      "content": "This is Nadia Conti. My cancellation was due to scheduling conflicts with our tourism development initiatives. I wasn't aware of any permit approvals. I'll submit revised documentation for alternative sustainable tourism proposals next week.",
+      "source": "Nadia Conti",
+      "target": "Oceanus City Council"
+    },
+    {
+      "event_id": "Event_Communication_795",
+      "datetime": "2040-10-12 08:44:00",
+      "content": "Liam, Nadia here. Redirect all remaining operations from southwest immediately. Move equipment to our secondary location. I'll handle EcoVigil through proper channels. Meet me at the usual place at 2100 hours with updated documentation.",
+      "source": "Nadia Conti",
+      "target": "Liam Thorne"
+    },
+    {
+      "event_id": "Event_Communication_538",
+      "datetime": "2040-10-08 08:30:00",
+      "content": "Neptune, Nadia here. Just confirming our 0600 meeting at the marina. I've reviewed the modified equipment specs with The Accountant. Please bring detailed timeline for foundation work and cost implications. We need to stay under radar.",
+      "source": "Nadia Conti",
+      "target": "Neptune"
+    },
+    {
+      "event_id": "Event_Communication_584",
+      "datetime": "2040-10-08 11:23:00",
+      "content": "Marlin, Nadia here. I understand you're inquiring about eastern shoal routes. Those are temporary diversions due to equipment transport needs. I'll have Davis provide the necessary documentation tonight. Nothing to be concerned about.",
+      "source": "Nadia Conti",
+      "target": "Marlin"
+    },
+    {
+      "event_id": "Event_Communication_847",
+      "datetime": "2040-10-12 11:19:00",
+      "content": "This is Nadia. Documentation for permit #CR-7844 is complete. Meeting The Middleman at 2100 to handle final details. Recommend accelerating timeline due to EcoVigil's ROV approval. Shifting operations from southwest immediately. Will update after meeting.",
+      "source": "Nadia Conti",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "event_id": "Event_Communication_756",
+      "datetime": "2040-10-11 09:53:00",
+      "content": "Neptune to Mako. Security personnel deployment proceeding as scheduled. Disregard Blake's instructions - you have operational authority from V. Miesel directly. Maintain current protocols and confirm security team integration upon arrival.",
+      "source": "Neptune",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_406",
+      "datetime": "2040-10-06 11:28:00",
+      "content": "Neptune to Serenity. Need confirmation of your readiness for tomorrow's Nemo Reef operation. The Boss has set an extremely tight schedule. V. Miesel's city contacts have secured our permits, but window is limited. Respond ASAP with status.",
+      "source": "Neptune",
+      "target": "Serenity"
+    },
+    {
+      "event_id": "Event_Communication_824",
+      "datetime": "2040-10-12 09:58:00",
+      "content": "Neptune to V. Miesel HQ. Final logistics confirmed for operation at 0600. All crews operating under Delta-3 encryption. Conservation vessels still present but maintaining distance. Security protocols at maximum. Requesting confirmation of harbor closure timeline.",
+      "source": "Neptune",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "event_id": "Event_Communication_419",
+      "datetime": "2040-10-06 12:27:00",
+      "content": "Neptune, Mako here. Departing Himark now. Still unclear who's coordinating - Samantha denies involvement yet Paackland confirms permits from city officials. Who's actually running this operation? Need immediate clarification on coordination team.",
+      "source": "Neptune",
+      "target": "City Officials"
+    },
+    {
+      "event_id": "Event_Communication_852",
+      "datetime": "2040-10-12 12:55:00",
+      "content": "Neptune to Remora. Final confirmation: operation proceeds at 0600. Maintain strict Delta-3 encryption and security protocols. Monitor conservation vessel movements closely. Davis bringing additional support team. All systems green for harbor closure. Report any deviations immediately.",
+      "source": "Neptune",
+      "target": "Remora"
+    },
+    {
+      "event_id": "Event_Communication_539",
+      "datetime": "2040-10-08 08:32:00",
+      "content": "Neptune to Elise. Heavy equipment delivered to site. Need immediate funding approval for modified stabilization gear. Nadia raised concerns about foundation work scope. Can you finalize payment protocols before 0500 tomorrow?",
+      "source": "Neptune",
+      "target": "Elise"
+    },
+    {
+      "event_id": "Event_Communication_489",
+      "datetime": "2040-10-07 10:36:00",
+      "content": "Neptune responding to Reef Guardian. We're transporting diving equipment and specialized imaging devices for reef documentation. All items are non-invasive and will be deployed at the approved eastern markers. Full documentation available upon your inspection.",
+      "source": "Neptune",
+      "target": "Reef Guardian"
+    },
+    {
+      "event_id": "Event_Communication_537",
+      "datetime": "2040-10-08 08:27:00",
+      "content": "Neptune to Nadia. I'm aware of the foundation work concerns. We're delivering the additional heavy equipment today as requested. Will meet you at 0600 as planned to discuss resource adjustments and review modified equipment specifications that Elise has approved funding for.",
+      "source": "Neptune",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_644",
+      "datetime": "2040-10-09 12:31:00",
+      "content": "Neptune to Himark Harbor. Confirming need for transport of 12 additional personnel to Nemo Reef tomorrow morning. Equipment strain requires immediate parts delivery as well. Will provide detailed manifest within 2 hours. Appreciate your assistance with prioritized berth allocation.",
+      "source": "Neptune",
+      "target": "Himark Harbor"
+    },
+    {
+      "event_id": "Event_Communication_981",
+      "datetime": "2040-10-14 12:12:00",
+      "content": "Neptune to Davis. Confirm arrival with security team at Berth 14. Weather conditions optimal. Conservation vessels still present but maintaining distance. Maintain Delta-3 encryption for all communications. Ready to execute at 0400.",
+      "source": "Neptune",
+      "target": "Davis"
+    },
+    {
+      "event_id": "Event_Communication_708",
+      "datetime": "2040-10-10 12:30:00",
+      "content": "Nadia, Elise here. Meeting confirmed for 0500 at Nemo Reef. Sam's evidence shows clear V. Miesel connection to permanent structures. Conservation vessels increasing surveillance - could complicate our operation. Bring alternate financial channels in case we need quick adaptation.",
+      "source": "Elise",
+      "target": "Nadia Conti"
+    },
+    {
+      "event_id": "Event_Communication_647",
+      "datetime": "2040-10-09 13:34:00",
+      "content": "Liam, Elise here. Need your help with our Nemo Reef situation. Permanent underwater construction discovered beyond original scope. Can you leverage your connections to quietly determine if V. Miesel is planning expanded shipping operations through that area? Urgent.",
+      "source": "Elise",
+      "target": "Liam Thorne"
+    },
+    {
+      "event_id": "Event_Communication_727",
+      "datetime": "2040-10-11 08:44:00",
+      "content": "This is Elise from financial operations. Requesting immediate meeting regarding your Nemo Reef expansion plans. My team has concerns about environmental compliance and potential regulatory issues that could impact your funding structure.",
+      "source": "Elise",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "event_id": "Event_Communication_866",
+      "datetime": "2040-10-13 08:19:00",
+      "content": "Boss, The Accountant here. Conservation vessels deploying underwater microphones around Nemo Reef. Meeting V. Miesel management at 10AM tomorrow. The Middleman confirms our 0500 meeting with enhanced encryption. Southwest clearance urgent after council pressure increased.",
+      "source": "The Accountant",
+      "target": "Boss"
+    },
+    {
+      "event_id": "Event_Communication_951",
+      "datetime": "2040-10-14 08:59:00",
+      "content": "The Middleman, this is The Accountant. Financial records for southwest operations prepared with triple encryption. I'm reviewing V. Miesel's vulnerabilities now. Will bring physical copies only to 0500. Confirm meeting location - standard spot?",
+      "source": "The Accountant",
+      "target": "The Middleman"
+    },
+    {
+      "event_id": "Event_Communication_886",
+      "datetime": "2040-10-13 11:45:00",
+      "content": "Knowles to Haacklee Harbor. Confirming receipt of special clearance code Alpha-7-Delta. We will depart at 22:00 and maintain radio silence as instructed. All systems ready for tonight's operation.",
+      "source": "Knowles",
+      "target": "Haacklee Harbor"
+    },
+    {
+      "event_id": "Event_Communication_987",
+      "datetime": "2040-10-14 12:17:00",
+      "content": "Mako, this is Knowles. We're positioned southwest of your location, maintaining distance as instructed. Visibility good, moving to designated coordinates for tonight's operation. Will hold position and await further instructions.",
+      "source": "Knowles",
+      "target": "Mako"
+    },
+    {
+      "event_id": "Event_Communication_1003",
+      "datetime": "2040-10-14 13:35:00",
+      "content": "Davis, this is Knowles. Approaching southern dock for 22:00 equipment transfer as instructed by Mako. All systems operational and crew ready. Awaiting your debrief at 21:30. Maintaining security protocols.",
+      "source": "Knowles",
+      "target": "Davis"
+    }
+  ]
+}

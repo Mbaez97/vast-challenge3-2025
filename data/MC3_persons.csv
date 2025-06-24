@@ -1,7 +1,7 @@
 label,name,sub_type,id,is_pseudonym
 Sam,Sam,Person,Sam,False
 Kelly,Kelly,Person,Kelly,True
-Nadia Conti,Nadia Conti,Person,Nadia Conti,True
+Nadia Conti,Nadia Conti,Person,Nadia Conti,False
 Elise,Elise,Person,Elise,True
 Liam Thorne,Liam Thorne,Person,Liam Thorne,False
 Samantha Blake,Samantha Blake,Person,Samantha Blake,False
