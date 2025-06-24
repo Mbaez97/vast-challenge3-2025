@@ -1,19 +1,18 @@
 function init_daily_patterns() {
     // Updated Configuration
-    const bandHeight = 110; // Height of each day band
-    const hourWidth = 140; // Width per hour
-    const markerSize = 15; // Size of event markers
-    const markerSpacing = 3; // Spacing between stacked markers
-    const maxStackHeight = bandHeight - 20; // Max height for stacking markers
+    const bandHeight = 120;
+    const hourWidth = 140;
+    const markerSize_h = 30;
+    const markerSize_v = 16;
+    const markerSpacing = 3;
+    const maxStackHeight = bandHeight - 10;
+    const cornerRadius = 6;
 
     // Color variables
-    const backgroundColor = "#ffffff"; // White background
-    const daySeparatorColor = "#94a3b8"; // Bold day separator
-    const hourLineColor = "#e2e8f0"; // Faint hour lines
-    const textColor = "#334155"; // Dark text
-    const axisColor = "#000000"; // Black axis
-    const legendBackground = "#f9fafb"; // Light legend background
-    const legendBorder = "#e2e8f0"; // Legend border
+    const daySeparatorColor = "#94a3b8";
+    const hourLineColor = "#e2e8f0";
+    const textColor = "#334155";
+    const axisColor = "#000000";
 
     const colors = {
         'Person': '#4f46e5',
@@ -39,21 +38,24 @@ function init_daily_patterns() {
     let allEntities = [];
     let selectedEntityIds = [];
     let letterMaps = {};
+    let entityLookup = {};
 
     // Fetch data from Flask endpoint
     d3.json("/data/daily_patterns").then(data => {
         allEvents = data.events;
         allEntities = data.entities;
 
+        // Create entity lookup
+        allEntities.forEach(entity => {
+            entityLookup[entity.id] = entity;
+        });
+
         // Calculate communication count for each entity
         const commCount = {};
         allEntities.forEach(entity => commCount[entity.id] = 0);
 
         allEvents.forEach(event => {
-            // Count source entity
             commCount[event.entity_id] = (commCount[event.entity_id] || 0) + 1;
-
-            // Count target entities
             event.target_entities.forEach(targetId => {
                 commCount[targetId] = (commCount[targetId] || 0) + 1;
             });
@@ -66,18 +68,16 @@ function init_daily_patterns() {
         const eventsByDay = {};
         allEvents.forEach(event => {
             const day = event.day;
-            if (!eventsByDay[day]) {
-                eventsByDay[day] = [];
-            }
+            if (!eventsByDay[day]) eventsByDay[day] = [];
             eventsByDay[day].push(event);
         });
 
-        // Get sorted days (numerically)
+        // Get sorted days
         const days = Object.keys(eventsByDay)
             .map(Number)
             .sort((a, b) => a - b);
 
-        // Find min/max hours from data
+        // Find min/max hours
         let minHour = 24, maxHour = 0;
         allEvents.forEach(event => {
             const hour = new Date(event.datetime).getHours();
@@ -85,7 +85,7 @@ function init_daily_patterns() {
             if (hour > maxHour) maxHour = hour;
         });
 
-        // Add 1-hour padding on each side
+        // Add padding
         minHour = Math.max(0, minHour);
         maxHour = Math.min(24, maxHour + 1);
         const hourRange = maxHour - minHour;
@@ -99,12 +99,22 @@ function init_daily_patterns() {
             .attr("width", "100%")
             .attr("height", svgHeight)
             .attr("viewBox", [0, 0, svgWidth, svgHeight])
-            .attr("class", "bg-white rounded-lg shadow-md");
+            .attr("class", "bg-white");
+
+        // Create clip path for rounded corners
+        svg.append("defs")
+            .append("clipPath")
+            .attr("id", "marker-clip")
+            .append("rect")
+            .attr("width", markerSize_h)
+            .attr("height", markerSize_v)
+            .attr("rx", cornerRadius)
+            .attr("ry", cornerRadius);
 
         // Create scales
         const xScale = d3.scaleLinear()
             .domain([minHour, maxHour])
-            .range([60, svgWidth - 20]); // Left padding increased for rotated labels
+            .range([60, svgWidth - 20]);
 
         // Create axes
         const hourTicks = d3.range(minHour, maxHour + 1);
@@ -114,11 +124,11 @@ function init_daily_patterns() {
 
         svg.append("g")
             .attr("class", "axis")
-            .attr("transform", "translate(0, 30)")
+            .attr("transform", "translate(0, 50)")
             .call(xAxis)
             .attr("color", axisColor);
 
-        // Draw hour lines (faint vertical lines)
+        // Draw hour lines
         hourTicks.forEach(hour => {
             svg.append("line")
                 .attr("x1", xScale(hour))
@@ -129,7 +139,7 @@ function init_daily_patterns() {
                 .attr("stroke-width", 1);
         });
 
-        // Create unique letter mapping per entity subtype
+        // Create unique letter mapping
         letterMaps = {
             'Person': {},
             'Organization': {},
@@ -138,19 +148,18 @@ function init_daily_patterns() {
             'Location': {}
         };
 
-        // Assign unique letters within each subtype
+        // Assign unique letters
         allEntities.forEach(entity => {
             const subType = entity.sub_type;
             if (letterMaps[subType]) {
                 const usedLetters = new Set(Object.values(letterMaps[subType]));
                 let letter = entity.id.charAt(0).toUpperCase();
 
-                // If first letter is taken, find next available letter
                 if (usedLetters.has(letter)) {
-                    let charCode = 65; // 'A'
+                    let charCode = 65;
                     while (usedLetters.has(String.fromCharCode(charCode))) {
                         charCode++;
-                        if (charCode > 90) break; // Stop at 'Z'
+                        if (charCode > 90) break;
                     }
                     letter = String.fromCharCode(charCode);
                 }
@@ -161,10 +170,8 @@ function init_daily_patterns() {
 
         // Draw visualization
         function drawVisualization() {
-            // Clear existing markers
             svg.selectAll(".marker-group").remove();
 
-            // Filter events based on selection
             let eventsToShow;
             if (selectedEntityIds.length > 0) {
                 eventsToShow = allEvents.filter(event =>
@@ -175,21 +182,16 @@ function init_daily_patterns() {
                 eventsToShow = allEvents;
             }
 
-            // Re-group events by day
             const filteredEventsByDay = {};
             eventsToShow.forEach(event => {
                 const day = event.day;
-                if (!filteredEventsByDay[day]) {
-                    filteredEventsByDay[day] = [];
-                }
+                if (!filteredEventsByDay[day]) filteredEventsByDay[day] = [];
                 filteredEventsByDay[day].push(event);
             });
 
-            // Draw day separators and markers
             days.forEach((day, i) => {
                 const yPos = i * bandHeight + 60;
 
-                // Draw bold day separator at the bottom
                 if (i > 0) {
                     svg.append("line")
                         .attr("x1", 40)
@@ -200,8 +202,7 @@ function init_daily_patterns() {
                         .attr("stroke-width", 2);
                 }
 
-                // Add rotated day label at center of band
-                const yCenter = yPos + bandHeight / 2 - 10;
+                const yCenter = yPos + bandHeight / 2 - 5;
                 svg.append("text")
                     .attr("class", "axis font-medium")
                     .attr("x", 20)
@@ -212,12 +213,8 @@ function init_daily_patterns() {
                     .attr("fill", textColor)
                     .text(`Oct ${day}`);
 
-                // Skip if no events for this day
-                if (!filteredEventsByDay[day] || filteredEventsByDay[day].length === 0) {
-                    return;
-                }
+                if (!filteredEventsByDay[day] || filteredEventsByDay[day].length === 0) return;
 
-                // Group events by hour
                 const hourGroups = {};
                 filteredEventsByDay[day].forEach(event => {
                     const hour = new Date(event.datetime).getHours();
@@ -225,119 +222,120 @@ function init_daily_patterns() {
                     hourGroups[hour].push(event);
                 });
 
-                // Draw event markers
                 Object.entries(hourGroups).forEach(([hour, hourEvents]) => {
                     const hourNum = Number(hour);
                     const xPos = xScale(hourNum);
 
-                    // Calculate stacking positions
                     const stacks = [];
                     let currentStack = [];
                     let currentHeight = 0;
 
                     hourEvents.forEach(event => {
-                        if (currentHeight + markerSize + markerSpacing > maxStackHeight) {
+                        if (currentHeight + markerSize_v + markerSpacing > maxStackHeight) {
                             stacks.push(currentStack);
                             currentStack = [];
                             currentHeight = 0;
                         }
                         currentStack.push(event);
-                        currentHeight += markerSize + markerSpacing;
+                        currentHeight += markerSize_v + markerSpacing;
                     });
                     if (currentStack.length > 0) stacks.push(currentStack);
 
-                    // Draw stacks
                     stacks.forEach((stack, stackIndex) => {
-                        const stackXPos = xPos + stackIndex * (markerSize + 5);
+                        const stackXPos = xPos + stackIndex * (markerSize_h + markerSpacing);
 
                         stack.forEach((event, eventIndex) => {
-                            const yPosInStack = yPos + eventIndex * (markerSize + markerSpacing);
-                            const entityLetter = letterMaps[event.entity_sub_type]?.[event.entity_id] ||
-                                event.entity_id.charAt(0).toUpperCase();
+                            const yPosInStack = yPos + eventIndex * (markerSize_v + markerSpacing);
 
-                            // Create marker group
+                            // Create group with clip path and mouse events
                             const markerGroup = svg.append("g")
                                 .attr("class", "marker-group")
                                 .attr("transform", `translate(${stackXPos},${yPosInStack})`)
-                                .attr("data-entity", event.entity_id)
-                                .attr("data-event", event.id);
-
-                            // Draw marker
-                            markerGroup.append("rect")
-                                .attr("class", "marker")
-                                .attr("width", markerSize)
-                                .attr("height", markerSize)
-                                .attr("rx", 4)
-                                .attr("fill", colors[event.entity_sub_type] || "#777")
-                                .on("mouseover", function (event, d) {
+                                .attr("clip-path", "url(#marker-clip)")
+                                .on("mouseover", function (e) {
                                     // Show tooltip
                                     const source = event.entity_id;
                                     const targets = event.target_entities.join(', ');
                                     const message = event.content || 'No message content';
 
                                     tooltip.html(`
-                                        <div class="font-semibold">Communication Details</div>
                                         <div class="mt-1"><span class="font-medium">Source:</span> ${source}</div>
-                                        <div><span class="font-medium">Targets:</span> ${targets}</div>
+                                        <div><span class="font-medium">Target:</span> ${targets}</div>
                                         <div class="mt-2"><span class="font-medium">Message:</span> ${message}</div>
                                         <div class="mt-1 text-xs text-gray-500">${event.datetime}</div>
                                     `)
-                                        .style("left", (d.pageX + 10) + "px")
-                                        .style("top", (d.pageY + 10) + "px")
+                                        .style("left", (e.pageX + 10) + "px")
+                                        .style("top", (e.pageY + 10) + "px")
                                         .classed("hidden", false);
 
-                                    // Highlight marker
-                                    d3.select(this)
+                                    // Highlight entire marker
+                                    markerGroup.selectAll("rect")
                                         .attr("stroke", "#000")
                                         .attr("stroke-width", 1);
-
-                                    // Show box coordinates
-                                    const coords = `(${stackXPos.toFixed(0)},${yPosInStack.toFixed(0)})`;
-                                    markerGroup.append("text")
-                                        .attr("class", "coords-label")
-                                        .attr("x", markerSize / 2)
-                                        .attr("y", -5)
-                                        .attr("text-anchor", "middle")
-                                        .attr("fill", "#555")
-                                        .text(coords);
                                 })
                                 .on("mouseout", function () {
-                                    // Hide tooltip
                                     tooltip.classed("hidden", true);
-
-                                    // Unhighlight marker
-                                    d3.select(this).attr("stroke", null);
-                                    markerGroup.select(".coords-label").remove();
+                                    markerGroup.selectAll("rect")
+                                        .attr("stroke", null);
                                 });
 
-                            // Add entity label
+                            // Get entities and letters
+                            const sourceEntity = entityLookup[event.entity_id];
+                            const targetId = event.target_entities[0] || "";
+                            const targetEntity = entityLookup[targetId];
+
+                            const sourceLetter = sourceEntity ?
+                                (letterMaps[sourceEntity.sub_type]?.[sourceEntity.id] ||
+                                    sourceEntity.id.charAt(0).toUpperCase()) : "?";
+
+                            const targetLetter = targetEntity ?
+                                (letterMaps[targetEntity.sub_type]?.[targetEntity.id] ||
+                                    targetEntity.id.charAt(0).toUpperCase()) : "?";
+
+                            // Draw dual-color marker
+                            markerGroup.append("rect")
+                                .attr("width", markerSize_h / 2)
+                                .attr("height", markerSize_v)
+                                .attr("fill", sourceEntity ? colors[sourceEntity.sub_type] || "#777" : "#999");
+
+                            markerGroup.append("rect")
+                                .attr("x", markerSize_h / 2)
+                                .attr("width", markerSize_h / 2)
+                                .attr("height", markerSize_v)
+                                .attr("fill", targetEntity ? colors[targetEntity.sub_type] || "#999" : "#bbb");
+
+                            // Add letters
                             markerGroup.append("text")
-                                .attr("x", markerSize / 2)
-                                .attr("y", markerSize / 2)
+                                .attr("x", markerSize_h / 4)
+                                .attr("y", markerSize_v / 2)
                                 .attr("dy", "0.35em")
                                 .attr("text-anchor", "middle")
                                 .attr("fill", "white")
                                 .attr("font-weight", "bold")
                                 .attr("font-size", "10px")
-                                .text(entityLetter);
+                                .text(sourceLetter);
+
+                            markerGroup.append("text")
+                                .attr("x", markerSize_h * 0.75)
+                                .attr("y", markerSize_v / 2)
+                                .attr("dy", "0.35em")
+                                .attr("text-anchor", "middle")
+                                .attr("fill", "white")
+                                .attr("font-weight", "bold")
+                                .attr("font-size", "10px")
+                                .text(targetLetter);
                         });
                     });
                 });
             });
         }
 
-        // Initial draw
         drawVisualization();
 
-        // Create legend with scroll container
-        const legendHeader = legendContainer.append("div")
-            .attr("class", "font-semibold mb-3")
-            .text("Entities (sorted by activity)");
-
-        // Create scrollable area for legend items
+        // Create legend
         const legendScrollContainer = legendContainer.append("div")
             .attr("class", "overflow-y-auto")
-            .style("max-height", "500px"); // Adjust based on your needs
+            .style("max-height", "490px");
 
         const legendItems = legendScrollContainer.selectAll(".legend-item")
             .data(allEntities)
@@ -345,28 +343,21 @@ function init_daily_patterns() {
             .append("div")
             .attr("class", "legend-item cursor-pointer p-2 rounded hover:bg-gray-100 flex items-center")
             .on("click", function (event, d) {
-                // Toggle selection
                 const index = selectedEntityIds.indexOf(d.id);
                 if (index > -1) {
-                    // Remove from selection
                     selectedEntityIds.splice(index, 1);
                     d3.select(this).classed("bg-blue-100 border border-blue-300", false);
                 } else {
-                    // Add to selection
                     selectedEntityIds.push(d.id);
                     d3.select(this).classed("bg-blue-100 border border-blue-300", true);
                 }
-
-                // Redraw visualization with filtered events
                 drawVisualization();
             });
 
-        // Add color box
         legendItems.append("div")
             .attr("class", "legend-color flex-shrink-0")
             .style("background-color", d => colors[d.sub_type] || "#777");
 
-        // Add entity info
         legendItems.append("div")
             .attr("class", "ml-2")
             .html(d => {
@@ -381,12 +372,10 @@ function init_daily_patterns() {
                 `;
             });
 
-        // Add caption
         legendContainer.append("div")
             .attr("class", "text-xs text-gray-500 mt-2")
             .html("Click on entities to filter communications");
 
-        // Add reset button
         legendContainer.append("button")
             .attr("class", "mt-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-sm")
             .text("Reset Filter")
