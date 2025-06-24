@@ -1,8 +1,8 @@
 function init_daily_patterns() {
     // Updated Configuration
-    const bandHeight = 120;
-    const hourWidth = 140;
-    const markerSize_h = 30;
+    const bandHeight = 110;
+    const hourWidth = 150;
+    const markerSize_h = 26;
     const markerSize_v = 16;
     const markerSpacing = 3;
     const maxStackHeight = bandHeight - 10;
@@ -114,7 +114,7 @@ function init_daily_patterns() {
         // Create scales
         const xScale = d3.scaleLinear()
             .domain([minHour, maxHour])
-            .range([60, svgWidth - 20]);
+            .range([40, svgWidth - 20]);
 
         // Create axes
         const hourTicks = d3.range(minHour, maxHour + 1);
@@ -192,17 +192,15 @@ function init_daily_patterns() {
             days.forEach((day, i) => {
                 const yPos = i * bandHeight + 60;
 
-                if (i > 0) {
-                    svg.append("line")
-                        .attr("x1", 40)
-                        .attr("y1", yPos - 10)
-                        .attr("x2", svgWidth - 20)
-                        .attr("y2", yPos - 10)
-                        .attr("stroke", daySeparatorColor)
-                        .attr("stroke-width", 2);
-                }
+                svg.append("line")
+                    .attr("x1", 20)
+                    .attr("y1", yPos + bandHeight - 10)
+                    .attr("x2", svgWidth - 20)
+                    .attr("y2", yPos + bandHeight - 10)
+                    .attr("stroke", daySeparatorColor)
+                    .attr("stroke-width", 2);
 
-                const yCenter = yPos + bandHeight / 2 - 5;
+                const yCenter = yPos + bandHeight / 2 - 15;
                 svg.append("text")
                     .attr("class", "axis font-medium")
                     .attr("x", 20)
@@ -242,7 +240,7 @@ function init_daily_patterns() {
                     if (currentStack.length > 0) stacks.push(currentStack);
 
                     stacks.forEach((stack, stackIndex) => {
-                        const stackXPos = xPos + stackIndex * (markerSize_h + markerSpacing);
+                        const stackXPos = 5 + xPos + stackIndex * (markerSize_h + markerSpacing);
 
                         stack.forEach((event, eventIndex) => {
                             const yPosInStack = yPos + eventIndex * (markerSize_v + markerSpacing);

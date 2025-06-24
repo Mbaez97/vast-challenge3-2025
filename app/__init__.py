@@ -16,7 +16,7 @@ app.config["DATA_FILE"] = DATA_FILE
 app.config["COMMUNICATION_FILE"] = COMMUNICATION_FILE
 
 # List of visualization modules
-VISUALIZATIONS = ["time_patterns", "daily_patterns", "graph"]
+VISUALIZATIONS = ["time_patterns", "daily_patterns", "keyword_analysis", "graph"]
 
 # Load visualization modules
 visualization_modules = {}
