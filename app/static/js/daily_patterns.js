@@ -259,7 +259,7 @@ function init_daily_patterns() {
                                     const message = event.content || 'No message content';
 
                                     tooltip.html(`
-                                        <div class="mt-1"><span class="font-medium">Source:</span> ${source}</div>
+                                        <div><span class="font-medium">Source:</span> ${source}</div>
                                         <div><span class="font-medium">Target:</span> ${targets}</div>
                                         <div class="mt-2"><span class="font-medium">Message:</span> ${message}</div>
                                         <div class="mt-1 text-xs text-gray-500">${event.datetime}</div>
@@ -335,7 +335,7 @@ function init_daily_patterns() {
         // Create legend
         const legendScrollContainer = legendContainer.append("div")
             .attr("class", "overflow-y-auto")
-            .style("max-height", "490px");
+            .style("max-height", "690px");
 
         const legendItems = legendScrollContainer.selectAll(".legend-item")
             .data(allEntities)
