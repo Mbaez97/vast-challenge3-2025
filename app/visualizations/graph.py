@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 # Visualization metadata
 NAME = "graph"
 TITLE = "Communication Graph"
-DESCRIPTION = "Visualize the communication graph of the dataset, showing nodes and edges representing entities and their interactions."
+DESCRIPTION = "Visualize the communication graph of the dataset, showing nodes and edges representing entities and their communications."
 
 
 def get_data():

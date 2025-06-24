@@ -1,4 +1,30 @@
 <div class="visualization-container p-4">
-    <h2 class="text-xl font-semibold mb-2">Network Graph</h2>
+  <h2 class="text-xl font-semibold mb-2">Network Graph</h2>
+
+  <!-- FLEX WRAPPER -->
+  <div id="main">
+    <!-- GRAPH PANEL -->
     <div id="graph-container"></div>
+
+    <!-- TABLE PANEL -->
+    <div id="table-container">
+        <button id="clear-filter-btn" class="mb-2 px-3 py-1 bg-gray-200 rounded">
+            Clear Filter
+        </button>
+
+        <table id="message-table">
+            <thead style="background-color: #777777;">
+            <tr>
+                <th class="font-bold">Source</th>
+                <th class="font-bold">Target</th>
+                <th class="font-bold">Date Time</th>
+                <th class="font-bold">Content</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- rows injected by graph.js -->
+            </tbody>
+        </table>
+        </div>
+  </div>
 </div>
