@@ -17,6 +17,7 @@ def get_data():
 
     logger.debug("Loading graph data from static/graph.json")
     data_file = current_app.config["COMMUNICATION_FILE"]
+    relationships_file = current_app.config["RELATIONSHIPS_FILE"]
     if not data_file:
         logger.error("COMMUNICATION_FILE not configured")
         return {"error": "Data file not configured"}
@@ -41,9 +42,27 @@ def get_data():
         logger.error(f"Error loading entity similarity matrix: {str(e)}")
         return {"error": f"Could not load entity similarity matrix: {str(e)}"}
 
+    # Load relationships data
+    try:
+        with open(relationships_file, "r") as f:
+            relationships_data = json.load(f)
+    except Exception as e:
+        logger.error(f"Error loading relationships data: {str(e)}")
+        return {"error": f"Could not load relationships file: {str(e)}"}
+    relationships_nodes = relationships_data.get("nodes", [])
+    relationships_edges = relationships_data.get(
+        "links", relationships_data.get("edges", [])
+    )
+
     logger.debug(f"Loaded graph: {len(nodes)} nodes, {len(links)} edges")
     return {
-        "nodes": nodes,
-        "edges": links,
+        "communication": {
+            "nodes": nodes,
+            "links": links,
+        },
+        "relationships": {
+            "nodes": relationships_nodes,
+            "links": relationships_edges,
+        },
         "heatmap": {"entities": entities, "matrix": matrix},
     }
