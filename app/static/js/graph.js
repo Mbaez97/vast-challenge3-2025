@@ -1,31 +1,42 @@
 function init_graph() {
-  // Set up main SVG
-  const container = d3.select("#graph-container-2");
-  const width = container.node().clientWidth;
+  // ── Containers and SVG setup ─────────────────────────────────────────
+  const commContainer = d3.select("#graph-container-2");
+  const relContainer  = d3.select("#relationship-container");
   const height = 600;
-  container.html("");
-  const svg = container.append("svg")
-    .attr("width", width)
+
+  commContainer.html("");
+  relContainer.html("");
+
+  // Communication SVG (left)
+  const commWidth = commContainer.node().clientWidth;
+  const commSvg = commContainer.append("svg")
+    .attr("width", commWidth)
     .attr("height", height)
     .attr("class", "bg-white rounded-lg shadow-md");
-  const g = svg.append("g");
+  const commG = commSvg.append("g");
 
-  // ─── Static Shape Legend (top-left) ─────────────────────────────
-  const shapeLegend = svg.append("g")
-    .attr("class", "shape-legend")
+  // Relationship SVG (right)
+  const relWidth = relContainer.node().clientWidth;
+  const relSvg = relContainer.append("svg")
+    .attr("width", relWidth)
+    .attr("height", height)
+    .attr("class", "bg-white rounded-lg shadow-md");
+  const relG = relSvg.append("g");
+
+  // ── Static Shape Legend on Communication ────────────────────────────
+  const shapeLegend = commSvg.append("g")
     .attr("transform", "translate(20,20)");
   const shapeItems = [
-    { label: "Real Name",     symbol: d3.symbolCircle },
-    { label: "Pseudonym",     symbol: d3.symbolStar   }
+    { label: "Real Name",  symbol: d3.symbolCircle },
+    { label: "Pseudonym",  symbol: d3.symbolStar   }
   ];
   shapeLegend.selectAll("g.legend-shape-item")
     .data(shapeItems)
     .join("g")
-      .attr("class", "legend-shape-item")
       .attr("transform", (_, i) => `translate(0,${i * 24})`)
     .call(item => {
       item.append("path")
-        .attr("d", d => d3.symbol().type(d.symbol).size(100)())
+        .attr("d", d3.symbol().type(d => d.symbol).size(100))
         .attr("fill", "#eee")
         .attr("stroke", "#333");
       item.append("text")
@@ -37,46 +48,60 @@ function init_graph() {
     });
   // ─────────────────────────────────────────────────────────────────
 
-  d3.json("/data/graph").then(data => {
-    const allEdges = data.edges;
+ d3.json("/data/graph").then(data => {
+    // Shared state
     let selectedNodes = new Set();
     let selectedTypes = new Set();
 
-    // Prepare nodesData including is_pseudonym
-    const nodesData = data.nodes.map(n => ({
+    // Communication graph data
+    const commNodes = data.communication.nodes.map(n => ({
       id: n.id,
       type: n.sub_type,
       is_pseudonym: n.is_pseudonym
     }));
-    const entityTypeMap = new Map(nodesData.map(d => [d.id, d.type]));
-    const links = allEdges.map(e => ({
+    const commLinks = data.communication.links.map(e => ({
       id: e.event_id, source: e.source, target: e.target
     }));
+
+    // Relationship graph data
+    const relNodes = data.relationships.nodes.map(n => ({
+      id: n.id,
+      type: n.sub_type,
+      is_pseudonym: n.is_pseudonym
+    }));
+    const relLinks = data.relationships.links.map(e => ({
+      id: e.event_id, source: e.source, target: e.target
+    }));
+
+    // Type → color
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+    const entityTypeMap = new Map(commNodes.map(d => [d.id, d.type]));
 
     // Tooltip for heatmap
     const tooltip = d3.select("body").append("div")
       .attr("class", "heatmap-tooltip")
       .style("visibility", "hidden");
 
-    // Force simulation
-    const sim = d3.forceSimulation(nodesData)
-      .force("link", d3.forceLink(links).id(d => d.id).distance(100))
+    // ── COMMUNICATION GRAPH ────────────────────────────────────────────
+    const commSim = d3.forceSimulation(commNodes)
+      .force("link", d3.forceLink(commLinks).id(d => d.id).distance(100))
       .force("charge", d3.forceManyBody().strength(-300))
-      .force("center", d3.forceCenter(width/2, height/2))
+      .force("center", d3.forceCenter(commWidth/2, height/2))
       .force("collision", d3.forceCollide().radius(30));
 
-    // Draw links
-    const link = g.append("g").attr("class","links")
+    // Links
+    const commLinkSel = commG.append("g").attr("class", "links")
       .selectAll("line")
-      .data(links).join("line")
-        .attr("stroke","#999")
-        .attr("stroke-width",2);
+      .data(commLinks)
+      .join("line")
+        .attr("stroke", "#999")
+        .attr("stroke-width", 2);
 
-    // Draw nodes as circle or star
-    const color = d3.scaleOrdinal(d3.schemeCategory10);
-    const node = g.append("g").attr("class","nodes")
+    // Nodes (circle vs star)
+    const commNode = commG.append("g").attr("class", "nodes")
       .selectAll("path")
-      .data(nodesData).join("path")
+      .data(commNodes)
+      .join("path")
         .attr("d", d => d3.symbol()
                          .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
                          .size(100)()
@@ -86,20 +111,108 @@ function init_graph() {
         .attr("stroke-width", 2)
         .style("cursor", "pointer")
         .call(d3.drag()
-          .on("start", e => { if (!e.active) sim.alphaTarget(0.3).restart(); e.subject.fx=e.subject.x; e.subject.fy=e.subject.y; })
-          .on("drag",  e => { e.subject.fx=e.x;         e.subject.fy=e.y;         })
-          .on("end",   e => { if (!e.active) sim.alphaTarget(0);     e.subject.fx=null;     e.subject.fy=null; })
+          .on("start", e => { if (!e.active) commSim.alphaTarget(0.3).restart(); e.subject.fx = e.subject.x; e.subject.fy = e.subject.y; })
+          .on("drag",  e => { e.subject.fx = e.x; e.subject.fy = e.y; })
+          .on("end",   e => { if (!e.active) commSim.alphaTarget(0); e.subject.fx = null; e.subject.fy = null; })
         );
 
-    // Type legend (interactive) at top-right
-    const types = Array.from(new Set(nodesData.map(d=>d.type)));
-    const legend = svg.append("g")
-      .attr("transform", `translate(${width-140},20)`);
-    const legendItems = legend.selectAll("g")
-      .data(types).join("g")
-        .attr("transform",(d,i)=>`translate(0,${i*20})`)
-        .style("cursor","pointer")
-        .on("click",(e,t)=>{
+    // Labels
+    const commLabel = commG.append("g").attr("class", "labels")
+      .selectAll("text")
+      .data(commNodes)
+      .join("text")
+        .text(d => d.id)
+        .attr("dx", 12)
+        .attr("dy", 4)
+        .attr("font-size", "12px");
+
+    // Tick
+    commSim.on("tick", () => {
+      commLinkSel
+        .attr("x1", d => d.source.x)
+        .attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x)
+        .attr("y2", d => d.target.y);
+      commNode
+        .attr("transform", d => `translate(${d.x},${d.y})`);
+      commLabel
+        .attr("x", d => d.x)
+        .attr("y", d => d.y);
+    });
+
+    // Zoom
+    commSvg.call(d3.zoom().on("zoom", ev => {
+      commG.attr("transform", ev.transform);
+    }));
+
+    // ── RELATIONSHIP GRAPH (static) ───────────────────────────────────
+    const relSim = d3.forceSimulation(relNodes)
+      .force("link", d3.forceLink(relLinks).id(d => d.id).distance(80))
+      .force("charge", d3.forceManyBody().strength(-200))
+      .force("center", d3.forceCenter(relWidth/2, height/2))
+      .force("collision", d3.forceCollide().radius(25));
+
+    const relLinkSel = relG.append("g").attr("class", "links")
+      .selectAll("line")
+      .data(relLinks)
+      .join("line")
+        .attr("stroke", "#666")
+        .attr("stroke-width", 1.5);
+
+    const relNode = relG.append("g").attr("class", "nodes")
+      .selectAll("path")
+      .data(relNodes)
+      .join("path")
+        .attr("d", d => d3.symbol()
+                         .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+                         .size(80)()
+        )
+        .attr("fill", d => color(d.type))
+        .attr("stroke", "#333")
+        .attr("stroke-width", 1.5)
+        .style("cursor", "grab")
+        .call(d3.drag()
+          .on("start", e => { if (!e.active) relSim.alphaTarget(0.3).restart(); e.subject.fx = e.subject.x; e.subject.fy = e.subject.y; })
+          .on("drag",  e => { e.subject.fx = e.x; e.subject.fy = e.y; })
+          .on("end",   e => { if (!e.active) relSim.alphaTarget(0); e.subject.fx = null; e.subject.fy = null; })
+        );
+
+    const relLabel = relG.append("g").attr("class", "labels")
+      .selectAll("text")
+      .data(relNodes)
+      .join("text")
+        .text(d => d.id)
+        .attr("dx", 12)
+        .attr("dy", 4)
+        .attr("font-size", "11px");
+
+    relSim.on("tick", () => {
+      relLinkSel
+        .attr("x1", d => d.source.x)
+        .attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x)
+        .attr("y2", d => d.target.y);
+      relNode
+        .attr("transform", d => `translate(${d.x},${d.y})`);
+      relLabel
+        .attr("x", d => d.x)
+        .attr("y", d => d.y);
+    });
+
+    relSvg.call(d3.zoom().on("zoom", ev => {
+      relG.attr("transform", ev.transform);
+    }));
+
+    // ── Interactive Type Legend on Communication ──────────────────────
+    const types = Array.from(new Set(commNodes.map(d => d.type)));
+    const legend = commSvg.append("g")
+      .attr("transform", `translate(${commWidth - 140},20)`);
+    const legendItems = legend.selectAll("g.type-item")
+      .data(types)
+      .join("g")
+        .attr("transform", (_, i) => `translate(0,${i * 20})`)
+        .style("cursor", "pointer")
+        .on("click", (e, t) => {
           if (selectedTypes.has(t)) selectedTypes.delete(t);
           else selectedTypes.add(t);
           updateHighlights();
@@ -107,64 +220,47 @@ function init_graph() {
           renderHeatmap();
         });
     legendItems.append("rect")
-      .attr("width",14).attr("height",14)
+      .attr("width", 14)
+      .attr("height", 14)
       .attr("fill", d => color(d));
     legendItems.append("text")
-      .attr("x",18).attr("y",12)
+      .attr("x", 18)
+      .attr("y", 12)
       .text(d => d)
-      .attr("font-size","12px")
-      .attr("fill","#1f2937");
-    function updateLegendStyles(){
+      .attr("font-size", "12px")
+      .attr("fill", "#1f2937");
+    function updateLegendStyles() {
       legendItems.select("rect")
-        .attr("stroke", d=>selectedTypes.has(d)?"#1e40af":"none")
-        .attr("stroke-width", d=>selectedTypes.has(d)?2:0);
+        .attr("stroke", d => selectedTypes.has(d) ? "#1e40af" : "none")
+        .attr("stroke-width", d => selectedTypes.has(d) ? 2 : 0);
     }
     updateLegendStyles();
 
-    // Labels
-    const label = g.append("g").attr("class","labels")
-      .selectAll("text")
-      .data(nodesData).join("text")
-        .text(d=>d.id)
-        .attr("dx",12).attr("dy",4)
-        .attr("font-size","12px");
-
-    // Tick
-    sim.on("tick",()=>{
-      link
-        .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
-        .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
-      node
-        .attr("transform", d=>`translate(${d.x},${d.y})`);
-      label
-        .attr("x",d=>d.x).attr("y",d=>d.y);
-    });
-
-    // Zoom
-    svg.call(d3.zoom().on("zoom", ev=> g.attr("transform", ev.transform)));
-
-    // Chat rendering
+    // ── Chat, Selected Display, Highlights, Heatmap ───────────────────
+    // (these remain exactly as before, driving only the communication graph)
     const chatWindow = d3.select("#chat-window");
-    function renderChat(){
+    function renderChat() {
       chatWindow.html("");
       if (!selectedNodes.size) return;
-      allEdges
+      data.communication.links
         .filter(e => selectedNodes.has(e.source) || selectedNodes.has(e.target))
         .sort((a,b) => new Date(a.datetime) - new Date(b.datetime))
         .forEach(msg => {
           const sent = selectedNodes.has(msg.source);
-          const b = chatWindow.append("div")
+          const bubble = chatWindow.append("div")
             .attr("class", `message ${sent?"sent":"received"}`);
-          b.append("div").attr("class","chat-header")
-            .text(`${msg.source} → ${msg.target} - (${msg.event_id}): `);
-          b.append("div").attr("class","content")
+          bubble.append("div")
+            .attr("class","chat-header")
+            .text(`${msg.source} → ${msg.target}:`);
+          bubble.append("div")
+            .attr("class","content")
             .text(msg.content);
-          b.append("div").attr("class","timestamp")
+          bubble.append("div")
+            .attr("class","timestamp")
             .text(new Date(msg.datetime).toLocaleString());
         });
     }
 
-    // Selected‐nodes display
     const selDisp = d3.select("#selected-nodes-display");
     function updateSelectedDisplay(){
       const names = Array.from(selectedNodes);
@@ -175,37 +271,36 @@ function init_graph() {
       );
     }
 
-    // Graph highlight
     function updateHighlights(){
       if (selectedNodes.size) {
         const nbr = new Set([...selectedNodes]);
-        allEdges.forEach(e => {
+        data.communication.links.forEach(e => {
           if (selectedNodes.has(e.source)) nbr.add(e.target);
           if (selectedNodes.has(e.target)) nbr.add(e.source);
         });
-        node
-          .attr("opacity", d=>nbr.has(d.id)?1:0.2);
-        label.attr("opacity", d=>nbr.has(d.id)?1:0.2);
-        link.attr("opacity", l=>
+        commNode.attr("opacity",d=>nbr.has(d.id)?1:0.2);
+        commLabel.attr("opacity",d=>nbr.has(d.id)?1:0.2);
+        commLinkSel.attr("opacity",l=>
           (selectedNodes.has(l.source.id)||selectedNodes.has(l.target.id))?1:0.1
         );
       } else if (selectedTypes.size) {
-        node.attr("opacity",d=>selectedTypes.has(d.type)?1:0.2);
-        label.attr("opacity",d=>selectedTypes.has(d.type)?1:0.2);
-        link.attr("opacity",l=>{
-          const t0=entityTypeMap.get(l.source.id),
-                t1=entityTypeMap.get(l.target.id);
+        commNode.attr("opacity",d=>selectedTypes.has(d.type)?1:0.2);
+        commLabel.attr("opacity",d=>selectedTypes.has(d.type)?1:0.2);
+        commLinkSel.attr("opacity",l=>{
+          const t0 = entityTypeMap.get(l.source.id),
+                t1 = entityTypeMap.get(l.target.id);
           return (selectedTypes.has(t0)&&selectedTypes.has(t1))?1:0.1;
         });
       } else {
-        node.attr("opacity",1);
-        label.attr("opacity",1);
-        link.attr("opacity",0.6);
+        commNode.attr("opacity",1);
+        commLabel.attr("opacity",1);
+        commLinkSel.attr("opacity",0.6);
       }
+      // relationship graph remains static—no filtering here
     }
 
-    // Node‐click
-    node.on("click",(e,d)=>{
+    // Node click on communication only
+    commNode.on("click",(e,d)=>{
       if (selectedNodes.has(d.id)) selectedNodes.delete(d.id);
       else selectedNodes.add(d.id);
       updateSelectedDisplay();
@@ -214,8 +309,7 @@ function init_graph() {
       renderHeatmap();
     });
 
-    // Clear‐filter
-    d3.select("#clear-filter-btn").on("click", ()=>{
+    d3.select("#clear-filter-btn").on("click",()=>{
       selectedNodes.clear();
       updateSelectedDisplay();
       renderChat();

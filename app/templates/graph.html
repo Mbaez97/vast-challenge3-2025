@@ -1,10 +1,23 @@
 <div class="visualization-container p-4">
     <!-- FLEX WRAPPER -->
+    <h2 class="text-xl font-semibold mb-4">Network Exploration Dashboard</h2>
     <div id="main">
         <!-- GRAPH PANEL -->
-        <h2 class="text-xl font-semibold mb-2">Communication Graph</h2>
-        <div id="graph-container-2"></div>
+        <div id="graph-row" style="display:flex; gap:20px; margin-bottom:20px;">
+            <!-- Communication panel -->
+            <div class="graph-panel" style="flex:1; display:flex; flex-direction:column;">
+                <h3 style="margin-bottom:8px">Communication Graph</h3>
+                <div id="graph-container-2" style="flex:1"></div>
+            </div>
 
+            <!-- Relationship panel -->
+            <div class="graph-panel" style="flex:1; display:flex; flex-direction:column;">
+                <h3 style="margin-bottom:8px">Relationship Graph</h3>
+                <div id="relationship-container" style="flex:1"></div>
+            </div>
+        </div>
+        
+        <!-- FILTERS AND CHAT/HEATMAP ROW -->
         <div id="selected-nodes-display">Selected nodes:</div>
         <button id="clear-filter-btn" class="mb-2 px-3 py-1 bg-gray-200 rounded">
             Clear Selection
