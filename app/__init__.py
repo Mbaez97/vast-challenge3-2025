@@ -17,8 +17,12 @@ logging.getLogger("numba.typed").setLevel(logging.WARNING)
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_FILE = os.path.join(base_dir, "data", "MC3_graph.json")
 COMMUNICATION_FILE = os.path.join(base_dir, "data", "MC3_graph_communication.json")
+HETMAP_SIMILARITY_FILE = os.path.join(
+    base_dir, "data", "MC3_entity_similarity_matrix.csv"
+)
 app.config["DATA_FILE"] = DATA_FILE
 app.config["COMMUNICATION_FILE"] = COMMUNICATION_FILE
+app.config["HEATMAP_SIMILARITY_FILE"] = HETMAP_SIMILARITY_FILE
 
 # List of visualization modules
 VISUALIZATIONS = ["time_patterns", "daily_patterns", "topic_modeling", "graph"]
