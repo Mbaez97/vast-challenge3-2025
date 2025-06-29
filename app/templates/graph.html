@@ -1,30 +1,31 @@
 <div class="visualization-container p-4">
-  <h2 class="text-xl font-semibold mb-2">Network Graph</h2>
+    <h2 class="text-xl font-semibold mb-2">Network Graph</h2>
 
-  <!-- FLEX WRAPPER -->
-  <div id="main">
-    <!-- GRAPH PANEL -->
-    <div id="graph-container"></div>
-
-    <!-- TABLE PANEL -->
-    <div id="table-container">
+    <!-- FLEX WRAPPER -->
+    <div id="main">
+        <!-- GRAPH PANEL -->
+        
+        <div id="graph-container-2"></div>
+        <div id="selected-nodes-display">Selected nodes:</div>
         <button id="clear-filter-btn" class="mb-2 px-3 py-1 bg-gray-200 rounded">
-            Clear Filter
+            Clear Selection
         </button>
+        <div id="chat-heatmap-row" style="display:flex; gap:20px; margin-top:20px;">
+             <!-- Chat panel -->
+                <div id="chat-panel" style="flex: 1; display: flex; flex-direction: column;">
+                    <h3>Chat view</h3>
+                    <div id="chat-window"
+                        style="flex:1; border:1px solid #ccc; border-radius:8px; padding:10px;">
+                        <!-- chat bubbles go here -->
+                    </div>
+                </div>
 
-        <table id="message-table">
-            <thead style="background-color: #777777;">
-            <tr>
-                <th class="font-bold">Source</th>
-                <th class="font-bold">Received</th>
-                <th class="font-bold">Date Time</th>
-                <th class="font-bold">Content</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- rows injected by graph.js -->
-            </tbody>
-        </table>
+                <!-- Heatmap panel -->
+                <div id="heatmap-panel" style="flex: 1; display: flex; flex-direction: column; align-items: stretch;">
+                    <h3>Entity Similarity Heatmap</h3>
+                    <div id="heatmap-container" style="flex: 1;"></div>
+                </div>
+
         </div>
-  </div>
+    </div>
 </div>

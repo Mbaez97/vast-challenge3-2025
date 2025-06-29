@@ -22,13 +22,15 @@
 /* 1. Flex layout: graph | table */
 #main {
     display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 
-/* 2. Make both panels share available space */
+/* both panels now span full width */
 #graph-container,
 #table-container {
-    flex: 1;
+    width: 100%;
+    flex: none;
 }
 
 /* 3. Scrollable table panel */
@@ -72,6 +74,95 @@
 
 #clear-filter-btn:hover {
     background-color: #e5e7eb;
+}
+
+#chat-window {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    max-height: 600px;
+    min-width: 600px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+#heatmap-container {
+    flex: 1 1 50%;
+}
+
+#chat-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#selected-nodes-display {
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+/* chat bubble base */
+.chat-header {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.message {
+    max-width: 60%;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* outgoing (source) on the right */
+.message.sent {
+    align-self: flex-end;
+    background: #d1e7dd;
+}
+
+/* incoming (target) on the left */
+.message.received {
+    align-self: flex-start;
+    background: #f8d7da;
+}
+
+/* parts of the bubble */
+.message .name {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.message .content {
+    margin-bottom: 4px;
+}
+
+.message .timestamp {
+    font-size: 10px;
+    color: #666;
+    text-align: right;
+    margin-top: 4px;
+}
+
+.heatmap-tooltip {
+    position: absolute;
+    z-index: 10000;
+    pointer-events: none;
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.heatmap-legend rect {
+    /* we’ll size it dynamically in JS, but give it a class */
 }
 
 .legend text {
