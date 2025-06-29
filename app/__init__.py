@@ -23,6 +23,9 @@ HETMAP_SIMILARITY_FILE = os.path.join(
 app.config["DATA_FILE"] = DATA_FILE
 app.config["COMMUNICATION_FILE"] = COMMUNICATION_FILE
 app.config["HEATMAP_SIMILARITY_FILE"] = HETMAP_SIMILARITY_FILE
+app.config["RELATIONSHIPS_FILE"] = os.path.join(
+    base_dir, "data", "MC3_relationships.json"
+)  # New relationships file
 
 # List of visualization modules
 VISUALIZATIONS = ["time_patterns", "daily_patterns", "topic_modeling", "graph"]
