@@ -8,6 +8,7 @@
       "label": "The Lookout",
       "name": "The Lookout",
       "sub_type": "Person",
+      "is_pseudonym": true,
       "id": "The Lookout"
     },
     {
@@ -15,6 +16,7 @@
       "label": "The Intern",
       "name": "The Intern",
       "sub_type": "Person",
+      "is_pseudonym": true,
       "id": "The Intern"
     },
     {
@@ -22,6 +24,7 @@
       "label": "Kelly",
       "name": "Kelly",
       "sub_type": "Person",
+      "is_pseudonym": true,
       "id": "Kelly"
     },
     {
@@ -29,6 +32,7 @@
       "label": "Sam",
       "name": "Sam",
       "sub_type": "Person",
+      "is_pseudonym": true,
       "id": "Sam"
     },
     {
@@ -36,6 +40,7 @@
       "label": "Mrs. Money",
       "name": "Mrs. Money",
       "sub_type": "Person",
+      "is_pseudonym": true,
       "id": "Mrs. Money"
     },
     {
@@ -43,6 +48,7 @@
       "label": "Boss",
       "name": "Boss",
       "sub_type": "Person",
+      "is_pseudonym": true,
       "id": "Boss"
     },
     {
@@ -50,6 +56,7 @@
       "label": "The Middleman",
       "name": "The Middleman",
       "sub_type": "Person",
+      "is_pseudonym": true,
       "id": "The Middleman"
     },
     {
@@ -57,6 +64,7 @@
       "label": "Serenity",
       "name": "Serenity",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Serenity"
     },
     {
@@ -64,6 +72,7 @@
       "label": "Mako",
       "name": "Mako",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Mako"
     },
     {
@@ -71,6 +80,7 @@
       "label": "Reef Guardian",
       "name": "Reef Guardian",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Reef Guardian"
     },
     {
@@ -78,6 +88,7 @@
       "label": "Himark Harbor",
       "name": "Himark Harbor",
       "sub_type": "Location",
+      "is_pseudonym": false,
       "id": "Himark Harbor"
     },
     {
@@ -85,6 +96,7 @@
       "label": "Davis",
       "name": "Davis",
       "sub_type": "Person",
+      "is_pseudonym": false,
       "id": "Davis"
     },
     {
@@ -92,6 +104,7 @@
       "label": "Paackland Harbor",
       "name": "Paackland Harbor",
       "sub_type": "Location",
+      "is_pseudonym": false,
       "id": "Paackland Harbor"
     },
     {
@@ -99,6 +112,7 @@
       "label": "Remora",
       "name": "Remora",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Remora"
     },
     {
@@ -106,6 +120,7 @@
       "label": "Oceanus City Council",
       "name": "Oceanus City Council",
       "sub_type": "Organization",
+      "is_pseudonym": false,
       "id": "Oceanus City Council"
     },
     {
@@ -113,6 +128,7 @@
       "label": "Liam Thorne",
       "name": "Liam Thorne",
       "sub_type": "Person",
+      "is_pseudonym": false,
       "id": "Liam Thorne"
     },
     {
@@ -120,6 +136,7 @@
       "label": "Marlin",
       "name": "Marlin",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Marlin"
     },
     {
@@ -127,6 +144,7 @@
       "label": "Green Guardians",
       "name": "Green Guardians",
       "sub_type": "Organization",
+      "is_pseudonym": false,
       "id": "Green Guardians"
     },
     {
@@ -134,6 +152,7 @@
       "label": "Samantha Blake",
       "name": "Samantha Blake",
       "sub_type": "Person",
+      "is_pseudonym": false,
       "id": "Samantha Blake"
     },
     {
@@ -141,6 +160,7 @@
       "label": "Sailor Shifts Team",
       "name": "Sailor Shifts Team",
       "sub_type": "Organization",
+      "is_pseudonym": false,
       "id": "Sailor Shifts Team"
     },
     {
@@ -148,6 +168,7 @@
       "label": "Glitters Team",
       "name": "Glitters Team",
       "sub_type": "Organization",
+      "is_pseudonym": false,
       "id": "Glitters Team"
     },
     {
@@ -155,6 +176,7 @@
       "label": "Sentinel",
       "name": "Sentinel",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Sentinel"
     },
     {
@@ -162,6 +184,7 @@
       "label": "Horizon",
       "name": "Horizon",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Horizon"
     },
     {
@@ -169,6 +192,7 @@
       "label": "Seawatch",
       "name": "Seawatch",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Seawatch"
     },
     {
@@ -176,6 +200,7 @@
       "label": "Haacklee Harbor",
       "name": "Haacklee Harbor",
       "sub_type": "Location",
+      "is_pseudonym": false,
       "id": "Haacklee Harbor"
     },
     {
@@ -183,6 +208,7 @@
       "label": "Osprey",
       "name": "Osprey",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Osprey"
     },
     {
@@ -190,6 +216,7 @@
       "label": "EcoVigil",
       "name": "EcoVigil",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "EcoVigil"
     },
     {
@@ -197,6 +224,7 @@
       "label": "Miranda Jordan",
       "name": "Miranda Jordan",
       "sub_type": "Person",
+      "is_pseudonym": false,
       "id": "Miranda Jordan"
     },
     {
@@ -204,6 +232,7 @@
       "label": "Clepper Jensen",
       "name": "Clepper Jensen",
       "sub_type": "Person",
+      "is_pseudonym": false,
       "id": "Clepper Jensen"
     },
     {
@@ -211,6 +240,7 @@
       "label": "Rodriguez",
       "name": "Rodriguez",
       "sub_type": "Person",
+      "is_pseudonym": false,
       "id": "Rodriguez"
     },
     {
@@ -218,6 +248,7 @@
       "label": "Small Fry",
       "name": "Small Fry",
       "sub_type": "Person",
+      "is_pseudonym": true,
       "id": "Small Fry"
     },
     {
@@ -225,6 +256,7 @@
       "label": "Defender",
       "name": "Defender",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Defender"
     },
     {
@@ -232,6 +264,7 @@
       "label": "V. Miesel Shipping",
       "name": "V. Miesel Shipping",
       "sub_type": "Organization",
+      "is_pseudonym": false,
       "id": "V. Miesel Shipping"
     },
     {
@@ -239,6 +272,7 @@
       "label": "Northern Light",
       "name": "Northern Light",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Northern Light"
     },
     {
@@ -246,6 +280,7 @@
       "label": "Nadia Conti",
       "name": "Nadia Conti",
       "sub_type": "Person",
+      "is_pseudonym": false,
       "id": "Nadia Conti"
     },
     {
@@ -253,6 +288,7 @@
       "label": "Neptune",
       "name": "Neptune",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Neptune"
     },
     {
@@ -260,6 +296,7 @@
       "label": "City Officials",
       "name": "City Officials",
       "sub_type": "Group",
+      "is_pseudonym": false,
       "id": "City Officials"
     },
     {
@@ -267,6 +304,7 @@
       "label": "Elise",
       "name": "Elise",
       "sub_type": "Person",
+      "is_pseudonym": false,
       "id": "Elise"
     },
     {
@@ -274,6 +312,7 @@
       "label": "The Accountant",
       "name": "The Accountant",
       "sub_type": "Person",
+      "is_pseudonym": true,
       "id": "The Accountant"
     },
     {
@@ -281,6 +320,7 @@
       "label": "Knowles",
       "name": "Knowles",
       "sub_type": "Vessel",
+      "is_pseudonym": false,
       "id": "Knowles"
     },
     {
@@ -288,6 +328,7 @@
       "label": "Port Security",
       "name": "Port Security",
       "sub_type": "Location",
+      "is_pseudonym": false,
       "id": "Port Security"
     }
   ],
