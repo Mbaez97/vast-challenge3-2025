@@ -10,13 +10,44 @@ function init_graph() {
     .attr("class", "bg-white rounded-lg shadow-md");
   const g = svg.append("g");
 
+  // ─── Static Shape Legend (top-left) ─────────────────────────────
+  const shapeLegend = svg.append("g")
+    .attr("class", "shape-legend")
+    .attr("transform", "translate(20,20)");
+  const shapeItems = [
+    { label: "Real Name",     symbol: d3.symbolCircle },
+    { label: "Pseudonym",     symbol: d3.symbolStar   }
+  ];
+  shapeLegend.selectAll("g.legend-shape-item")
+    .data(shapeItems)
+    .join("g")
+      .attr("class", "legend-shape-item")
+      .attr("transform", (_, i) => `translate(0,${i * 24})`)
+    .call(item => {
+      item.append("path")
+        .attr("d", d => d3.symbol().type(d.symbol).size(100)())
+        .attr("fill", "#eee")
+        .attr("stroke", "#333");
+      item.append("text")
+        .attr("x", 20)
+        .attr("y", 4)
+        .text(d => d.label)
+        .attr("font-size", "12px")
+        .attr("alignment-baseline", "middle");
+    });
+  // ─────────────────────────────────────────────────────────────────
+
   d3.json("/data/graph").then(data => {
     const allEdges = data.edges;
     let selectedNodes = new Set();
     let selectedTypes = new Set();
 
-    // Prepare nodes & links
-    const nodesData = data.nodes.map(n => ({ id: n.id, type: n.sub_type }));
+    // Prepare nodesData including is_pseudonym
+    const nodesData = data.nodes.map(n => ({
+      id: n.id,
+      type: n.sub_type,
+      is_pseudonym: n.is_pseudonym
+    }));
     const entityTypeMap = new Map(nodesData.map(d => [d.id, d.type]));
     const links = allEdges.map(e => ({
       id: e.event_id, source: e.source, target: e.target
@@ -41,24 +72,29 @@ function init_graph() {
         .attr("stroke","#999")
         .attr("stroke-width",2);
 
-    // Draw nodes
+    // Draw nodes as circle or star
     const color = d3.scaleOrdinal(d3.schemeCategory10);
     const node = g.append("g").attr("class","nodes")
-      .selectAll("circle")
-      .data(nodesData).join("circle")
-        .attr("r",10)
-        .attr("fill", d=>color(d.type))
-        .attr("stroke","#1e40af")
-        .attr("stroke-width",2)
+      .selectAll("path")
+      .data(nodesData).join("path")
+        .attr("d", d => d3.symbol()
+                         .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+                         .size(100)()
+        )
+        .attr("fill", d => color(d.type))
+        .attr("stroke", "#1e40af")
+        .attr("stroke-width", 2)
+        .style("cursor", "pointer")
         .call(d3.drag()
           .on("start", e => { if (!e.active) sim.alphaTarget(0.3).restart(); e.subject.fx=e.subject.x; e.subject.fy=e.subject.y; })
-          .on("drag",  e => { e.subject.fx=e.x; e.subject.fy=e.y; })
-          .on("end",   e => { if (!e.active) sim.alphaTarget(0); e.subject.fx=null; e.subject.fy=null; })
+          .on("drag",  e => { e.subject.fx=e.x;         e.subject.fy=e.y;         })
+          .on("end",   e => { if (!e.active) sim.alphaTarget(0);     e.subject.fx=null;     e.subject.fy=null; })
         );
 
-    // Type legend for graph
+    // Type legend (interactive) at top-right
     const types = Array.from(new Set(nodesData.map(d=>d.type)));
-    const legend = svg.append("g").attr("transform", `translate(${width-140},20)`);
+    const legend = svg.append("g")
+      .attr("transform", `translate(${width-140},20)`);
     const legendItems = legend.selectAll("g")
       .data(types).join("g")
         .attr("transform",(d,i)=>`translate(0,${i*20})`)
@@ -72,10 +108,10 @@ function init_graph() {
         });
     legendItems.append("rect")
       .attr("width",14).attr("height",14)
-      .attr("fill",d=>color(d));
+      .attr("fill", d => color(d));
     legendItems.append("text")
       .attr("x",18).attr("y",12)
-      .text(d=>d)
+      .text(d => d)
       .attr("font-size","12px")
       .attr("fill","#1f2937");
     function updateLegendStyles(){
@@ -99,7 +135,7 @@ function init_graph() {
         .attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
         .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
       node
-        .attr("cx",d=>d.x).attr("cy",d=>d.y);
+        .attr("transform", d=>`translate(${d.x},${d.y})`);
       label
         .attr("x",d=>d.x).attr("y",d=>d.y);
     });
@@ -120,7 +156,7 @@ function init_graph() {
           const b = chatWindow.append("div")
             .attr("class", `message ${sent?"sent":"received"}`);
           b.append("div").attr("class","chat-header")
-            .text(`${msg.source} → ${msg.target}:`);
+            .text(`${msg.source} → ${msg.target} - (${msg.event_id}): `);
           b.append("div").attr("class","content")
             .text(msg.content);
           b.append("div").attr("class","timestamp")
@@ -148,14 +184,13 @@ function init_graph() {
           if (selectedNodes.has(e.target)) nbr.add(e.source);
         });
         node
-          .attr("opacity", d=>nbr.has(d.id)?1:0.2)
-          .attr("r", d=>selectedNodes.has(d.id)?14:10);
+          .attr("opacity", d=>nbr.has(d.id)?1:0.2);
         label.attr("opacity", d=>nbr.has(d.id)?1:0.2);
-        link.attr("opacity", l=> 
-          (selectedNodes.has(l.source.id) || selectedNodes.has(l.target.id))?1:0.1
+        link.attr("opacity", l=>
+          (selectedNodes.has(l.source.id)||selectedNodes.has(l.target.id))?1:0.1
         );
       } else if (selectedTypes.size) {
-        node.attr("opacity",d=>selectedTypes.has(d.type)?1:0.2).attr("r",10);
+        node.attr("opacity",d=>selectedTypes.has(d.type)?1:0.2);
         label.attr("opacity",d=>selectedTypes.has(d.type)?1:0.2);
         link.attr("opacity",l=>{
           const t0=entityTypeMap.get(l.source.id),
@@ -163,7 +198,7 @@ function init_graph() {
           return (selectedTypes.has(t0)&&selectedTypes.has(t1))?1:0.1;
         });
       } else {
-        node.attr("opacity",1).attr("r",10);
+        node.attr("opacity",1);
         label.attr("opacity",1);
         link.attr("opacity",0.6);
       }
@@ -188,9 +223,7 @@ function init_graph() {
       renderHeatmap();
     });
 
-    //
-    // Heatmap
-    //
+    // Heatmap rendering
     function renderHeatmap() {
       const hm = data.heatmap;
       let ents = hm.entities.slice(),
@@ -207,14 +240,12 @@ function init_graph() {
 
       // size
       const panel = document.getElementById("heatmap-container"),
-            W = Math.min(panel.clientWidth, 600),
-            n = ents.length;
+            W = Math.min(panel.clientWidth, 600);
 
-      // band scales
+      // band scales for equal cell sizes
       const xScale = d3.scaleBand().domain(ents).range([0, W]).padding(0),
             yScale = d3.scaleBand().domain(ents).range([0, W]).padding(0);
 
-      // clear & create SVG
       const svgHM = d3.select(panel).html("")
         .append("svg")
           .attr("width", W + 80)     // room for right legend
@@ -222,7 +253,7 @@ function init_graph() {
 
       const scale = d3.scaleSequential([0,1], d3.interpolateViridis);
 
-      // draw cells
+      // draw cells with click
       svgHM.append("g").attr("class","cells")
         .selectAll("rect")
         .data(ents.flatMap((row,i)=>
@@ -236,9 +267,10 @@ function init_graph() {
           .attr("fill", d=> scale(d.value))
           .style("cursor","pointer")
           .on("click", (e,d)=> {
-            // toggle that entity
             if (selectedNodes.has(d.row)) selectedNodes.delete(d.row);
             else selectedNodes.add(d.row);
+            if (selectedNodes.has(d.col)) selectedNodes.delete(d.col);
+            else selectedNodes.add(d.col);
             updateSelectedDisplay();
             renderChat();
             updateHighlights();
@@ -267,17 +299,17 @@ function init_graph() {
           .attr("pointer-events","none");
 
       // right‐side vertical legend
-      const legendDef = svgHM.append("defs")
-        .append("linearGradient")
-          .attr("id","heatmap-vert-grad")
-          .attr("x1","0%").attr("y1","100%")
-          .attr("x2","0%").attr("y2","0%");
-      legendDef.append("stop").attr("offset","0%").attr("stop-color", scale(0));
-      legendDef.append("stop").attr("offset","100%").attr("stop-color", scale(1));
-
       const fullH = W,
             lgH   = Math.min(fullH, 300),
             lgY   = (fullH - lgH)/2;
+
+      const defs = svgHM.append("defs");
+      const grad = defs.append("linearGradient")
+        .attr("id","heatmap-vert-grad")
+        .attr("x1","0%").attr("y1","100%")
+        .attr("x2","0%").attr("y2","0%");
+      grad.append("stop").attr("offset","0%").attr("stop-color",scale(0));
+      grad.append("stop").attr("offset","100%").attr("stop-color",scale(1));
 
       svgHM.append("rect")
         .attr("class","heatmap-legend")
@@ -287,8 +319,7 @@ function init_graph() {
         .attr("height", lgH)
         .style("fill","url(#heatmap-vert-grad)");
 
-      const legendScale = d3.scaleLinear()
-        .domain([0,1]).range([lgY+lgH, lgY]);
+      const legendScale = d3.scaleLinear().domain([0,1]).range([lgY+lgH, lgY]);
       svgHM.append("g")
         .attr("transform", `translate(${W+30},0)`)
         .call(d3.axisRight(legendScale).ticks(5).tickFormat(d3.format(".2f")));
