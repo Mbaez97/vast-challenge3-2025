@@ -45,12 +45,29 @@
                 </select>
             </div>
 
+            <!-- Event date Filter -->
+            <div>
+                <div class="flex justify-between items-center mb-1">
+                    <label class="block text-sm font-medium text-gray-700">Date</label>
+                    <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="date">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-3" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <select id="date-filter" class="filter-select w-full" multiple size="5">
+                    <!-- Options populated by JavaScript -->
+                </select>
+            </div>
+
             <!-- Source Type Filter -->
             <div>
                 <div class="flex justify-between items-center mb-1">
                     <label class="block text-sm font-medium text-gray-700">Source Type</label>
                     <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="source-type">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12" />
@@ -67,7 +84,7 @@
                 <div class="flex justify-between items-center mb-1">
                     <label class="block text-sm font-medium text-gray-700">Target Type</label>
                     <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="target-type">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12" />
@@ -84,7 +101,7 @@
                 <div class="flex justify-between items-center mb-1">
                     <label class="block text-sm font-medium text-gray-700">Source Entity</label>
                     <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="source-entity">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12" />
@@ -101,7 +118,7 @@
                 <div class="flex justify-between items-center mb-1">
                     <label class="block text-sm font-medium text-gray-700">Target Entity</label>
                     <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="target-entity">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12" />

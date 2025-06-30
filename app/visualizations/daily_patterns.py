@@ -4,6 +4,9 @@ import json
 import networkx as nx
 import os
 from flask import current_app
+from sklearn.feature_extraction.text import TfidfVectorizer
+import re
+import numpy as np
 
 logger = logging.getLogger(__name__)
 
@@ -115,5 +118,62 @@ def get_data():
 
     logger.info(f"Found {len(october_events)} communication events in October 2040")
 
+    # Extract keywords using TF-IDF (1,2,3 grams)
+    keywords = extract_keywords(
+        [e["content"] for e in october_events if e.get("content")],
+        max_keywords=30,
+        ngram_range=(1, 3),
+    )
+
     # Prepare JSON-serializable response
-    return {"events": october_events, "entities": list(entities.values())}
+    return {
+        "events": october_events,
+        "entities": list(entities.values()),
+        "keywords": keywords,
+    }
+
+
+def extract_keywords(contents, max_keywords=15, ngram_range=(1, 3)):
+    """Extract important keywords using TF-IDF with n-grams"""
+    if not contents:
+        return []
+
+    # Preprocess text
+    processed_contents = [
+        re.sub(r"[^\w\s]", "", content).lower().strip() for content in contents
+    ]
+
+    # Create TF-IDF matrix
+    vectorizer = TfidfVectorizer(
+        stop_words="english",
+        max_features=500,
+        ngram_range=ngram_range,  # 1,2 and 3-grams
+    )
+
+    try:
+        tfidf_matrix = vectorizer.fit_transform(processed_contents)
+    except ValueError:
+        return []
+
+    # Get feature names
+    feature_names = vectorizer.get_feature_names_out()
+
+    # Get top keywords across all documents
+    tfidf_scores = np.sum(tfidf_matrix, axis=0)
+    top_indices = np.argsort(tfidf_scores).tolist()[0][-max_keywords:]
+    top_indices.reverse()
+
+    # Prepare keyword data
+    keywords = []
+    for idx in top_indices:
+        keyword = feature_names[idx]
+        score = float(tfidf_scores[0, idx])
+        keywords.append(
+            {
+                "term": keyword,
+                "score": score,
+                "id": f"kw_{len(keywords)}",  # Generate unique ID
+            }
+        )
+
+    return keywords

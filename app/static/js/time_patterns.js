@@ -7,7 +7,8 @@ let currentFilters = {
     sourceTypes: [],
     targetTypes: [],
     sourceEntities: [],
-    targetEntities: []
+    targetEntities: [],
+    dates: []  // Added date filter
 };
 
 // Pagination variables
@@ -68,6 +69,15 @@ function initFilters() {
     // Populate target entity filter
     populateSelect('#target-entity-filter', filterOptions.target_entities || []);
 
+    // Populate date filter (newly added)
+    if (filterOptions.dates) {
+        // Sort dates chronologically
+        const sortedDates = [...filterOptions.dates].sort((a, b) => {
+            return new Date(a) - new Date(b);
+        });
+        populateSelect('#date-filter', sortedDates);
+    }
+
     // Add event listeners
     document.getElementById('apply-filters').addEventListener('click', () => {
         // Show loading state
@@ -102,7 +112,8 @@ function clearSingleFilter(filterType) {
         'source-type': '#source-type-filter',
         'target-type': '#target-type-filter',
         'source-entity': '#source-entity-filter',
-        'target-entity': '#target-entity-filter'
+        'target-entity': '#target-entity-filter',
+        'date': '#date-filter'  // Added date filter
     };
 
     const selector = filterMap[filterType];
@@ -119,7 +130,8 @@ function applyFilters() {
         sourceTypes: getSelectedValues('#source-type-filter'),
         targetTypes: getSelectedValues('#target-type-filter'),
         sourceEntities: getSelectedValues('#source-entity-filter'),
-        targetEntities: getSelectedValues('#target-entity-filter')
+        targetEntities: getSelectedValues('#target-entity-filter'),
+        dates: getSelectedValues('#date-filter')  // Added date filter
     };
 
     // Apply filters to events
@@ -160,6 +172,12 @@ function applyFilters() {
             if (!currentFilters.targetEntities.some(e => targetNames.includes(e))) {
                 return false;
             }
+        }
+
+        // Date filter (newly added)
+        if (currentFilters.dates.length > 0 &&
+            !currentFilters.dates.includes(event.date)) {
+            return false;
         }
 
         return true;

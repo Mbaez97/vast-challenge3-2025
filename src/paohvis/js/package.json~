@@ -1,9 +1,0 @@
-{
-  "requires": true,
-  "lockfileVersion": 1,
-  "dependencies": {
-    "fastbitset": {
-      "version": "0.2.7",
-    }
-  }
-}
