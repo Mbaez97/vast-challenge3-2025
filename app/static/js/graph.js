@@ -22,6 +22,19 @@ function init_graph() {
     .attr("height", height)
     .attr("class", "bg-white rounded-lg shadow-md");
   const relG = relSvg.append("g");
+  
+  relSvg.append("defs")
+    .append("marker")
+      .attr("id", "arrowhead")
+      .attr("viewBox", "-0 -5 10 10")
+      .attr("refX", 15)        // move arrowhead a bit past the end of the line
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+    .append("path")
+      .attr("d", "M0,-5L10,0L0,5")  // simple triangle
+      .attr("fill", "#666"); 
 
   // ── Static Shape Legend on Communication ────────────────────────────
   const shapeLegend = commSvg.append("g")
@@ -48,10 +61,25 @@ function init_graph() {
     });
   // ─────────────────────────────────────────────────────────────────
 
- d3.json("/data/graph").then(data => {
+  d3.json("/data/graph").then(data => {
     // Shared state
     let selectedNodes = new Set();
     let selectedTypes = new Set();
+    // 1) track checkbox state
+    let hideEvidence = false;
+
+    // 2) precompute all 'evidence_for' sources
+    const evidenceSources = new Set(
+      data.relationships.links
+        .filter(e => e.type === "evidence_for")
+        .map(e => e.source)
+    );
+
+    // 3) hook up the checkbox
+    d3.select("#hide-evidence-checkbox").on("change", function() {
+      hideEvidence = this.checked;
+      updateHighlights();
+    });
 
     // Communication graph data
     const commNodes = data.communication.nodes.map(n => ({
@@ -70,7 +98,7 @@ function init_graph() {
       is_pseudonym: n.is_pseudonym
     }));
     const relLinks = data.relationships.links.map(e => ({
-      id: e.event_id, source: e.source, target: e.target
+      id: e.event_id, source: e.source, target: e.target, type: e.type
     }));
 
     // Type → color
@@ -89,7 +117,6 @@ function init_graph() {
       .force("center", d3.forceCenter(commWidth/2, height/2))
       .force("collision", d3.forceCollide().radius(30));
 
-    // Links
     const commLinkSel = commG.append("g").attr("class", "links")
       .selectAll("line")
       .data(commLinks)
@@ -157,7 +184,11 @@ function init_graph() {
       .data(relLinks)
       .join("line")
         .attr("stroke", "#666")
-        .attr("stroke-width", 1.5);
+        .attr("stroke-width", 1.5)
+        .attr("marker-end", "url(#arrowhead)")                 // ← add arrow
+        .attr("stroke-dasharray", d =>                        // ← dashed if evidence_for
+          d.type === "evidence_for" ? "4 2" : null
+        );
 
     const relNode = relG.append("g").attr("class", "nodes")
       .selectAll("path")
@@ -206,7 +237,8 @@ function init_graph() {
     // ── Interactive Type Legend on Communication ──────────────────────
     const types = Array.from(new Set(commNodes.map(d => d.type)));
     const legend = commSvg.append("g")
-      .attr("transform", `translate(${commWidth - 140},20)`);
+      .attr("transform", `translate(12,65)`)
+      // .attr("transform", `translate(${commWidth - 130},20)`);
     const legendItems = legend.selectAll("g.type-item")
       .data(types)
       .join("g")
@@ -251,7 +283,7 @@ function init_graph() {
             .attr("class", `message ${sent?"sent":"received"}`);
           bubble.append("div")
             .attr("class","chat-header")
-            .text(`${msg.source} → ${msg.target}:`);
+            .text(`${msg.source} → ${msg.target}: (${msg.event_id})`);
           bubble.append("div")
             .attr("class","content")
             .text(msg.content);
@@ -272,31 +304,153 @@ function init_graph() {
     }
 
     function updateHighlights(){
+      // COMM GRAPH -------------------------
       if (selectedNodes.size) {
         const nbr = new Set([...selectedNodes]);
         data.communication.links.forEach(e => {
           if (selectedNodes.has(e.source)) nbr.add(e.target);
           if (selectedNodes.has(e.target)) nbr.add(e.source);
         });
-        commNode.attr("opacity",d=>nbr.has(d.id)?1:0.2);
-        commLabel.attr("opacity",d=>nbr.has(d.id)?1:0.2);
-        commLinkSel.attr("opacity",l=>
-          (selectedNodes.has(l.source.id)||selectedNodes.has(l.target.id))?1:0.1
-        );
+
+        // COMM NODES: fade & resize
+        commNode
+          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2)
+          .attr("d", d => d3.symbol()
+                          .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+                          // <-- double the area for selected nodes (200 vs. 100)
+                          .size(selectedNodes.has(d.id) ? 2000 : 100)()
+          );
+
+        commLabel
+          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2);
+
+        commLinkSel
+          .attr("opacity", l =>
+            (selectedNodes.has(l.source.id) || selectedNodes.has(l.target.id))
+              ? 1 : 0.1
+          );
+
       } else if (selectedTypes.size) {
-        commNode.attr("opacity",d=>selectedTypes.has(d.type)?1:0.2);
-        commLabel.attr("opacity",d=>selectedTypes.has(d.type)?1:0.2);
-        commLinkSel.attr("opacity",l=>{
-          const t0 = entityTypeMap.get(l.source.id),
-                t1 = entityTypeMap.get(l.target.id);
-          return (selectedTypes.has(t0)&&selectedTypes.has(t1))?1:0.1;
-        });
+        // reset to default size & opacity when using type-filter
+        commNode
+          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2)
+          .attr("d", d => d3.symbol()
+                          .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+                          .size(100)()
+          );
+        commLabel
+          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2);
+        commLinkSel
+          .attr("opacity", l => {
+            const t0 = entityTypeMap.get(l.source.id),
+                  t1 = entityTypeMap.get(l.target.id);
+            return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? 1 : 0.1;
+          });
+
       } else {
-        commNode.attr("opacity",1);
-        commLabel.attr("opacity",1);
-        commLinkSel.attr("opacity",0.6);
+        // no filter → all default
+        commNode
+          .attr("opacity", 1)
+          .attr("d", d => d3.symbol()
+                          .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+                          .size(100)()
+          );
+        commLabel.attr("opacity", 1);
+        commLinkSel.attr("opacity", 0.6);
       }
-      // relationship graph remains static—no filtering here
+         
+      // ── REL GRAPH: show selected, their neighbors, AND neighbors-of-neighbors ──
+      if (selectedNodes.size) {
+        // build twoHop set (selected + neighbors + neighbors‐of‐neighbors)
+        const twoHop = new Set([...selectedNodes]);
+        data.relationships.links.forEach(l => {
+          if (twoHop.has(l.source)) twoHop.add(l.target);
+          if (twoHop.has(l.target)) twoHop.add(l.source);
+        });
+        // data.relationships.links.forEach(l => {
+        //   if (twoHop.has(l.source)) twoHop.add(l.target);
+        //   if (twoHop.has(l.target)) twoHop.add(l.source);
+        // });
+
+        relNode
+          .style("display", d => twoHop.has(d.id) ? "inline" : "none")
+          // **resize** only the nodes you actually clicked
+          .attr("d", d => d3.symbol()
+            .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+            .size(selectedNodes.has(d.id) ? 2000 : 80)()
+          );
+
+        relLabel
+          .style("display", d => twoHop.has(d.id) ? "inline" : "none");
+
+        relLinkSel
+          .style("display", l =>
+            (twoHop.has(l.source.id) && twoHop.has(l.target.id)) ? "inline" : "none"
+          );
+
+      } else if (selectedTypes.size) {
+        // when filtering by type, no node is "selected" so all stay default size
+        relNode
+          .style("display", "inline")
+          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2)
+          .attr("d", d => d3.symbol()
+            .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+            .size(80)()
+          );
+
+        relLabel
+          .style("display", "inline")
+          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2);
+
+        relLinkSel
+          .style("display", "inline")
+          .attr("opacity", l => {
+            const t0 = entityTypeMap.get(l.source.id);
+            const t1 = entityTypeMap.get(l.target.id);
+            return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? 1 : 0.1;
+          });
+
+      } else {
+        // no filtering → all default size & full opacity
+        relNode
+          .style("display", "inline")
+          .attr("opacity", 1)
+          .attr("d", d => d3.symbol()
+            .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+            .size(80)()
+          );
+
+        relLabel.style("display", "inline").attr("opacity", 1);
+        relLinkSel.style("display", "inline").attr("opacity", 0.6);
+      }
+
+      if (hideEvidence) {
+        // edges of type evidence_for
+        relLinkSel
+          .filter(d => d.type === "evidence_for")
+          .style("display", "none");
+
+        // source nodes of those edges
+        relNode
+          .filter(d => evidenceSources.has(d.id))
+          .style("display", "none");
+        relLabel
+          .filter(d => evidenceSources.has(d.id))
+          .style("display", "none");
+
+      } else {
+        // restore them
+        relLinkSel
+          .filter(d => d.type === "evidence_for")
+          .style("display", "inline");
+
+        relNode
+          .filter(d => evidenceSources.has(d.id))
+          .style("display", "inline");
+        relLabel
+          .filter(d => evidenceSources.has(d.id))
+          .style("display", "inline");
+      }
     }
 
     // Node click on communication only
