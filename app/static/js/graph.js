@@ -65,6 +65,39 @@ function init_graph() {
     // Shared state
     let selectedNodes = new Set();
     let selectedTypes = new Set();
+    // new filter state:
+    let filterStart = null,
+        filterEnd   = null,
+        filterEventId = "",
+        filterSource  = "";
+
+    // populate Source dropdown from your communication nodes:
+    const commIds = Array.from(new Set(data.communication.nodes.map(n => n.id)));
+    const sourceSelect = d3.select("#filter-source");
+    commIds.forEach(id =>
+      sourceSelect.append("option").attr("value", id).text(id)
+    );
+
+    // wire up buttons:
+    d3.select("#apply-chat-filters").on("click", () => {
+      const sd = document.getElementById("filter-start").value;
+      const ed = document.getElementById("filter-end").value;
+      filterStart   = sd ? new Date(sd) : null;
+      filterEnd     = ed ? new Date(ed) : null;
+      filterEventId = document.getElementById("filter-event-id").value.trim();
+      filterSource  = document.getElementById("filter-source").value;
+      renderChat();
+    });
+    d3.select("#clear-chat-filters").on("click", () => {
+      filterStart = filterEnd = null;
+      filterEventId = filterSource = "";
+      document.getElementById("filter-start").value = "";
+      document.getElementById("filter-end").value   = "";
+      document.getElementById("filter-event-id").value = "";
+      document.getElementById("filter-source").value   = "";
+      renderChat();
+    });
+
     // 1) track checkbox state
     let hideEvidence = false;
 
@@ -272,26 +305,91 @@ function init_graph() {
     // (these remain exactly as before, driving only the communication graph)
     const chatWindow = d3.select("#chat-window");
     function renderChat() {
+      const baseMsgs = data.communication.links.filter(
+        e => selectedNodes.has(e.source) || selectedNodes.has(e.target)
+      );
       chatWindow.html("");
       if (!selectedNodes.size) return;
-      data.communication.links
-        .filter(e => selectedNodes.has(e.source) || selectedNodes.has(e.target))
-        .sort((a,b) => new Date(a.datetime) - new Date(b.datetime))
+
+      // 2) On first render after selection, init date inputs from baseMsgs
+      if (filterStart === null && filterEnd === null && baseMsgs.length) {
+        // sort by datetime
+        const dates = baseMsgs
+          .map(e => new Date(e.datetime))
+          .sort((a,b) => a - b);
+        const min = dates[0], max = dates[dates.length - 1];
+        filterStart = min;
+        filterEnd   = max;
+        // set inputs to ISO‐local strings (yyyy-MM-ddTHH:mm)
+        document.getElementById("filter-start").value = min.toISOString().slice(0,16);
+        document.getElementById("filter-end").value   = max.toISOString().slice(0,16);
+      }
+      // 3) Rebuild Source dropdown from **baseMsgs**'s sources
+      const sourceSelect = d3.select("#filter-source");
+      sourceSelect.selectAll("option").remove();
+      sourceSelect.append("option").attr("value","").text("All");
+      const sources = Array.from(new Set(baseMsgs.map(e => e.source)));
+      sources.forEach(src =>
+        sourceSelect.append("option").attr("value", src).text(src)
+      );
+      // if the user already had chosen a filterSource that no longer exists, reset:
+      if (filterSource && !sources.includes(filterSource)) {
+        filterSource = "";
+        sourceSelect.property("value", "");
+      }
+      
+      // 4) Now apply your filters against baseMsgs
+      let msgs = baseMsgs.slice();
+
+      // datetime range
+      if (filterStart)
+        msgs = msgs.filter(e => new Date(e.datetime) >= filterStart);
+      if (filterEnd)
+        msgs = msgs.filter(e => new Date(e.datetime) <= filterEnd);
+
+      // event_id filter (substring match)
+      if (filterEventId)
+        msgs = msgs.filter(e => e.event_id.includes(filterEventId));
+
+      // source filter (exact match)
+      if (filterSource)
+        msgs = msgs.filter(e => e.source === filterSource);
+
+      // now sort & render
+      msgs.sort((a, b) => new Date(a.datetime) - new Date(b.datetime))
         .forEach(msg => {
           const sent = selectedNodes.has(msg.source);
           const bubble = chatWindow.append("div")
             .attr("class", `message ${sent?"sent":"received"}`);
-          bubble.append("div")
-            .attr("class","chat-header")
+          bubble.append("div").attr("class","chat-header")
             .text(`${msg.source} → ${msg.target}: (${msg.event_id})`);
-          bubble.append("div")
-            .attr("class","content")
+          bubble.append("div").attr("class","content")
             .text(msg.content);
-          bubble.append("div")
-            .attr("class","timestamp")
-            .text(new Date(msg.datetime).toLocaleString());
-        });
+          bubble.append("div").attr("class","timestamp")
+            .text(new Date(msg.datetime).toLocaleString("en-GB"));
+      });
     }
+    // function renderChat() {
+    //   chatWindow.html("");
+    //   if (!selectedNodes.size) return;
+    //   data.communication.links
+    //     .filter(e => selectedNodes.has(e.source) || selectedNodes.has(e.target))
+    //     .sort((a,b) => new Date(a.datetime) - new Date(b.datetime))
+    //     .forEach(msg => {
+    //       const sent = selectedNodes.has(msg.source);
+    //       const bubble = chatWindow.append("div")
+    //         .attr("class", `message ${sent?"sent":"received"}`);
+    //       bubble.append("div")
+    //         .attr("class","chat-header")
+    //         .text(`${msg.source} → ${msg.target}: (${msg.event_id})`);
+    //       bubble.append("div")
+    //         .attr("class","content")
+    //         .text(msg.content);
+    //       bubble.append("div")
+    //         .attr("class","timestamp")
+    //         .text(new Date(msg.datetime).toLocaleString("en-GB"));
+    //     });
+    // }
 
     const selDisp = d3.select("#selected-nodes-display");
     function updateSelectedDisplay(){
@@ -493,11 +591,13 @@ function init_graph() {
       // band scales for equal cell sizes
       const xScale = d3.scaleBand().domain(ents).range([0, W]).padding(0),
             yScale = d3.scaleBand().domain(ents).range([0, W]).padding(0);
-
+      
+      const labelMargin = 40;
       const svgHM = d3.select(panel).html("")
         .append("svg")
           .attr("width", W + 80)     // room for right legend
-          .attr("height", W + 60);
+          .attr("height", W + labelMargin)
+          .style("overflow","visible");
 
       const scale = d3.scaleSequential([0,1], d3.interpolateViridis);
 
@@ -536,15 +636,21 @@ function init_graph() {
 
       // column labels rotated
       svgHM.append("g")
-        .selectAll("text")
-        .data(ents).join("text")
-          .attr("x", d=> xScale(d) + xScale.bandwidth()/2)
-          .attr("y",-5)
-          .text(d=>d)
-          .attr("font-size","10px")
-          .attr("text-anchor","start")
-          .attr("transform", d=>`translate(${xScale(d)+xScale.bandwidth()/2},10) rotate(-40)`)
-          .attr("pointer-events","none");
+          .selectAll("text")
+          .data(ents, d => {
+            let entityNode = commNodes.find(n => n.id === d);
+            if (!entityNode) return d; // skip if not found
+            return `* ${entityNode.id}` ? entityNode.is_pseudonym : d; // add asterisk for pseudonyms
+          })
+          .join("text")
+            .attr("transform", (d,i) =>
+              // place at mid‐cell, down near bottom margin, then rotate
+              `translate(${xScale(d) + xScale.bandwidth()/2}, ${W + labelMargin - 35}) rotate(-40)`
+            )
+            .text(d => d)
+            .attr("font-size", "10px")
+            .attr("text-anchor", "end")
+            .attr("pointer-events", "none");
 
       // right‐side vertical legend
       const fullH = W,
