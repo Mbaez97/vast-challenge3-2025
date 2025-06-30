@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 # Visualization metadata
 NAME = "graph"
 TITLE = "Network Exploration"
-DESCRIPTION = ""
+DESCRIPTION = "Vizualize the interaction between entities and their relationships."
 
 
 def get_data():
