@@ -369,27 +369,6 @@ function init_graph() {
             .text(new Date(msg.datetime).toLocaleString("en-GB"));
       });
     }
-    // function renderChat() {
-    //   chatWindow.html("");
-    //   if (!selectedNodes.size) return;
-    //   data.communication.links
-    //     .filter(e => selectedNodes.has(e.source) || selectedNodes.has(e.target))
-    //     .sort((a,b) => new Date(a.datetime) - new Date(b.datetime))
-    //     .forEach(msg => {
-    //       const sent = selectedNodes.has(msg.source);
-    //       const bubble = chatWindow.append("div")
-    //         .attr("class", `message ${sent?"sent":"received"}`);
-    //       bubble.append("div")
-    //         .attr("class","chat-header")
-    //         .text(`${msg.source} → ${msg.target}: (${msg.event_id})`);
-    //       bubble.append("div")
-    //         .attr("class","content")
-    //         .text(msg.content);
-    //       bubble.append("div")
-    //         .attr("class","timestamp")
-    //         .text(new Date(msg.datetime).toLocaleString("en-GB"));
-    //     });
-    // }
 
     const selDisp = d3.select("#selected-nodes-display");
     function updateSelectedDisplay(){
@@ -472,6 +451,7 @@ function init_graph() {
 
         relNode
           .style("display", d => twoHop.has(d.id) ? "inline" : "none")
+          .attr("opacity", d => twoHop.has(d.id) ? 1 : 0.2)
           // **resize** only the nodes you actually clicked
           .attr("d", d => d3.symbol()
             .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
@@ -479,11 +459,16 @@ function init_graph() {
           );
 
         relLabel
-          .style("display", d => twoHop.has(d.id) ? "inline" : "none");
+          .style("display", d => twoHop.has(d.id) ? "inline" : "none")
+          .attr("opacity", d => twoHop.has(d.id) ? 1 : 0.2);
 
         relLinkSel
           .style("display", l =>
             (twoHop.has(l.source.id) && twoHop.has(l.target.id)) ? "inline" : "none"
+          )
+          .attr("opacity", l =>
+            (twoHop.has(l.source.id) || twoHop.has(l.target.id))
+              ? 1 : 0.1
           );
 
       } else if (selectedTypes.size) {
