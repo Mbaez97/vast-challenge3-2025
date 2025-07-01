@@ -14,7 +14,18 @@ function init_graph() {
     .attr("height", height)
     .attr("class", "bg-white rounded-lg shadow-md");
   const commG = commSvg.append("g");
-
+  commSvg.append("defs")
+  .append("marker")
+    .attr("id", "comm-arrowhead")
+    .attr("viewBox", "-5 -5 10 10")
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("refX", 8)    // pull it back a bit
+    .attr("refY", 0)
+    .attr("orient", "auto")
+  .append("path")
+    .attr("d", "M-5,-5L5,0L-5,5")  // simple triangle
+    .attr("fill", "#999");
   // Relationship SVG (right)
   const relWidth = relContainer.node().clientWidth;
   const relSvg = relContainer.append("svg")
@@ -113,6 +124,7 @@ function init_graph() {
       hideEvidence = this.checked;
       updateHighlights();
     });
+  
 
     // Communication graph data
     const commNodes = data.communication.nodes.map(n => ({
@@ -120,9 +132,30 @@ function init_graph() {
       type: n.sub_type,
       is_pseudonym: n.is_pseudonym
     }));
+
     const commLinks = data.communication.links.map(e => ({
       id: e.event_id, source: e.source, target: e.target
     }));
+
+    const pairCounts = {};
+    commLinks.forEach(l => {
+      // undirected key
+      const key = l.source < l.target
+        ? `${l.source}|${l.target}`
+        : `${l.target}|${l.source}`;
+      pairCounts[key] = (pairCounts[key]||0) + 1;
+    });
+
+    const pairIndex = {};
+    commLinks.forEach(l => {
+      const key = l.source < l.target
+        ? `${l.source}|${l.target}`
+        : `${l.target}|${l.source}`;
+      pairIndex[key] = (pairIndex[key]||0) + 1;
+      l.count = pairCounts[key];
+      l.index = pairIndex[key];
+    });
+
 
     // Relationship graph data
     const relNodes = data.relationships.nodes.map(n => ({
@@ -150,12 +183,14 @@ function init_graph() {
       .force("center", d3.forceCenter(commWidth/2, height/2))
       .force("collision", d3.forceCollide().radius(30));
 
-    const commLinkSel = commG.append("g").attr("class", "links")
-      .selectAll("line")
+    const commLinkSel = commG.append("g").attr("class","links")
+      .selectAll("path")
       .data(commLinks)
-      .join("line")
+      .join("path")
+        .attr("fill", "none")
         .attr("stroke", "#999")
-        .attr("stroke-width", 2);
+        .attr("stroke-width", 2)
+        .attr("marker-end", "url(#comm-arrowhead)");
 
     // Nodes (circle vs star)
     const commNode = commG.append("g").attr("class", "nodes")
@@ -188,11 +223,16 @@ function init_graph() {
 
     // Tick
     commSim.on("tick", () => {
-      commLinkSel
-        .attr("x1", d => d.source.x)
-        .attr("y1", d => d.source.y)
-        .attr("x2", d => d.target.x)
-        .attr("y2", d => d.target.y);
+      commLinkSel.attr("d", d => {
+        const x1 = d.source.x, y1 = d.source.y;
+        const x2 = d.target.x, y2 = d.target.y;
+        const dx = x2 - x1, dy = y2 - y1;
+        const dr = Math.hypot(dx, dy) * 0.3;      // arc radius = 30% of link length
+        const sweep = d.index % 2;                // alternate direction for parallel links
+        return `M${x1},${y1}A${dr},${dr} 0 0,${sweep} ${x2},${y2}`;
+      });
+
+      // your existing node + label updates:
       commNode
         .attr("transform", d => `translate(${d.x},${d.y})`);
       commLabel
