@@ -12,6 +12,9 @@ function init_daily_patterns() {
     const collapseFraction = 2 / 5; // Size fraction when collapsed
     const defaultCollapsed = true; // Start collapsed by default
 
+    // Legend configuration
+    const legendOffsetFromBottom = 10; // Vertical position from bottom of bands
+
     // Color variables
     const daySeparatorColor = "#94a3b8";
     const hourLineColor = "#e2e8f0";
@@ -337,7 +340,7 @@ function init_daily_patterns() {
         function drawVisualization() {
             // Calculate total height based on current collapsed/expanded states
             const totalBandHeight = days.reduce((total, day) => total + getEffectiveBandHeight(day), 0);
-            const svgHeight = totalBandHeight + 50; // No separate density section needed
+            const svgHeight = totalBandHeight + 50 + legendOffsetFromBottom + 40; // Include space for two-line legend
 
             // Set container height first to prevent layout shifts
             visContainer.style("height", svgHeight + "px");
@@ -697,16 +700,18 @@ function init_daily_patterns() {
                                 .attr("y", 0)
                                 .attr("width", effectiveMarkerSizes.markerSize_h / 2)
                                 .attr("height", effectiveMarkerSizes.markerSize_v)
-                                .attr("fill", sourceEntity ? colors[sourceEntity.sub_type] || "#777" : "#999");
+                                .attr("fill", sourceEntity ? colors[sourceEntity.sub_type] || "#777" : "#999")
+                                .style("shape-rendering", "crispEdges");
 
-                            // Draw target box (right side)
+                            // Draw target box (right side) with crisp edges to avoid white lines
                             clippedGroup.append("rect")
                                 .attr("class", "target-box")
                                 .attr("x", effectiveMarkerSizes.markerSize_h / 2)
                                 .attr("y", 0)
                                 .attr("width", effectiveMarkerSizes.markerSize_h / 2)
                                 .attr("height", effectiveMarkerSizes.markerSize_v)
-                                .attr("fill", targetEntity ? colors[targetEntity.sub_type] || "#999" : "#bbb");
+                                .attr("fill", targetEntity ? colors[targetEntity.sub_type] || "#999" : "#bbb")
+                                .style("shape-rendering", "crispEdges");
 
                             // Add letters when expanded (not collapsed)
                             if (!bandCollapsedState[day]) {
@@ -743,6 +748,143 @@ function init_daily_patterns() {
                 // Update cumulative position for next band
                 cumulativeY += effectiveBandHeight;
             });
+
+            // Draw legend for message boxes
+            drawMessageBoxLegend(svg, cumulativeY + legendOffsetFromBottom, xScale);
+        }
+
+        // Function to draw message box legend
+        function drawMessageBoxLegend(svg, yPosition, xScale) {
+            const legendGroup = svg.append("g")
+                .attr("class", "message-box-legend")
+                .attr("transform", `translate(40, ${yPosition})`);
+
+            // Use same dimensions as actual markers
+            const exampleBoxWidth = markerSize_h;
+            const exampleBoxHeight = markerSize_v;
+
+            // Create clip path for rounded corners (same as visualization)
+            const clipId = `legend-clip-${Math.random().toString(36).substr(2, 9)}`;
+            const defs = svg.select("defs").empty() ? svg.append("defs") : svg.select("defs");
+            defs.append("clipPath")
+                .attr("id", clipId)
+                .append("rect")
+                .attr("width", exampleBoxWidth)
+                .attr("height", exampleBoxHeight)
+                .attr("rx", cornerRadius)
+                .attr("ry", cornerRadius);
+
+            // Apply clip path to the legend group
+            const clippedLegendGroup = legendGroup.append("g")
+                .attr("clip-path", `url(#${clipId})`);
+
+            // Draw source box (left side) - exactly like visualization
+            clippedLegendGroup.append("rect")
+                .attr("class", "source-box")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", exampleBoxWidth / 2)
+                .attr("height", exampleBoxHeight)
+                .attr("fill", colors['Person'])
+                .style("shape-rendering", "crispEdges");
+
+            // Draw target box (right side) - exactly like visualization
+            clippedLegendGroup.append("rect")
+                .attr("class", "target-box")
+                .attr("x", exampleBoxWidth / 2)
+                .attr("y", 0)
+                .attr("width", exampleBoxWidth / 2)
+                .attr("height", exampleBoxHeight)
+                .attr("fill", colors['Organization'])
+                .style("shape-rendering", "crispEdges");
+
+            // Add letters exactly like visualization
+            const fontSize = "10px";
+
+            // Source letter (left box)
+            clippedLegendGroup.append("text")
+                .attr("class", "source-letter")
+                .attr("x", exampleBoxWidth / 4)
+                .attr("y", exampleBoxHeight / 2)
+                .attr("dy", "0.35em")
+                .attr("text-anchor", "middle")
+                .attr("fill", "white")
+                .attr("font-weight", "bold")
+                .attr("font-size", fontSize)
+                .text("P");
+
+            // Target letter (right box)
+            clippedLegendGroup.append("text")
+                .attr("class", "target-letter")
+                .attr("x", exampleBoxWidth * 0.75)
+                .attr("y", exampleBoxHeight / 2)
+                .attr("dy", "0.35em")
+                .attr("text-anchor", "middle")
+                .attr("fill", "white")
+                .attr("font-weight", "bold")
+                .attr("font-size", fontSize)
+                .text("O");
+
+            // Add explanatory text
+            legendGroup.append("text")
+                .attr("x", exampleBoxWidth + 8)
+                .attr("y", exampleBoxHeight / 2)
+                .attr("dy", "0.35em")
+                .attr("font-size", "11px")
+                .attr("fill", textColor)
+                .text("Message: Source (P) → Target (O)");
+
+            // Add color legend with simple boxes
+            let colorLegendX = exampleBoxWidth + 200; // Start after the message explanation
+            const colorBoxSize = 12;
+            const colorSpacing = 160; // Doubled spacing
+
+            Object.entries(colors).forEach(([entityType, color], index) => {
+                const colorGroup = legendGroup.append("g")
+                    .attr("transform", `translate(${colorLegendX + index * colorSpacing}, 0)`);
+
+                // Simple colored box
+                colorGroup.append("rect")
+                    .attr("x", 0)
+                    .attr("y", 2)
+                    .attr("width", colorBoxSize)
+                    .attr("height", colorBoxSize)
+                    .attr("fill", color)
+                    .attr("rx", 2)
+                    .attr("ry", 2);
+
+                // Entity type label
+                colorGroup.append("text")
+                    .attr("x", colorBoxSize + 4)
+                    .attr("y", colorBoxSize / 2 + 2)
+                    .attr("dy", "0.35em")
+                    .attr("font-size", "10px")
+                    .attr("fill", textColor)
+                    .text(entityType);
+            });
+
+            // Add second line for density legend
+            const densityLegendY = exampleBoxHeight + 18; // Position below the first line
+
+            // Draw example density area (filled below curve like actual density)
+            const densityLineLength = 40;
+            const densityBaseline = densityLegendY + 4; // Baseline below the curve
+            const densityPath = legendGroup.append("path")
+                .attr("d", `M 0,${densityBaseline} L 0,${densityLegendY} Q ${densityLineLength / 4},${densityLegendY - 8} ${densityLineLength / 2},${densityLegendY - 4} Q ${densityLineLength * 3 / 4},${densityLegendY + 2} ${densityLineLength},${densityLegendY} L ${densityLineLength},${densityBaseline} Z`)
+                .attr("fill", "#3b82f6")
+                .attr("fill-opacity", 0.3)
+                .attr("stroke", "#1e40af")
+                .attr("stroke-width", 2)
+                .attr("stroke-opacity", 0.4);
+
+            // Add density explanation text
+            legendGroup.append("text")
+                .attr("x", densityLineLength + 8)
+                .attr("y", densityLegendY)
+                .attr("dy", "0.35em")
+                .attr("font-size", "11px")
+                .attr("fill", textColor)
+                .text("Communication/Topic density (filtered by topic/entity selection)");
         }
 
 
