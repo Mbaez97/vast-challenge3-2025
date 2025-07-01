@@ -87,6 +87,7 @@ def get_data():
         target_types = set()
         source_entities = set()
         target_entities = set()
+        unique_dates = set()
 
         for node in graph_data["nodes"]:
             if node.get("type") == "Event":
@@ -159,6 +160,7 @@ def get_data():
 
                         # Update filter options
                         event_types.add(node.get("sub_type", "Unknown"))
+                        unique_dates.add(dt.strftime("%Y-%m-%d"))
 
                         for source in connections["sources"]:
                             source_types.add(source.get("sub_type", "Unknown"))
@@ -199,6 +201,7 @@ def get_data():
             "target_types": sorted(target_types),
             "source_entities": sorted(source_entities),
             "target_entities": sorted(target_entities),
+            "dates": sorted(unique_dates),
         }
 
         return {"events": events, "filter_options": filter_options}

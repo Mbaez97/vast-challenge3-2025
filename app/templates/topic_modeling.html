@@ -1,5 +1,8 @@
 <div class="visualization-container p-4">
     <h2 class="text-xl font-semibold mb-4">Topic Modeling Explorer</h2>
+    
+    <!-- Method Info Display -->
+    <div id="method-info" class="mb-3 text-sm text-gray-600 bg-blue-50 p-2 rounded-md">Loading...</div>
 
     <!-- Controls Panel -->
     <div class="controls mb-4 p-3 bg-gray-50 rounded-md shadow-sm">
@@ -17,15 +20,16 @@
 
             <!-- Topic Count Control -->
             <div>
-                <label class="block text-sm font-medium mb-1">Topic Count:</label>
-                <select id="topic-count" class="w-full p-2 border rounded-md">
-                    <option value="auto">Auto</option>
-                    <option value="5">5 Topics</option>
-                    <option value="8">8 Topics</option>
-                    <option value="10">10 Topics</option>
-                    <option value="15">15 Topics</option>
-                    <option value="20">20 Topics</option>
-                </select>
+                <label class="block text-sm font-medium mb-1">Topic Count: <span id="topic-count-display">Auto</span></label>
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="topic-count-auto" class="rounded" checked>
+                    <label for="topic-count-auto" class="text-sm">Auto</label>
+                </div>
+                <input type="range" id="topic-count" class="w-full mt-1" min="5" max="20" step="1" value="10" disabled>
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>5</span>
+                    <span>20</span>
+                </div>
             </div>
 
             <!-- Topic Selector -->
