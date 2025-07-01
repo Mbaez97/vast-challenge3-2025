@@ -7,6 +7,7 @@ from flask import current_app
 from sklearn.feature_extraction.text import TfidfVectorizer
 import re
 import numpy as np
+import pandas as pd
 from .topic_modeling import extract_topics_bertopic, extract_topics_lda, extract_topics_tfidf
 
 logger = logging.getLogger(__name__)
@@ -14,6 +15,143 @@ logger = logging.getLogger(__name__)
 NAME = "daily_patterns"
 TITLE = "Daily Communication Patterns"
 DESCRIPTION = "Visualization of daily communication events with entity markers"
+
+
+def load_and_organize_communications(graph_path):
+    """
+    Loads a graph from a JSON file, organizes communication events, and enhances each event with detailed attributes of the source, target, and communication itself.
+
+    Args:
+        graph_path (str): Path to the JSON file containing the graph data.
+
+    Returns:
+        list: A list of dictionaries. Each dictionary represents a communication event
+             with its basic information and enhanced attributes.
+    """
+    with open(graph_path) as f:
+        json_data = json.load(f)
+
+    G = nx.json_graph.node_link_graph(json_data, edges="edges")
+    communications = []
+
+    for node_id in G.nodes():
+        node_data = G.nodes[node_id]
+
+        if node_data.get('type') == 'Event' and node_data.get('sub_type') == 'Communication':
+            comm_data = {
+                'id': node_id,
+                'timestamp': node_data.get('timestamp'),
+                'content': node_data.get('content', ''),
+                'source': None,
+                'target': None,
+                'source_attrs': {},
+                'target_attrs': {}
+            }
+
+            # Extract source entity attributes from incoming edges
+            for predecessor in G.predecessors(node_id):
+                pred_node = G.nodes[predecessor]
+                if pred_node.get('type') == 'Entity':
+                    comm_data['source'] = pred_node.get('label', '')
+                    comm_data['source_attrs'] = pred_node.copy()
+                    break
+
+            # Extract target entity attributes from outgoing edges
+            for successor in G.successors(node_id):
+                succ_node = G.nodes[successor]
+                if succ_node.get('type') == 'Entity':
+                    comm_data['target'] = succ_node.get('label', '')
+                    comm_data['target_attrs'] = succ_node.copy()
+                    break
+
+            communications.append(comm_data)
+
+    return communications
+
+
+def calculate_hourly_density(october_events):
+    """
+    Calculate hourly communication density data for visualization.
+    
+    Args:
+        october_events (list): List of communication events
+        
+    Returns:
+        dict: Hourly density data for visualization
+    """
+    if not october_events:
+        return {"dates": [], "hours": [], "density_data": []}
+    
+    # Create DataFrame from events
+    df_data = []
+    for event in october_events:
+        try:
+            # Parse datetime
+            if "T" in event["timestamp"]:
+                dt = datetime.fromisoformat(event["timestamp"])
+            elif " " in event["timestamp"]:
+                dt = datetime.strptime(event["timestamp"], "%Y-%m-%d %H:%M:%S")
+            else:
+                dt = datetime.strptime(event["timestamp"], "%Y-%m-%d")
+            
+            df_data.append({
+                'event_id': event["id"],
+                'timestamp': dt,
+                'date': dt.date(),
+                'hour_of_day': dt.hour,
+                'content': event.get("content", ""),
+                'entity_id': event.get("entity_id", ""),
+                'target_entities': event.get("target_entities", [])
+            })
+        except (ValueError, TypeError) as e:
+            logger.debug(f"Skipping event with invalid timestamp: {event.get('timestamp')} - {str(e)}")
+            continue
+    
+    if not df_data:
+        return {"dates": [], "hours": [], "density_data": []}
+    
+    df = pd.DataFrame(df_data)
+    
+    # Filter to hours 8-14 (8AM-2PM) for business hours analysis
+    df_filtered = df[(df['hour_of_day'] >= 8) & (df['hour_of_day'] <= 14)]
+    
+    # Group by date and hour to get communication counts
+    aggregated_df = df_filtered.groupby(['date', 'hour_of_day']).size().reset_index(name='count')
+    
+    # Create complete grid of dates and hours (8-14)
+    all_dates = sorted(df_filtered['date'].unique())
+    all_hours = list(range(8, 15))  # Hours 8 to 14 inclusive
+    
+    complete_grid = pd.DataFrame([(date, hour) for date in all_dates for hour in all_hours],
+                                columns=['date', 'hour_of_day'])
+    
+    # Merge with actual data and fill missing values with 0
+    complete_df = pd.merge(complete_grid, aggregated_df, 
+                          on=['date', 'hour_of_day'], 
+                          how='left').fillna(0)
+    
+    # Sort by date for consistent ordering
+    complete_df = complete_df.sort_values(['date', 'hour_of_day'])
+    
+    # Convert to format suitable for frontend visualization
+    dates = [date.strftime("%Y-%m-%d") for date in all_dates]
+    hours = all_hours
+    
+    # Create density data as a list of series for each date
+    density_data = []
+    for date in all_dates:
+        date_data = complete_df[complete_df['date'] == date]
+        density_data.append({
+            'date': date.strftime("%Y-%m-%d"),
+            'counts': date_data['count'].tolist()
+        })
+    
+    return {
+        "dates": dates,
+        "hours": hours,
+        "density_data": density_data,
+        "total_events": len(df_filtered)
+    }
 
 
 def get_data(include_topics=False, method="bertopic", **kwargs):
@@ -119,10 +257,14 @@ def get_data(include_topics=False, method="bertopic", **kwargs):
 
     logger.info(f"Found {len(october_events)} communication events in October 2040")
 
+    # Calculate hourly density data for visualization
+    hourly_density_data = calculate_hourly_density(october_events)
+
     # Base response with events and entities
     response = {
         "events": october_events,
         "entities": list(entities.values()),
+        "hourly_density": hourly_density_data,
     }
 
     # Only include topic/keyword data if requested
