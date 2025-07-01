@@ -37,9 +37,14 @@ function init_daily_patterns() {
     let allEvents = [];
     let allEntities = [];
     let allKeywords = [];
+    let allTopics = [];
+    let eventTopicData = {};
     let selectedEntityIds = [];
     let selectedKeywordId = null;
+    let selectedTopicId = null;
     let customKeyword = "";
+    let currentTopicMethod = "bertopic";
+    let topicsLoaded = false;
     let letterMaps = {};
     let entityLookup = {};
     let eventContentLookup = {};
@@ -192,20 +197,14 @@ function init_daily_patterns() {
                 eventsToShow = allEvents;
             }
 
-            // Calculate keyword frequencies if a keyword is selected
+            // Calculate highlighting based on keywords/topics
             let maxFreq = 0;
             let termFreq = {};
             let currentTerm = "";
 
-            // Use custom keyword if entered, otherwise use selected keyword
+            // Priority: custom keyword > selected topic > selected keyword
             if (customKeyword) {
                 currentTerm = customKeyword.toLowerCase();
-            } else if (selectedKeywordId) {
-                const keyword = allKeywords.find(kw => kw.id === selectedKeywordId);
-                currentTerm = keyword ? keyword.term.toLowerCase() : "";
-            }
-
-            if (currentTerm) {
                 // Escape special regex characters
                 const escapedTerm = currentTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 const regex = new RegExp(`\\b${escapedTerm}\\b`, "g");
@@ -218,6 +217,62 @@ function init_daily_patterns() {
                     termFreq[event.id] = freq;
                     if (freq > maxFreq) maxFreq = freq;
                 });
+            } else if (selectedTopicId !== null && topicsLoaded) {
+                // Use topic weights for highlighting
+                const selectedTopic = allTopics.find(t => t.id === selectedTopicId);
+                console.log("Highlighting topic:", selectedTopicId, "method:", currentTopicMethod, "topic:", selectedTopic);
+                
+                if (selectedTopic) {
+                    if (currentTopicMethod === "tfidf") {
+                        // For TF-IDF, use term frequency highlighting based on keywords
+                        const topicKeywords = selectedTopic.keywords;
+                        console.log("TF-IDF keywords:", topicKeywords);
+                        eventsToShow.forEach(event => {
+                            const content = eventContentLookup[event.id].toLowerCase();
+                            let totalFreq = 0;
+                            
+                            topicKeywords.forEach(keyword => {
+                                const escapedTerm = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                                const regex = new RegExp(`\\b${escapedTerm}\\b`, "gi");
+                                const matches = content.match(regex);
+                                if (matches) totalFreq += matches.length;
+                            });
+                            
+                            termFreq[event.id] = totalFreq;
+                            if (totalFreq > maxFreq) maxFreq = totalFreq;
+                        });
+                        console.log("TF-IDF maxFreq:", maxFreq, "sample frequencies:", Object.keys(termFreq).slice(0, 5).map(k => `${k}:${termFreq[k]}`));
+                    } else {
+                        // For BERTopic and LDA, use topic weights
+                        eventsToShow.forEach(event => {
+                            const topicData = eventTopicData[event.id];
+                            if (topicData && topicData.topic_weights && topicData.topic_weights[selectedTopicId] !== undefined) {
+                                const weight = topicData.topic_weights[selectedTopicId];
+                                termFreq[event.id] = weight;
+                                if (weight > maxFreq) maxFreq = weight;
+                            } else {
+                                termFreq[event.id] = 0;
+                            }
+                        });
+                        console.log("Topic weights maxFreq:", maxFreq, "sample weights:", Object.keys(termFreq).slice(0, 5).map(k => `${k}:${termFreq[k]}`));
+                    }
+                }
+            } else if (selectedKeywordId) {
+                const keyword = allKeywords.find(kw => kw.id === selectedKeywordId);
+                currentTerm = keyword ? keyword.term.toLowerCase() : "";
+                
+                if (currentTerm) {
+                    const escapedTerm = currentTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(`\\b${escapedTerm}\\b`, "g");
+
+                    eventsToShow.forEach(event => {
+                        const content = eventContentLookup[event.id].toLowerCase();
+                        const matches = content.match(regex);
+                        const freq = matches ? matches.length : 0;
+                        termFreq[event.id] = freq;
+                        if (freq > maxFreq) maxFreq = freq;
+                    });
+                }
             }
 
             const filteredEventsByDay = {};
@@ -283,13 +338,23 @@ function init_daily_patterns() {
                         stack.forEach((event, eventIndex) => {
                             const yPosInStack = yPos + eventIndex * (markerSize_v + markerSpacing);
 
-                            // Calculate opacity based on keyword frequency
+                            // Calculate opacity based on keyword/topic frequency
                             let opacity = 1;
-                            if (currentTerm) {
+                            const isHighlighting = currentTerm || (selectedTopicId !== null && topicsLoaded);
+                            
+                            if (isHighlighting) {
                                 const freq = termFreq[event.id] || 0;
                                 if (maxFreq > 0) {
-                                    // Scale opacity between 0.3 and 1.0
-                                    opacity = 0.3 + 0.7 * (freq / maxFreq);
+                                    // Scale opacity between 0.2 and 1.0 for better visibility
+                                    opacity = 0.2 + 0.8 * (freq / maxFreq);
+                                } else {
+                                    // If no maxFreq but we're highlighting, make irrelevant events faint
+                                    opacity = freq > 0 ? 1.0 : 0.1;
+                                }
+                                
+                                // Debug logging for opacity calculation
+                                if (event === stack[0]) { // Only log for first event in stack to avoid spam
+                                    console.log(`Event ${event.id}: freq=${freq}, maxFreq=${maxFreq}, opacity=${opacity}`);
                                 }
                             }
 
@@ -329,12 +394,13 @@ function init_daily_patterns() {
                                         .attr("stroke", null);
 
                                     // Restore original opacity
-                                    if (currentTerm) {
+                                    const isHighlighting = currentTerm || (selectedTopicId !== null && topicsLoaded);
+                                    if (isHighlighting) {
                                         const freq = termFreq[event.id] || 0;
-                                        if (maxFreq === 0) {
-                                            d3.select(this).style("opacity", 1);
+                                        if (maxFreq > 0) {
+                                            d3.select(this).style("opacity", 0.2 + 0.8 * (freq / maxFreq));
                                         } else {
-                                            d3.select(this).style("opacity", 0.3 + 0.7 * (freq / maxFreq));
+                                            d3.select(this).style("opacity", freq > 0 ? 1.0 : 0.1);
                                         }
                                     } else {
                                         d3.select(this).style("opacity", 1);
@@ -450,91 +516,250 @@ function init_daily_patterns() {
                 drawVisualization();
             });
 
-        // Add keyword section
-        if (allKeywords.length > 0) {
-            const keywordContainer = legendContainer.append("div")
+        // Add topic modeling section
+        createTopicModelingSection();
+
+        // Function to load topic data (defined first so it can be referenced)
+        function loadTopicData() {
+            const isAuto = d3.select("#topic-auto").property("checked");
+            const topicCount = isAuto ? "auto" : d3.select("input[type='range']").property("value");
+            
+            const params = new URLSearchParams({
+                include_topics: "true",
+                method: currentTopicMethod,
+                num_topics: topicCount
+            });
+
+            const loadButton = d3.select("button").filter(function() { 
+                return d3.select(this).text() === "Load Topics"; 
+            });
+            loadButton.text("Loading...").property("disabled", true);
+
+            d3.json(`/data/daily_patterns?${params}`).then(data => {
+                if (data.error) {
+                    console.error("Error loading topic data:", data.error);
+                    return;
+                }
+
+                allTopics = data.topics || [];
+                
+                // Create event topic data lookup
+                eventTopicData = {};
+                if (data.event_topic_data) {
+                    data.event_topic_data.forEach(item => {
+                        eventTopicData[item.event_id] = item;
+                    });
+                }
+
+                topicsLoaded = true;
+                updateTopicsList();
+                
+                loadButton.text("Load Topics").property("disabled", false);
+                
+                // Show topics list
+                d3.select(".topics-list-container").style("display", "block");
+                
+            }).catch(error => {
+                console.error("Error loading topic data:", error);
+                loadButton.text("Load Topics").property("disabled", false);
+            });
+        }
+
+        // Function to update topics list
+        function updateTopicsList() {
+            const topicsList = d3.select(".topics-list");
+            topicsList.selectAll("*").remove();
+
+            allTopics.forEach(topic => {
+                const topicDiv = topicsList.append("div")
+                    .attr("class", `topic-item px-2 py-1 rounded cursor-pointer text-xs transition-all ${
+                        selectedTopicId === topic.id 
+                            ? "bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium"
+                            : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                    }`)
+                    .on("click", function() {
+                        const previousTopicId = selectedTopicId;
+                        selectedTopicId = selectedTopicId === topic.id ? null : topic.id;
+                        selectedKeywordId = null;
+                        customKeyword = "";
+                        d3.select("input[type='text']").property("value", "");
+                        
+                        console.log(`Topic clicked: ${topic.id}, previous: ${previousTopicId}, new: ${selectedTopicId}`);
+                        console.log("topicsLoaded:", topicsLoaded, "eventTopicData keys:", Object.keys(eventTopicData).length);
+                        
+                        drawVisualization();
+                        updateTopicSelection();
+                    });
+
+                topicDiv.append("div")
+                    .attr("class", "font-medium")
+                    .text(`Topic ${topic.id}`);
+
+                topicDiv.append("div")
+                    .attr("class", "text-xs text-gray-600")
+                    .text(topic.keywords.slice(0, 4).join(", "));
+            });
+        }
+
+        // Function to update topic selection UI
+        function updateTopicSelection() {
+            d3.selectAll(".topic-item")
+                .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", false)
+                .classed("bg-gray-100 text-gray-700", true);
+
+            if (selectedTopicId !== null) {
+                d3.selectAll(".topic-item")
+                    .filter((d, i) => allTopics[i] && allTopics[i].id === selectedTopicId)
+                    .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", true)
+                    .classed("bg-gray-100 text-gray-700", false);
+            }
+        }
+
+        // Function to create topic modeling controls
+        function createTopicModelingSection() {
+            const topicContainer = legendContainer.append("div")
                 .attr("class", "mt-6 pt-4 border-t border-gray-200");
 
-            keywordContainer.append("div")
+            topicContainer.append("div")
                 .attr("class", "font-medium text-sm mb-2")
-                .text("Key Expressions");
+                .text("Topic Analysis");
 
-            keywordContainer.append("div")
-                .attr("class", "text-xs text-gray-500 mb-3")
-                .html("Click to highlight communications<br>by frequency of expression");
+        // Topic method selector
+        const methodGroup = topicContainer.append("div")
+            .attr("class", "mb-3");
 
-            const keywordList = keywordContainer.append("div")
-                .attr("class", "flex flex-wrap gap-2");
+        methodGroup.append("label")
+            .attr("class", "block text-xs font-medium text-gray-700 mb-1")
+            .text("Topic Method:");
 
-            keywordList.selectAll(".keyword-tag")
-                .data(allKeywords)
-                .enter()
-                .append("div")
-                .attr("class", d =>
-                    `keyword-tag px-2 py-1 rounded-full text-xs cursor-pointer transition-all ${selectedKeywordId === d.id && !customKeyword
-                        ? "bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium"
-                        : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                    }`)
-                .text(d => d.term)
-                .on("click", function (event, d) {
-                    selectedKeywordId = d.id === selectedKeywordId && !customKeyword ? null : d.id;
-                    customKeyword = "";
-                    $customInput.property("value", "");
-                    drawVisualization();
+        const methodSelect = methodGroup.append("select")
+            .attr("class", "w-full px-2 py-1 border border-gray-300 rounded text-xs")
+            .on("change", function() {
+                currentTopicMethod = this.value;
+                loadTopicData();
+            });
 
-                    // Update UI
-                    d3.selectAll(".keyword-tag")
-                        .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", false)
-                        .classed("bg-gray-100 text-gray-700", true);
+        methodSelect.append("option").attr("value", "bertopic").text("BERTopic");
+        methodSelect.append("option").attr("value", "lda?vectorizer=tfidf").text("LDA (TF-IDF)");
+        methodSelect.append("option").attr("value", "lda?vectorizer=bow").text("LDA (BOW)");
+        methodSelect.append("option").attr("value", "tfidf").text("TF-IDF");
 
-                    if (selectedKeywordId && !customKeyword) {
-                        d3.select(this)
-                            .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", true)
-                            .classed("bg-gray-100 text-gray-700", false);
-                    }
-                });
+        // Topic count controls
+        const countGroup = topicContainer.append("div")
+            .attr("class", "mb-3");
 
-            // Add custom expression input
-            const inputGroup = keywordContainer.append("div")
-                .attr("class", "flex gap-2 mt-3");
+        countGroup.append("label")
+            .attr("class", "block text-xs font-medium text-gray-700 mb-1")
+            .text("Topic Count:");
 
-            // Store reference to input element
-            const $customInput = inputGroup.append("input")
-                .attr("type", "text")
-                .attr("placeholder", "Type an expression...")
-                .attr("class", "flex-1 px-2 py-1 border border-gray-300 rounded text-sm")
-                .on("keypress", function (event) {
-                    if (event.key === "Enter") {
-                        customKeyword = $customInput.property("value").trim();
-                        selectedKeywordId = null;
-                        drawVisualization();
-                        d3.selectAll(".keyword-tag")
-                            .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", false);
-                    }
-                });
+        const countContainer = countGroup.append("div")
+            .attr("class", "flex items-center gap-2");
 
-            inputGroup.append("button")
-                .attr("class", "px-2 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600")
-                .text("Apply")
-                .on("click", function () {
-                    customKeyword = $customInput.property("value").trim();
+        const autoCheckbox = countContainer.append("input")
+            .attr("type", "checkbox")
+            .attr("id", "topic-auto")
+            .attr("checked", true)
+            .on("change", function() {
+                countSlider.property("disabled", this.checked);
+                if (topicsLoaded) loadTopicData();
+            });
+
+        countContainer.append("label")
+            .attr("for", "topic-auto")
+            .attr("class", "text-xs")
+            .text("Auto");
+
+        const sliderContainer = countGroup.append("div")
+            .attr("class", "mt-1");
+
+        const countSlider = sliderContainer.append("input")
+            .attr("type", "range")
+            .attr("min", "5")
+            .attr("max", "20")
+            .attr("value", "10")
+            .attr("disabled", true)
+            .attr("class", "w-full")
+            .on("input", function() {
+                countDisplay.text(this.value);
+            })
+            .on("change", function() {
+                if (topicsLoaded) loadTopicData();
+            });
+
+        const countDisplay = sliderContainer.append("div")
+            .attr("class", "text-xs text-center text-gray-600 mt-1")
+            .text("10");
+
+        sliderContainer.append("div")
+            .attr("class", "flex justify-between text-xs text-gray-500")
+            .html("<span>5</span><span>20</span>");
+
+        // Load topics button
+        const loadButton = topicContainer.append("button")
+            .attr("class", "w-full px-3 py-2 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 mb-3")
+            .text("Load Topics")
+            .on("click", loadTopicData);
+
+        // Topics list container
+        const topicsListContainer = topicContainer.append("div")
+            .attr("class", "topics-list-container")
+            .style("display", "none");
+
+        topicsListContainer.append("div")
+            .attr("class", "text-xs text-gray-500 mb-2")
+            .html("Click topics to highlight communications by relevance:");
+
+        const topicsList = topicsListContainer.append("div")
+            .attr("class", "topics-list space-y-1");
+
+        // Custom keyword section (keeping this for backward compatibility)
+        const keywordGroup = topicContainer.append("div")
+            .attr("class", "mt-4 pt-3 border-t border-gray-200");
+
+        keywordGroup.append("div")
+            .attr("class", "text-xs font-medium text-gray-700 mb-2")
+            .text("Custom Expression:");
+
+        const inputGroup = keywordGroup.append("div")
+            .attr("class", "flex gap-2");
+
+        const customInput = inputGroup.append("input")
+            .attr("type", "text")
+            .attr("placeholder", "Type expression...")
+            .attr("class", "flex-1 px-2 py-1 border border-gray-300 rounded text-xs")
+            .on("keypress", function(event) {
+                if (event.key === "Enter") {
+                    customKeyword = this.value.trim();
+                    selectedTopicId = null;
                     selectedKeywordId = null;
                     drawVisualization();
-                    d3.selectAll(".keyword-tag")
-                        .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", false);
-                });
+                    updateTopicSelection();
+                }
+            });
 
-            keywordContainer.append("button")
-                .attr("class", "mt-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-xs w-full")
-                .text("Reset Highlight")
-                .on("click", function () {
-                    selectedKeywordId = null;
-                    customKeyword = "";
-                    $customInput.property("value", "");
-                    drawVisualization();
-                    d3.selectAll(".keyword-tag")
-                        .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", false);
-                });
+        inputGroup.append("button")
+            .attr("class", "px-2 py-1 bg-blue-500 text-white rounded text-xs hover:bg-blue-600")
+            .text("Apply")
+            .on("click", function() {
+                customKeyword = customInput.property("value").trim();
+                selectedTopicId = null;
+                selectedKeywordId = null;
+                drawVisualization();
+                updateTopicSelection();
+            });
+
+        // Reset button
+        topicContainer.append("button")
+            .attr("class", "mt-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-xs w-full")
+            .text("Reset Highlighting")
+            .on("click", function() {
+                selectedTopicId = null;
+                selectedKeywordId = null;
+                customKeyword = "";
+                customInput.property("value", "");
+                drawVisualization();
+                updateTopicSelection();
+            });
         }
 
     }).catch(error => {
