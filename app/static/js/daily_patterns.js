@@ -9,7 +9,7 @@ function init_daily_patterns() {
     const cornerRadius = 6;
 
     // Collapse/Expand configuration
-    const collapseFraction = 1 / 3; // Size fraction when collapsed
+    const collapseFraction = 2 / 5; // Size fraction when collapsed
     const defaultCollapsed = true; // Start collapsed by default
 
     // Color variables
@@ -911,13 +911,13 @@ function init_daily_patterns() {
             selectedKeywordId = null;
             customKeyword = "";
             d3.select("input[type='text']").property("value", "");
-            
+
             // Reset dropdown button text
             d3.select("#topics-dropdown-button").text("Select Topic");
-            
+
             // Immediately update visualization to clear highlighting
             drawVisualization();
-            
+
             const isAuto = d3.select("#topic-auto").property("checked");
             const topicCount = isAuto ? "auto" : d3.select("input[type='range']").property("value");
 
