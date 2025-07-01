@@ -141,8 +141,18 @@ def get_data(method="bertopic", **kwargs):
     # Apply topic modeling based on method
     metrics = {}
     if method == "tfidf":
+        # Handle auto topic count for TF-IDF
+        tfidf_num_topics = num_topics
+        if num_topics == "auto":
+            tfidf_num_topics = max(5, min(15, len(communications) // 10))
+        else:
+            try:
+                tfidf_num_topics = int(num_topics)
+            except:
+                tfidf_num_topics = 10
+        
         topics, doc_topics = extract_topics_tfidf(
-            [c["content"] for c in communications], num_topics=num_topics
+            [c["content"] for c in communications], num_topics=tfidf_num_topics
         )
         metrics = calculate_tfidf_metrics(topics)
     elif method == "lda":
@@ -312,7 +322,7 @@ def get_data(method="bertopic", **kwargs):
 
 
 def extract_topics_tfidf(texts, num_topics=15):
-    """Extract topics using TF-IDF keywords"""
+    """Extract topics using TF-IDF keywords - each high-scoring term is treated as a separate topic"""
     if len(texts) < 2:
         return [["insufficient", "data"]], [[1.0] for _ in texts]
 
@@ -335,13 +345,26 @@ def extract_topics_tfidf(texts, num_topics=15):
         total_scores = np.sum(doc_scores, axis=0)
         top_indices = total_scores.argsort()[-num_topics:][::-1]
 
-        # Create topics - each topic is a single keyword
+        # Create topics - each topic is a single keyword (term)
         topics = [[feature_names[i]] for i in top_indices]
 
-        # Create document-topic matrix (each doc has scores for each keyword)
+        # Create document-topic matrix 
+        # Each document gets scores for each term/topic based on TF-IDF values
         doc_topics = doc_scores[:, top_indices].tolist()
 
-        return topics, doc_topics
+        # Normalize document-topic scores so they sum to 1 for each document
+        # This makes the topic assignments more interpretable
+        normalized_doc_topics = []
+        for doc_scores_row in doc_topics:
+            total_score = sum(doc_scores_row)
+            if total_score > 0:
+                normalized_row = [score / total_score for score in doc_scores_row]
+            else:
+                # If no terms match, assign equal weight to all topics
+                normalized_row = [1.0 / len(doc_scores_row)] * len(doc_scores_row)
+            normalized_doc_topics.append(normalized_row)
+
+        return topics, normalized_doc_topics
 
     except Exception as e:
         logger.error(f"TF-IDF extraction failed: {str(e)}")
@@ -363,34 +386,36 @@ def extract_topics_lda(texts, num_topics="auto", vectorizer="tfidf", top_n=10):
             num_topics = 5
 
     try:
-        # Create vectorizer
+        # Create vectorizer with more lenient parameters for small datasets
         if vectorizer == "bow":
             vectorizer_model = CountVectorizer(
                 stop_words="english",
                 ngram_range=(1, 2),
-                max_features=2000,
-                min_df=2,
-                max_df=0.8,
+                max_features=1000,
+                min_df=1,  # More lenient for small datasets
+                max_df=0.9,
             )
         else:  # default to tfidf
             vectorizer_model = TfidfVectorizer(
                 stop_words="english",
                 ngram_range=(1, 2),
-                max_features=2000,
-                min_df=2,
-                max_df=0.8,
+                max_features=1000,
+                min_df=1,  # More lenient for small datasets
+                max_df=0.9,
             )
 
         # Create document-term matrix
         dtm = vectorizer_model.fit_transform(texts)
         feature_names = vectorizer_model.get_feature_names_out()
 
-        # Run LDA
+        # Run LDA with better parameters
         lda = LatentDirichletAllocation(
             n_components=num_topics,
-            learning_method="online",
+            learning_method="batch",  # Better for small datasets
             random_state=42,
-            max_iter=20,
+            max_iter=100,  # More iterations for better convergence
+            doc_topic_prior=0.1,  # Lower alpha for sparser topics
+            topic_word_prior=0.01,  # Lower beta for sparser word distributions
         )
         lda.fit(dtm)
 
@@ -499,9 +524,17 @@ def calculate_lda_metrics(lda_model, vectorizer, texts):
         # Perplexity
         perplexity = lda_model.perplexity(dtm)
 
-        # Coherence (approximation)
+        # Coherence (based on topic concentration - higher is better)
         topics = lda_model.components_
-        coherence = np.mean(np.log(topics + 1e-10).sum(axis=1))
+        # Calculate topic coherence as the concentration of probability mass
+        topic_concentrations = []
+        for topic in topics:
+            # Sort topic probabilities and take top 10 words
+            top_probs = np.sort(topic)[-10:]
+            # Calculate concentration (higher = more coherent)
+            concentration = np.sum(top_probs) / np.sum(topic)
+            topic_concentrations.append(concentration)
+        coherence = np.mean(topic_concentrations)
 
         # Diversity
         top_words_per_topic = [np.argsort(topic)[-10:][::-1] for topic in topics]

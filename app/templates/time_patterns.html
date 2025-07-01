@@ -27,11 +27,11 @@
     <div class="bg-gray-50 p-4 mb-6">
         <h3 class="text-lg font-medium mb-3">Filters</h3>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3">
             <!-- Event Type Filter -->
             <div>
                 <div class="flex justify-between items-center mb-1">
-                    <label class="block text-sm font-medium text-gray-700">Event Type</label>
+                    <label class="block text-xs font-medium text-gray-700">Event Type</label>
                     <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="event-type">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -40,7 +40,7 @@
                         </svg>
                     </button>
                 </div>
-                <select id="event-type-filter" class="filter-select w-full" multiple size="5">
+                <select id="event-type-filter" class="filter-select w-full text-xs" multiple size="4">
                     <!-- Options will be populated by JavaScript -->
                 </select>
             </div>
@@ -48,7 +48,7 @@
             <!-- Event date Filter -->
             <div>
                 <div class="flex justify-between items-center mb-1">
-                    <label class="block text-sm font-medium text-gray-700">Date</label>
+                    <label class="block text-xs font-medium text-gray-700">Date</label>
                     <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="date">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -57,7 +57,7 @@
                         </svg>
                     </button>
                 </div>
-                <select id="date-filter" class="filter-select w-full" multiple size="5">
+                <select id="date-filter" class="filter-select w-full text-xs" multiple size="4">
                     <!-- Options populated by JavaScript -->
                 </select>
             </div>
@@ -65,7 +65,7 @@
             <!-- Source Type Filter -->
             <div>
                 <div class="flex justify-between items-center mb-1">
-                    <label class="block text-sm font-medium text-gray-700">Source Type</label>
+                    <label class="block text-xs font-medium text-gray-700">Source Type</label>
                     <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="source-type">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -74,7 +74,7 @@
                         </svg>
                     </button>
                 </div>
-                <select id="source-type-filter" class="filter-select w-full" multiple size="5">
+                <select id="source-type-filter" class="filter-select w-full text-xs" multiple size="4">
                     <!-- Options will be populated by JavaScript -->
                 </select>
             </div>
@@ -82,7 +82,7 @@
             <!-- Target Type Filter -->
             <div>
                 <div class="flex justify-between items-center mb-1">
-                    <label class="block text-sm font-medium text-gray-700">Target Type</label>
+                    <label class="block text-xs font-medium text-gray-700">Target Type</label>
                     <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="target-type">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -91,7 +91,7 @@
                         </svg>
                     </button>
                 </div>
-                <select id="target-type-filter" class="filter-select w-full" multiple size="5">
+                <select id="target-type-filter" class="filter-select w-full text-xs" multiple size="4">
                     <!-- Options will be populated by JavaScript -->
                 </select>
             </div>
@@ -99,7 +99,7 @@
             <!-- Source Entity Filter -->
             <div>
                 <div class="flex justify-between items-center mb-1">
-                    <label class="block text-sm font-medium text-gray-700">Source Entity</label>
+                    <label class="block text-xs font-medium text-gray-700">Source Entity</label>
                     <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="source-entity">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -108,7 +108,7 @@
                         </svg>
                     </button>
                 </div>
-                <select id="source-entity-filter" class="filter-select w-full" multiple size="5">
+                <select id="source-entity-filter" class="filter-select w-full text-xs" multiple size="4">
                     <!-- Options will be populated by JavaScript -->
                 </select>
             </div>
@@ -116,7 +116,7 @@
             <!-- Target Entity Filter -->
             <div>
                 <div class="flex justify-between items-center mb-1">
-                    <label class="block text-sm font-medium text-gray-700">Target Entity</label>
+                    <label class="block text-xs font-medium text-gray-700">Target Entity</label>
                     <button class="text-gray-400 hover:text-red-600 clear-filter" data-filter="target-entity">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-3" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -125,7 +125,7 @@
                         </svg>
                     </button>
                 </div>
-                <select id="target-entity-filter" class="filter-select w-full" multiple size="5">
+                <select id="target-entity-filter" class="filter-select w-full text-xs" multiple size="4">
                     <!-- Options will be populated by JavaScript -->
                 </select>
             </div>

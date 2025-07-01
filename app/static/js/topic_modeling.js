@@ -10,7 +10,7 @@ function init_topic_modeling() {
         .attr("viewBox", [0, 0, width, height])
         .attr("class", "bg-white");
 
-    const g = svg.append("g");
+    let g = svg.append("g");
     let simulation;
     let topicData = {};
     let currentTopic = null;
@@ -28,14 +28,42 @@ function init_topic_modeling() {
         loadTopicData();
     });
 
-    // Topic count handler
-    const topicCountSelector = d3.select("#topic-count");
-    topicCountSelector.on("change", function () {
+    // Topic count handlers
+    const topicCountSlider = d3.select("#topic-count");
+    const topicCountAuto = d3.select("#topic-count-auto");
+    const topicCountDisplay = d3.select("#topic-count-display");
+
+    // Handle auto checkbox toggle
+    topicCountAuto.on("change", function() {
+        const isAuto = this.checked;
+        topicCountSlider.property("disabled", isAuto);
+        updateTopicCountDisplay();
         loadTopicData();
     });
 
+    // Handle slider change
+    topicCountSlider.on("input", function() {
+        updateTopicCountDisplay();
+    });
+
+    topicCountSlider.on("change", function() {
+        loadTopicData();
+    });
+
+    // Update display function
+    function updateTopicCountDisplay() {
+        const isAuto = topicCountAuto.property("checked");
+        if (isAuto) {
+            topicCountDisplay.text("Auto");
+        } else {
+            const value = topicCountSlider.property("value");
+            topicCountDisplay.text(value);
+        }
+    }
+
     function loadTopicData() {
-        const topicCount = topicCountSelector.property("value");
+        const isAuto = topicCountAuto.property("checked");
+        const topicCount = isAuto ? "auto" : topicCountSlider.property("value");
         const url = `/data/topic_modeling?method=${currentMethod}&num_topics=${topicCount}`;
 
         // Show loading indicator
@@ -48,7 +76,7 @@ function init_topic_modeling() {
                 return;
             }
 
-            const { graph, topics, entity_topic_scores, method_used, vectorizer_used, total_communications, messages, topic_metrics } = data;
+            const { graph, topics, entity_topic_scores, method_used, vectorizer_used, total_communications, messages, topic_metrics, model_metrics } = data;
             topicData = {
                 topics,
                 entity_topic_scores,
@@ -75,9 +103,39 @@ function init_topic_modeling() {
             methodInfo += ` | Communications: ${total_communications} | Topics: ${topics.length}`;
 
             d3.select("#method-info").html(methodInfo);
+            
+            // Update model metrics display
+            const metricsDisplay = d3.select("#model-metrics");
+            if (model_metrics && Object.keys(model_metrics).length > 0) {
+                metricsDisplay.html(`
+                    <div>Coherence: ${model_metrics.coherence || '--'}</div>
+                    <div>Perplexity: ${model_metrics.perplexity || '--'}</div>
+                    <div>Diversity: ${model_metrics.diversity || '--'}</div>
+                `);
+            } else {
+                metricsDisplay.html(`
+                    <div>Coherence: --</div>
+                    <div>Perplexity: --</div>
+                    <div>Diversity: --</div>
+                `);
+            }
+            
+            // Update topic count display to reflect actual topics generated
+            if (method_used === "bertopic") {
+                // For BERTopic, show actual count since it auto-determines topics
+                topicCountDisplay.text(`${topics.length} (Auto)`);
+                topicCountAuto.property("checked", true);
+                topicCountSlider.property("disabled", true);
+            }
 
-            // Clear previous visualization
-            g.selectAll("*").remove();
+            // Recreate SVG structure (in case it was replaced by loading message)
+            container.html("");
+            const svg = container.append("svg")
+                .attr("width", "100%")
+                .attr("height", "100%")
+                .attr("viewBox", [0, 0, width, height])
+                .attr("class", "bg-white");
+            const g = svg.append("g");
 
             // Populate topic selector
             const topicSelector = d3.select("#topic-selector");
