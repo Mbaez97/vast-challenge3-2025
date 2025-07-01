@@ -330,9 +330,9 @@ def get_topic_data(october_events, method="bertopic", **kwargs):
             for i, keywords in enumerate(topics_list):
                 if keywords and len(keywords) > 0:
                     topics.append({
-                        "id": i,
+                        "id": i + 1,
                         "keywords": keywords,
-                        "name": f"Topic {i}: {', '.join(keywords[:3])}"
+                        "name": f"Topic {i + 1}: {', '.join(keywords[:3])}"
                     })
             
             # Create event topic assignments
@@ -344,8 +344,9 @@ def get_topic_data(october_events, method="bertopic", **kwargs):
                         topic_weights = doc_topics[content_index]
                         # Find dominant topic
                         if topic_weights:
-                            dominant_topic = int(np.argmax(topic_weights))
-                            dominant_weight = float(topic_weights[dominant_topic])
+                            dominant_topic_index = int(np.argmax(topic_weights))
+                            dominant_topic = dominant_topic_index + 1  # Convert to 1-based indexing
+                            dominant_weight = float(topic_weights[dominant_topic_index])
                         else:
                             dominant_topic = -1
                             dominant_weight = 0.0
@@ -362,7 +363,7 @@ def get_topic_data(october_events, method="bertopic", **kwargs):
             logger.error(f"Topic modeling failed: {str(e)}")
             # Fallback to simple keyword extraction
             keywords = extract_keywords(event_contents, max_keywords=10)
-            topics = [{"id": i, "keywords": [kw["term"]], "name": kw["term"]} for i, kw in enumerate(keywords)]
+            topics = [{"id": i + 1, "keywords": [kw["term"]], "name": kw["term"]} for i, kw in enumerate(keywords)]
             event_topic_data = []
     else:
         # Not enough content for topic modeling

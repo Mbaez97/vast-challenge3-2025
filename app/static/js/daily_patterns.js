@@ -7,8 +7,6 @@ function init_daily_patterns() {
     const markerSpacing = 3;
     const maxStackHeight = bandHeight - 10;
     const cornerRadius = 6;
-    const legendLineHeight = 40; // Height of legend lines next to day labels
-    const legendLineWidth = 3; // Width/thickness of legend lines next to day labels
 
     // Collapse/Expand configuration
     const collapseFraction = 1 / 3; // Size fraction when collapsed
@@ -21,11 +19,11 @@ function init_daily_patterns() {
     const axisColor = "#000000";
 
     const colors = {
-        'Person': '#4f46e5',
-        'Organization': '#dc2626',
-        'Vessel': '#059669',
-        'Group': '#d97706',
-        'Location': '#0284c7'
+        'Person': '#6366f1',     // indigo-500
+        'Organization': '#f43f5e', // rose-500
+        'Vessel': '#10b981',     // emerald-500
+        'Group': '#f59e0b',      // amber-500
+        'Location': '#06b6d4'    // cyan-500
     };
 
     // Select containers and ensure stable positioning
@@ -54,7 +52,7 @@ function init_daily_patterns() {
     let selectedKeywordId = null;
     let selectedTopicId = null;
     let customKeyword = "";
-    let currentTopicMethod = "bertopic";
+    let currentTopicMethod = "lda?vectorizer=tfidf";
     let topicsLoaded = false;
     let letterMaps = {};
     let entityLookup = {};
@@ -129,6 +127,159 @@ function init_daily_patterns() {
             return { markerSize_h, markerSize_v, markerSpacing };
         }
 
+        // Helper function to calculate filtered density for a specific day
+        function calculateFilteredDensityForDay(day, eventsToShow) {
+            const dateStr = `2040-10-${day.toString().padStart(2, '0')}`;
+
+            // Filter events for this specific date
+            const dateEvents = eventsToShow.filter(event => {
+                const eventDate = new Date(event.datetime).toISOString().split('T')[0];
+                return eventDate === dateStr;
+            });
+
+            // Calculate topic/keyword relevance for each event (same logic as main viz)
+            let eventRelevance = {};
+            const isTopicMode = selectedTopicId !== null || customKeyword || selectedKeywordId;
+
+            if (isTopicMode) {
+                dateEvents.forEach(event => {
+                    let relevance = 0;
+                    const content = eventContentLookup[event.id].toLowerCase();
+
+                    if (customKeyword) {
+                        const escapedTerm = customKeyword.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        const regex = new RegExp(`\\b${escapedTerm}\\b`, "g");
+                        const matches = content.match(regex);
+                        relevance = matches ? matches.length : 0;
+                    } else if (selectedTopicId !== null && topicsLoaded) {
+                        const selectedTopic = allTopics.find(t => t.id === selectedTopicId);
+                        if (selectedTopic) {
+                            if (currentTopicMethod === "tfidf") {
+                                const topicKeywords = selectedTopic.keywords;
+                                topicKeywords.forEach(keyword => {
+                                    const escapedTerm = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                                    const regex = new RegExp(`\\b${escapedTerm}\\b`, "gi");
+                                    const matches = content.match(regex);
+                                    if (matches) relevance += matches.length;
+                                });
+                            } else {
+                                const topicData = eventTopicData[event.id];
+                                if (topicData && topicData.topic_weights && topicData.topic_weights[selectedTopicId - 1] !== undefined) {
+                                    relevance = topicData.topic_weights[selectedTopicId - 1];
+                                }
+                            }
+                        }
+                    } else if (selectedKeywordId) {
+                        const keyword = allKeywords.find(kw => kw.id === selectedKeywordId);
+                        if (keyword) {
+                            const escapedTerm = keyword.term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                            const regex = new RegExp(`\\b${escapedTerm}\\b`, "g");
+                            const matches = content.match(regex);
+                            relevance = matches ? matches.length : 0;
+                        }
+                    }
+
+                    eventRelevance[event.id] = relevance;
+                });
+            }
+
+            // Calculate hourly counts for hours 8-14
+            const hourCounts = new Array(7).fill(0);
+
+            dateEvents.forEach(event => {
+                const hour = new Date(event.datetime).getHours();
+                if (hour >= 8 && hour <= 14) {
+                    const index = hour - 8;
+                    if (isTopicMode) {
+                        // Use relevance score instead of count
+                        hourCounts[index] += eventRelevance[event.id] || 0;
+                    } else {
+                        // Use simple count
+                        hourCounts[index]++;
+                    }
+                }
+            });
+
+            return {
+                date: dateStr,
+                counts: hourCounts
+            };
+        }
+
+        // Helper function to draw density background for a band
+        function drawBandDensityBackground(day, yPos, effectiveBandHeight, eventsToShow) {
+            if (!hourlyDensityData.density_data || hourlyDensityData.density_data.length === 0) {
+                return;
+            }
+
+            // Calculate filtered density for this specific day
+            const filteredDensityData = calculateFilteredDensityForDay(day, eventsToShow);
+
+            if (!filteredDensityData || filteredDensityData.counts.every(c => c === 0)) return;
+
+            // Create density scale based on band state - use global max for consistency
+            const isTopicMode = selectedTopicId !== null || customKeyword || selectedKeywordId;
+            let maxDensity;
+            if (isTopicMode) {
+                // For topic mode, calculate max across all filtered data
+                maxDensity = Math.max(1, ...days.map(d => {
+                    const dayData = calculateFilteredDensityForDay(d, eventsToShow);
+                    return Math.max(...dayData.counts);
+                }));
+            } else {
+                // For normal mode, use original data max
+                maxDensity = d3.max(hourlyDensityData.density_data, d => d3.max(d.counts)) || 1;
+            }
+            const densityScale = bandCollapsedState[day] ?
+                effectiveBandHeight * 0.8 : effectiveBandHeight * 0.6; // Different scales for collapsed vs expanded
+
+            // Create Y scale for density within the band
+            const densityYScale = d3.scaleLinear()
+                .domain([0, maxDensity])
+                .range([0, densityScale]);
+
+            // Create area generator
+            const area = d3.area()
+                .x((d, i) => xScale(8 + i)) // Hours 8-14
+                .y0(yPos + effectiveBandHeight - 10) // Bottom of band
+                .y1((d) => yPos + effectiveBandHeight - densityYScale(d) - 10) // Top based on density
+                .curve(d3.curveMonotoneX);
+
+            // Calculate color for this date
+            const dates = hourlyDensityData.dates;
+            const dateIndex = dates.indexOf(filteredDensityData.date);
+            const n_dates = dates.length;
+            const colorPos = 1 / 3 + (2 / 3) * (dateIndex / (n_dates - 1));
+            const densityColor = d3.interpolateBlues(colorPos);
+
+            // Add extra 0 value at end to complete the curve
+            const extendedCounts = [...filteredDensityData.counts, 0];
+
+            // Update area generator to handle the extra point
+            const extendedArea = d3.area()
+                .x((d, i) => {
+                    if (i < 7) {
+                        return xScale(8 + i); // Hours 8-14 (7 points)
+                    } else {
+                        return xScale(15); // Extra point at hour 15
+                    }
+                })
+                .y0(yPos + effectiveBandHeight - 10) // Bottom of band
+                .y1((d) => yPos + effectiveBandHeight - densityYScale(d) - 10) // Top based on density
+                .curve(d3.curveMonotoneX);
+
+            // Draw filled area
+            svg.append("path")
+                .datum(extendedCounts)
+                .attr("class", "density-background")
+                .attr("fill", densityColor)
+                .attr("fill-opacity", 0.3)
+                .attr("stroke", densityColor)
+                .attr("stroke-width", 1)
+                .attr("stroke-opacity", 0.6)
+                .attr("d", extendedArea);
+        }
+
         // Find min/max hours
         let minHour = 24, maxHour = 0;
         allEvents.forEach(event => {
@@ -143,7 +294,6 @@ function init_daily_patterns() {
         const hourRange = maxHour - minHour;
 
         // Store constants for drawVisualization function
-        const densityHeight = bandHeight * 2;
         const svgWidth = hourRange * hourWidth + 100;
         const hourTicks = d3.range(minHour, maxHour + 1);
 
@@ -187,7 +337,7 @@ function init_daily_patterns() {
         function drawVisualization() {
             // Calculate total height based on current collapsed/expanded states
             const totalBandHeight = days.reduce((total, day) => total + getEffectiveBandHeight(day), 0);
-            const svgHeight = totalBandHeight + densityHeight + 50;
+            const svgHeight = totalBandHeight + 50; // No separate density section needed
 
             // Set container height first to prevent layout shifts
             visContainer.style("height", svgHeight + "px");
@@ -226,15 +376,18 @@ function init_daily_patterns() {
                 .call(xAxis)
                 .attr("color", axisColor);
 
-            // Draw hour lines for entire visualization (bands + density)
+            // Draw hour lines for entire visualization (bands only)
             hourTicks.forEach(hour => {
+                const lineWidth = hour === minHour ? 2 : 1; // Bold line for x=0 (leftmost position)
+                const lineColor = hour === minHour ? daySeparatorColor : hourLineColor; // Darker color for x=0
+
                 svg.append("line")
                     .attr("x1", xScale(hour))
-                    .attr("y1", 40)
+                    .attr("y1", 50)
                     .attr("x2", xScale(hour))
-                    .attr("y2", svgHeight - 50) // Extend to bottom including density area
-                    .attr("stroke", hourLineColor)
-                    .attr("stroke-width", 1);
+                    .attr("y2", totalBandHeight + 50) // Extend to bottom of bands
+                    .attr("stroke", lineColor)
+                    .attr("stroke-width", lineWidth);
             });
 
             let eventsToShow;
@@ -296,8 +449,8 @@ function init_daily_patterns() {
                         // For BERTopic and LDA, use topic weights
                         eventsToShow.forEach(event => {
                             const topicData = eventTopicData[event.id];
-                            if (topicData && topicData.topic_weights && topicData.topic_weights[selectedTopicId] !== undefined) {
-                                const weight = topicData.topic_weights[selectedTopicId];
+                            if (topicData && topicData.topic_weights && topicData.topic_weights[selectedTopicId - 1] !== undefined) {
+                                const weight = topicData.topic_weights[selectedTopicId - 1];
                                 termFreq[event.id] = weight;
                                 if (weight > maxFreq) maxFreq = weight;
                             } else {
@@ -338,6 +491,9 @@ function init_daily_patterns() {
                 const effectiveBandHeight = getEffectiveBandHeight(day);
                 const yPos = cumulativeY;
 
+                // Draw density background first (behind everything)
+                drawBandDensityBackground(day, yPos, effectiveBandHeight, eventsToShow);
+
                 // Create clickable band background for expand/collapse
                 const bandRect = svg.append("rect")
                     .attr("x", 20)
@@ -351,7 +507,6 @@ function init_daily_patterns() {
                         bandCollapsedState[day] = !bandCollapsedState[day];
                         // Redraw visualization
                         drawVisualization();
-                        drawHourlyDensity();
                     });
 
                 svg.append("line")
@@ -362,32 +517,8 @@ function init_daily_patterns() {
                     .attr("stroke", daySeparatorColor)
                     .attr("stroke-width", 2);
 
-                const yCenter = yPos + effectiveBandHeight / 2 - 15;
+                const yCenter = yPos + effectiveBandHeight / 2 - 10;
 
-                // Add legend line for density visualization
-                if (hourlyDensityData.density_data && hourlyDensityData.density_data.length > 0) {
-                    const dateStr = `2040-10-${day.toString().padStart(2, '0')}`;
-                    const densityDateData = hourlyDensityData.density_data.find(d => d.date === dateStr);
-
-                    if (densityDateData) {
-                        // Calculate color using same logic as density viz
-                        const dates = hourlyDensityData.dates;
-                        const dateIndex = dates.indexOf(dateStr);
-                        const n_dates = dates.length;
-                        const colorPos = 1 / 3 + (2 / 3) * (dateIndex / (n_dates - 1));
-                        const legendLineColor = d3.interpolateBlues(colorPos);
-
-                        // Draw legend line next to day label (scale with band)
-                        const effectiveLegendHeight = bandCollapsedState[day] ? legendLineHeight * collapseFraction : legendLineHeight;
-                        svg.append("line")
-                            .attr("x1", 32)
-                            .attr("y1", yCenter - effectiveLegendHeight / 2)
-                            .attr("x2", 32)
-                            .attr("y2", yCenter + effectiveLegendHeight / 2)
-                            .attr("stroke", legendLineColor)
-                            .attr("stroke-width", legendLineWidth);
-                    }
-                }
 
                 // Only show text when expanded
                 if (!bandCollapsedState[day]) {
@@ -477,11 +608,29 @@ function init_daily_patterns() {
                                 }
                             }
 
-                            // Create group with clip path and mouse events
+                            // Create main group for the message with rounded clipping
                             const markerGroup = svg.append("g")
                                 .attr("class", "marker-group")
                                 .attr("transform", `translate(${stackXPos},${yPosInStack})`)
-                                .style("opacity", opacity)
+                                .style("opacity", opacity);
+
+                            // Create clip path for rounded corners
+                            const clipId = `clip-${event.id}-${Math.random().toString(36).substr(2, 9)}`;
+                            const defs = svg.select("defs").empty() ? svg.append("defs") : svg.select("defs");
+                            defs.append("clipPath")
+                                .attr("id", clipId)
+                                .append("rect")
+                                .attr("width", effectiveMarkerSizes.markerSize_h)
+                                .attr("height", effectiveMarkerSizes.markerSize_v)
+                                .attr("rx", cornerRadius * (bandCollapsedState[day] ? collapseFraction : 1))
+                                .attr("ry", cornerRadius * (bandCollapsedState[day] ? collapseFraction : 1));
+
+                            // Apply clip path to the marker group
+                            const clippedGroup = markerGroup.append("g")
+                                .attr("clip-path", `url(#${clipId})`);
+
+                            // Add mouse events to the marker group
+                            markerGroup
                                 .on("mouseover", function (e) {
                                     // Show tooltip
                                     const source = event.entity_id;
@@ -498,8 +647,12 @@ function init_daily_patterns() {
                                         .style("top", (e.pageY + 10) + "px")
                                         .classed("hidden", false);
 
-                                    // Highlight entire marker
-                                    markerGroup.selectAll("rect")
+                                    // Add subtle stroke to entire marker
+                                    clippedGroup.append("rect")
+                                        .attr("class", "hover-outline")
+                                        .attr("width", effectiveMarkerSizes.markerSize_h)
+                                        .attr("height", effectiveMarkerSizes.markerSize_v)
+                                        .attr("fill", "none")
                                         .attr("stroke", "#000")
                                         .attr("stroke-width", 1);
 
@@ -508,8 +661,7 @@ function init_daily_patterns() {
                                 })
                                 .on("mouseout", function () {
                                     tooltip.classed("hidden", true);
-                                    markerGroup.selectAll("rect")
-                                        .attr("stroke", null);
+                                    clippedGroup.select(".hover-outline").remove();
 
                                     // Restore original opacity
                                     const isHighlighting = currentTerm || (selectedTopicId !== null && topicsLoaded);
@@ -538,27 +690,31 @@ function init_daily_patterns() {
                                 (letterMaps[targetEntity.sub_type]?.[targetEntity.id] ||
                                     targetEntity.id.charAt(0).toUpperCase()) : "?";
 
-                            // Draw dual-color marker using effective sizes
-                            markerGroup.append("rect")
+                            // Draw source box (left side)
+                            clippedGroup.append("rect")
+                                .attr("class", "source-box")
+                                .attr("x", 0)
+                                .attr("y", 0)
                                 .attr("width", effectiveMarkerSizes.markerSize_h / 2)
                                 .attr("height", effectiveMarkerSizes.markerSize_v)
-                                .attr("rx", cornerRadius * (bandCollapsedState[day] ? collapseFraction : 1))
-                                .attr("ry", cornerRadius * (bandCollapsedState[day] ? collapseFraction : 1))
                                 .attr("fill", sourceEntity ? colors[sourceEntity.sub_type] || "#777" : "#999");
 
-                            markerGroup.append("rect")
+                            // Draw target box (right side)
+                            clippedGroup.append("rect")
+                                .attr("class", "target-box")
                                 .attr("x", effectiveMarkerSizes.markerSize_h / 2)
+                                .attr("y", 0)
                                 .attr("width", effectiveMarkerSizes.markerSize_h / 2)
                                 .attr("height", effectiveMarkerSizes.markerSize_v)
-                                .attr("rx", cornerRadius * (bandCollapsedState[day] ? collapseFraction : 1))
-                                .attr("ry", cornerRadius * (bandCollapsedState[day] ? collapseFraction : 1))
                                 .attr("fill", targetEntity ? colors[targetEntity.sub_type] || "#999" : "#bbb");
 
-                            // Add letters only when not collapsed or if marker is large enough
-                            if (!bandCollapsedState[day] || effectiveMarkerSizes.markerSize_h > 12) {
-                                const fontSize = bandCollapsedState[day] ? "6px" : "10px";
+                            // Add letters when expanded (not collapsed)
+                            if (!bandCollapsedState[day]) {
+                                const fontSize = "10px";
 
-                                markerGroup.append("text")
+                                // Source letter (left box)
+                                clippedGroup.append("text")
+                                    .attr("class", "source-letter")
                                     .attr("x", effectiveMarkerSizes.markerSize_h / 4)
                                     .attr("y", effectiveMarkerSizes.markerSize_v / 2)
                                     .attr("dy", "0.35em")
@@ -568,7 +724,9 @@ function init_daily_patterns() {
                                     .attr("font-size", fontSize)
                                     .text(sourceLetter);
 
-                                markerGroup.append("text")
+                                // Target letter (right box)
+                                clippedGroup.append("text")
+                                    .attr("class", "target-letter")
                                     .attr("x", effectiveMarkerSizes.markerSize_h * 0.75)
                                     .attr("y", effectiveMarkerSizes.markerSize_v / 2)
                                     .attr("dy", "0.35em")
@@ -587,98 +745,6 @@ function init_daily_patterns() {
             });
         }
 
-        // Function to draw hourly density visualization
-        function drawHourlyDensity() {
-            if (!hourlyDensityData.density_data || hourlyDensityData.density_data.length === 0) {
-                return;
-            }
-
-            // Calculate density data (filtered by entities and topics/keywords)
-            let filteredDensityData = calculateFilteredDensity();
-            let isTopicMode = selectedTopicId !== null || customKeyword || selectedKeywordId;
-
-            // Calculate position for density visualization (after all bands, no gap)
-            const totalBandHeight = days.reduce((total, day) => total + getEffectiveBandHeight(day), 0);
-            const densityStartY = totalBandHeight + 60;
-            const densityHeight = bandHeight * 2;
-            const densityMargin = { top: 10, right: 20, bottom: 30, left: 40 };
-
-            const maxCount = d3.max(filteredDensityData, d => d3.max(d.counts));
-            const densityYScale = d3.scaleLinear()
-                .domain([0, maxCount])
-                .range([densityStartY + densityHeight - densityMargin.bottom, densityStartY + densityMargin.top]);
-
-            // Create color scale for dates - match main viz color intensity progression
-            const dates = filteredDensityData.map(d => d.date);
-            const n_dates = dates.length;
-            const color_positions = [];
-            for (let i = 0; i < n_dates; i++) {
-                color_positions.push(1 / 3 + (2 / 3) * (i / (n_dates - 1))); // Start at 1/3 like main viz
-            }
-            const colorScale = d3.scaleOrdinal()
-                .domain(dates)
-                .range(color_positions.map(pos => d3.interpolateBlues(pos)));
-
-            // Draw bottom axis for density section
-            svg.append("g")
-                .attr("class", "density-element")
-                .attr("transform", `translate(0,${densityStartY + densityHeight - densityMargin.bottom})`)
-                .call(d3.axisBottom(xScale)
-                    .tickValues(hourTicks)
-                    .tickFormat(d => `${d}:00`))
-                .attr("color", axisColor);
-
-            // Draw left axis for density values
-            svg.append("g")
-                .attr("class", "density-element")
-                .attr("transform", `translate(40,${densityStartY})`)
-                .call(d3.axisLeft(densityYScale).ticks(5))
-                .attr("color", axisColor);
-
-            // Add y-axis label only (no title since it's integrated)
-            svg.append("text")
-                .attr("class", "density-element")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 10)
-                .attr("x", -(densityStartY + densityHeight / 2))
-                .attr("dy", "0.71em")
-                .style("text-anchor", "middle")
-                .style("font-size", "12px")
-                .attr("fill", textColor)
-                .text(isTopicMode ? "Topic Relevance" : "Density");
-
-            // Draw lines for each date
-            const line = d3.line()
-                .x((d, i) => xScale(8 + i)) // Use existing xScale that covers hours 8-14
-                .y(d => densityYScale(d))
-                .curve(d3.curveMonotoneX);
-
-            filteredDensityData.forEach((dateData) => {
-                const dateColor = colorScale(dateData.date);
-
-                svg.append("path")
-                    .attr("class", "density-element")
-                    .datum(dateData.counts)
-                    .attr("fill", "none")
-                    .attr("stroke", dateColor)
-                    .attr("stroke-width", 2.5)
-                    .attr("d", line)
-                    .on("mouseover", function (event) {
-                        // Highlight line on hover
-                        d3.select(this).attr("stroke-width", 4);
-
-                        // Show tooltip with date
-                        tooltip.html(`Date: ${dateData.date}`)
-                            .style("left", (event.pageX + 10) + "px")
-                            .style("top", (event.pageY + 10) + "px")
-                            .classed("hidden", false);
-                    })
-                    .on("mouseout", function () {
-                        d3.select(this).attr("stroke-width", 2.5);
-                        tooltip.classed("hidden", true);
-                    });
-            });
-        }
 
         // Function to calculate filtered density based on selected entities and topics
         function calculateFilteredDensity() {
@@ -721,8 +787,8 @@ function init_daily_patterns() {
                                 });
                             } else {
                                 const topicData = eventTopicData[event.id];
-                                if (topicData && topicData.topic_weights && topicData.topic_weights[selectedTopicId] !== undefined) {
-                                    relevance = topicData.topic_weights[selectedTopicId];
+                                if (topicData && topicData.topic_weights && topicData.topic_weights[selectedTopicId - 1] !== undefined) {
+                                    relevance = topicData.topic_weights[selectedTopicId - 1];
                                 }
                             }
                         }
@@ -775,18 +841,17 @@ function init_daily_patterns() {
         }
 
         drawVisualization();
-        drawHourlyDensity();
 
         // Create legend
         const legendScrollContainer = legendContainer.append("div")
             .attr("class", "overflow-y-auto")
-            .style("max-height", "400px");
+            .style("max-height", "300px");
 
         const legendItems = legendScrollContainer.selectAll(".legend-item")
             .data(allEntities)
             .enter()
             .append("div")
-            .attr("class", "legend-item cursor-pointer p-2 rounded hover:bg-gray-100 flex items-center")
+            .attr("class", "legend-item cursor-pointer px-2 py-1 rounded hover:bg-gray-100 flex items-center")
             .on("click", function (event, d) {
                 const index = selectedEntityIds.indexOf(d.id);
                 if (index > -1) {
@@ -797,7 +862,6 @@ function init_daily_patterns() {
                     d3.select(this).classed("bg-blue-100 border border-blue-300", true);
                 }
                 drawVisualization();
-                drawHourlyDensity();
             });
 
         legendItems.append("div")
@@ -832,7 +896,6 @@ function init_daily_patterns() {
                 d3.selectAll(".legend-item")
                     .classed("bg-blue-100 border border-blue-300", false);
                 drawVisualization();
-                drawHourlyDensity();
             });
 
         // Add topic modeling section
@@ -843,6 +906,18 @@ function init_daily_patterns() {
 
         // Function to load topic data (defined first so it can be referenced)
         function loadTopicData() {
+            // Clear current topic selection and highlighting when parameters change
+            selectedTopicId = null;
+            selectedKeywordId = null;
+            customKeyword = "";
+            d3.select("input[type='text']").property("value", "");
+            
+            // Reset dropdown button text
+            d3.select("#topics-dropdown-button").text("Select Topic");
+            
+            // Immediately update visualization to clear highlighting
+            drawVisualization();
+            
             const isAuto = d3.select("#topic-auto").property("checked");
             const topicCount = isAuto ? "auto" : d3.select("input[type='range']").property("value");
 
@@ -852,9 +927,9 @@ function init_daily_patterns() {
                 num_topics: topicCount
             });
 
-            // Show loading status
+            // Show loading status and hide topic selector
             d3.select(".loading-status").style("display", "block");
-            d3.select(".topics-list-container").style("display", "none");
+            d3.select(".topics-dropdown-container").style("display", "none");
 
             d3.json(`/data/daily_patterns?${params}`).then(data => {
                 if (data.error) {
@@ -883,30 +958,51 @@ function init_daily_patterns() {
 
                 // Redraw visualization to clear any highlighting
                 drawVisualization();
-                drawHourlyDensity();
 
-                // Hide loading status and show topics list
+                // Hide loading status and show topics dropdown
                 d3.select(".loading-status").style("display", "none");
-                d3.select(".topics-list-container").style("display", "block");
+                d3.select(".topics-dropdown-container").style("display", "block");
 
             }).catch(error => {
                 console.error("Error loading topic data:", error);
-                // Hide loading status on error
+                // Hide loading status on error, keep topic selector hidden
                 d3.select(".loading-status").style("display", "none");
+                d3.select(".topics-dropdown-container").style("display", "none");
             });
         }
 
-        // Function to update topics list
+        // Function to update topics dropdown
         function updateTopicsList() {
-            const topicsList = d3.select(".topics-list");
-            topicsList.selectAll("*").remove();
+            const dropdownContent = d3.select("#topics-dropdown-content");
+            const dropdownButton = d3.select("#topics-dropdown-button");
+
+            dropdownContent.selectAll("*").remove();
+
+            // Add "None" option
+            const noneItem = dropdownContent.append("li");
+            noneItem.append("a")
+                .attr("class", `dropdown-item px-2 py-1 text-xs hover:bg-gray-100 cursor-pointer ${selectedTopicId === null ? "text-indigo-700 bg-indigo-50" : "text-gray-900"}`)
+                .on("click", function () {
+                    selectedTopicId = null;
+                    selectedKeywordId = null;
+                    customKeyword = "";
+                    d3.select("input[type='text']").property("value", "");
+
+                    // Update button text
+                    dropdownButton.text('Select Topic');
+
+                    // Close dropdown
+                    d3.select("#topics-dropdown").node().open = false;
+
+                    drawVisualization();
+                    updateTopicSelection();
+                })
+                .text("None");
 
             allTopics.forEach(topic => {
-                const topicDiv = topicsList.append("div")
-                    .attr("class", `topic-item px-2 py-1 rounded cursor-pointer text-xs transition-all ${selectedTopicId === topic.id
-                        ? "bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium"
-                        : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                        }`)
+                const listItem = dropdownContent.append("li");
+                const linkDiv = listItem.append("a")
+                    .attr("class", `dropdown-item px-2 py-1 text-xs hover:bg-gray-100 cursor-pointer ${selectedTopicId === topic.id ? "text-indigo-700 bg-indigo-50" : "text-gray-900"}`)
                     .on("click", function () {
                         const previousTopicId = selectedTopicId;
                         selectedTopicId = selectedTopicId === topic.id ? null : topic.id;
@@ -914,35 +1010,80 @@ function init_daily_patterns() {
                         customKeyword = "";
                         d3.select("input[type='text']").property("value", "");
 
+                        // Update button text
+                        if (selectedTopicId !== null) {
+                            dropdownButton.text(`Topic ${topic.id}: ${topic.keywords.join(', ')}`);
+                        } else {
+                            dropdownButton.text('Select Topic');
+                        }
+
+                        // Close dropdown
+                        d3.select("#topics-dropdown").node().open = false;
+
                         console.log(`Topic clicked: ${topic.id}, previous: ${previousTopicId}, new: ${selectedTopicId}`);
                         console.log("topicsLoaded:", topicsLoaded, "eventTopicData keys:", Object.keys(eventTopicData).length);
 
                         drawVisualization();
-                        drawHourlyDensity();
                         updateTopicSelection();
                     });
 
-                topicDiv.append("div")
+                // Two-line layout for each topic
+                linkDiv.append("div")
                     .attr("class", "font-medium")
                     .text(`Topic ${topic.id}`);
 
-                topicDiv.append("div")
-                    .attr("class", "text-xs text-gray-600")
+                linkDiv.append("div")
+                    .attr("class", "text-xs opacity-70")
                     .text(topic.keywords.slice(0, 4).join(", "));
+            });
+
+            // Initialize dropdown behavior
+            setupDropdownBehavior();
+        }
+
+        // Function to setup dropdown click behavior
+        function setupDropdownBehavior() {
+            const dropdown = d3.select("#topics-dropdown");
+
+            // Close dropdown when clicking outside
+            d3.select("body").on("click.dropdown", function (event) {
+                // Check if click is outside the dropdown
+                if (!dropdown.node().contains(event.target)) {
+                    dropdown.node().open = false;
+                }
+            });
+
+            // Prevent dropdown from closing when clicking inside content
+            d3.select("#topics-dropdown-content").on("click", function (event) {
+                event.stopPropagation();
             });
         }
 
         // Function to update topic selection UI
         function updateTopicSelection() {
-            d3.selectAll(".topic-item")
-                .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", false)
-                .classed("bg-gray-100 text-gray-700", true);
+            // Update dropdown items
+            d3.selectAll(".dropdown-item")
+                .classed("text-indigo-700 bg-indigo-50", false)
+                .classed("text-gray-900", true);
+
+            // Update dropdown button text
+            const dropdownButton = d3.select("#topics-dropdown-button");
 
             if (selectedTopicId !== null) {
-                d3.selectAll(".topic-item")
+                // Find and highlight selected topic
+                d3.selectAll(".dropdown-item")
                     .filter((d, i) => allTopics[i] && allTopics[i].id === selectedTopicId)
-                    .classed("bg-indigo-100 border border-indigo-500 text-indigo-800 font-medium", true)
-                    .classed("bg-gray-100 text-gray-700", false);
+                    .classed("text-indigo-700 bg-indigo-50", true)
+                    .classed("text-gray-900", false);
+
+                // Update button text to show selected topic
+                const selectedTopic = allTopics.find(t => t.id === selectedTopicId);
+                if (selectedTopic) {
+                    dropdownButton.text(`Topic ${selectedTopic.id}: ${selectedTopic.keywords.join(', ')}`);
+                }
+            } else {
+                // Reset button text
+                dropdownButton.text("Select Topic");
             }
         }
 
@@ -955,13 +1096,17 @@ function init_daily_patterns() {
                 .attr("class", "font-medium text-sm mb-2")
                 .text("Topic Analysis");
 
+            // Topic controls in a single row
+            const topicControlsRow = topicContainer.append("div")
+                .attr("class", "flex gap-3 mb-3");
+
             // Topic method selector
-            const methodGroup = topicContainer.append("div")
-                .attr("class", "mb-3");
+            const methodGroup = topicControlsRow.append("div")
+                .attr("class", "flex-1");
 
             methodGroup.append("label")
                 .attr("class", "block text-xs font-medium text-gray-700 mb-1")
-                .text("Topic Method:");
+                .text("Method:");
 
             const methodSelect = methodGroup.append("select")
                 .attr("class", "w-full px-2 py-1 border border-gray-300 rounded text-xs")
@@ -971,25 +1116,22 @@ function init_daily_patterns() {
                 });
 
             methodSelect.append("option").attr("value", "bertopic").text("BERTopic");
-            methodSelect.append("option").attr("value", "lda?vectorizer=tfidf").text("LDA (TF-IDF)");
+            methodSelect.append("option").attr("value", "lda?vectorizer=tfidf").attr("selected", "selected").text("LDA (TF-IDF)");
             methodSelect.append("option").attr("value", "lda?vectorizer=bow").text("LDA (BOW)");
             methodSelect.append("option").attr("value", "tfidf").text("TF-IDF");
 
             // Topic count controls
-            const countGroup = topicContainer.append("div")
-                .attr("class", "mb-3");
+            const countGroup = topicControlsRow.append("div")
+                .attr("class", "flex-1");
 
-            countGroup.append("label")
-                .attr("class", "block text-xs font-medium text-gray-700 mb-1")
-                .text("Topic Count:");
 
             const countContainer = countGroup.append("div")
-                .attr("class", "flex items-center gap-2");
+                .attr("class", "flex items-center gap-1");
 
             const autoCheckbox = countContainer.append("input")
                 .attr("type", "checkbox")
                 .attr("id", "topic-auto")
-                .attr("checked", true)
+                .property("checked", false)
                 .on("change", function () {
                     countSlider.property("disabled", this.checked);
                     loadTopicData();
@@ -1007,8 +1149,8 @@ function init_daily_patterns() {
                 .attr("type", "range")
                 .attr("min", "5")
                 .attr("max", "20")
-                .attr("value", "10")
-                .attr("disabled", true)
+                .attr("value", "15")
+                .property("disabled", false)
                 .attr("class", "w-full")
                 .on("input", function () {
                     countDisplay.text(this.value);
@@ -1019,11 +1161,8 @@ function init_daily_patterns() {
 
             const countDisplay = sliderContainer.append("div")
                 .attr("class", "text-xs text-center text-gray-600 mt-1")
-                .text("10");
+                .text("15");
 
-            sliderContainer.append("div")
-                .attr("class", "flex justify-between text-xs text-gray-500")
-                .html("<span>5</span><span>20</span>");
 
             // Loading status indicator
             const loadingStatus = topicContainer.append("div")
@@ -1031,17 +1170,25 @@ function init_daily_patterns() {
                 .style("display", "none")
                 .text("Loading topics...");
 
-            // Topics list container
-            const topicsListContainer = topicContainer.append("div")
-                .attr("class", "topics-list-container")
+            // Topics dropdown container using Daisy UI
+            const topicsDropdownContainer = topicContainer.append("div")
+                .attr("class", "topics-dropdown-container mb-3 p-2 border border-gray-200 bg-gray-50 rounded-lg")
                 .style("display", "none");
 
-            topicsListContainer.append("div")
-                .attr("class", "text-xs text-gray-500 mb-2")
-                .html("Click topics to highlight communications by relevance:");
 
-            const topicsList = topicsListContainer.append("div")
-                .attr("class", "topics-list space-y-1");
+            // Create Daisy UI dropdown using details/summary for better control
+            const dropdownDetails = topicsDropdownContainer.append("details")
+                .attr("id", "topics-dropdown")
+                .attr("class", "dropdown w-full");
+
+            const dropdownButton = dropdownDetails.append("summary")
+                .attr("id", "topics-dropdown-button")
+                .attr("class", "btn btn-sm btn-outline w-full justify-between text-xs")
+                .text("Select Topic");
+
+            const dropdownContent = dropdownDetails.append("ul")
+                .attr("id", "topics-dropdown-content")
+                .attr("class", "dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-2 shadow border max-h-60 overflow-y-auto");
 
             // Custom keyword section (keeping this for backward compatibility)
             const keywordGroup = topicContainer.append("div")
@@ -1064,7 +1211,6 @@ function init_daily_patterns() {
                         selectedTopicId = null;
                         selectedKeywordId = null;
                         drawVisualization();
-                        drawHourlyDensity();
                         updateTopicSelection();
                     }
                 });
@@ -1077,7 +1223,6 @@ function init_daily_patterns() {
                     selectedTopicId = null;
                     selectedKeywordId = null;
                     drawVisualization();
-                    drawHourlyDensity();
                     updateTopicSelection();
                 });
 
@@ -1091,7 +1236,6 @@ function init_daily_patterns() {
                     customKeyword = "";
                     customInput.property("value", "");
                     drawVisualization();
-                    drawHourlyDensity();
                     updateTopicSelection();
                 });
         }
