@@ -7,6 +7,7 @@ from flask import current_app
 from sklearn.feature_extraction.text import TfidfVectorizer
 import re
 import numpy as np
+from .topic_modeling import extract_topics_bertopic, extract_topics_lda, extract_topics_tfidf
 
 logger = logging.getLogger(__name__)
 
@@ -15,8 +16,8 @@ TITLE = "Daily Communication Patterns"
 DESCRIPTION = "Visualization of daily communication events with entity markers"
 
 
-def get_data():
-    logger.debug("Generating daily patterns data")
+def get_data(include_topics=False, method="bertopic", **kwargs):
+    logger.debug(f"Generating daily patterns data, include_topics: {include_topics}")
 
     # Get path to data file from config
     data_file = current_app.config["DATA_FILE"]
@@ -118,18 +119,120 @@ def get_data():
 
     logger.info(f"Found {len(october_events)} communication events in October 2040")
 
-    # Extract keywords using TF-IDF (1,2,3 grams)
-    keywords = extract_keywords(
-        [e["content"] for e in october_events if e.get("content")],
-        max_keywords=30,
-        ngram_range=(1, 3),
-    )
-
-    # Prepare JSON-serializable response
-    return {
+    # Base response with events and entities
+    response = {
         "events": october_events,
         "entities": list(entities.values()),
-        "keywords": keywords,
+    }
+
+    # Only include topic/keyword data if requested
+    if include_topics:
+        response.update(get_topic_data(october_events, method, **kwargs))
+    else:
+        # Include basic keywords for backward compatibility
+        keywords = extract_keywords(
+            [e["content"] for e in october_events if e.get("content")],
+            max_keywords=15,
+            ngram_range=(1, 2),
+        )
+        response["keywords"] = keywords
+
+    return response
+
+
+def get_topic_data(october_events, method="bertopic", **kwargs):
+    """Get topic modeling data for events"""
+    logger.debug(f"Generating topic data with method: {method}")
+    
+    # Extract topics using the specified method
+    topics = []
+    event_contents = [e["content"] for e in october_events if e.get("content")]
+    
+    if len(event_contents) >= 5:  # Need minimum events for topic modeling
+        # Get topic count parameters
+        num_topics = kwargs.get("num_topics", "auto")
+        min_topic_size = kwargs.get("min_topic_size", 3)
+        
+        try:
+            if method == "tfidf":
+                # Handle auto topic count for TF-IDF
+                tfidf_num_topics = num_topics
+                if num_topics == "auto":
+                    tfidf_num_topics = max(3, min(8, len(event_contents) // 5))
+                else:
+                    try:
+                        tfidf_num_topics = int(num_topics)
+                    except:
+                        tfidf_num_topics = 5
+                        
+                topics_list, doc_topics = extract_topics_tfidf(event_contents, num_topics=tfidf_num_topics)
+                
+            elif method.startswith("lda"):
+                # Parse vectorizer for LDA
+                vectorizer_type = "tfidf"
+                if "?" in method:
+                    parts = method.split("?")
+                    if len(parts) > 1:
+                        vectorizer_type = parts[1].split("=")[1] if "=" in parts[1] else "tfidf"
+                    
+                topics_list, doc_topics, _, _ = extract_topics_lda(
+                    event_contents, num_topics=num_topics, vectorizer=vectorizer_type
+                )
+                
+            else:  # Default to BERTopic
+                topics_list, doc_topics, _ = extract_topics_bertopic(
+                    event_contents, min_topic_size=min_topic_size
+                )
+            
+            # Format topics for frontend
+            for i, keywords in enumerate(topics_list):
+                if keywords and len(keywords) > 0:
+                    topics.append({
+                        "id": i,
+                        "keywords": keywords,
+                        "name": f"Topic {i}: {', '.join(keywords[:3])}"
+                    })
+            
+            # Create event topic assignments
+            event_topic_data = []
+            content_index = 0
+            for event in october_events:
+                if event.get("content"):
+                    if content_index < len(doc_topics):
+                        topic_weights = doc_topics[content_index]
+                        # Find dominant topic
+                        if topic_weights:
+                            dominant_topic = int(np.argmax(topic_weights))
+                            dominant_weight = float(topic_weights[dominant_topic])
+                        else:
+                            dominant_topic = -1
+                            dominant_weight = 0.0
+                        
+                        event_topic_data.append({
+                            "event_id": event["id"],
+                            "topic_weights": [float(w) for w in topic_weights],
+                            "dominant_topic": dominant_topic,
+                            "dominant_weight": dominant_weight
+                        })
+                    content_index += 1
+                    
+        except Exception as e:
+            logger.error(f"Topic modeling failed: {str(e)}")
+            # Fallback to simple keyword extraction
+            keywords = extract_keywords(event_contents, max_keywords=10)
+            topics = [{"id": i, "keywords": [kw["term"]], "name": kw["term"]} for i, kw in enumerate(keywords)]
+            event_topic_data = []
+    else:
+        # Not enough content for topic modeling
+        logger.warning(f"Not enough content for topic modeling ({len(event_contents)} events)")
+        topics = []
+        event_topic_data = []
+
+    return {
+        "topics": topics,
+        "method_used": method,
+        "total_communications": len(event_contents),
+        "event_topic_data": event_topic_data
     }
 
 
