@@ -5,287 +5,328 @@
       "label": "The Lookout",
       "name": "The Lookout",
       "sub_type": "Person",
-      "id": "The Lookout"
+      "id": "The Lookout",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "The Intern",
       "name": "The Intern",
       "sub_type": "Person",
-      "id": "The Intern"
+      "id": "The Intern",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Kelly",
       "name": "Kelly",
       "sub_type": "Person",
-      "id": "Kelly"
+      "id": "Kelly",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Sam",
       "name": "Sam",
       "sub_type": "Person",
-      "id": "Sam"
+      "id": "Sam",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Mrs. Money",
       "name": "Mrs. Money",
       "sub_type": "Person",
-      "id": "Mrs. Money"
+      "id": "Mrs. Money",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Boss",
       "name": "Boss",
       "sub_type": "Person",
-      "id": "Boss"
+      "id": "Boss",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "The Middleman",
       "name": "The Middleman",
       "sub_type": "Person",
-      "id": "The Middleman"
+      "id": "The Middleman",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Serenity",
       "name": "Serenity",
       "sub_type": "Vessel",
-      "id": "Serenity"
+      "id": "Serenity",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Mako",
       "name": "Mako",
       "sub_type": "Vessel",
-      "id": "Mako"
+      "id": "Mako",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Reef Guardian",
       "name": "Reef Guardian",
       "sub_type": "Vessel",
-      "id": "Reef Guardian"
+      "id": "Reef Guardian",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Himark Harbor",
       "name": "Himark Harbor",
       "sub_type": "Location",
-      "id": "Himark Harbor"
+      "id": "Himark Harbor",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Davis",
       "name": "Davis",
       "sub_type": "Person",
-      "id": "Davis"
+      "id": "Davis",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Paackland Harbor",
       "name": "Paackland Harbor",
       "sub_type": "Location",
-      "id": "Paackland Harbor"
+      "id": "Paackland Harbor",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Remora",
       "name": "Remora",
       "sub_type": "Vessel",
-      "id": "Remora"
+      "id": "Remora",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Oceanus City Council",
       "name": "Oceanus City Council",
       "sub_type": "Organization",
-      "id": "Oceanus City Council"
+      "id": "Oceanus City Council",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Liam Thorne",
       "name": "Liam Thorne",
       "sub_type": "Person",
-      "id": "Liam Thorne"
+      "id": "Liam Thorne",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Marlin",
       "name": "Marlin",
       "sub_type": "Vessel",
-      "id": "Marlin"
+      "id": "Marlin",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Green Guardians",
       "name": "Green Guardians",
       "sub_type": "Organization",
-      "id": "Green Guardians"
+      "id": "Green Guardians",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Samantha Blake",
       "name": "Samantha Blake",
       "sub_type": "Person",
-      "id": "Samantha Blake"
+      "id": "Samantha Blake",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Sailor Shifts Team",
       "name": "Sailor Shifts Team",
       "sub_type": "Organization",
-      "id": "Sailor Shifts Team"
+      "id": "Sailor Shifts Team",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Glitters Team",
       "name": "Glitters Team",
       "sub_type": "Organization",
-      "id": "Glitters Team"
+      "id": "Glitters Team",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Sentinel",
       "name": "Sentinel",
       "sub_type": "Vessel",
-      "id": "Sentinel"
+      "id": "Sentinel",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Horizon",
       "name": "Horizon",
       "sub_type": "Vessel",
-      "id": "Horizon"
+      "id": "Horizon",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Seawatch",
       "name": "Seawatch",
       "sub_type": "Vessel",
-      "id": "Seawatch"
+      "id": "Seawatch",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Haacklee Harbor",
       "name": "Haacklee Harbor",
       "sub_type": "Location",
-      "id": "Haacklee Harbor"
+      "id": "Haacklee Harbor",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Osprey",
       "name": "Osprey",
       "sub_type": "Vessel",
-      "id": "Osprey"
+      "id": "Osprey",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "EcoVigil",
       "name": "EcoVigil",
       "sub_type": "Vessel",
-      "id": "EcoVigil"
+      "id": "EcoVigil",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Miranda Jordan",
       "name": "Miranda Jordan",
       "sub_type": "Person",
-      "id": "Miranda Jordan"
+      "id": "Miranda Jordan",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Clepper Jensen",
       "name": "Clepper Jensen",
       "sub_type": "Person",
-      "id": "Clepper Jensen"
+      "id": "Clepper Jensen",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Rodriguez",
       "name": "Rodriguez",
       "sub_type": "Person",
-      "id": "Rodriguez"
+      "id": "Rodriguez",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Small Fry",
       "name": "Small Fry",
       "sub_type": "Person",
-      "id": "Small Fry"
+      "id": "Small Fry",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Defender",
       "name": "Defender",
       "sub_type": "Vessel",
-      "id": "Defender"
+      "id": "Defender",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "V. Miesel Shipping",
       "name": "V. Miesel Shipping",
       "sub_type": "Organization",
-      "id": "V. Miesel Shipping"
+      "id": "V. Miesel Shipping",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Northern Light",
       "name": "Northern Light",
       "sub_type": "Vessel",
-      "id": "Northern Light"
+      "id": "Northern Light",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Nadia Conti",
       "name": "Nadia Conti",
       "sub_type": "Person",
-      "id": "Nadia Conti"
+      "id": "Nadia Conti",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Neptune",
       "name": "Neptune",
       "sub_type": "Vessel",
-      "id": "Neptune"
+      "id": "Neptune",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "City Officials",
       "name": "City Officials",
       "sub_type": "Group",
-      "id": "City Officials"
+      "id": "City Officials",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Elise",
       "name": "Elise",
       "sub_type": "Person",
-      "id": "Elise"
+      "id": "Elise",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "The Accountant",
       "name": "The Accountant",
       "sub_type": "Person",
-      "id": "The Accountant"
+      "id": "The Accountant",
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
       "label": "Knowles",
       "name": "Knowles",
       "sub_type": "Vessel",
-      "id": "Knowles"
+      "id": "Knowles",
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
       "label": "Port Security",
       "name": "Port Security",
       "sub_type": "Location",
-      "id": "Port Security"
+      "id": "Port Security",
+      "is_pseudonym": false
     }
   ],
   "links": [

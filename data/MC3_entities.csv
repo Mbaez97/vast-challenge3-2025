@@ -1,0 +1,73 @@
+label,name,sub_type,id,Spacy_type,is_pseudonym
+Sam,Sam,Person,Sam,PERSON,False
+Kelly,Kelly,Person,Kelly,N/A,True
+Nadia Conti,Nadia Conti,Person,Nadia Conti,ORG,False
+Elise,Elise,Person,Elise,N/A,True
+Liam Thorne,Liam Thorne,Person,Liam Thorne,PERSON,False
+Samantha Blake,Samantha Blake,Person,Samantha Blake,PERSON,False
+Davis,Davis,Person,Davis,PERSON,False
+Rodriguez,Rodriguez,Person,Rodriguez,N/A,True
+Sailor Shift,Sailor Shift,Person,Sailor Shift,N/A,True
+Clepper Jensen,Clepper Jensen,Person,Clepper Jensen,PERSON,False
+Miranda Jordan,Miranda Jordan,Person,Miranda Jordan,PERSON,False
+The Intern,The Intern,Person,The Intern,N/A,True
+The Lookout,The Lookout,Person,The Lookout,ORG,False
+The Accountant,The Accountant,Person,The Accountant,N/A,True
+Mrs. Money,Mrs. Money,Person,Mrs. Money,PERSON,False
+The Middleman,The Middleman,Person,The Middleman,N/A,True
+Boss,Boss,Person,Boss,N/A,True
+Small Fry,Small Fry,Person,Small Fry,N/A,True
+Glitters Team,Glitters Team,Organization,Glitters Team,N/A,True
+Oceanus City Council,Oceanus City Council,Organization,Oceanus City Council,ORG,False
+Green Guardians,Green Guardians,Organization,Green Guardians,NORP,False
+V. Miesel Shipping,V. Miesel Shipping,Organization,V. Miesel Shipping,ORG,False
+Sailor Shifts Team,Sailor Shifts Team,Organization,Sailor Shifts Team,N/A,True
+Neptune,Neptune,Vessel,Neptune,N/A,True
+Marlin,Marlin,Vessel,Marlin,PRODUCT,False
+Serenity,Serenity,Vessel,Serenity,N/A,True
+Mako,Mako,Vessel,Mako,PERSON,False
+Reef Guardian,Reef Guardian,Vessel,Reef Guardian,N/A,True
+Horizon,Horizon,Vessel,Horizon,ORG,False
+Seawatch,Seawatch,Vessel,Seawatch,PERSON,False
+EcoVigil,EcoVigil,Vessel,EcoVigil,ORG,False
+Sentinel,Sentinel,Vessel,Sentinel,N/A,True
+Osprey,Osprey,Vessel,Osprey,PERSON,False
+Defender,Defender,Vessel,Defender,PERSON,False
+Northern Light,Northern Light,Vessel,Northern Light,N/A,True
+Remora,Remora,Vessel,Remora,PERSON,False
+Knowles,Knowles,Vessel,Knowles,GPE,False
+Mariner's Dream,Mariner's Dream,Vessel,Mariner's Dream,ORG,False
+Recreational Fishing Boats,Recreational Fishing Boats,Group,Recreational Fishing Boats,N/A,True
+City Officials,City Officials,Group,City Officials,N/A,True
+Diving Tour Operators,Diving Tour Operators,Group,Diving Tour Operators,ORG,False
+Tourists,Tourists,Group,Tourists,N/A,True
+Conservation Vessels,Conservation Vessels,Group,Conservation Vessels,ORG,False
+Paackland Harbor,Paackland Harbor,Location,Paackland Harbor,GPE,False
+Haacklee Harbor,Haacklee Harbor,Location,Haacklee Harbor,PERSON,False
+Himark Harbor,Himark Harbor,Location,Himark Harbor,GPE,False
+Nemo Reef,Nemo Reef,Location,Nemo Reef,PERSON,False
+Restricted areas,Restricted areas,Location,Restricted areas,N/A,True
+Azure Cove,Azure Cove,Location,Azure Cove,N/A,True
+Protected areas,Protected areas,Location,Protected areas,N/A,True
+Eastern reefs,Eastern reefs,Location,Eastern reefs,ORG,False
+Eastern Coastline,Eastern Coastline,Location,Eastern Coastline,LOC,False
+Southern islands,Southern islands,Location,Southern islands,NORP,False
+Southern coastline,Southern coastline,Location,Southern coastline,NORP,False
+Coral Point,Coral Point,Location,Coral Point,N/A,True
+Dolphin Bay,Dolphin Bay,Location,Dolphin Bay,FAC,False
+E7,E7,Location,E7,N/A,True
+Northern quadrant,Northern quadrant,Location,Northern quadrant,N/A,True
+Southern quadrant,Southern quadrant,Location,Southern quadrant,N/A,True
+Eastern quadrant,Eastern quadrant,Location,Eastern quadrant,ORG,False
+Western quadrant,Western quadrant,Location,Western quadrant,N/A,True
+Eastern Islands,Eastern Islands,Location,Eastern Islands,LOC,False
+Western Boundary,Western Boundary,Location,Western Boundary,ORG,False
+Eastern Boundary,Eastern Boundary,Location,Eastern Boundary,ORG,False
+Southern Boundary,Southern Boundary,Location,Southern Boundary,ORG,False
+Eastern Shoals,Eastern Shoals,Location,Eastern Shoals,ORG,False
+Restricted Zone,Restricted Zone,Location,Restricted Zone,N/A,True
+Route C,Route C,Location,Route C,N/A,True
+South Dock,South Dock,Location,South Dock,NORP,False
+Castaway Cove,Castaway Cove,Location,Castaway Cove,N/A,True
+Berth 14,Berth 14,Location,Berth 14,CARDINAL,False
+Port Security,Port Security,Location,Port Security,ORG,False
