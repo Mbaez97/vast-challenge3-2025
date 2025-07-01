@@ -340,7 +340,7 @@ function init_daily_patterns() {
         function drawVisualization() {
             // Calculate total height based on current collapsed/expanded states
             const totalBandHeight = days.reduce((total, day) => total + getEffectiveBandHeight(day), 0);
-            const svgHeight = totalBandHeight + 50 + legendOffsetFromBottom + 40; // Include space for two-line legend
+            const svgHeight = totalBandHeight + 50 + legendOffsetFromBottom + 10; // Include space for two-line legend
 
             // Set container height first to prevent layout shifts
             visContainer.style("height", svgHeight + "px");
