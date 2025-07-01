@@ -518,6 +518,9 @@ function init_daily_patterns() {
 
         // Add topic modeling section
         createTopicModelingSection();
+        
+        // Auto-load topics after visualization is ready
+        loadTopicData();
 
         // Function to load topic data (defined first so it can be referenced)
         function loadTopicData() {
@@ -530,10 +533,9 @@ function init_daily_patterns() {
                 num_topics: topicCount
             });
 
-            const loadButton = d3.select("button").filter(function() { 
-                return d3.select(this).text() === "Load Topics"; 
-            });
-            loadButton.text("Loading...").property("disabled", true);
+            // Show loading status
+            d3.select(".loading-status").style("display", "block");
+            d3.select(".topics-list-container").style("display", "none");
 
             d3.json(`/data/daily_patterns?${params}`).then(data => {
                 if (data.error) {
@@ -551,17 +553,26 @@ function init_daily_patterns() {
                     });
                 }
 
+                // Clear any previous topic selection when new topics load
+                selectedTopicId = null;
+                selectedKeywordId = null;
+                customKeyword = "";
+                d3.select("input[type='text']").property("value", "");
+
                 topicsLoaded = true;
                 updateTopicsList();
                 
-                loadButton.text("Load Topics").property("disabled", false);
+                // Redraw visualization to clear any highlighting
+                drawVisualization();
                 
-                // Show topics list
+                // Hide loading status and show topics list
+                d3.select(".loading-status").style("display", "none");
                 d3.select(".topics-list-container").style("display", "block");
                 
             }).catch(error => {
                 console.error("Error loading topic data:", error);
-                loadButton.text("Load Topics").property("disabled", false);
+                // Hide loading status on error
+                d3.select(".loading-status").style("display", "none");
             });
         }
 
@@ -661,7 +672,7 @@ function init_daily_patterns() {
             .attr("checked", true)
             .on("change", function() {
                 countSlider.property("disabled", this.checked);
-                if (topicsLoaded) loadTopicData();
+                loadTopicData();
             });
 
         countContainer.append("label")
@@ -683,7 +694,7 @@ function init_daily_patterns() {
                 countDisplay.text(this.value);
             })
             .on("change", function() {
-                if (topicsLoaded) loadTopicData();
+                loadTopicData();
             });
 
         const countDisplay = sliderContainer.append("div")
@@ -694,11 +705,11 @@ function init_daily_patterns() {
             .attr("class", "flex justify-between text-xs text-gray-500")
             .html("<span>5</span><span>20</span>");
 
-        // Load topics button
-        const loadButton = topicContainer.append("button")
-            .attr("class", "w-full px-3 py-2 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 mb-3")
-            .text("Load Topics")
-            .on("click", loadTopicData);
+        // Loading status indicator
+        const loadingStatus = topicContainer.append("div")
+            .attr("class", "w-full px-3 py-2 text-center text-sm mb-3 loading-status")
+            .style("display", "none")
+            .text("Loading topics...");
 
         // Topics list container
         const topicsListContainer = topicContainer.append("div")
