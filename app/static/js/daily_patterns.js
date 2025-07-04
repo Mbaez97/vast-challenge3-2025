@@ -1181,6 +1181,16 @@ function init_daily_patterns() {
 
             // Initialize dropdown behavior
             setupDropdownBehavior();
+            
+            // Update button text based on current selection
+            if (selectedTopicId !== null) {
+                const selectedTopic = allTopics.find(t => t.id === selectedTopicId);
+                if (selectedTopic) {
+                    dropdownButton.text(`Topic ${selectedTopic.id}: ${selectedTopic.keywords.join(', ')}`);
+                }
+            } else {
+                dropdownButton.text("Select Topic");
+            }
         }
 
         // Function to setup dropdown click behavior
@@ -1203,30 +1213,8 @@ function init_daily_patterns() {
 
         // Function to update topic selection UI
         function updateTopicSelection() {
-            // Update dropdown items
-            d3.selectAll(".dropdown-item")
-                .classed("text-indigo-700 bg-indigo-50", false)
-                .classed("text-gray-900", true);
-
-            // Update dropdown button text
-            const dropdownButton = d3.select("#topics-dropdown-button");
-
-            if (selectedTopicId !== null) {
-                // Find and highlight selected topic
-                d3.selectAll(".dropdown-item")
-                    .filter((d, i) => allTopics[i] && allTopics[i].id === selectedTopicId)
-                    .classed("text-indigo-700 bg-indigo-50", true)
-                    .classed("text-gray-900", false);
-
-                // Update button text to show selected topic
-                const selectedTopic = allTopics.find(t => t.id === selectedTopicId);
-                if (selectedTopic) {
-                    dropdownButton.text(`Topic ${selectedTopic.id}: ${selectedTopic.keywords.join(', ')}`);
-                }
-            } else {
-                // Reset button text
-                dropdownButton.text("Select Topic");
-            }
+            // Simply rebuild the dropdown to ensure proper highlighting
+            updateTopicsList();
         }
 
         // Function to create topic modeling controls
@@ -1295,7 +1283,7 @@ function init_daily_patterns() {
                 .property("disabled", false)
                 .attr("class", "w-full")
                 .on("input", function () {
-                    countDisplay.text(this.value);
+                    countDisplay.text(this.value + " topics");
                 })
                 .on("change", function () {
                     loadTopicData();
@@ -1303,7 +1291,7 @@ function init_daily_patterns() {
 
             const countDisplay = sliderContainer.append("div")
                 .attr("class", "text-xs text-center text-gray-600 mt-1")
-                .text("15");
+                .text("15 topics");
 
 
             // Loading status indicator
