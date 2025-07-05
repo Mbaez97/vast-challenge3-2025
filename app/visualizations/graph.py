@@ -50,9 +50,7 @@ def get_data():
         logger.error(f"Error loading relationships data: {str(e)}")
         return {"error": f"Could not load relationships file: {str(e)}"}
     relationships_nodes = relationships_data.get("nodes", [])
-    relationships_edges = relationships_data.get(
-        "links", relationships_data.get("edges", [])
-    )
+    relationships_edges = relationships_data.get("edges", [])
 
     logger.debug(f"Loaded graph: {len(nodes)} nodes, {len(links)} edges")
     return {
