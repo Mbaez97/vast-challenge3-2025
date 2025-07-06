@@ -22,19 +22,7 @@ function init_graph() {
     .attr("height", height)
     .attr("class", "bg-white rounded-lg shadow-md");
   const relG = relSvg.append("g");
-  
-  relSvg.append("defs")
-    .append("marker")
-      .attr("id", "arrowhead")
-      .attr("viewBox", "-0 -5 10 10")
-      .attr("refX", 15)        // move arrowhead a bit past the end of the line
-      .attr("refY", 0)
-      .attr("markerWidth", 6)
-      .attr("markerHeight", 6)
-      .attr("orient", "auto")
-    .append("path")
-      .attr("d", "M0,-5L10,0L0,5")  // simple triangle
-      .attr("fill", "#666"); 
+
 
   // ── Static Shape Legend on Communication ────────────────────────────
   const shapeLegend = commSvg.append("g")
@@ -98,21 +86,6 @@ function init_graph() {
       renderChat();
     });
 
-    // 1) track checkbox state
-    let hideEvidence = false;
-
-    // 2) precompute all 'evidence_for' sources
-    const evidenceSources = new Set(
-      data.relationships.links
-        .filter(e => e.type === "evidence_for")
-        .map(e => e.source)
-    );
-
-    // 3) hook up the checkbox
-    d3.select("#hide-evidence-checkbox").on("change", function() {
-      hideEvidence = this.checked;
-      updateHighlights();
-    });
 
     // Communication graph data
     const commNodes = data.communication.nodes.map(n => ({
@@ -131,8 +104,53 @@ function init_graph() {
       is_pseudonym: n.is_pseudonym
     }));
     const relLinks = data.relationships.links.map(e => ({
-      id: e.event_id, source: e.source, target: e.target, type: e.type
+      id: e.id,
+      source: e.source,
+      target: e.target,
+      type: e.type,
+      evidence: e.evidence,
+      participants: e.participants,
+      info: e.info
     }));
+
+    const linkCounts = {};
+    relLinks.forEach(l => {
+      const key = [l.source, l.target].sort().join("::");
+      linkCounts[key] = (linkCounts[key] || 0) + 1;
+    });
+
+    // 1b) assign each link an index 0…(total−1)
+    const linkIndex = {};
+    relLinks.forEach(l => {
+      const key = [l.source, l.target].sort().join("::");
+      linkIndex[key] = linkIndex[key] || 0;
+      l._parallelIndex = linkIndex[key]++;
+      l._parallelTotal = linkCounts[key];
+    });
+
+    const linkTypes = Array.from(new Set(relLinks.map(d => d.type)));
+    const linkColor = d3.scaleOrdinal(d3.schemeCategory10)
+                        .domain(linkTypes);
+    const legendRelation = relSvg.append("g")
+      .attr("class", "link-legend")
+      .attr("transform", "translate(20,20)");
+
+    legendRelation.selectAll("g")
+      .data(linkTypes)
+      .join("g")
+        .attr("transform", (_,i) => `translate(0,${i*20})`)
+      .call(g => {
+        g.append("line")
+          .attr("x1", 0).attr("y1", 5)
+          .attr("x2", 20).attr("y2", 5)
+          .attr("stroke", d => linkColor(d))
+          .attr("stroke-width", 2);
+        g.append("text")
+          .attr("x", 25).attr("y", 5)
+          .text(d => d)
+          .attr("alignment-baseline", "middle")
+          .attr("font-size", "12px");
+      });
 
     // Type → color
     const color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -213,15 +231,36 @@ function init_graph() {
       .force("collision", d3.forceCollide().radius(25));
 
     const relLinkSel = relG.append("g").attr("class", "links")
-      .selectAll("line")
+      .selectAll("path")
       .data(relLinks)
-      .join("line")
-        .attr("stroke", "#666")
-        .attr("stroke-width", 1.5)
-        .attr("marker-end", "url(#arrowhead)")                 // ← add arrow
-        .attr("stroke-dasharray", d =>                        // ← dashed if evidence_for
-          d.type === "evidence_for" ? "4 2" : null
-        );
+      .join("path")
+        .attr("fill", "none")
+        .attr("stroke", d => linkColor(d.type))
+        .attr("stroke-width", 2)
+        .on("mouseover", (e, d) => {
+        tooltip
+          .html(
+          `
+          <strong>Relationship:</strong> ${d.info.id}<br/>
+          <strong>Type:</strong> ${d.type}<br/>
+          <strong>Participants:</strong><br/>
+          ${Array.isArray(d.participants)
+            ? d.participants.map(p => `<div>${p}</div>`).join("")
+            : d.participants}
+          <strong>Evidence:</strong><br/>
+          ${Array.isArray(d.evidence) 
+            ? d.evidence.map(ev => `<div>${ev}</div>`).join("")
+            : d.evidence}
+          `
+          )
+          .style("visibility", "visible");
+        })
+        .on("mousemove", e => {
+        tooltip
+          .style("top",   `${e.pageY+10}px`)
+          .style("left",  `${e.pageX+10}px`);
+        })
+        .on("mouseout", () => tooltip.style("visibility", "hidden"));
 
     const relNode = relG.append("g").attr("class", "nodes")
       .selectAll("path")
@@ -251,11 +290,17 @@ function init_graph() {
         .attr("font-size", "11px");
 
     relSim.on("tick", () => {
-      relLinkSel
-        .attr("x1", d => d.source.x)
-        .attr("y1", d => d.source.y)
-        .attr("x2", d => d.target.x)
-        .attr("y2", d => d.target.y);
+      relLinkSel.attr("d", d => {
+        const sx = d.source.x, sy = d.source.y;
+        const tx = d.target.x, ty = d.target.y;
+        const dx = tx - sx, dy = ty - sy;
+        const dr = Math.hypot(dx, dy)
+                / (1 + Math.abs(d._parallelIndex - (d._parallelTotal-1)/2));  
+        // the denominator staggers the radius for each parallel link
+        
+        // SVG arc: rx, ry, x-axis-rotation, large-arc-flag, sweep-flag, x, y
+        return `M${sx},${sy}A${dr},${dr} 0 0,1 ${tx},${ty}`;
+      });
       relNode
         .attr("transform", d => `translate(${d.x},${d.y})`);
       relLabel
@@ -436,108 +481,71 @@ function init_graph() {
         commLinkSel.attr("opacity", 0.6);
       }
          
-      // ── REL GRAPH: show selected, their neighbors, AND neighbors-of-neighbors ──
+      // ── REL GRAPH: highlight like COMM graph ──
       if (selectedNodes.size) {
-        // build twoHop set (selected + neighbors + neighbors‐of‐neighbors)
-        const twoHop = new Set([...selectedNodes]);
+        const nbr = new Set([...selectedNodes]);
         data.relationships.links.forEach(l => {
-          if (twoHop.has(l.source)) twoHop.add(l.target);
-          if (twoHop.has(l.target)) twoHop.add(l.source);
+          if (selectedNodes.has(l.source)) nbr.add(l.target);
+          if (selectedNodes.has(l.target)) nbr.add(l.source);
         });
-        // data.relationships.links.forEach(l => {
-        //   if (twoHop.has(l.source)) twoHop.add(l.target);
-        //   if (twoHop.has(l.target)) twoHop.add(l.source);
-        // });
 
         relNode
-          .style("display", d => twoHop.has(d.id) ? "inline" : "none")
-          .attr("opacity", d => twoHop.has(d.id) ? 1 : 0.2)
-          // **resize** only the nodes you actually clicked
+          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2)
           .attr("d", d => d3.symbol()
-            .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
-            .size(selectedNodes.has(d.id) ? 2000 : 80)()
+        .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+        .size(selectedNodes.has(d.id) ? 2000 : 80)()
           );
 
         relLabel
-          .style("display", d => twoHop.has(d.id) ? "inline" : "none")
-          .attr("opacity", d => twoHop.has(d.id) ? 1 : 0.2);
+          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2);
 
         relLinkSel
-          .style("display", l =>
-            (twoHop.has(l.source.id) && twoHop.has(l.target.id)) ? "inline" : "none"
-          )
           .attr("opacity", l =>
-            (twoHop.has(l.source.id) || twoHop.has(l.target.id))
-              ? 1 : 0.1
+        (selectedNodes.has(l.source.id) || selectedNodes.has(l.target.id))
+          ? 1 : 0.1
           );
 
       } else if (selectedTypes.size) {
-        // when filtering by type, no node is "selected" so all stay default size
         relNode
-          .style("display", "inline")
           .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2)
           .attr("d", d => d3.symbol()
-            .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
-            .size(80)()
+        .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+        .size(80)()
           );
 
         relLabel
-          .style("display", "inline")
           .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2);
 
         relLinkSel
-          .style("display", "inline")
           .attr("opacity", l => {
-            const t0 = entityTypeMap.get(l.source.id);
-            const t1 = entityTypeMap.get(l.target.id);
-            return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? 1 : 0.1;
+        const t0 = entityTypeMap.get(l.source.id);
+        const t1 = entityTypeMap.get(l.target.id);
+        return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? 1 : 0.1;
           });
 
       } else {
-        // no filtering → all default size & full opacity
         relNode
-          .style("display", "inline")
           .attr("opacity", 1)
           .attr("d", d => d3.symbol()
-            .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
-            .size(80)()
+        .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
+        .size(80)()
           );
 
-        relLabel.style("display", "inline").attr("opacity", 1);
-        relLinkSel.style("display", "inline").attr("opacity", 0.6);
-      }
-
-      if (hideEvidence) {
-        // edges of type evidence_for
-        relLinkSel
-          .filter(d => d.type === "evidence_for")
-          .style("display", "none");
-
-        // source nodes of those edges
-        relNode
-          .filter(d => evidenceSources.has(d.id))
-          .style("display", "none");
-        relLabel
-          .filter(d => evidenceSources.has(d.id))
-          .style("display", "none");
-
-      } else {
-        // restore them
-        relLinkSel
-          .filter(d => d.type === "evidence_for")
-          .style("display", "inline");
-
-        relNode
-          .filter(d => evidenceSources.has(d.id))
-          .style("display", "inline");
-        relLabel
-          .filter(d => evidenceSources.has(d.id))
-          .style("display", "inline");
+        relLabel.attr("opacity", 1);
+        relLinkSel.attr("opacity", 0.6);
       }
     }
 
-    // Node click on communication only
+    // Node click
     commNode.on("click",(e,d)=>{
+      if (selectedNodes.has(d.id)) selectedNodes.delete(d.id);
+      else selectedNodes.add(d.id);
+      updateSelectedDisplay();
+      renderChat();
+      updateHighlights();
+      renderHeatmap();
+    });
+    relNode.on("click",(e,d)=>{
       if (selectedNodes.has(d.id)) selectedNodes.delete(d.id);
       else selectedNodes.add(d.id);
       updateSelectedDisplay();

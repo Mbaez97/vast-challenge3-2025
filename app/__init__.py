@@ -14,18 +14,24 @@ logging.getLogger("numba").setLevel(logging.WARNING)
 logging.getLogger("numba.core").setLevel(logging.WARNING)
 logging.getLogger("numba.typed").setLevel(logging.WARNING)
 
+# Define base directory and data file paths
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_FILE = os.path.join(base_dir, "data", "MC3_graph.json")
-COMMUNICATION_FILE = os.path.join(base_dir, "data", "MC3_graph_communication.json")
-HETMAP_SIMILARITY_FILE = os.path.join(
+COMMUNICATION_FILE = os.path.join(
+    base_dir, "data", "MC3_graph_communication.json"
+)  # noqa
+HEATMAP_SIMILARITY_FILE = os.path.join(
     base_dir, "data", "MC3_entity_similarity_matrix.csv"
 )
+RELATIONSHIPS_FILE = os.path.join(
+    base_dir, "data", "MC3_graph_relationships.json"
+)  # noqa
+
+# Assign configuration values
 app.config["DATA_FILE"] = DATA_FILE
 app.config["COMMUNICATION_FILE"] = COMMUNICATION_FILE
-app.config["HEATMAP_SIMILARITY_FILE"] = HETMAP_SIMILARITY_FILE
-app.config["RELATIONSHIPS_FILE"] = os.path.join(
-    base_dir, "data", "MC3_relationships.json"
-)  # New relationships file
+app.config["HEATMAP_SIMILARITY_FILE"] = HEATMAP_SIMILARITY_FILE
+app.config["RELATIONSHIPS_FILE"] = RELATIONSHIPS_FILE
 
 # List of visualization modules
 VISUALIZATIONS = ["time_patterns", "daily_patterns", "topic_modeling", "graph"]

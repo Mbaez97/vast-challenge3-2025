@@ -150,7 +150,7 @@ def get_data(method="bertopic", **kwargs):
                 tfidf_num_topics = int(num_topics)
             except:
                 tfidf_num_topics = 10
-        
+
         topics, doc_topics = extract_topics_tfidf(
             [c["content"] for c in communications], num_topics=tfidf_num_topics
         )
@@ -348,7 +348,7 @@ def extract_topics_tfidf(texts, num_topics=15):
         # Create topics - each topic is a single keyword (term)
         topics = [[feature_names[i]] for i in top_indices]
 
-        # Create document-topic matrix 
+        # Create document-topic matrix
         # Each document gets scores for each term/topic based on TF-IDF values
         doc_topics = doc_scores[:, top_indices].tolist()
 

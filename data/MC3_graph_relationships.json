@@ -1,0 +1,6847 @@
+{
+  "nodes": [
+    {
+      "type": "Entity",
+      "label": "Sam",
+      "name": "Sam",
+      "sub_type": "Person",
+      "id": "Sam",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Kelly",
+      "name": "Kelly",
+      "sub_type": "Person",
+      "id": "Kelly",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Nadia Conti",
+      "name": "Nadia Conti",
+      "sub_type": "Person",
+      "id": "Nadia Conti",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Elise",
+      "name": "Elise",
+      "sub_type": "Person",
+      "id": "Elise",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Liam Thorne",
+      "name": "Liam Thorne",
+      "sub_type": "Person",
+      "id": "Liam Thorne",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Samantha Blake",
+      "name": "Samantha Blake",
+      "sub_type": "Person",
+      "id": "Samantha Blake",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Davis",
+      "name": "Davis",
+      "sub_type": "Person",
+      "id": "Davis",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Rodriguez",
+      "name": "Rodriguez",
+      "sub_type": "Person",
+      "id": "Rodriguez",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Sailor Shift",
+      "name": "Sailor Shift",
+      "sub_type": "Person",
+      "id": "Sailor Shift",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Clepper Jensen",
+      "name": "Clepper Jensen",
+      "sub_type": "Person",
+      "id": "Clepper Jensen",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Miranda Jordan",
+      "name": "Miranda Jordan",
+      "sub_type": "Person",
+      "id": "Miranda Jordan",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "The Intern",
+      "name": "The Intern",
+      "sub_type": "Person",
+      "id": "The Intern",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "The Lookout",
+      "name": "The Lookout",
+      "sub_type": "Person",
+      "id": "The Lookout",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "The Accountant",
+      "name": "The Accountant",
+      "sub_type": "Person",
+      "id": "The Accountant",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Mrs. Money",
+      "name": "Mrs. Money",
+      "sub_type": "Person",
+      "id": "Mrs. Money",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "The Middleman",
+      "name": "The Middleman",
+      "sub_type": "Person",
+      "id": "The Middleman",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Boss",
+      "name": "Boss",
+      "sub_type": "Person",
+      "id": "Boss",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Small Fry",
+      "name": "Small Fry",
+      "sub_type": "Person",
+      "id": "Small Fry",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Glitters Team",
+      "name": "Glitters Team",
+      "sub_type": "Organization",
+      "id": "Glitters Team",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Oceanus City Council",
+      "name": "Oceanus City Council",
+      "sub_type": "Organization",
+      "id": "Oceanus City Council",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Green Guardians",
+      "name": "Green Guardians",
+      "sub_type": "Organization",
+      "id": "Green Guardians",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "V. Miesel Shipping",
+      "name": "V. Miesel Shipping",
+      "sub_type": "Organization",
+      "id": "V. Miesel Shipping",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Sailor Shifts Team",
+      "name": "Sailor Shifts Team",
+      "sub_type": "Organization",
+      "id": "Sailor Shifts Team",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Neptune",
+      "name": "Neptune",
+      "sub_type": "Vessel",
+      "id": "Neptune",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Marlin",
+      "name": "Marlin",
+      "sub_type": "Vessel",
+      "id": "Marlin",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Serenity",
+      "name": "Serenity",
+      "sub_type": "Vessel",
+      "id": "Serenity",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Mako",
+      "name": "Mako",
+      "sub_type": "Vessel",
+      "id": "Mako",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Reef Guardian",
+      "name": "Reef Guardian",
+      "sub_type": "Vessel",
+      "id": "Reef Guardian",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Horizon",
+      "name": "Horizon",
+      "sub_type": "Vessel",
+      "id": "Horizon",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Seawatch",
+      "name": "Seawatch",
+      "sub_type": "Vessel",
+      "id": "Seawatch",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "EcoVigil",
+      "name": "EcoVigil",
+      "sub_type": "Vessel",
+      "id": "EcoVigil",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Sentinel",
+      "name": "Sentinel",
+      "sub_type": "Vessel",
+      "id": "Sentinel",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Osprey",
+      "name": "Osprey",
+      "sub_type": "Vessel",
+      "id": "Osprey",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Defender",
+      "name": "Defender",
+      "sub_type": "Vessel",
+      "id": "Defender",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Northern Light",
+      "name": "Northern Light",
+      "sub_type": "Vessel",
+      "id": "Northern Light",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Remora",
+      "name": "Remora",
+      "sub_type": "Vessel",
+      "id": "Remora",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Knowles",
+      "name": "Knowles",
+      "sub_type": "Vessel",
+      "id": "Knowles",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Mariner's Dream",
+      "name": "Mariner's Dream",
+      "sub_type": "Vessel",
+      "id": "Mariner's Dream",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Recreational Fishing Boats",
+      "name": "Recreational Fishing Boats",
+      "sub_type": "Group",
+      "id": "Recreational Fishing Boats",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "City Officials",
+      "name": "City Officials",
+      "sub_type": "Group",
+      "id": "City Officials",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Diving Tour Operators",
+      "name": "Diving Tour Operators",
+      "sub_type": "Group",
+      "id": "Diving Tour Operators",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Tourists",
+      "name": "Tourists",
+      "sub_type": "Group",
+      "id": "Tourists",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Conservation Vessels",
+      "name": "Conservation Vessels",
+      "sub_type": "Group",
+      "id": "Conservation Vessels",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Paackland Harbor",
+      "name": "Paackland Harbor",
+      "sub_type": "Location",
+      "id": "Paackland Harbor",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Haacklee Harbor",
+      "name": "Haacklee Harbor",
+      "sub_type": "Location",
+      "id": "Haacklee Harbor",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Himark Harbor",
+      "name": "Himark Harbor",
+      "sub_type": "Location",
+      "id": "Himark Harbor",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Nemo Reef",
+      "name": "Nemo Reef",
+      "sub_type": "Location",
+      "id": "Nemo Reef",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Restricted areas",
+      "name": "Restricted areas",
+      "sub_type": "Location",
+      "id": "Restricted areas",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Protected areas",
+      "name": "Protected areas",
+      "sub_type": "Location",
+      "id": "Protected areas",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Eastern reefs",
+      "name": "Eastern reefs",
+      "sub_type": "Location",
+      "id": "Eastern reefs",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Southern islands",
+      "name": "Southern islands",
+      "sub_type": "Location",
+      "id": "Southern islands",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Coral Point",
+      "name": "Coral Point",
+      "sub_type": "Location",
+      "id": "Coral Point",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Dolphin Bay",
+      "name": "Dolphin Bay",
+      "sub_type": "Location",
+      "id": "Dolphin Bay",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Northern quadrant",
+      "name": "Northern quadrant",
+      "sub_type": "Location",
+      "id": "Northern quadrant",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Western quadrant",
+      "name": "Western quadrant",
+      "sub_type": "Location",
+      "id": "Western quadrant",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Restricted Zone",
+      "name": "Restricted Zone",
+      "sub_type": "Location",
+      "id": "Restricted Zone",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "Route C",
+      "name": "Route C",
+      "sub_type": "Location",
+      "id": "Route C",
+      "is_pseudonym": true
+    },
+    {
+      "type": "Entity",
+      "label": "South Dock",
+      "name": "South Dock",
+      "sub_type": "Location",
+      "id": "South Dock",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Berth 14",
+      "name": "Berth 14",
+      "sub_type": "Location",
+      "id": "Berth 14",
+      "is_pseudonym": false
+    },
+    {
+      "type": "Entity",
+      "label": "Port Security",
+      "name": "Port Security",
+      "sub_type": "Location",
+      "id": "Port Security",
+      "is_pseudonym": false
+    }
+  ],
+  "edges": [
+    {
+      "id": "Relationship_Friends_0",
+      "type": "Friends",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Friends",
+        "label": "Friends",
+        "friendship_type": "informal",
+        "id": "Relationship_Friends_0"
+      },
+      "evidence": [
+        "Event_Communication_2"
+      ],
+      "participants": [
+        "The Intern",
+        "The Lookout"
+      ],
+      "source": "The Intern",
+      "target": "The Lookout"
+    },
+    {
+      "id": "Relationship_Friends_272",
+      "type": "Friends",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Friends",
+        "label": "Friends",
+        "friendship_type": "collaborative",
+        "id": "Relationship_Friends_272"
+      },
+      "evidence": [
+        "Event_Communication_443"
+      ],
+      "participants": [
+        "Sam",
+        "Kelly"
+      ],
+      "source": "Sam",
+      "target": "Kelly"
+    },
+    {
+      "id": "Relationship_Colleagues_2",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_2"
+      },
+      "evidence": [
+        "Event_Communication_6",
+        "Event_Communication_7",
+        "Event_Communication_21",
+        "Event_Communication_120",
+        "Event_Communication_249",
+        "Event_Communication_280",
+        "Event_Communication_366"
+      ],
+      "participants": [
+        "Mrs. Money",
+        "Boss"
+      ],
+      "source": "Mrs. Money",
+      "target": "Boss"
+    },
+    {
+      "id": "Relationship_Colleagues_11",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_11"
+      },
+      "evidence": [
+        "Event_Communication_7",
+        "Event_Communication_21",
+        "Event_Communication_277",
+        "Event_Communication_278",
+        "Event_Communication_279",
+        "Event_Communication_280",
+        "Event_Communication_950"
+      ],
+      "participants": [
+        "The Middleman",
+        "Boss"
+      ],
+      "source": "The Middleman",
+      "target": "Boss"
+    },
+    {
+      "id": "Relationship_Colleagues_16",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_16"
+      },
+      "evidence": [
+        "Event_Communication_32"
+      ],
+      "participants": [
+        "Rodriguez",
+        "Sailor Shifts Team"
+      ],
+      "source": "Rodriguez",
+      "target": "Sailor Shifts Team"
+    },
+    {
+      "id": "Relationship_Colleagues_45",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_45"
+      },
+      "evidence": [
+        "Event_Communication_99"
+      ],
+      "participants": [
+        "Davis",
+        "Sailor Shift"
+      ],
+      "source": "Davis",
+      "target": "Sailor Shift"
+    },
+    {
+      "id": "Relationship_Colleagues_66",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_66"
+      },
+      "evidence": [
+        "Event_Communication_123"
+      ],
+      "participants": [
+        "Davis",
+        "Mako"
+      ],
+      "source": "Davis",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Colleagues_80",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_80"
+      },
+      "evidence": [
+        "Event_Communication_156"
+      ],
+      "participants": [
+        "Small Fry",
+        "Remora"
+      ],
+      "source": "Small Fry",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Colleagues_83",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_83"
+      },
+      "evidence": [
+        "Event_Communication_158"
+      ],
+      "participants": [
+        "Rodriguez",
+        "Remora"
+      ],
+      "source": "Rodriguez",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Colleagues_84",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_84"
+      },
+      "evidence": [
+        "Event_Communication_120",
+        "Event_Communication_160",
+        "Event_Communication_249",
+        "Event_Communication_720",
+        "Event_Communication_925"
+      ],
+      "participants": [
+        "The Intern",
+        "Mrs. Money"
+      ],
+      "source": "The Intern",
+      "target": "Mrs. Money"
+    },
+    {
+      "id": "Relationship_Colleagues_102",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_102"
+      },
+      "evidence": [
+        "Event_Communication_199"
+      ],
+      "participants": [
+        "Rodriguez",
+        "Boss"
+      ],
+      "source": "Rodriguez",
+      "target": "Boss"
+    },
+    {
+      "id": "Relationship_Colleagues_121",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_121"
+      },
+      "evidence": [
+        "Event_Communication_221"
+      ],
+      "participants": [
+        "Liam Thorne",
+        "Oceanus City Council"
+      ],
+      "source": "Liam Thorne",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Colleagues_158",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_158"
+      },
+      "evidence": [
+        "Event_Communication_7",
+        "Event_Communication_21",
+        "Event_Communication_39",
+        "Event_Communication_120",
+        "Event_Communication_278",
+        "Event_Communication_279",
+        "Event_Communication_280"
+      ],
+      "participants": [
+        "Mrs. Money",
+        "The Middleman"
+      ],
+      "source": "Mrs. Money",
+      "target": "The Middleman"
+    },
+    {
+      "id": "Relationship_Colleagues_215",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_215"
+      },
+      "evidence": [
+        "Event_Communication_370"
+      ],
+      "participants": [
+        "Sam",
+        "Kelly"
+      ],
+      "source": "Sam",
+      "target": "Kelly"
+    },
+    {
+      "id": "Relationship_Colleagues_290",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_290"
+      },
+      "evidence": [
+        "Event_Communication_128",
+        "Event_Communication_132",
+        "Event_Communication_203",
+        "Event_Communication_205",
+        "Event_Communication_207",
+        "Event_Communication_357",
+        "Event_Communication_360",
+        "Event_Communication_377",
+        "Event_Communication_468",
+        "Event_Communication_470",
+        "Event_Communication_476",
+        "Event_Communication_479",
+        "Event_Communication_768",
+        "Event_Communication_771",
+        "Event_Communication_773",
+        "Event_Communication_775"
+      ],
+      "participants": [
+        "Clepper Jensen",
+        "Miranda Jordan"
+      ],
+      "source": "Clepper Jensen",
+      "target": "Miranda Jordan"
+    },
+    {
+      "id": "Relationship_Colleagues_319",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_319"
+      },
+      "evidence": [
+        "Event_Communication_537"
+      ],
+      "participants": [
+        "Nadia Conti",
+        "Neptune"
+      ],
+      "source": "Nadia Conti",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Colleagues_320",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_320"
+      },
+      "evidence": [
+        "Event_Communication_537"
+      ],
+      "participants": [
+        "Elise",
+        "Neptune"
+      ],
+      "source": "Elise",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Colleagues_321",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_321"
+      },
+      "evidence": [
+        "Event_Communication_528",
+        "Event_Communication_537",
+        "Event_Communication_708"
+      ],
+      "participants": [
+        "Nadia Conti",
+        "Elise"
+      ],
+      "source": "Nadia Conti",
+      "target": "Elise"
+    },
+    {
+      "id": "Relationship_Colleagues_322",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_322"
+      },
+      "evidence": [
+        "Event_Communication_538"
+      ],
+      "participants": [
+        "Nadia Conti",
+        "The Accountant"
+      ],
+      "source": "Nadia Conti",
+      "target": "The Accountant"
+    },
+    {
+      "id": "Relationship_Colleagues_323",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_323"
+      },
+      "evidence": [
+        "Event_Communication_541"
+      ],
+      "participants": [
+        "Remora",
+        "Mako"
+      ],
+      "source": "Remora",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Colleagues_430",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_430"
+      },
+      "evidence": [
+        "Event_Communication_370",
+        "Event_Communication_528",
+        "Event_Communication_708"
+      ],
+      "participants": [
+        "Sam",
+        "Elise"
+      ],
+      "source": "Sam",
+      "target": "Elise"
+    },
+    {
+      "id": "Relationship_Colleagues_431",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_431"
+      },
+      "evidence": [
+        "Event_Communication_708"
+      ],
+      "participants": [
+        "Sam",
+        "Nadia Conti"
+      ],
+      "source": "Sam",
+      "target": "Nadia Conti"
+    },
+    {
+      "id": "Relationship_Colleagues_494",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_494"
+      },
+      "evidence": [
+        "Event_Communication_535",
+        "Event_Communication_753",
+        "Event_Communication_795"
+      ],
+      "participants": [
+        "Nadia Conti",
+        "Liam Thorne"
+      ],
+      "source": "Nadia Conti",
+      "target": "Liam Thorne"
+    },
+    {
+      "id": "Relationship_Colleagues_535",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_535"
+      },
+      "evidence": [
+        "Event_Communication_842"
+      ],
+      "participants": [
+        "Boss",
+        "Small Fry"
+      ],
+      "source": "Boss",
+      "target": "Small Fry"
+    },
+    {
+      "id": "Relationship_Colleagues_536",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_536"
+      },
+      "evidence": [
+        "Event_Communication_842",
+        "Event_Communication_964"
+      ],
+      "participants": [
+        "Davis",
+        "Boss"
+      ],
+      "source": "Davis",
+      "target": "Boss"
+    },
+    {
+      "id": "Relationship_Colleagues_551",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_551"
+      },
+      "evidence": [
+        "Event_Communication_388",
+        "Event_Communication_582",
+        "Event_Communication_844",
+        "Event_Communication_845",
+        "Event_Communication_846",
+        "Event_Communication_851",
+        "Event_Communication_869"
+      ],
+      "participants": [
+        "Nadia Conti",
+        "Davis"
+      ],
+      "source": "Nadia Conti",
+      "target": "Davis"
+    },
+    {
+      "id": "Relationship_Colleagues_589",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_589"
+      },
+      "evidence": [
+        "Event_Communication_5",
+        "Event_Communication_89",
+        "Event_Communication_92",
+        "Event_Communication_160",
+        "Event_Communication_594",
+        "Event_Communication_599",
+        "Event_Communication_649",
+        "Event_Communication_651",
+        "Event_Communication_705",
+        "Event_Communication_715",
+        "Event_Communication_720",
+        "Event_Communication_921",
+        "Event_Communication_923",
+        "Event_Communication_925",
+        "Event_Communication_936"
+      ],
+      "participants": [
+        "The Intern",
+        "The Lookout"
+      ],
+      "source": "The Intern",
+      "target": "The Lookout"
+    },
+    {
+      "id": "Relationship_Colleagues_599",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_599"
+      },
+      "evidence": [
+        "Event_Communication_950"
+      ],
+      "participants": [
+        "The Accountant",
+        "Boss"
+      ],
+      "source": "The Accountant",
+      "target": "Boss"
+    },
+    {
+      "id": "Relationship_Colleagues_601",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_601"
+      },
+      "evidence": [
+        "Event_Communication_796",
+        "Event_Communication_950",
+        "Event_Communication_951"
+      ],
+      "participants": [
+        "The Accountant",
+        "The Middleman"
+      ],
+      "source": "The Accountant",
+      "target": "The Middleman"
+    },
+    {
+      "id": "Relationship_Colleagues_617",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_617"
+      },
+      "evidence": [
+        "Event_Communication_842",
+        "Event_Communication_984"
+      ],
+      "participants": [
+        "Davis",
+        "Small Fry"
+      ],
+      "source": "Davis",
+      "target": "Small Fry"
+    },
+    {
+      "id": "Relationship_Colleagues_619",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_619"
+      },
+      "evidence": [
+        "Event_Communication_115",
+        "Event_Communication_401",
+        "Event_Communication_588",
+        "Event_Communication_804",
+        "Event_Communication_805",
+        "Event_Communication_986"
+      ],
+      "participants": [
+        "Davis",
+        "Rodriguez"
+      ],
+      "source": "Davis",
+      "target": "Rodriguez"
+    },
+    {
+      "id": "Relationship_Colleagues_628",
+      "type": "Colleagues",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Colleagues",
+        "label": "Colleagues",
+        "id": "Relationship_Colleagues_628"
+      },
+      "evidence": [
+        "Event_Communication_1001"
+      ],
+      "participants": [
+        "Davis",
+        "Knowles"
+      ],
+      "source": "Davis",
+      "target": "Knowles"
+    },
+    {
+      "id": "Relationship_AccessPermission_7",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_7"
+      },
+      "evidence": [
+        "Event_Communication_13",
+        "Event_Communication_16",
+        "Event_Communication_24",
+        "Event_Communication_225",
+        "Event_Communication_390"
+      ],
+      "participants": [
+        "Serenity",
+        "Nemo Reef"
+      ],
+      "source": "Serenity",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_68",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_68"
+      },
+      "evidence": [
+        "Event_Communication_130"
+      ],
+      "participants": [
+        "Sailor Shifts Team",
+        "Nemo Reef"
+      ],
+      "source": "Sailor Shifts Team",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_81",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_81"
+      },
+      "evidence": [
+        "Event_Communication_66",
+        "Event_Communication_156"
+      ],
+      "participants": [
+        "Glitters Team",
+        "Nemo Reef"
+      ],
+      "source": "Glitters Team",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_96",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_96"
+      },
+      "evidence": [
+        "Event_Communication_189"
+      ],
+      "participants": [
+        "Mariner's Dream",
+        "Nemo Reef"
+      ],
+      "source": "Mariner's Dream",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_98",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_98"
+      },
+      "evidence": [
+        null
+      ],
+      "participants": [
+        "Mariner's Dream",
+        "Restricted areas"
+      ],
+      "source": "Mariner's Dream",
+      "target": "Restricted areas"
+    },
+    {
+      "id": "Relationship_AccessPermission_100",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_100"
+      },
+      "evidence": [
+        "Event_Communication_197",
+        "Event_Communication_214"
+      ],
+      "participants": [
+        "Remora",
+        "Southern islands"
+      ],
+      "source": "Remora",
+      "target": "Southern islands"
+    },
+    {
+      "id": "Relationship_AccessPermission_101",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_101"
+      },
+      "evidence": [
+        "Event_Communication_199",
+        "Event_Communication_280"
+      ],
+      "participants": [
+        "Boss",
+        "Nemo Reef"
+      ],
+      "source": "Boss",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_118",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_118"
+      },
+      "evidence": [
+        "Event_Communication_216"
+      ],
+      "participants": [
+        "Diving Tour Operators",
+        "Protected areas"
+      ],
+      "source": "Diving Tour Operators",
+      "target": "Protected areas"
+    },
+    {
+      "id": "Relationship_AccessPermission_122",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_122"
+      },
+      "evidence": [
+        "Event_Communication_222"
+      ],
+      "participants": [
+        "Remora",
+        "Protected areas"
+      ],
+      "source": "Remora",
+      "target": "Protected areas"
+    },
+    {
+      "id": "Relationship_AccessPermission_125",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_125"
+      },
+      "evidence": [
+        "Event_Communication_224"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Protected areas"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Protected areas"
+    },
+    {
+      "id": "Relationship_AccessPermission_127",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "regular access",
+        "start_date": "2040-10-03 10:23:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_127"
+      },
+      "evidence": [
+        "Event_Communication_226"
+      ],
+      "participants": [
+        "Serenity",
+        "Dolphin Bay"
+      ],
+      "source": "Serenity",
+      "target": "Dolphin Bay"
+    },
+    {
+      "id": "Relationship_AccessPermission_128",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "regular access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_128"
+      },
+      "evidence": [
+        "Event_Communication_226"
+      ],
+      "participants": [
+        "Serenity",
+        "Paackland Harbor"
+      ],
+      "source": "Serenity",
+      "target": "Paackland Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_129",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_129"
+      },
+      "evidence": [
+        "Event_Communication_230"
+      ],
+      "participants": [
+        "Recreational Fishing Boats",
+        "Restricted Zone"
+      ],
+      "source": "Recreational Fishing Boats",
+      "target": "Restricted Zone"
+    },
+    {
+      "id": "Relationship_AccessPermission_148",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_148"
+      },
+      "evidence": [
+        "Event_Communication_17",
+        "Event_Communication_272"
+      ],
+      "participants": [
+        "Mako",
+        "Protected areas"
+      ],
+      "source": "Mako",
+      "target": "Protected areas"
+    },
+    {
+      "id": "Relationship_AccessPermission_156",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-04 21:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_156"
+      },
+      "evidence": [
+        "Event_Communication_280"
+      ],
+      "participants": [
+        "Mrs. Money",
+        "Nemo Reef"
+      ],
+      "source": "Mrs. Money",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_161",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_161"
+      },
+      "evidence": [
+        "Event_Communication_281"
+      ],
+      "participants": [
+        "Davis",
+        "Remora"
+      ],
+      "source": "Davis",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_AccessPermission_163",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_163"
+      },
+      "evidence": [
+        "Event_Communication_282"
+      ],
+      "participants": [
+        "Remora",
+        "Paackland Harbor"
+      ],
+      "source": "Remora",
+      "target": "Paackland Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_181",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_181"
+      },
+      "evidence": [
+        "Event_Communication_330",
+        "Event_Communication_331",
+        "Event_Communication_332"
+      ],
+      "participants": [
+        "Nadia Conti",
+        "Nemo Reef"
+      ],
+      "source": "Nadia Conti",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_190",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_190"
+      },
+      "evidence": [
+        "Event_Communication_142",
+        "Event_Communication_343",
+        "Event_Communication_349",
+        "Event_Communication_449",
+        "Event_Communication_451"
+      ],
+      "participants": [
+        "Mako",
+        "Himark Harbor"
+      ],
+      "source": "Mako",
+      "target": "Himark Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_192",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "regular access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_192"
+      },
+      "evidence": [
+        "Event_Communication_345"
+      ],
+      "participants": [
+        "Mako",
+        "Remora"
+      ],
+      "source": "Mako",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_AccessPermission_196",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-06 00:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_196"
+      },
+      "evidence": [
+        "Event_Communication_103",
+        "Event_Communication_351"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Nemo Reef"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_214",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_214"
+      },
+      "evidence": [
+        "Event_Communication_368",
+        "Event_Communication_369",
+        "Event_Communication_406",
+        "Event_Communication_840",
+        "Event_Communication_846"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Nemo Reef"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_232",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_232"
+      },
+      "evidence": [
+        "Event_Communication_386",
+        "Event_Communication_428",
+        "Event_Communication_792"
+      ],
+      "participants": [
+        "Recreational Fishing Boats",
+        "Nemo Reef"
+      ],
+      "source": "Recreational Fishing Boats",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_233",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_233"
+      },
+      "evidence": [
+        "Event_Communication_387"
+      ],
+      "participants": [
+        "Mako",
+        "Paackland Harbor"
+      ],
+      "source": "Mako",
+      "target": "Paackland Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_238",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_238"
+      },
+      "evidence": [
+        "Event_Communication_28",
+        "Event_Communication_118",
+        "Event_Communication_119",
+        "Event_Communication_147",
+        "Event_Communication_392"
+      ],
+      "participants": [
+        "Serenity",
+        "Himark Harbor"
+      ],
+      "source": "Serenity",
+      "target": "Himark Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_243",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_243"
+      },
+      "evidence": [
+        "Event_Communication_244",
+        "Event_Communication_258",
+        "Event_Communication_262",
+        "Event_Communication_309",
+        "Event_Communication_318",
+        "Event_Communication_347",
+        "Event_Communication_365",
+        "Event_Communication_372",
+        "Event_Communication_373",
+        "Event_Communication_378",
+        "Event_Communication_396",
+        "Event_Communication_399",
+        "Event_Communication_401",
+        "Event_Communication_467",
+        "Event_Communication_545",
+        "Event_Communication_574",
+        "Event_Communication_588",
+        "Event_Communication_656",
+        "Event_Communication_657",
+        "Event_Communication_687",
+        "Event_Communication_804",
+        "Event_Communication_805",
+        "Event_Communication_963"
+      ],
+      "participants": [
+        "Mako",
+        "Nemo Reef"
+      ],
+      "source": "Mako",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_244",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": "2040-10-07 00:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_244"
+      },
+      "evidence": [
+        "Event_Communication_403",
+        "Event_Communication_890"
+      ],
+      "participants": [
+        "Neptune",
+        "Himark Harbor"
+      ],
+      "source": "Neptune",
+      "target": "Himark Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_259_0_1",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-07 00:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_259"
+      },
+      "evidence": [
+        "Event_Communication_423"
+      ],
+      "participants": [
+        "Neptune",
+        "Mako",
+        "Remora"
+      ],
+      "source": "Neptune",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_AccessPermission_259_0_2",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-07 00:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_259"
+      },
+      "evidence": [
+        "Event_Communication_423"
+      ],
+      "participants": [
+        "Neptune",
+        "Mako",
+        "Remora"
+      ],
+      "source": "Neptune",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_AccessPermission_259_1_2",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-07 00:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_259"
+      },
+      "evidence": [
+        "Event_Communication_423"
+      ],
+      "participants": [
+        "Neptune",
+        "Mako",
+        "Remora"
+      ],
+      "source": "Mako",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_AccessPermission_262",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-07 06:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_262"
+      },
+      "evidence": [
+        "Event_Communication_426"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "South Dock"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "South Dock"
+    },
+    {
+      "id": "Relationship_AccessPermission_266",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-06 13:07:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_266"
+      },
+      "evidence": [
+        "Event_Communication_321",
+        "Event_Communication_323",
+        "Event_Communication_433"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Nemo Reef"
+      ],
+      "source": "Green Guardians",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_281",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-08 05:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_281"
+      },
+      "evidence": [
+        "Event_Communication_458",
+        "Event_Communication_506"
+      ],
+      "participants": [
+        "Neptune",
+        "Eastern reefs"
+      ],
+      "source": "Neptune",
+      "target": "Eastern reefs"
+    },
+    {
+      "id": "Relationship_AccessPermission_303",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-07 05:30:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_303"
+      },
+      "evidence": [
+        "Event_Communication_513"
+      ],
+      "participants": [
+        "Small Fry",
+        "Nemo Reef"
+      ],
+      "source": "Small Fry",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_304",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": "2040-10-07 05:30:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_304"
+      },
+      "evidence": [
+        "Event_Communication_513"
+      ],
+      "participants": [
+        "Small Fry",
+        "Route C"
+      ],
+      "source": "Small Fry",
+      "target": "Route C"
+    },
+    {
+      "id": "Relationship_AccessPermission_306",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-07 06:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_306"
+      },
+      "evidence": [
+        "Event_Communication_515"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Route C"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Route C"
+    },
+    {
+      "id": "Relationship_AccessPermission_313",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": "2040-10-09 22:00:00",
+        "end_date": "2040-10-15 23:59:59",
+        "id": "Relationship_AccessPermission_313"
+      },
+      "evidence": [
+        "Event_Communication_529"
+      ],
+      "participants": [
+        "Liam Thorne",
+        "Nemo Reef"
+      ],
+      "source": "Liam Thorne",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_328",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_328"
+      },
+      "evidence": [
+        "Event_Communication_546"
+      ],
+      "participants": [
+        "Neptune",
+        "Restricted Zone"
+      ],
+      "source": "Neptune",
+      "target": "Restricted Zone"
+    },
+    {
+      "id": "Relationship_AccessPermission_332",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_332"
+      },
+      "evidence": [
+        "Event_Communication_553"
+      ],
+      "participants": [
+        "Mako",
+        "Eastern reefs"
+      ],
+      "source": "Mako",
+      "target": "Eastern reefs"
+    },
+    {
+      "id": "Relationship_AccessPermission_338",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-09 00:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_338"
+      },
+      "evidence": [
+        "Event_Communication_30",
+        "Event_Communication_32",
+        "Event_Communication_158",
+        "Event_Communication_560"
+      ],
+      "participants": [
+        "Remora",
+        "Nemo Reef"
+      ],
+      "source": "Remora",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_349",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_349"
+      },
+      "evidence": [
+        "Event_Communication_581"
+      ],
+      "participants": [
+        "Marlin",
+        "Himark Harbor"
+      ],
+      "source": "Marlin",
+      "target": "Himark Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_370",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_370"
+      },
+      "evidence": [
+        "Event_Communication_613"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Paackland Harbor"
+      ],
+      "source": "Reef Guardian",
+      "target": "Paackland Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_382",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-09 11:22:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_382"
+      },
+      "evidence": [
+        "Event_Communication_345",
+        "Event_Communication_636"
+      ],
+      "participants": [
+        "Himark Harbor",
+        "Nemo Reef"
+      ],
+      "source": "Himark Harbor",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_392",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "regular access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_392"
+      },
+      "evidence": [
+        "Event_Communication_645"
+      ],
+      "participants": [
+        "Northern Light",
+        "Himark Harbor"
+      ],
+      "source": "Northern Light",
+      "target": "Himark Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_393",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "regular access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_393"
+      },
+      "evidence": [
+        "Event_Communication_645"
+      ],
+      "participants": [
+        "Northern Light",
+        "Nemo Reef"
+      ],
+      "source": "Northern Light",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_397",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_397"
+      },
+      "evidence": [
+        "Event_Communication_654"
+      ],
+      "participants": [
+        "Tourists",
+        "Nemo Reef"
+      ],
+      "source": "Tourists",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_405",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": "2040-10-11 06:00:00",
+        "end_date": "2040-10-14 06:00:00",
+        "id": "Relationship_AccessPermission_405"
+      },
+      "evidence": [
+        "Event_Communication_394",
+        "Event_Communication_453",
+        "Event_Communication_525",
+        "Event_Communication_548",
+        "Event_Communication_665",
+        "Event_Communication_841"
+      ],
+      "participants": [
+        "Neptune",
+        "Nemo Reef"
+      ],
+      "source": "Neptune",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_415",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": "2040-10-11 06:00:00",
+        "id": "Relationship_AccessPermission_415"
+      },
+      "evidence": [
+        "Event_Communication_67",
+        "Event_Communication_102",
+        "Event_Communication_381",
+        "Event_Communication_544",
+        "Event_Communication_640",
+        "Event_Communication_686"
+      ],
+      "participants": [
+        "Samantha Blake",
+        "Nemo Reef"
+      ],
+      "source": "Samantha Blake",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_421",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": "2040-10-11 06:00:00",
+        "end_date": "2040-10-14 06:00:00",
+        "id": "Relationship_AccessPermission_421"
+      },
+      "evidence": [
+        "Event_Communication_694",
+        "Event_Communication_914"
+      ],
+      "participants": [
+        "Sentinel",
+        "Nemo Reef"
+      ],
+      "source": "Sentinel",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_425",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_425"
+      },
+      "evidence": [
+        "Event_Communication_702"
+      ],
+      "participants": [
+        "The Intern",
+        "Mrs. Money"
+      ],
+      "source": "The Intern",
+      "target": "Mrs. Money"
+    },
+    {
+      "id": "Relationship_AccessPermission_441",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_441"
+      },
+      "evidence": [
+        "Event_Communication_731"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Paackland Harbor"
+      ],
+      "source": "EcoVigil",
+      "target": "Paackland Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_444",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_444"
+      },
+      "evidence": [
+        "Event_Communication_668",
+        "Event_Communication_733",
+        "Event_Communication_735",
+        "Event_Communication_749"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Nemo Reef"
+      ],
+      "source": "EcoVigil",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_455",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": null,
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_455"
+      },
+      "evidence": [
+        "Event_Communication_751"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Northern quadrant"
+      ],
+      "source": "EcoVigil",
+      "target": "Northern quadrant"
+    },
+    {
+      "id": "Relationship_AccessPermission_477",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_477"
+      },
+      "evidence": [
+        "Event_Communication_767"
+      ],
+      "participants": [
+        "Conservation Vessels",
+        "Restricted areas"
+      ],
+      "source": "Conservation Vessels",
+      "target": "Restricted areas"
+    },
+    {
+      "id": "Relationship_AccessPermission_479",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_479"
+      },
+      "evidence": [
+        "Event_Communication_770"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Restricted areas"
+      ],
+      "source": "Green Guardians",
+      "target": "Restricted areas"
+    },
+    {
+      "id": "Relationship_AccessPermission_489",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_489"
+      },
+      "evidence": [
+        "Event_Communication_785",
+        "Event_Communication_993"
+      ],
+      "participants": [
+        "Seawatch",
+        "Nemo Reef"
+      ],
+      "source": "Seawatch",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_497",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_497"
+      },
+      "evidence": [
+        "Event_Communication_353",
+        "Event_Communication_354",
+        "Event_Communication_604",
+        "Event_Communication_614",
+        "Event_Communication_616",
+        "Event_Communication_801",
+        "Event_Communication_828",
+        "Event_Communication_834",
+        "Event_Communication_855",
+        "Event_Communication_949",
+        "Event_Communication_970",
+        "Event_Communication_999"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Nemo Reef"
+      ],
+      "source": "Reef Guardian",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_502",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_502"
+      },
+      "evidence": [
+        "Event_Communication_808"
+      ],
+      "participants": [
+        "Osprey",
+        "Nemo Reef"
+      ],
+      "source": "Osprey",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_511",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_511"
+      },
+      "evidence": [
+        "Event_Communication_819"
+      ],
+      "participants": [
+        "Davis",
+        "Restricted Zone"
+      ],
+      "source": "Davis",
+      "target": "Restricted Zone"
+    },
+    {
+      "id": "Relationship_AccessPermission_512",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_512"
+      },
+      "evidence": [
+        "Event_Communication_819"
+      ],
+      "participants": [
+        "Mako",
+        "Restricted Zone"
+      ],
+      "source": "Mako",
+      "target": "Restricted Zone"
+    },
+    {
+      "id": "Relationship_AccessPermission_553",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-13 06:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_553"
+      },
+      "evidence": [
+        "Event_Communication_871"
+      ],
+      "participants": [
+        "Remora",
+        "South Dock"
+      ],
+      "source": "Remora",
+      "target": "South Dock"
+    },
+    {
+      "id": "Relationship_AccessPermission_560",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-13 22:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_560"
+      },
+      "evidence": [
+        "Event_Communication_884",
+        "Event_Communication_886"
+      ],
+      "participants": [
+        "Knowles",
+        "Haacklee Harbor"
+      ],
+      "source": "Knowles",
+      "target": "Haacklee Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_562",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-13 22:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_562"
+      },
+      "evidence": [
+        "Event_Communication_888"
+      ],
+      "participants": [
+        "Knowles",
+        "Nemo Reef"
+      ],
+      "source": "Knowles",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_AccessPermission_564",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": "2040-10-13 04:00:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_564"
+      },
+      "evidence": [
+        "Event_Communication_891"
+      ],
+      "participants": [
+        "Davis",
+        "Berth 14"
+      ],
+      "source": "Davis",
+      "target": "Berth 14"
+    },
+    {
+      "id": "Relationship_AccessPermission_569",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_569"
+      },
+      "evidence": [
+        "Event_Communication_905"
+      ],
+      "participants": [
+        "Sentinel",
+        "Paackland Harbor"
+      ],
+      "source": "Sentinel",
+      "target": "Paackland Harbor"
+    },
+    {
+      "id": "Relationship_AccessPermission_585",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": "2040-10-13 13:20:00",
+        "end_date": "2040-10-15 13:20:00",
+        "id": "Relationship_AccessPermission_585"
+      },
+      "evidence": [
+        "Event_Communication_930"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Restricted Zone"
+      ],
+      "source": "EcoVigil",
+      "target": "Restricted Zone"
+    },
+    {
+      "id": "Relationship_AccessPermission_588",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": "2040-10-13 13:23:00",
+        "end_date": "2040-10-15 13:23:00",
+        "id": "Relationship_AccessPermission_588"
+      },
+      "evidence": [
+        "Event_Communication_881",
+        "Event_Communication_933"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Western quadrant"
+      ],
+      "source": "EcoVigil",
+      "target": "Western quadrant"
+    },
+    {
+      "id": "Relationship_AccessPermission_591",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "special access",
+        "start_date": "2040-10-15 05:30:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_591"
+      },
+      "evidence": [
+        "Event_Communication_940"
+      ],
+      "participants": [
+        "Remora",
+        "Coral Point"
+      ],
+      "source": "Remora",
+      "target": "Coral Point"
+    },
+    {
+      "id": "Relationship_AccessPermission_594",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": "2040-10-14 08:34:00",
+        "end_date": null,
+        "id": "Relationship_AccessPermission_594"
+      },
+      "evidence": [
+        "Event_Communication_939",
+        "Event_Communication_943"
+      ],
+      "participants": [
+        "Sailor Shifts Team",
+        "South Dock"
+      ],
+      "source": "Sailor Shifts Team",
+      "target": "South Dock"
+    },
+    {
+      "id": "Relationship_AccessPermission_615",
+      "type": "AccessPermission",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "AccessPermission",
+        "label": "AccessPermission",
+        "permission_type": "restricted",
+        "start_date": null,
+        "end_date": null,
+        "id": "Relationship_AccessPermission_615"
+      },
+      "evidence": [
+        "Event_Communication_974"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "EcoVigil"
+      ],
+      "source": "Reef Guardian",
+      "target": "EcoVigil"
+    },
+    {
+      "id": "Relationship_Reports_18",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "environmental report",
+        "submission_date": "2040-10-01 10:48:00",
+        "id": "Relationship_Reports_18"
+      },
+      "evidence": [
+        "Event_Communication_35"
+      ],
+      "participants": [
+        "Paackland Harbor",
+        "Oceanus City Council"
+      ],
+      "source": "Paackland Harbor",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Reports_38",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "environmental report",
+        "submission_date": "2040-10-01 12:43:00",
+        "id": "Relationship_Reports_38"
+      },
+      "evidence": [
+        null
+      ],
+      "participants": [
+        "Horizon",
+        "Green Guardians"
+      ],
+      "source": "Horizon",
+      "target": "Green Guardians"
+    },
+    {
+      "id": "Relationship_Reports_41",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "environmental report",
+        "submission_date": "2040-10-02 08:13:00",
+        "id": "Relationship_Reports_41"
+      },
+      "evidence": [
+        "Event_Communication_92",
+        "Event_Communication_248",
+        "Event_Communication_372",
+        "Event_Communication_596",
+        "Event_Communication_864"
+      ],
+      "participants": [
+        "The Intern",
+        "Mrs. Money"
+      ],
+      "source": "The Intern",
+      "target": "Mrs. Money"
+    },
+    {
+      "id": "Relationship_Reports_46",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "official logs",
+        "submission_date": "2040-10-02 08:56:00",
+        "id": "Relationship_Reports_46"
+      },
+      "evidence": [
+        "Event_Communication_100"
+      ],
+      "participants": [
+        "Marlin",
+        "Oceanus City Council"
+      ],
+      "source": "Marlin",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Reports_51",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "environmental report",
+        "submission_date": "2040-10-02 09:59:00",
+        "id": "Relationship_Reports_51"
+      },
+      "evidence": [
+        "Event_Communication_106",
+        "Event_Communication_997"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Green Guardians"
+      ],
+      "source": "EcoVigil",
+      "target": "Green Guardians"
+    },
+    {
+      "id": "Relationship_Reports_69",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": null,
+        "submission_date": "2040-10-02 12:16:00",
+        "id": "Relationship_Reports_69"
+      },
+      "evidence": [
+        "Event_Communication_130"
+      ],
+      "participants": [
+        "Miranda Jordan",
+        "Sailor Shifts Team"
+      ],
+      "source": "Miranda Jordan",
+      "target": "Sailor Shifts Team"
+    },
+    {
+      "id": "Relationship_Reports_73",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "environmental report",
+        "submission_date": "2040-10-02 12:22:00",
+        "id": "Relationship_Reports_73"
+      },
+      "evidence": [
+        "Event_Communication_134"
+      ],
+      "participants": [
+        "Miranda Jordan",
+        "Rodriguez"
+      ],
+      "source": "Miranda Jordan",
+      "target": "Rodriguez"
+    },
+    {
+      "id": "Relationship_Reports_170",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "official logs",
+        "submission_date": "2040-10-04 13:19:00",
+        "id": "Relationship_Reports_170"
+      },
+      "evidence": [
+        "Event_Communication_301"
+      ],
+      "participants": [
+        "Mako",
+        "Oceanus City Council"
+      ],
+      "source": "Mako",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Reports_205",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "data transmission",
+        "submission_date": "2040-10-05 10:30:00",
+        "id": "Relationship_Reports_205"
+      },
+      "evidence": [
+        "Event_Communication_359"
+      ],
+      "participants": [
+        "Miranda Jordan",
+        "V. Miesel Shipping"
+      ],
+      "source": "Miranda Jordan",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Reports_218",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": null,
+        "submission_date": "2040-10-05 10:50:00",
+        "id": "Relationship_Reports_218"
+      },
+      "evidence": [
+        "Event_Communication_371"
+      ],
+      "participants": [
+        "Clepper Jensen",
+        "Oceanus City Council"
+      ],
+      "source": "Clepper Jensen",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Reports_288",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": null,
+        "submission_date": "2040-10-07 10:28:00",
+        "id": "Relationship_Reports_288"
+      },
+      "evidence": [
+        "Event_Communication_478"
+      ],
+      "participants": [
+        "Miranda Jordan",
+        "Green Guardians"
+      ],
+      "source": "Miranda Jordan",
+      "target": "Green Guardians"
+    },
+    {
+      "id": "Relationship_Reports_344",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "data transmission",
+        "submission_date": "2040-10-08 11:11:00",
+        "id": "Relationship_Reports_344"
+      },
+      "evidence": [
+        "Event_Communication_572",
+        "Event_Communication_621",
+        "Event_Communication_968"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Green Guardians"
+      ],
+      "source": "Reef Guardian",
+      "target": "Green Guardians"
+    },
+    {
+      "id": "Relationship_Reports_355",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "environmental report",
+        "submission_date": "2040-10-08 11:33:00",
+        "id": "Relationship_Reports_355"
+      },
+      "evidence": [
+        "Event_Communication_593",
+        "Event_Communication_619",
+        "Event_Communication_792"
+      ],
+      "participants": [
+        "The Lookout",
+        "Green Guardians"
+      ],
+      "source": "The Lookout",
+      "target": "Green Guardians"
+    },
+    {
+      "id": "Relationship_Reports_408",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "environmental report",
+        "submission_date": null,
+        "id": "Relationship_Reports_408"
+      },
+      "evidence": [
+        "Event_Communication_675"
+      ],
+      "participants": [
+        "Sentinel",
+        "Oceanus City Council"
+      ],
+      "source": "Sentinel",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Reports_447",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "data transmission",
+        "submission_date": "2040-10-11 09:04:00",
+        "id": "Relationship_Reports_447"
+      },
+      "evidence": [
+        "Event_Communication_737",
+        "Event_Communication_741",
+        "Event_Communication_742"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Oceanus City Council"
+      ],
+      "source": "EcoVigil",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Reports_496",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "data transmission",
+        "submission_date": null,
+        "id": "Relationship_Reports_496"
+      },
+      "evidence": [
+        "Event_Communication_796"
+      ],
+      "participants": [
+        "The Middleman",
+        "Boss"
+      ],
+      "source": "The Middleman",
+      "target": "Boss"
+    },
+    {
+      "id": "Relationship_Reports_513",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "data transmission",
+        "submission_date": "2040-10-12 09:53:00",
+        "id": "Relationship_Reports_513"
+      },
+      "evidence": [
+        "Event_Communication_606",
+        "Event_Communication_633",
+        "Event_Communication_820"
+      ],
+      "participants": [
+        "Neptune",
+        "V. Miesel Shipping"
+      ],
+      "source": "Neptune",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Reports_526",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "environmental report",
+        "submission_date": "2040-10-12 10:59:00",
+        "id": "Relationship_Reports_526"
+      },
+      "evidence": [
+        "Event_Communication_179",
+        "Event_Communication_182",
+        "Event_Communication_834"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Oceanus City Council"
+      ],
+      "source": "Reef Guardian",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Reports_529",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "data transmission",
+        "submission_date": "2040-10-12 11:02:00",
+        "id": "Relationship_Reports_529"
+      },
+      "evidence": [
+        "Event_Communication_621",
+        "Event_Communication_836"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Oceanus City Council"
+      ],
+      "source": "Green Guardians",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Reports_537",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": null,
+        "submission_date": "2040-10-12 11:11:00",
+        "id": "Relationship_Reports_537"
+      },
+      "evidence": [
+        "Event_Communication_842"
+      ],
+      "participants": [
+        "Small Fry",
+        "V. Miesel Shipping"
+      ],
+      "source": "Small Fry",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Reports_572",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "environmental report",
+        "submission_date": "2040-10-13 12:31:00",
+        "id": "Relationship_Reports_572"
+      },
+      "evidence": [
+        "Event_Communication_908"
+      ],
+      "participants": [
+        "Sentinel",
+        "Green Guardians"
+      ],
+      "source": "Sentinel",
+      "target": "Green Guardians"
+    },
+    {
+      "id": "Relationship_Reports_587",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": null,
+        "submission_date": "2040-10-13 22:00:00",
+        "id": "Relationship_Reports_587"
+      },
+      "evidence": [
+        "Event_Communication_43",
+        "Event_Communication_311",
+        "Event_Communication_336",
+        "Event_Communication_531",
+        "Event_Communication_533",
+        "Event_Communication_881",
+        "Event_Communication_930",
+        "Event_Communication_933"
+      ],
+      "participants": [
+        "Liam Thorne",
+        "Oceanus City Council"
+      ],
+      "source": "Liam Thorne",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Reports_603",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "data transmission",
+        "submission_date": "2040-10-14 09:04:00",
+        "id": "Relationship_Reports_603"
+      },
+      "evidence": [
+        "Event_Communication_958"
+      ],
+      "participants": [
+        "Remora",
+        "V. Miesel Shipping"
+      ],
+      "source": "Remora",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Reports_604",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": "data transmission",
+        "submission_date": "2040-10-14 09:28:00",
+        "id": "Relationship_Reports_604"
+      },
+      "evidence": [
+        "Event_Communication_960"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Horizon"
+      ],
+      "source": "EcoVigil",
+      "target": "Horizon"
+    },
+    {
+      "id": "Relationship_Reports_622",
+      "type": "Reports",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Reports",
+        "label": "Reports",
+        "report_type": null,
+        "submission_date": null,
+        "id": "Relationship_Reports_622"
+      },
+      "evidence": [
+        "Event_Communication_989"
+      ],
+      "participants": [
+        "Mako",
+        "Boss"
+      ],
+      "source": "Mako",
+      "target": "Boss"
+    },
+    {
+      "id": "Relationship_Jurisdiction_19",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "Harbor",
+        "authority_level": null,
+        "id": "Relationship_Jurisdiction_19"
+      },
+      "evidence": [
+        "Event_Communication_35"
+      ],
+      "participants": [
+        "Protected areas",
+        "Nemo Reef"
+      ],
+      "source": "Protected areas",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_Jurisdiction_21",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "conservation",
+        "authority_level": "oversight",
+        "id": "Relationship_Jurisdiction_21"
+      },
+      "evidence": [
+        "Event_Communication_37"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Protected areas"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Protected areas"
+    },
+    {
+      "id": "Relationship_Jurisdiction_29",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "marine protected area",
+        "authority_level": null,
+        "id": "Relationship_Jurisdiction_29"
+      },
+      "evidence": [
+        "Event_Communication_62"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Protected areas"
+      ],
+      "source": "Green Guardians",
+      "target": "Protected areas"
+    },
+    {
+      "id": "Relationship_Jurisdiction_131",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "regulatory enforcement",
+        "authority_level": "primary",
+        "id": "Relationship_Jurisdiction_131"
+      },
+      "evidence": [
+        "Event_Communication_237",
+        "Event_Communication_258",
+        "Event_Communication_262"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Nemo Reef"
+      ],
+      "source": "Green Guardians",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_Jurisdiction_162",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "Paackland Harbor",
+        "authority_level": "oversight",
+        "id": "Relationship_Jurisdiction_162"
+      },
+      "evidence": [
+        "Event_Communication_281"
+      ],
+      "participants": [
+        "Paackland Harbor",
+        "Protected areas"
+      ],
+      "source": "Paackland Harbor",
+      "target": "Protected areas"
+    },
+    {
+      "id": "Relationship_Jurisdiction_390",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "city council",
+        "authority_level": "primary",
+        "id": "Relationship_Jurisdiction_390"
+      },
+      "evidence": [
+        "Event_Communication_147",
+        "Event_Communication_641"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Himark Harbor"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Himark Harbor"
+    },
+    {
+      "id": "Relationship_Jurisdiction_446",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "environmental",
+        "authority_level": "oversight",
+        "id": "Relationship_Jurisdiction_446"
+      },
+      "evidence": [
+        "Event_Communication_37",
+        "Event_Communication_102",
+        "Event_Communication_175",
+        "Event_Communication_176",
+        "Event_Communication_179",
+        "Event_Communication_186",
+        "Event_Communication_218",
+        "Event_Communication_275",
+        "Event_Communication_293",
+        "Event_Communication_323",
+        "Event_Communication_339",
+        "Event_Communication_350",
+        "Event_Communication_351",
+        "Event_Communication_381",
+        "Event_Communication_382",
+        "Event_Communication_413",
+        "Event_Communication_433",
+        "Event_Communication_533",
+        "Event_Communication_604",
+        "Event_Communication_614",
+        "Event_Communication_677",
+        "Event_Communication_686",
+        "Event_Communication_696",
+        "Event_Communication_700",
+        "Event_Communication_731",
+        "Event_Communication_733",
+        "Event_Communication_735",
+        "Event_Communication_781",
+        "Event_Communication_783",
+        "Event_Communication_834"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Nemo Reef"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_Jurisdiction_454",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "Reef",
+        "authority_level": null,
+        "id": "Relationship_Jurisdiction_454"
+      },
+      "evidence": [
+        "Event_Communication_749"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Northern quadrant"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Northern quadrant"
+    },
+    {
+      "id": "Relationship_Jurisdiction_575",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "special clearance",
+        "authority_level": null,
+        "id": "Relationship_Jurisdiction_575"
+      },
+      "evidence": [
+        "Event_Communication_914"
+      ],
+      "participants": [
+        "Paackland Harbor",
+        "Nemo Reef"
+      ],
+      "source": "Paackland Harbor",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_Jurisdiction_583",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "City Council",
+        "authority_level": "primary",
+        "id": "Relationship_Jurisdiction_583"
+      },
+      "evidence": [
+        "Event_Communication_387",
+        "Event_Communication_439",
+        "Event_Communication_613",
+        "Event_Communication_903",
+        "Event_Communication_905",
+        "Event_Communication_928"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Paackland Harbor"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Paackland Harbor"
+    },
+    {
+      "id": "Relationship_Jurisdiction_586",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "City Council",
+        "authority_level": "primary",
+        "id": "Relationship_Jurisdiction_586"
+      },
+      "evidence": [
+        "Event_Communication_774",
+        "Event_Communication_930"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Restricted Zone"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Restricted Zone"
+    },
+    {
+      "id": "Relationship_Jurisdiction_611",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "conservation monitoring",
+        "authority_level": null,
+        "id": "Relationship_Jurisdiction_611"
+      },
+      "evidence": [
+        "Event_Communication_970"
+      ],
+      "participants": [
+        "Port Security",
+        "Nemo Reef"
+      ],
+      "source": "Port Security",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_Jurisdiction_613",
+      "type": "Jurisdiction",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Jurisdiction",
+        "label": "Jurisdiction",
+        "jurisdiction_type": "protected marine areas",
+        "authority_level": null,
+        "id": "Relationship_Jurisdiction_613"
+      },
+      "evidence": [
+        "Event_Communication_970"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Nemo Reef"
+      ],
+      "source": "Reef Guardian",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_Coordinates_20",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "conservation patrols",
+        "start_date": "2040-10-01 10:51:00",
+        "id": "Relationship_Coordinates_20"
+      },
+      "evidence": [
+        "Event_Communication_37"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Paackland Harbor"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Paackland Harbor"
+    },
+    {
+      "id": "Relationship_Coordinates_24",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "harbor masters",
+        "start_date": "2040-10-01 10:56:00",
+        "id": "Relationship_Coordinates_24"
+      },
+      "evidence": [
+        "Event_Communication_43",
+        "Event_Communication_45"
+      ],
+      "participants": [
+        "Liam Thorne",
+        "Oceanus City Council"
+      ],
+      "source": "Liam Thorne",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Coordinates_27",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "monitoring patrol increase",
+        "start_date": "2040-10-01 11:01:00",
+        "id": "Relationship_Coordinates_27"
+      },
+      "evidence": [
+        "Event_Communication_48",
+        "Event_Communication_746"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Reef Guardian"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Reef Guardian"
+    },
+    {
+      "id": "Relationship_Coordinates_30",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "event coordination",
+        "start_date": null,
+        "id": "Relationship_Coordinates_30"
+      },
+      "evidence": [
+        "Event_Communication_64"
+      ],
+      "participants": [
+        "Samantha Blake",
+        "Sailor Shifts Team"
+      ],
+      "source": "Samantha Blake",
+      "target": "Sailor Shifts Team"
+    },
+    {
+      "id": "Relationship_Coordinates_33",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "patrol",
+        "start_date": "2040-10-01 12:37:00",
+        "id": "Relationship_Coordinates_33"
+      },
+      "evidence": [
+        "Event_Communication_72"
+      ],
+      "participants": [
+        "Horizon",
+        "Sentinel"
+      ],
+      "source": "Horizon",
+      "target": "Sentinel"
+    },
+    {
+      "id": "Relationship_Coordinates_35",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "monitoring",
+        "start_date": "2040-10-01 12:39:00",
+        "id": "Relationship_Coordinates_35"
+      },
+      "evidence": [
+        "Event_Communication_76",
+        "Event_Communication_196"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Sentinel"
+      ],
+      "source": "Green Guardians",
+      "target": "Sentinel"
+    },
+    {
+      "id": "Relationship_Coordinates_37",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "reporting",
+        "start_date": "2040-10-01 12:43:00",
+        "id": "Relationship_Coordinates_37"
+      },
+      "evidence": [
+        null
+      ],
+      "participants": [
+        "Green Guardians",
+        "Horizon"
+      ],
+      "source": "Green Guardians",
+      "target": "Horizon"
+    },
+    {
+      "id": "Relationship_Coordinates_39",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "patrol schedule",
+        "start_date": "2040-10-01 12:44:00",
+        "id": "Relationship_Coordinates_39"
+      },
+      "evidence": [
+        "Event_Communication_85"
+      ],
+      "participants": [
+        "Horizon",
+        "Sentinel"
+      ],
+      "source": "Horizon",
+      "target": "Sentinel"
+    },
+    {
+      "id": "Relationship_Coordinates_43",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": null,
+        "start_date": null,
+        "id": "Relationship_Coordinates_43"
+      },
+      "evidence": [
+        "Event_Communication_95"
+      ],
+      "participants": [
+        "Haacklee Harbor",
+        "Mako"
+      ],
+      "source": "Haacklee Harbor",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_53",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "monitoring station establishment",
+        "start_date": null,
+        "id": "Relationship_Coordinates_53"
+      },
+      "evidence": [
+        "Event_Communication_109",
+        "Event_Communication_672"
+      ],
+      "participants": [
+        "Green Guardians",
+        "EcoVigil"
+      ],
+      "source": "Green Guardians",
+      "target": "EcoVigil"
+    },
+    {
+      "id": "Relationship_Coordinates_54",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "joint monitoring station",
+        "start_date": "2040-10-03 08:00:00",
+        "id": "Relationship_Coordinates_54"
+      },
+      "evidence": [
+        "Event_Communication_110",
+        "Event_Communication_112",
+        "Event_Communication_838",
+        "Event_Communication_961"
+      ],
+      "participants": [
+        "Horizon",
+        "EcoVigil"
+      ],
+      "source": "Horizon",
+      "target": "EcoVigil"
+    },
+    {
+      "id": "Relationship_Coordinates_77",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "meeting",
+        "start_date": "2040-10-02 13:23:00",
+        "id": "Relationship_Coordinates_77"
+      },
+      "evidence": [
+        "Event_Communication_143"
+      ],
+      "participants": [
+        "Glitters Team",
+        "Small Fry"
+      ],
+      "source": "Glitters Team",
+      "target": "Small Fry"
+    },
+    {
+      "id": "Relationship_Coordinates_116",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "repositioning",
+        "start_date": "2040-10-03 10:05:00",
+        "id": "Relationship_Coordinates_116"
+      },
+      "evidence": [
+        "Event_Communication_76",
+        "Event_Communication_211",
+        "Event_Communication_239"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Horizon"
+      ],
+      "source": "Green Guardians",
+      "target": "Horizon"
+    },
+    {
+      "id": "Relationship_Coordinates_120",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "enforcement protocols",
+        "start_date": "2040-10-03 10:16:00",
+        "id": "Relationship_Coordinates_120"
+      },
+      "evidence": [
+        "Event_Communication_221"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Mariner's Dream"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Mariner's Dream"
+    },
+    {
+      "id": "Relationship_Coordinates_172",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "environmental assessment",
+        "start_date": "2040-10-04 13:32:00",
+        "id": "Relationship_Coordinates_172"
+      },
+      "evidence": [
+        "Event_Communication_311"
+      ],
+      "participants": [
+        "Liam Thorne",
+        "Paackland Harbor"
+      ],
+      "source": "Liam Thorne",
+      "target": "Paackland Harbor"
+    },
+    {
+      "id": "Relationship_Coordinates_185",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "reporting",
+        "start_date": null,
+        "id": "Relationship_Coordinates_185"
+      },
+      "evidence": [
+        "Event_Communication_336"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Mako"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_201",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "port operations",
+        "start_date": "2040-10-06 00:00:00",
+        "id": "Relationship_Coordinates_201"
+      },
+      "evidence": [
+        "Event_Communication_356"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Oceanus City Council"
+      ],
+      "source": "Green Guardians",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Coordinates_226",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "event",
+        "start_date": "2040-10-13 00:00:00",
+        "id": "Relationship_Coordinates_226"
+      },
+      "evidence": [
+        "Event_Communication_380"
+      ],
+      "participants": [
+        "Samantha Blake",
+        "Mako"
+      ],
+      "source": "Samantha Blake",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_231",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "monitoring",
+        "start_date": "2040-10-06 09:50:00",
+        "id": "Relationship_Coordinates_231"
+      },
+      "evidence": [
+        "Event_Communication_384"
+      ],
+      "participants": [
+        "Horizon",
+        "Sentinel"
+      ],
+      "source": "Horizon",
+      "target": "Sentinel"
+    },
+    {
+      "id": "Relationship_Coordinates_236",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "staffing",
+        "start_date": "2040-10-07 00:00:00",
+        "id": "Relationship_Coordinates_236"
+      },
+      "evidence": [
+        "Event_Communication_389"
+      ],
+      "participants": [
+        "Glitters Team",
+        "Boss"
+      ],
+      "source": "Glitters Team",
+      "target": "Boss"
+    },
+    {
+      "id": "Relationship_Coordinates_247",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "operation",
+        "start_date": "2040-10-07 00:00:00",
+        "id": "Relationship_Coordinates_247"
+      },
+      "evidence": [
+        "Event_Communication_406"
+      ],
+      "participants": [
+        "Neptune",
+        "Serenity"
+      ],
+      "source": "Neptune",
+      "target": "Serenity"
+    },
+    {
+      "id": "Relationship_Coordinates_248",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "shipping",
+        "start_date": null,
+        "id": "Relationship_Coordinates_248"
+      },
+      "evidence": [
+        "Event_Communication_409",
+        "Event_Communication_421"
+      ],
+      "participants": [
+        "Mako",
+        "Serenity"
+      ],
+      "source": "Mako",
+      "target": "Serenity"
+    },
+    {
+      "id": "Relationship_Coordinates_251",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "water sampling and monitoring",
+        "start_date": "2040-10-07 00:00:00",
+        "id": "Relationship_Coordinates_251"
+      },
+      "evidence": [
+        "Event_Communication_106",
+        "Event_Communication_109",
+        "Event_Communication_111",
+        "Event_Communication_209",
+        "Event_Communication_415"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Horizon"
+      ],
+      "source": "EcoVigil",
+      "target": "Horizon"
+    },
+    {
+      "id": "Relationship_Coordinates_252",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "transponder malfunction",
+        "start_date": null,
+        "id": "Relationship_Coordinates_252"
+      },
+      "evidence": [
+        "Event_Communication_417"
+      ],
+      "participants": [
+        "Sentinel",
+        "Mako"
+      ],
+      "source": "Sentinel",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_253_0_1",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "operation coordination",
+        "start_date": null,
+        "id": "Relationship_Coordinates_253"
+      },
+      "evidence": [
+        "Event_Communication_420"
+      ],
+      "participants": [
+        "Neptune",
+        "Mako",
+        "Serenity"
+      ],
+      "source": "Neptune",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_253_0_2",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "operation coordination",
+        "start_date": null,
+        "id": "Relationship_Coordinates_253"
+      },
+      "evidence": [
+        "Event_Communication_420"
+      ],
+      "participants": [
+        "Neptune",
+        "Mako",
+        "Serenity"
+      ],
+      "source": "Neptune",
+      "target": "Serenity"
+    },
+    {
+      "id": "Relationship_Coordinates_253_1_2",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "operation coordination",
+        "start_date": null,
+        "id": "Relationship_Coordinates_253"
+      },
+      "evidence": [
+        "Event_Communication_420"
+      ],
+      "participants": [
+        "Neptune",
+        "Mako",
+        "Serenity"
+      ],
+      "source": "Mako",
+      "target": "Serenity"
+    },
+    {
+      "id": "Relationship_Coordinates_269",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "surveillance",
+        "start_date": "2040-10-06 13:13:00",
+        "id": "Relationship_Coordinates_269"
+      },
+      "evidence": [
+        "Event_Communication_270",
+        "Event_Communication_437"
+      ],
+      "participants": [
+        "Sentinel",
+        "Horizon"
+      ],
+      "source": "Sentinel",
+      "target": "Horizon"
+    },
+    {
+      "id": "Relationship_Coordinates_274",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "meeting",
+        "start_date": null,
+        "id": "Relationship_Coordinates_274"
+      },
+      "evidence": [
+        "Event_Communication_446"
+      ],
+      "participants": [
+        "The Intern",
+        "Mrs. Money"
+      ],
+      "source": "The Intern",
+      "target": "Mrs. Money"
+    },
+    {
+      "id": "Relationship_Coordinates_279",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "meeting to establish payment protocols",
+        "start_date": "2040-10-08 05:00:00",
+        "id": "Relationship_Coordinates_279"
+      },
+      "evidence": [
+        "Event_Communication_456"
+      ],
+      "participants": [
+        "Mako",
+        "Remora"
+      ],
+      "source": "Mako",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Coordinates_280",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "payment protocols",
+        "start_date": "2040-10-08 05:00:00",
+        "id": "Relationship_Coordinates_280"
+      },
+      "evidence": [
+        "Event_Communication_458"
+      ],
+      "participants": [
+        "Mako",
+        "Remora"
+      ],
+      "source": "Mako",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Coordinates_289",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "communication",
+        "start_date": "2040-10-07 10:28:00",
+        "id": "Relationship_Coordinates_289"
+      },
+      "evidence": [
+        "Event_Communication_478"
+      ],
+      "participants": [
+        "Green Guardians",
+        "City Officials"
+      ],
+      "source": "Green Guardians",
+      "target": "City Officials"
+    },
+    {
+      "id": "Relationship_Coordinates_292",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "surveillance",
+        "start_date": "2040-10-07 10:33:00",
+        "id": "Relationship_Coordinates_292"
+      },
+      "evidence": [
+        "Event_Communication_482",
+        "Event_Communication_485",
+        "Event_Communication_576"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Sentinel"
+      ],
+      "source": "Reef Guardian",
+      "target": "Sentinel"
+    },
+    {
+      "id": "Relationship_Coordinates_297",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "conservation tourism operation",
+        "start_date": "2040-10-08 05:30:00",
+        "id": "Relationship_Coordinates_297"
+      },
+      "evidence": [
+        "Event_Communication_340",
+        "Event_Communication_341",
+        "Event_Communication_425",
+        "Event_Communication_493",
+        "Event_Communication_499",
+        "Event_Communication_556",
+        "Event_Communication_664",
+        "Event_Communication_812",
+        "Event_Communication_850"
+      ],
+      "participants": [
+        "Remora",
+        "Mako"
+      ],
+      "source": "Remora",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_298",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "Equipment transfer",
+        "start_date": "2040-10-08 06:00:00",
+        "id": "Relationship_Coordinates_298"
+      },
+      "evidence": [
+        "Event_Communication_462",
+        "Event_Communication_504",
+        "Event_Communication_553",
+        "Event_Communication_754",
+        "Event_Communication_756"
+      ],
+      "participants": [
+        "Neptune",
+        "Mako"
+      ],
+      "source": "Neptune",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_302",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "operation",
+        "start_date": "2040-10-08 05:30:00",
+        "id": "Relationship_Coordinates_302"
+      },
+      "evidence": [
+        "Event_Communication_511"
+      ],
+      "participants": [
+        "Sailor Shifts Team",
+        "Remora"
+      ],
+      "source": "Sailor Shifts Team",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Coordinates_305",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "equipment transfer",
+        "start_date": "2040-10-08 06:00:00",
+        "id": "Relationship_Coordinates_305"
+      },
+      "evidence": [
+        "Event_Communication_423",
+        "Event_Communication_426",
+        "Event_Communication_508",
+        "Event_Communication_515",
+        "Event_Communication_559",
+        "Event_Communication_607",
+        "Event_Communication_663",
+        "Event_Communication_759",
+        "Event_Communication_822",
+        "Event_Communication_852"
+      ],
+      "participants": [
+        "Neptune",
+        "Remora"
+      ],
+      "source": "Neptune",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Coordinates_307",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "equipment transfer",
+        "start_date": "2040-10-08 06:00:00",
+        "id": "Relationship_Coordinates_307"
+      },
+      "evidence": [
+        "Event_Communication_518"
+      ],
+      "participants": [
+        "Mako",
+        "Remora"
+      ],
+      "source": "Mako",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Coordinates_334",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "technical crew support",
+        "start_date": "2040-10-09 06:00:00",
+        "id": "Relationship_Coordinates_334"
+      },
+      "evidence": [
+        "Event_Communication_555",
+        "Event_Communication_605",
+        "Event_Communication_684"
+      ],
+      "participants": [
+        "Remora",
+        "Neptune"
+      ],
+      "source": "Remora",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Coordinates_336",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "sensor installation",
+        "start_date": "2040-10-09 00:00:00",
+        "id": "Relationship_Coordinates_336"
+      },
+      "evidence": [
+        "Event_Communication_451",
+        "Event_Communication_558",
+        "Event_Communication_755"
+      ],
+      "participants": [
+        "Mako",
+        "Neptune"
+      ],
+      "source": "Mako",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Coordinates_343",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "environmental protection operation",
+        "start_date": "2040-10-08 11:08:00",
+        "id": "Relationship_Coordinates_343"
+      },
+      "evidence": [
+        "Event_Communication_571"
+      ],
+      "participants": [
+        "Sentinel",
+        "Horizon"
+      ],
+      "source": "Sentinel",
+      "target": "Horizon"
+    },
+    {
+      "id": "Relationship_Coordinates_378",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "environmental monitoring",
+        "start_date": null,
+        "id": "Relationship_Coordinates_378"
+      },
+      "evidence": [
+        "Event_Communication_623",
+        "Event_Communication_741",
+        "Event_Communication_949"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "EcoVigil"
+      ],
+      "source": "Reef Guardian",
+      "target": "EcoVigil"
+    },
+    {
+      "id": "Relationship_Coordinates_380",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "surveillance",
+        "start_date": null,
+        "id": "Relationship_Coordinates_380"
+      },
+      "evidence": [
+        "Event_Communication_287",
+        "Event_Communication_630",
+        "Event_Communication_660"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Marlin"
+      ],
+      "source": "Reef Guardian",
+      "target": "Marlin"
+    },
+    {
+      "id": "Relationship_Coordinates_387",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "crew operations",
+        "start_date": "2040-10-10 06:00:00",
+        "id": "Relationship_Coordinates_387"
+      },
+      "evidence": [
+        "Event_Communication_17",
+        "Event_Communication_496",
+        "Event_Communication_543",
+        "Event_Communication_639",
+        "Event_Communication_665"
+      ],
+      "participants": [
+        "Mako",
+        "Remora"
+      ],
+      "source": "Mako",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Coordinates_401",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "monitoring",
+        "start_date": "2040-10-10 09:32:00",
+        "id": "Relationship_Coordinates_401"
+      },
+      "evidence": [
+        "Event_Communication_627",
+        "Event_Communication_662"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Reef Guardian"
+      ],
+      "source": "EcoVigil",
+      "target": "Reef Guardian"
+    },
+    {
+      "id": "Relationship_Coordinates_411",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "surveillance",
+        "start_date": null,
+        "id": "Relationship_Coordinates_411"
+      },
+      "evidence": [
+        "Event_Communication_679"
+      ],
+      "participants": [
+        "Seawatch",
+        "Reef Guardian"
+      ],
+      "source": "Seawatch",
+      "target": "Reef Guardian"
+    },
+    {
+      "id": "Relationship_Coordinates_413",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "night watch",
+        "start_date": null,
+        "id": "Relationship_Coordinates_413"
+      },
+      "evidence": [
+        "Event_Communication_683"
+      ],
+      "participants": [
+        "Horizon",
+        "Reef Guardian"
+      ],
+      "source": "Horizon",
+      "target": "Reef Guardian"
+    },
+    {
+      "id": "Relationship_Coordinates_418",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "patrol coordination",
+        "start_date": null,
+        "id": "Relationship_Coordinates_418"
+      },
+      "evidence": [
+        "Event_Communication_689"
+      ],
+      "participants": [
+        "Defender",
+        "Reef Guardian"
+      ],
+      "source": "Defender",
+      "target": "Reef Guardian"
+    },
+    {
+      "id": "Relationship_Coordinates_423",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "harbor masters regarding Nemo Reef closure enforcement",
+        "start_date": "2040-10-11 10:00:00",
+        "id": "Relationship_Coordinates_423"
+      },
+      "evidence": [
+        "Event_Communication_700"
+      ],
+      "participants": [
+        "Liam Thorne",
+        "Sentinel"
+      ],
+      "source": "Liam Thorne",
+      "target": "Sentinel"
+    },
+    {
+      "id": "Relationship_Coordinates_428",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "operation",
+        "start_date": "2040-10-10 05:00:00",
+        "id": "Relationship_Coordinates_428"
+      },
+      "evidence": [
+        "Event_Communication_708"
+      ],
+      "participants": [
+        "Elise",
+        "Nadia Conti"
+      ],
+      "source": "Elise",
+      "target": "Nadia Conti"
+    },
+    {
+      "id": "Relationship_Coordinates_437",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "meeting",
+        "start_date": "2040-10-11 05:00:00",
+        "id": "Relationship_Coordinates_437"
+      },
+      "evidence": [
+        "Event_Communication_726"
+      ],
+      "participants": [
+        "The Middleman",
+        "Sentinel"
+      ],
+      "source": "The Middleman",
+      "target": "Sentinel"
+    },
+    {
+      "id": "Relationship_Coordinates_445",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "scientific documentation access",
+        "start_date": null,
+        "id": "Relationship_Coordinates_445"
+      },
+      "evidence": [
+        "Event_Communication_735"
+      ],
+      "participants": [
+        "Liam Thorne",
+        "EcoVigil"
+      ],
+      "source": "Liam Thorne",
+      "target": "EcoVigil"
+    },
+    {
+      "id": "Relationship_Coordinates_448",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "meeting",
+        "start_date": "2040-10-11 00:00:00",
+        "id": "Relationship_Coordinates_448"
+      },
+      "evidence": [
+        "Event_Communication_739"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "EcoVigil"
+      ],
+      "source": "Oceanus City Council",
+      "target": "EcoVigil"
+    },
+    {
+      "id": "Relationship_Coordinates_471",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "Security deployment and equipment testing",
+        "start_date": "2040-10-11 10:04:00",
+        "id": "Relationship_Coordinates_471"
+      },
+      "evidence": [
+        "Event_Communication_403",
+        "Event_Communication_758",
+        "Event_Communication_762"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Neptune"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Coordinates_473",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "Security deployment",
+        "start_date": "2040-10-11 10:04:00",
+        "id": "Relationship_Coordinates_473"
+      },
+      "evidence": [
+        "Event_Communication_758",
+        "Event_Communication_762"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Remora"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Coordinates_492",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "surveillance",
+        "start_date": "2040-10-11 10:53:00",
+        "id": "Relationship_Coordinates_492"
+      },
+      "evidence": [
+        "Event_Communication_793"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Seawatch"
+      ],
+      "source": "Green Guardians",
+      "target": "Seawatch"
+    },
+    {
+      "id": "Relationship_Coordinates_493",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "operations relocation",
+        "start_date": "2040-10-12 21:00:00",
+        "id": "Relationship_Coordinates_493"
+      },
+      "evidence": [
+        "Event_Communication_795"
+      ],
+      "participants": [
+        "Nadia Conti",
+        "EcoVigil"
+      ],
+      "source": "Nadia Conti",
+      "target": "EcoVigil"
+    },
+    {
+      "id": "Relationship_Coordinates_499",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "security team arrival",
+        "start_date": "2040-10-13 06:00:00",
+        "id": "Relationship_Coordinates_499"
+      },
+      "evidence": [
+        "Event_Communication_373",
+        "Event_Communication_762",
+        "Event_Communication_802",
+        "Event_Communication_812"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Mako"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_503",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "security team arrival",
+        "start_date": "2040-10-13 06:00:00",
+        "id": "Relationship_Coordinates_503"
+      },
+      "evidence": [
+        "Event_Communication_809"
+      ],
+      "participants": [
+        "Mako",
+        "Remora"
+      ],
+      "source": "Mako",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Coordinates_509",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "tour",
+        "start_date": "2040-10-13 08:00:00",
+        "id": "Relationship_Coordinates_509"
+      },
+      "evidence": [
+        "Event_Communication_97",
+        "Event_Communication_817"
+      ],
+      "participants": [
+        "Osprey",
+        "Mako"
+      ],
+      "source": "Osprey",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_516",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "harbor closure",
+        "start_date": "2040-10-12 06:00:00",
+        "id": "Relationship_Coordinates_516"
+      },
+      "evidence": [
+        "Event_Communication_761",
+        "Event_Communication_823"
+      ],
+      "participants": [
+        "Remora",
+        "V. Miesel Shipping"
+      ],
+      "source": "Remora",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Coordinates_518",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "operation logistics",
+        "start_date": "2040-10-12 06:00:00",
+        "id": "Relationship_Coordinates_518"
+      },
+      "evidence": [
+        "Event_Communication_824"
+      ],
+      "participants": [
+        "Neptune",
+        "V. Miesel Shipping"
+      ],
+      "source": "Neptune",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Coordinates_548",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "surveillance",
+        "start_date": "2040-10-12 12:59:00",
+        "id": "Relationship_Coordinates_548"
+      },
+      "evidence": [
+        "Event_Communication_681",
+        "Event_Communication_710",
+        "Event_Communication_857"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Seawatch"
+      ],
+      "source": "Reef Guardian",
+      "target": "Seawatch"
+    },
+    {
+      "id": "Relationship_Coordinates_550",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "meeting",
+        "start_date": "2040-10-14 10:00:00",
+        "id": "Relationship_Coordinates_550"
+      },
+      "evidence": [
+        "Event_Communication_866",
+        "Event_Communication_867"
+      ],
+      "participants": [
+        "The Accountant",
+        "V. Miesel Shipping"
+      ],
+      "source": "The Accountant",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Coordinates_555",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "triangulate signals",
+        "start_date": "2040-10-13 09:07:00",
+        "id": "Relationship_Coordinates_555"
+      },
+      "evidence": [
+        "Event_Communication_428",
+        "Event_Communication_877"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Horizon"
+      ],
+      "source": "Reef Guardian",
+      "target": "Horizon"
+    },
+    {
+      "id": "Relationship_Coordinates_556",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "triangulation",
+        "start_date": "2040-10-13 09:08:00",
+        "id": "Relationship_Coordinates_556"
+      },
+      "evidence": [
+        "Event_Communication_879"
+      ],
+      "participants": [
+        "Horizon",
+        "Seawatch"
+      ],
+      "source": "Horizon",
+      "target": "Seawatch"
+    },
+    {
+      "id": "Relationship_Coordinates_565",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "observation",
+        "start_date": "2040-10-13 12:17:00",
+        "id": "Relationship_Coordinates_565"
+      },
+      "evidence": [
+        "Event_Communication_898"
+      ],
+      "participants": [
+        "Mako",
+        "Sentinel"
+      ],
+      "source": "Mako",
+      "target": "Sentinel"
+    },
+    {
+      "id": "Relationship_Coordinates_573",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "water sample collection and vessel movement documentation",
+        "start_date": "2040-10-13 12:34:00",
+        "id": "Relationship_Coordinates_573"
+      },
+      "evidence": [
+        "Event_Communication_910"
+      ],
+      "participants": [
+        "Sentinel",
+        "Horizon"
+      ],
+      "source": "Sentinel",
+      "target": "Horizon"
+    },
+    {
+      "id": "Relationship_Coordinates_578",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "patrol",
+        "start_date": "2040-10-13 12:41:00",
+        "id": "Relationship_Coordinates_578"
+      },
+      "evidence": [
+        "Event_Communication_919"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Mako"
+      ],
+      "source": "Reef Guardian",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_609",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "environmental monitoring",
+        "start_date": "2040-10-14 10:58:00",
+        "id": "Relationship_Coordinates_609"
+      },
+      "evidence": [
+        "Event_Communication_571",
+        "Event_Communication_572",
+        "Event_Communication_692",
+        "Event_Communication_968"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Reef Guardian"
+      ],
+      "source": "Green Guardians",
+      "target": "Reef Guardian"
+    },
+    {
+      "id": "Relationship_Coordinates_614",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "documentation",
+        "start_date": "2040-10-14 11:32:00",
+        "id": "Relationship_Coordinates_614"
+      },
+      "evidence": [
+        "Event_Communication_974"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "EcoVigil"
+      ],
+      "source": "Reef Guardian",
+      "target": "EcoVigil"
+    },
+    {
+      "id": "Relationship_Coordinates_616",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "surveillance",
+        "start_date": "2040-10-14 11:36:00",
+        "id": "Relationship_Coordinates_616"
+      },
+      "evidence": [
+        "Event_Communication_977"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Sentinel"
+      ],
+      "source": "EcoVigil",
+      "target": "Sentinel"
+    },
+    {
+      "id": "Relationship_Coordinates_618",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "equipment transfer",
+        "start_date": "2040-10-14 02:00:00",
+        "id": "Relationship_Coordinates_618"
+      },
+      "evidence": [
+        "Event_Communication_984"
+      ],
+      "participants": [
+        "Small Fry",
+        "Remora"
+      ],
+      "source": "Small Fry",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Coordinates_621",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "positioning",
+        "start_date": "2040-10-14 12:17:00",
+        "id": "Relationship_Coordinates_621"
+      },
+      "evidence": [
+        "Event_Communication_987"
+      ],
+      "participants": [
+        "Knowles",
+        "Mako"
+      ],
+      "source": "Knowles",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Coordinates_623",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "Security protocols for Nemo Reef operation",
+        "start_date": null,
+        "id": "Relationship_Coordinates_623"
+      },
+      "evidence": [
+        "Event_Communication_993"
+      ],
+      "participants": [
+        "Himark Harbor",
+        "Neptune"
+      ],
+      "source": "Himark Harbor",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Coordinates_629",
+      "type": "Coordinates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Coordinates",
+        "label": "Coordinates",
+        "coordination_type": "equipment transfer",
+        "start_date": "2040-10-14 22:00:00",
+        "id": "Relationship_Coordinates_629"
+      },
+      "evidence": [
+        "Event_Communication_1003"
+      ],
+      "participants": [
+        "Mako",
+        "Knowles"
+      ],
+      "source": "Mako",
+      "target": "Knowles"
+    },
+    {
+      "id": "Relationship_Operates_36",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "monitoring",
+        "id": "Relationship_Operates_36"
+      },
+      "evidence": [
+        "Event_Communication_431",
+        "Event_Communication_610",
+        "Event_Communication_831",
+        "Event_Communication_836"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Horizon"
+      ],
+      "source": "Green Guardians",
+      "target": "Horizon"
+    },
+    {
+      "id": "Relationship_Operates_58",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "Sailor Shifts Team",
+        "id": "Relationship_Operates_58"
+      },
+      "evidence": [
+        "Event_Communication_117",
+        "Event_Communication_260",
+        "Event_Communication_283",
+        "Event_Communication_291",
+        "Event_Communication_295",
+        "Event_Communication_343",
+        "Event_Communication_548",
+        "Event_Communication_551",
+        "Event_Communication_639",
+        "Event_Communication_802",
+        "Event_Communication_819",
+        "Event_Communication_916",
+        "Event_Communication_963"
+      ],
+      "participants": [
+        "Davis",
+        "Mako"
+      ],
+      "source": "Davis",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Operates_59",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "Sailor Shifts Team",
+        "id": "Relationship_Operates_59"
+      },
+      "evidence": [
+        "Event_Communication_117"
+      ],
+      "participants": [
+        "Sailor Shifts Team",
+        "Mako"
+      ],
+      "source": "Sailor Shifts Team",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Operates_65",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "Captain",
+        "id": "Relationship_Operates_65"
+      },
+      "evidence": [
+        "Event_Communication_123"
+      ],
+      "participants": [
+        "Davis",
+        "Sailor Shifts Team"
+      ],
+      "source": "Davis",
+      "target": "Sailor Shifts Team"
+    },
+    {
+      "id": "Relationship_Operates_75",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "captain",
+        "id": "Relationship_Operates_75"
+      },
+      "evidence": [
+        "Event_Communication_142"
+      ],
+      "participants": [
+        "Rodriguez",
+        "Mako"
+      ],
+      "source": "Rodriguez",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Operates_97",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "tourism",
+        "id": "Relationship_Operates_97"
+      },
+      "evidence": [
+        "Event_Communication_191"
+      ],
+      "participants": [
+        "Sailor Shifts Team",
+        "Recreational Fishing Boats"
+      ],
+      "source": "Sailor Shifts Team",
+      "target": "Recreational Fishing Boats"
+    },
+    {
+      "id": "Relationship_Operates_103",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "shell company",
+        "id": "Relationship_Operates_103"
+      },
+      "evidence": [
+        "Event_Communication_201"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Knowles"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Knowles"
+    },
+    {
+      "id": "Relationship_Operates_109",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "rare earth extraction",
+        "id": "Relationship_Operates_109"
+      },
+      "evidence": [
+        "Event_Communication_204"
+      ],
+      "participants": [
+        "Knowles",
+        "V. Miesel Shipping"
+      ],
+      "source": "Knowles",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Operates_153",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "financial operations",
+        "id": "Relationship_Operates_153"
+      },
+      "evidence": [
+        "Event_Communication_280"
+      ],
+      "participants": [
+        "Boss",
+        "V. Miesel Shipping"
+      ],
+      "source": "Boss",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Operates_154",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "financial management",
+        "id": "Relationship_Operates_154"
+      },
+      "evidence": [
+        "Event_Communication_280"
+      ],
+      "participants": [
+        "Mrs. Money",
+        "V. Miesel Shipping"
+      ],
+      "source": "Mrs. Money",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Operates_176",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "patrol",
+        "id": "Relationship_Operates_176"
+      },
+      "evidence": [
+        "Event_Communication_239",
+        "Event_Communication_320",
+        "Event_Communication_411",
+        "Event_Communication_437",
+        "Event_Communication_568",
+        "Event_Communication_778",
+        "Event_Communication_908"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Sentinel"
+      ],
+      "source": "Green Guardians",
+      "target": "Sentinel"
+    },
+    {
+      "id": "Relationship_Operates_202",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "equipment loading",
+        "id": "Relationship_Operates_202"
+      },
+      "evidence": [
+        "Event_Communication_357"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "V. Miesel Shipping"
+      ],
+      "source": "Oceanus City Council",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Operates_210",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "financial",
+        "id": "Relationship_Operates_210"
+      },
+      "evidence": [
+        "Event_Communication_366"
+      ],
+      "participants": [
+        "Boss",
+        "Nemo Reef"
+      ],
+      "source": "Boss",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_Operates_211",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "financial management",
+        "id": "Relationship_Operates_211"
+      },
+      "evidence": [
+        "Event_Communication_366"
+      ],
+      "participants": [
+        "Mrs. Money",
+        "Nemo Reef"
+      ],
+      "source": "Mrs. Money",
+      "target": "Nemo Reef"
+    },
+    {
+      "id": "Relationship_Operates_255",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": "2040-10-06 12:31:00",
+        "operational_role": "tourism activities",
+        "id": "Relationship_Operates_255"
+      },
+      "evidence": [
+        "Event_Communication_313",
+        "Event_Communication_421",
+        "Event_Communication_423",
+        "Event_Communication_637",
+        "Event_Communication_638"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Mako"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Operates_256",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": "2040-10-06 12:31:00",
+        "operational_role": "tourism activities",
+        "id": "Relationship_Operates_256"
+      },
+      "evidence": [
+        "Event_Communication_421"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Serenity"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Serenity"
+    },
+    {
+      "id": "Relationship_Operates_271",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "Harbor Response",
+        "id": "Relationship_Operates_271"
+      },
+      "evidence": [
+        "Event_Communication_439"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Paackland Harbor"
+      ],
+      "source": "Green Guardians",
+      "target": "Paackland Harbor"
+    },
+    {
+      "id": "Relationship_Operates_283",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": "2040-10-07 09:38:00",
+        "operational_role": "financial controller",
+        "id": "Relationship_Operates_283"
+      },
+      "evidence": [
+        "Event_Communication_249",
+        "Event_Communication_464"
+      ],
+      "participants": [
+        "Mrs. Money",
+        "Mako"
+      ],
+      "source": "Mrs. Money",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Operates_327",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "special marine research",
+        "id": "Relationship_Operates_327"
+      },
+      "evidence": [
+        "Event_Communication_546"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Neptune"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Operates_351",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "vessel operator",
+        "id": "Relationship_Operates_351"
+      },
+      "evidence": [
+        "Event_Communication_585"
+      ],
+      "participants": [
+        "Davis",
+        "Marlin"
+      ],
+      "source": "Davis",
+      "target": "Marlin"
+    },
+    {
+      "id": "Relationship_Operates_352",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "Mako",
+        "id": "Relationship_Operates_352"
+      },
+      "evidence": [
+        "Event_Communication_588"
+      ],
+      "participants": [
+        "Davis",
+        "Rodriguez"
+      ],
+      "source": "Davis",
+      "target": "Rodriguez"
+    },
+    {
+      "id": "Relationship_Operates_367",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "supervising",
+        "id": "Relationship_Operates_367"
+      },
+      "evidence": [
+        "Event_Communication_610"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Neptune"
+      ],
+      "source": "Green Guardians",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Operates_439",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "Intern",
+        "id": "Relationship_Operates_439"
+      },
+      "evidence": [
+        "Event_Communication_730"
+      ],
+      "participants": [
+        "The Intern",
+        "Mrs. Money"
+      ],
+      "source": "The Intern",
+      "target": "Mrs. Money"
+    },
+    {
+      "id": "Relationship_Operates_459",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "security personnel",
+        "id": "Relationship_Operates_459"
+      },
+      "evidence": [
+        "Event_Communication_755"
+      ],
+      "participants": [
+        "Samantha Blake",
+        "Mako"
+      ],
+      "source": "Samantha Blake",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Operates_461",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "security",
+        "id": "Relationship_Operates_461"
+      },
+      "evidence": [
+        "Event_Communication_756"
+      ],
+      "participants": [
+        "Neptune",
+        "Mako"
+      ],
+      "source": "Neptune",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Operates_463",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": null,
+        "id": "Relationship_Operates_463"
+      },
+      "evidence": [
+        "Event_Communication_757"
+      ],
+      "participants": [
+        "Samantha Blake",
+        "Neptune"
+      ],
+      "source": "Samantha Blake",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Operates_474",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": "2040-10-11 10:05:00",
+        "operational_role": "permit #CR-7844 operations",
+        "id": "Relationship_Operates_474"
+      },
+      "evidence": [
+        "Event_Communication_224",
+        "Event_Communication_639",
+        "Event_Communication_759",
+        "Event_Communication_763"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Remora"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Operates_476",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "morale management",
+        "id": "Relationship_Operates_476"
+      },
+      "evidence": [
+        "Event_Communication_511",
+        "Event_Communication_764",
+        "Event_Communication_810"
+      ],
+      "participants": [
+        "Rodriguez",
+        "Remora"
+      ],
+      "source": "Rodriguez",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Operates_505",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "stabilization equipment testing",
+        "id": "Relationship_Operates_505"
+      },
+      "evidence": [
+        "Event_Communication_810"
+      ],
+      "participants": [
+        "Rodriguez",
+        "Neptune"
+      ],
+      "source": "Rodriguez",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Operates_506",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": "2040-10-13 05:00:00",
+        "operational_role": "stabilization equipment operator",
+        "id": "Relationship_Operates_506"
+      },
+      "evidence": [
+        "Event_Communication_811"
+      ],
+      "participants": [
+        "Small Fry",
+        "Remora"
+      ],
+      "source": "Small Fry",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Operates_514",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "communication and security oversight",
+        "id": "Relationship_Operates_514"
+      },
+      "evidence": [
+        "Event_Communication_446",
+        "Event_Communication_525",
+        "Event_Communication_598",
+        "Event_Communication_759",
+        "Event_Communication_763",
+        "Event_Communication_821",
+        "Event_Communication_823",
+        "Event_Communication_841"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Neptune"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Operates_519",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "oversee crew reallocation",
+        "id": "Relationship_Operates_519"
+      },
+      "evidence": [
+        "Event_Communication_825"
+      ],
+      "participants": [
+        "Neptune",
+        "Remora"
+      ],
+      "source": "Neptune",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Operates_521",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "environmental monitoring",
+        "id": "Relationship_Operates_521"
+      },
+      "evidence": [
+        "Event_Communication_828"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Reef Guardian"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Reef Guardian"
+    },
+    {
+      "id": "Relationship_Operates_538",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "Security team",
+        "id": "Relationship_Operates_538"
+      },
+      "evidence": [
+        "Event_Communication_844",
+        "Event_Communication_845"
+      ],
+      "participants": [
+        "Remora",
+        "Neptune"
+      ],
+      "source": "Remora",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Operates_543",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": "2040-10-13 06:00:00",
+        "operational_role": null,
+        "id": "Relationship_Operates_543"
+      },
+      "evidence": [
+        "Event_Communication_851"
+      ],
+      "participants": [
+        "Davis",
+        "Neptune"
+      ],
+      "source": "Davis",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Operates_546",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": "2040-10-12 06:00:00",
+        "operational_role": "security",
+        "id": "Relationship_Operates_546"
+      },
+      "evidence": [
+        "Event_Communication_281",
+        "Event_Communication_282",
+        "Event_Communication_853",
+        "Event_Communication_873",
+        "Event_Communication_986"
+      ],
+      "participants": [
+        "Davis",
+        "Remora"
+      ],
+      "source": "Davis",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Operates_566",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "Reef Guardian",
+        "id": "Relationship_Operates_566"
+      },
+      "evidence": [
+        "Event_Communication_62",
+        "Event_Communication_179",
+        "Event_Communication_182",
+        "Event_Communication_354",
+        "Event_Communication_621",
+        "Event_Communication_692",
+        "Event_Communication_834",
+        "Event_Communication_901"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Reef Guardian"
+      ],
+      "source": "Green Guardians",
+      "target": "Reef Guardian"
+    },
+    {
+      "id": "Relationship_Operates_592",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "underwater filming",
+        "id": "Relationship_Operates_592"
+      },
+      "evidence": [
+        "Event_Communication_940"
+      ],
+      "participants": [
+        "Glitters Team",
+        "Remora"
+      ],
+      "source": "Glitters Team",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Operates_593",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "Sailor Shifts",
+        "id": "Relationship_Operates_593"
+      },
+      "evidence": [
+        "Event_Communication_943"
+      ],
+      "participants": [
+        "Sailor Shifts Team",
+        "Remora"
+      ],
+      "source": "Sailor Shifts Team",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Operates_602",
+      "type": "Operates",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Operates",
+        "label": "Operates",
+        "start_date": null,
+        "operational_role": "Operation manager",
+        "id": "Relationship_Operates_602"
+      },
+      "evidence": [
+        "Event_Communication_958"
+      ],
+      "participants": [
+        "Boss",
+        "Remora"
+      ],
+      "source": "Boss",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Suspicious_71",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_71"
+      },
+      "evidence": [
+        "Event_Communication_131"
+      ],
+      "participants": [
+        "Clepper Jensen",
+        "Sailor Shifts Team"
+      ],
+      "source": "Clepper Jensen",
+      "target": "Sailor Shifts Team"
+    },
+    {
+      "id": "Relationship_Suspicious_74",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_74"
+      },
+      "evidence": [
+        "Event_Communication_134"
+      ],
+      "participants": [
+        "Miranda Jordan",
+        "Rodriguez"
+      ],
+      "source": "Miranda Jordan",
+      "target": "Rodriguez"
+    },
+    {
+      "id": "Relationship_Suspicious_106",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_106"
+      },
+      "evidence": [
+        "Event_Communication_203",
+        "Event_Communication_357"
+      ],
+      "participants": [
+        "Clepper Jensen",
+        "V. Miesel Shipping"
+      ],
+      "source": "Clepper Jensen",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Suspicious_107",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_107"
+      },
+      "evidence": [
+        "Event_Communication_131",
+        "Event_Communication_203"
+      ],
+      "participants": [
+        "Clepper Jensen",
+        "Rodriguez"
+      ],
+      "source": "Clepper Jensen",
+      "target": "Rodriguez"
+    },
+    {
+      "id": "Relationship_Suspicious_108",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_108"
+      },
+      "evidence": [
+        "Event_Communication_203"
+      ],
+      "participants": [
+        "Clepper Jensen",
+        "Knowles"
+      ],
+      "source": "Clepper Jensen",
+      "target": "Knowles"
+    },
+    {
+      "id": "Relationship_Suspicious_110",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_110"
+      },
+      "evidence": [
+        "Event_Communication_201",
+        "Event_Communication_204"
+      ],
+      "participants": [
+        "Miranda Jordan",
+        "V. Miesel Shipping"
+      ],
+      "source": "Miranda Jordan",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Suspicious_112",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_112"
+      },
+      "evidence": [
+        "Event_Communication_205"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Oceanus City Council"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Suspicious_113",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_113"
+      },
+      "evidence": [
+        "Event_Communication_206"
+      ],
+      "participants": [
+        "Rodriguez",
+        "Knowles"
+      ],
+      "source": "Rodriguez",
+      "target": "Knowles"
+    },
+    {
+      "id": "Relationship_Suspicious_123",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_123"
+      },
+      "evidence": [
+        "Event_Communication_222"
+      ],
+      "participants": [
+        "Paackland Harbor",
+        "Remora"
+      ],
+      "source": "Paackland Harbor",
+      "target": "Remora"
+    },
+    {
+      "id": "Relationship_Suspicious_145",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_145"
+      },
+      "evidence": [
+        "Event_Communication_270",
+        "Event_Communication_272",
+        "Event_Communication_639"
+      ],
+      "participants": [
+        "Sentinel",
+        "Mako"
+      ],
+      "source": "Sentinel",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Suspicious_209",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_209"
+      },
+      "evidence": [
+        "Event_Communication_366"
+      ],
+      "participants": [
+        "Boss",
+        "Oceanus City Council"
+      ],
+      "source": "Boss",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Suspicious_217",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_217"
+      },
+      "evidence": [
+        "Event_Communication_370"
+      ],
+      "participants": [
+        "Sam",
+        "Oceanus City Council"
+      ],
+      "source": "Sam",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Suspicious_219",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_219"
+      },
+      "evidence": [
+        "Event_Communication_371"
+      ],
+      "participants": [
+        "The Lookout",
+        "Clepper Jensen"
+      ],
+      "source": "The Lookout",
+      "target": "Clepper Jensen"
+    },
+    {
+      "id": "Relationship_Suspicious_293",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_293"
+      },
+      "evidence": [
+        "Event_Communication_485",
+        "Event_Communication_565",
+        "Event_Communication_574"
+      ],
+      "participants": [
+        "Sentinel",
+        "Neptune"
+      ],
+      "source": "Sentinel",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Suspicious_294",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_294"
+      },
+      "evidence": [
+        "Event_Communication_491"
+      ],
+      "participants": [
+        "Reef Guardian",
+        "Neptune"
+      ],
+      "source": "Reef Guardian",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Suspicious_317",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_317"
+      },
+      "evidence": [
+        "Event_Communication_535"
+      ],
+      "participants": [
+        "Liam Thorne",
+        "Oceanus City Council"
+      ],
+      "source": "Liam Thorne",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Suspicious_341",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_341"
+      },
+      "evidence": [
+        "Event_Communication_568"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Neptune"
+      ],
+      "source": "Green Guardians",
+      "target": "Neptune"
+    },
+    {
+      "id": "Relationship_Suspicious_360",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_360"
+      },
+      "evidence": [
+        "Event_Communication_601"
+      ],
+      "participants": [
+        "Elise",
+        "V. Miesel Shipping"
+      ],
+      "source": "Elise",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Suspicious_368",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_368"
+      },
+      "evidence": [
+        "Event_Communication_325",
+        "Event_Communication_612",
+        "Event_Communication_833"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Oceanus City Council"
+      ],
+      "source": "Green Guardians",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Suspicious_410",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_410"
+      },
+      "evidence": [
+        "Event_Communication_677"
+      ],
+      "participants": [
+        "Sentinel",
+        "Oceanus City Council"
+      ],
+      "source": "Sentinel",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Suspicious_426",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_426"
+      },
+      "evidence": [
+        "Event_Communication_702"
+      ],
+      "participants": [
+        "The Intern",
+        "Mrs. Money"
+      ],
+      "source": "The Intern",
+      "target": "Mrs. Money"
+    },
+    {
+      "id": "Relationship_Suspicious_436",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_436"
+      },
+      "evidence": [
+        "Event_Communication_724"
+      ],
+      "participants": [
+        "Liam Thorne",
+        "V. Miesel Shipping"
+      ],
+      "source": "Liam Thorne",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Suspicious_457",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_457"
+      },
+      "evidence": [
+        "Event_Communication_753"
+      ],
+      "participants": [
+        "EcoVigil",
+        "Liam Thorne"
+      ],
+      "source": "EcoVigil",
+      "target": "Liam Thorne"
+    },
+    {
+      "id": "Relationship_Suspicious_470",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_470"
+      },
+      "evidence": [
+        "Event_Communication_761"
+      ],
+      "participants": [
+        "Remora",
+        "Green Guardians"
+      ],
+      "source": "Remora",
+      "target": "Green Guardians"
+    },
+    {
+      "id": "Relationship_Suspicious_483",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_483"
+      },
+      "evidence": [
+        "Event_Communication_774"
+      ],
+      "participants": [
+        "Miranda Jordan",
+        "Oceanus City Council"
+      ],
+      "source": "Miranda Jordan",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Suspicious_485",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_485"
+      },
+      "evidence": [
+        "Event_Communication_775"
+      ],
+      "participants": [
+        "Clepper Jensen",
+        "Miranda Jordan"
+      ],
+      "source": "Clepper Jensen",
+      "target": "Miranda Jordan"
+    },
+    {
+      "id": "Relationship_Suspicious_577",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_577"
+      },
+      "evidence": [
+        "Event_Communication_916"
+      ],
+      "participants": [
+        "Davis",
+        "Defender"
+      ],
+      "source": "Davis",
+      "target": "Defender"
+    },
+    {
+      "id": "Relationship_Suspicious_600",
+      "type": "Suspicious",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Suspicious",
+        "label": "Suspicious",
+        "id": "Relationship_Suspicious_600"
+      },
+      "evidence": [
+        "Event_Communication_726",
+        "Event_Communication_951"
+      ],
+      "participants": [
+        "The Accountant",
+        "V. Miesel Shipping"
+      ],
+      "source": "The Accountant",
+      "target": "V. Miesel Shipping"
+    },
+    {
+      "id": "Relationship_Unfriendly_130",
+      "type": "Unfriendly",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Unfriendly",
+        "label": "Unfriendly",
+        "id": "Relationship_Unfriendly_130"
+      },
+      "evidence": [
+        "Event_Communication_234"
+      ],
+      "participants": [
+        "Northern Light",
+        "Green Guardians"
+      ],
+      "source": "Northern Light",
+      "target": "Green Guardians"
+    },
+    {
+      "id": "Relationship_Unfriendly_229",
+      "type": "Unfriendly",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Unfriendly",
+        "label": "Unfriendly",
+        "id": "Relationship_Unfriendly_229"
+      },
+      "evidence": [
+        "Event_Communication_382"
+      ],
+      "participants": [
+        "Samantha Blake",
+        "Oceanus City Council"
+      ],
+      "source": "Samantha Blake",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Unfriendly_312",
+      "type": "Unfriendly",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Unfriendly",
+        "label": "Unfriendly",
+        "id": "Relationship_Unfriendly_312"
+      },
+      "evidence": [
+        "Event_Communication_528"
+      ],
+      "participants": [
+        "V. Miesel Shipping",
+        "Mako"
+      ],
+      "source": "V. Miesel Shipping",
+      "target": "Mako"
+    },
+    {
+      "id": "Relationship_Unfriendly_567",
+      "type": "Unfriendly",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Unfriendly",
+        "label": "Unfriendly",
+        "id": "Relationship_Unfriendly_567"
+      },
+      "evidence": [
+        "Event_Communication_902"
+      ],
+      "participants": [
+        "Green Guardians",
+        "Oceanus City Council"
+      ],
+      "source": "Green Guardians",
+      "target": "Oceanus City Council"
+    },
+    {
+      "id": "Relationship_Unfriendly_625",
+      "type": "Unfriendly",
+      "info": {
+        "type": "Relationship",
+        "sub_type": "Unfriendly",
+        "label": "Unfriendly",
+        "id": "Relationship_Unfriendly_625"
+      },
+      "evidence": [
+        "Event_Communication_882",
+        "Event_Communication_994"
+      ],
+      "participants": [
+        "Oceanus City Council",
+        "Green Guardians"
+      ],
+      "source": "Oceanus City Council",
+      "target": "Green Guardians"
+    }
+  ]
+}
