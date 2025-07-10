@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Analysis of Nadia Conti{% endblock %}
+
+{% block content %}
+<!-- Content without tabs -->
+<div id="nadia-content" class="mb-12">
+  <div id="network-graph" class="mb-6" style="min-height:600px;"></div>
+  <div id="contacts-list"></div>
+</div>
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/graph.css') }}">
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/nadia_analysis.js') }}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', init_nadia_analysis);
+  </script>
+{% endblock %}
