@@ -1,8 +1,8 @@
 function init_daily_patterns() {
     // Updated Configuration
     const bandHeight = 110;
-    const hourWidth = 150;
-    const markerSize_h = 26;
+    const hourWidth = 140;
+    const markerSize_h = 25;
     const markerSize_v = 16;
     const markerSpacing = 3;
     const maxStackHeight = bandHeight - 10;
@@ -32,23 +32,105 @@ function init_daily_patterns() {
     // Select containers and ensure stable positioning
     const visContainer = d3.select("#daily-patterns-vis")
         .style("position", "relative")
-        .style("overflow", "visible");
+        .style("width", "100%");
     const densityContainer = d3.select("#hourly-density-vis");
     const legendContainer = d3.select("#daily-patterns-legend");
     visContainer.html("");
     densityContainer.html("");
     legendContainer.html("");
 
-    // Create tooltip
+    // Create tooltip for hover
     const tooltip = d3.select("body").append("div")
         .attr("class", "absolute bg-white p-3 rounded shadow-lg border border-gray-200 text-sm max-w-xs z-50 hidden")
         .style("pointer-events", "none");
+
+    // Store pinned tooltips
+    let pinnedTooltips = [];
+    let nextTooltipId = 0;
+
+    // Function to create a pinned tooltip
+    function createPinnedTooltip(content, x, y, eventId) {
+        const tooltipId = nextTooltipId++;
+        
+        const pinnedTooltip = d3.select("body").append("div")
+            .attr("class", "absolute bg-white p-3 rounded shadow-lg border border-gray-300 text-sm max-w-xs z-50")
+            .style("pointer-events", "all")
+            .style("left", x + "px")
+            .style("top", y + "px")
+            .style("cursor", "move");
+
+        // Add close button
+        const closeButton = pinnedTooltip.append("div")
+            .attr("class", "absolute top-1 right-1 cursor-pointer text-gray-500 hover:text-gray-700")
+            .style("font-size", "16px")
+            .style("line-height", "1")
+            .style("width", "16px")
+            .style("height", "16px")
+            .style("display", "flex")
+            .style("align-items", "center")
+            .style("justify-content", "center")
+            .text("×")
+            .on("click", function() {
+                pinnedTooltip.remove();
+                pinnedTooltips = pinnedTooltips.filter(t => t.id !== tooltipId);
+            });
+
+        // Add content
+        pinnedTooltip.append("div")
+            .attr("class", "pr-4") // Add padding to avoid close button
+            .html(content);
+
+        // Make draggable with relative movement
+        const drag = d3.drag()
+            .on("start", function() {
+                pinnedTooltip.style("cursor", "grabbing");
+            })
+            .on("drag", function(event) {
+                // Get current position
+                const currentLeft = parseInt(pinnedTooltip.style("left")) || 0;
+                const currentTop = parseInt(pinnedTooltip.style("top")) || 0;
+                
+                // Apply relative movement
+                pinnedTooltip
+                    .style("left", (currentLeft + event.dx) + "px")
+                    .style("top", (currentTop + event.dy) + "px");
+            })
+            .on("end", function() {
+                pinnedTooltip.style("cursor", "move");
+            });
+
+        pinnedTooltip.call(drag);
+
+        // Store reference
+        pinnedTooltips.push({ id: tooltipId, element: pinnedTooltip, eventId: eventId });
+        
+        return pinnedTooltip;
+    }
+
+    // Function to check if event already has a pinned tooltip
+    function findPinnedTooltipByEvent(eventId) {
+        return pinnedTooltips.find(t => t.eventId === eventId);
+    }
+
+    // Function to close pinned tooltip by event ID
+    function closePinnedTooltipByEvent(eventId) {
+        const tooltip = findPinnedTooltipByEvent(eventId);
+        if (tooltip) {
+            tooltip.element.remove();
+            pinnedTooltips = pinnedTooltips.filter(t => t.id !== tooltip.id);
+            return true;
+        }
+        return false;
+    }
+
 
     // Store visualization state
     let allEvents = [];
     let allEntities = [];
     let allKeywords = [];
     let allTopics = [];
+    let allEventTypes = [];
+    let selectedEventTypes = ["Communication"]; // Default to Communication only
     let eventTopicData = {};
     let hourlyDensityData = {};
     let selectedEntityIds = [];
@@ -67,6 +149,7 @@ function init_daily_patterns() {
         allEvents = data.events;
         allEntities = data.entities;
         allKeywords = data.keywords || [];
+        allEventTypes = data.event_types || [];
         hourlyDensityData = data.hourly_density || {};
 
         // Create entity lookup
@@ -131,7 +214,7 @@ function init_daily_patterns() {
         }
 
         // Helper function to calculate filtered density for a specific day
-        function calculateFilteredDensityForDay(day, eventsToShow) {
+        function calculateFilteredDensityForDay(day, eventsToShow, minHour, maxHour) {
             const dateStr = `2040-10-${day.toString().padStart(2, '0')}`;
 
             // Filter events for this specific date
@@ -186,13 +269,14 @@ function init_daily_patterns() {
                 });
             }
 
-            // Calculate hourly counts for hours 8-14
-            const hourCounts = new Array(7).fill(0);
+            // Calculate hourly counts for the dynamic hour range
+            const hourRange = maxHour - minHour;
+            const hourCounts = new Array(hourRange).fill(0);
 
             dateEvents.forEach(event => {
                 const hour = new Date(event.datetime).getHours();
-                if (hour >= 8 && hour <= 14) {
-                    const index = hour - 8;
+                if (hour >= minHour && hour < maxHour) {
+                    const index = hour - minHour;
                     if (isTopicMode) {
                         // Use relevance score instead of count
                         hourCounts[index] += eventRelevance[event.id] || 0;
@@ -210,13 +294,13 @@ function init_daily_patterns() {
         }
 
         // Helper function to draw density background for a band
-        function drawBandDensityBackground(day, yPos, effectiveBandHeight, eventsToShow) {
+        function drawBandDensityBackground(day, yPos, effectiveBandHeight, eventsToShow, minHour, maxHour) {
             if (!hourlyDensityData.density_data || hourlyDensityData.density_data.length === 0) {
                 return;
             }
 
             // Calculate filtered density for this specific day
-            const filteredDensityData = calculateFilteredDensityForDay(day, eventsToShow);
+            const filteredDensityData = calculateFilteredDensityForDay(day, eventsToShow, minHour, maxHour);
 
             if (!filteredDensityData || filteredDensityData.counts.every(c => c === 0)) return;
 
@@ -226,7 +310,7 @@ function init_daily_patterns() {
             if (isTopicMode) {
                 // For topic mode, calculate max across all filtered data
                 maxDensity = Math.max(1, ...days.map(d => {
-                    const dayData = calculateFilteredDensityForDay(d, eventsToShow);
+                    const dayData = calculateFilteredDensityForDay(d, eventsToShow, minHour, maxHour);
                     return Math.max(...dayData.counts);
                 }));
             } else {
@@ -241,9 +325,9 @@ function init_daily_patterns() {
                 .domain([0, maxDensity])
                 .range([0, densityScale]);
 
-            // Create area generator
+            // Create area generator using dynamic hour range
             const area = d3.area()
-                .x((d, i) => xScale(8 + i)) // Hours 8-14
+                .x((d, i) => xScale(minHour + i)) // Dynamic hour range
                 .y0(yPos + effectiveBandHeight - 10) // Bottom of band
                 .y1((d) => yPos + effectiveBandHeight - densityYScale(d) - 10) // Top based on density
                 .curve(d3.curveMonotoneX);
@@ -261,10 +345,10 @@ function init_daily_patterns() {
             // Update area generator to handle the extra point
             const extendedArea = d3.area()
                 .x((d, i) => {
-                    if (i < 7) {
-                        return xScale(8 + i); // Hours 8-14 (7 points)
+                    if (i < filteredDensityData.counts.length) {
+                        return xScale(minHour + i); // Dynamic hour range
                     } else {
-                        return xScale(15); // Extra point at hour 15
+                        return xScale(maxHour); // Extra point at max hour
                     }
                 })
                 .y0(yPos + effectiveBandHeight - 10) // Bottom of band
@@ -283,27 +367,28 @@ function init_daily_patterns() {
                 .attr("d", extendedArea);
         }
 
-        // Find min/max hours
-        let minHour = 24, maxHour = 0;
-        allEvents.forEach(event => {
-            const hour = new Date(event.datetime).getHours();
-            if (hour < minHour) minHour = hour;
-            if (hour > maxHour) maxHour = hour;
-        });
+        // Function to calculate hour range based on filtered events
+        function calculateHourRange(eventsToShow) {
+            if (eventsToShow.length === 0) {
+                return { minHour: 0, maxHour: 24 };
+            }
 
-        // Add padding
-        minHour = Math.max(0, minHour);
-        maxHour = Math.min(24, maxHour + 1);
-        const hourRange = maxHour - minHour;
+            let minHour = 24, maxHour = 0;
+            eventsToShow.forEach(event => {
+                const hour = new Date(event.datetime).getHours();
+                if (hour < minHour) minHour = hour;
+                if (hour > maxHour) maxHour = hour;
+            });
 
-        // Store constants for drawVisualization function
-        const svgWidth = hourRange * hourWidth + 100;
-        const hourTicks = d3.range(minHour, maxHour + 1);
+            // Add padding
+            minHour = Math.max(0, minHour);
+            maxHour = Math.min(24, maxHour + 1);
 
-        // Create scales
-        const xScale = d3.scaleLinear()
-            .domain([minHour, maxHour])
-            .range([40, svgWidth - 20]);
+            return { minHour, maxHour };
+        }
+
+        // Store constants for drawVisualization function (will be updated dynamically)
+        let svgWidth, hourTicks, xScale;
 
         let svg; // Will be created in drawVisualization
 
@@ -338,24 +423,56 @@ function init_daily_patterns() {
 
         // Draw visualization
         function drawVisualization() {
+            let eventsToShow = allEvents;
+
+            // Filter by event types first
+            if (selectedEventTypes.length > 0) {
+                eventsToShow = eventsToShow.filter(event =>
+                    selectedEventTypes.includes(event.event_type)
+                );
+            }
+
+            // Then filter by selected entities
+            if (selectedEntityIds.length > 0) {
+                eventsToShow = eventsToShow.filter(event =>
+                    selectedEntityIds.includes(event.entity_id) ||
+                    event.target_entities.some(targetId => selectedEntityIds.includes(targetId))
+                );
+            }
+
+            // Calculate dynamic hour range based on filtered events
+            const { minHour, maxHour } = calculateHourRange(eventsToShow);
+            const hourRange = maxHour - minHour;
+
+            // Update dynamic constants
+            svgWidth = hourRange * hourWidth + 100;
+            hourTicks = d3.range(minHour, maxHour + 1);
+            xScale = d3.scaleLinear()
+                .domain([minHour, maxHour])
+                .range([40, svgWidth - 20]);
+
             // Calculate total height based on current collapsed/expanded states
             const totalBandHeight = days.reduce((total, day) => total + getEffectiveBandHeight(day), 0);
-            const svgHeight = totalBandHeight + 50 + legendOffsetFromBottom + 10; // Include space for two-line legend
+            const svgHeight = totalBandHeight + 50 + legendOffsetFromBottom + 50; // Include space for two-line legend
 
             // Set container height first to prevent layout shifts
-            visContainer.style("height", svgHeight + "px");
+            visContainer.style("height", svgHeight + 20 + "px");
 
             // Clear existing SVG and recreate
-            visContainer.selectAll("svg").remove();
+            visContainer.selectAll("*").remove();
 
-            // Create SVG with stable positioning
-            svg = visContainer.append("svg")
-                .attr("width", "100%")
+            // Create a wrapper div for scrolling
+            const scrollWrapper = visContainer.append("div")
+                .style("overflow-x", "auto")
+                .style("overflow-y", "visible")
+                .style("width", "1100px")
+                .style("height", svgHeight + 20 + "px");
+
+            // Create SVG with fixed width inside the scrollable wrapper
+            svg = scrollWrapper.append("svg")
+                .attr("width", svgWidth)
                 .attr("height", svgHeight)
-                .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
-                .attr("preserveAspectRatio", "xMidYMin meet")
                 .style("display", "block")
-                .style("position", "relative")
                 .attr("class", "bg-white");
 
             // Create clip path for rounded corners
@@ -392,16 +509,6 @@ function init_daily_patterns() {
                     .attr("stroke", lineColor)
                     .attr("stroke-width", lineWidth);
             });
-
-            let eventsToShow;
-            if (selectedEntityIds.length > 0) {
-                eventsToShow = allEvents.filter(event =>
-                    selectedEntityIds.includes(event.entity_id) ||
-                    event.target_entities.some(targetId => selectedEntityIds.includes(targetId))
-                );
-            } else {
-                eventsToShow = allEvents;
-            }
 
             // Calculate highlighting based on keywords/topics
             let maxFreq = 0;
@@ -495,7 +602,7 @@ function init_daily_patterns() {
                 const yPos = cumulativeY;
 
                 // Draw density background first (behind everything)
-                drawBandDensityBackground(day, yPos, effectiveBandHeight, eventsToShow);
+                drawBandDensityBackground(day, yPos, effectiveBandHeight, eventsToShow, minHour, maxHour);
 
                 // Create clickable band background for expand/collapse
                 const bandRect = svg.append("rect")
@@ -635,17 +742,36 @@ function init_daily_patterns() {
                             // Add mouse events to the marker group
                             markerGroup
                                 .on("mouseover", function (e) {
-                                    // Show tooltip
-                                    const source = event.entity_id;
-                                    const targets = event.target_entities.join(', ');
-                                    const message = event.content || 'No message content';
+                                    // Show tooltip with event type and details
+                                    const sourceLabel = sourceEntity ? sourceEntity.label || sourceEntity.id : event.entity_id;
+                                    const targetLabels = event.target_entities.map(id => {
+                                        const target = entityLookup[id];
+                                        return target ? (target.label || target.id) : id;
+                                    }).join(', ');
+                                    const content = event.content || 'No content';
+                                    const eventType = event.event_type || 'Unknown';
 
-                                    tooltip.html(`
-                                        <div><span class="font-medium">Source:</span> ${source}</div>
-                                        <div><span class="font-medium">Target:</span> ${targets}</div>
-                                        <div class="mt-2"><span class="font-medium">Message:</span> ${message}</div>
-                                        <div class="mt-1 text-xs text-gray-500">${event.datetime}</div>
-                                    `)
+                                    // Build tooltip content based on event type
+                                    let tooltipContent = `
+                                        <div><span class="font-medium">Event Type:</span> ${eventType}</div>
+                                        <div><span class="font-medium">Time:</span> ${new Date(event.datetime).toLocaleString()}</div>
+                                    `;
+
+                                    if (event.event_type === 'Communication') {
+                                        tooltipContent += `
+                                            <div><span class="font-medium">From:</span> ${sourceLabel}</div>
+                                            <div><span class="font-medium">To:</span> ${targetLabels || 'None'}</div>
+                                            <div class="mt-2"><span class="font-medium">Message:</span> ${content}</div>
+                                        `;
+                                    } else {
+                                        tooltipContent += `
+                                            <div><span class="font-medium">Entity:</span> ${sourceLabel}</div>
+                                            ${targetLabels ? `<div><span class="font-medium">Related:</span> ${targetLabels}</div>` : ''}
+                                            ${content !== 'No content' ? `<div class="mt-2"><span class="font-medium">Details:</span> ${content}</div>` : ''}
+                                        `;
+                                    }
+
+                                    tooltip.html(tooltipContent)
                                         .style("left", (e.pageX + 10) + "px")
                                         .style("top", (e.pageY + 10) + "px")
                                         .classed("hidden", false);
@@ -678,6 +804,46 @@ function init_daily_patterns() {
                                     } else {
                                         d3.select(this).style("opacity", 1);
                                     }
+                                })
+                                .on("click", function (e) {
+                                    // Check if tooltip already exists for this event
+                                    e.stopPropagation();
+                                    
+                                    // If tooltip already exists, close it
+                                    if (closePinnedTooltipByEvent(event.id)) {
+                                        return; // Tooltip was closed, don't create a new one
+                                    }
+                                    
+                                    // Create new pinned tooltip
+                                    const sourceLabel = sourceEntity ? sourceEntity.label || sourceEntity.id : event.entity_id;
+                                    const targetLabels = event.target_entities.map(id => {
+                                        const target = entityLookup[id];
+                                        return target ? (target.label || target.id) : id;
+                                    }).join(', ');
+                                    const content = event.content || 'No content';
+                                    const eventType = event.event_type || 'Unknown';
+
+                                    let tooltipContent = `
+                                        <div><span class="font-medium">Event Type:</span> ${eventType}</div>
+                                        <div><span class="font-medium">Time:</span> ${new Date(event.datetime).toLocaleString()}</div>
+                                    `;
+
+                                    if (event.event_type === 'Communication') {
+                                        tooltipContent += `
+                                            <div><span class="font-medium">From:</span> ${sourceLabel}</div>
+                                            <div><span class="font-medium">To:</span> ${targetLabels || 'None'}</div>
+                                            <div class="mt-2"><span class="font-medium">Message:</span> ${content}</div>
+                                        `;
+                                    } else {
+                                        tooltipContent += `
+                                            <div><span class="font-medium">Entity:</span> ${sourceLabel}</div>
+                                            ${targetLabels ? `<div><span class="font-medium">Related:</span> ${targetLabels}</div>` : ''}
+                                            ${content !== 'No content' ? `<div class="mt-2"><span class="font-medium">Details:</span> ${content}</div>` : ''}
+                                        `;
+                                    }
+
+                                    // Create pinned tooltip at click position
+                                    createPinnedTooltip(tooltipContent, e.pageX + 10, e.pageY + 10, event.id);
                                 });
 
                             // Get entities and letters
@@ -685,61 +851,105 @@ function init_daily_patterns() {
                             const targetId = event.target_entities[0] || "";
                             const targetEntity = entityLookup[targetId];
 
-                            const sourceLetter = sourceEntity ?
-                                (letterMaps[sourceEntity.sub_type]?.[sourceEntity.id] ||
-                                    sourceEntity.id.charAt(0).toUpperCase()) : "?";
+                            // Check if this is a standalone event (no proper source/target)
+                            const isStandaloneEvent = !sourceEntity || event.entity_id.startsWith('standalone_');
+                            const hasTarget = targetEntity && event.target_entities.length > 0;
 
-                            const targetLetter = targetEntity ?
-                                (letterMaps[targetEntity.sub_type]?.[targetEntity.id] ||
-                                    targetEntity.id.charAt(0).toUpperCase()) : "?";
+                            if (isStandaloneEvent || !hasTarget) {
+                                // Draw single square for standalone events or events without proper source/target
+                                // Use source entity color and letter if available, otherwise default to event type color
+                                const eventColor = sourceEntity ? 
+                                    colors[sourceEntity.sub_type] || "#888" : 
+                                    (event.event_type === "VesselMovement" ? colors['Vessel'] :
+                                     event.event_type === "Enforcement" ? colors['Organization'] :
+                                     "#888"); // Default color
 
-                            // Draw source box (left side)
-                            clippedGroup.append("rect")
-                                .attr("class", "source-box")
-                                .attr("x", 0)
-                                .attr("y", 0)
-                                .attr("width", effectiveMarkerSizes.markerSize_h / 2)
-                                .attr("height", effectiveMarkerSizes.markerSize_v)
-                                .attr("fill", sourceEntity ? colors[sourceEntity.sub_type] || "#777" : "#999")
-                                .style("shape-rendering", "crispEdges");
+                                clippedGroup.append("rect")
+                                    .attr("class", "event-box")
+                                    .attr("x", 0)
+                                    .attr("y", 0)
+                                    .attr("width", effectiveMarkerSizes.markerSize_h)
+                                    .attr("height", effectiveMarkerSizes.markerSize_v)
+                                    .attr("fill", eventColor)
+                                    .style("shape-rendering", "crispEdges");
 
-                            // Draw target box (right side) with crisp edges to avoid white lines
-                            clippedGroup.append("rect")
-                                .attr("class", "target-box")
-                                .attr("x", effectiveMarkerSizes.markerSize_h / 2)
-                                .attr("y", 0)
-                                .attr("width", effectiveMarkerSizes.markerSize_h / 2)
-                                .attr("height", effectiveMarkerSizes.markerSize_v)
-                                .attr("fill", targetEntity ? colors[targetEntity.sub_type] || "#999" : "#bbb")
-                                .style("shape-rendering", "crispEdges");
+                                // Add source entity letter when expanded, fallback to event type letter
+                                if (!bandCollapsedState[day]) {
+                                    const fontSize = "10px";
+                                    const eventLetter = sourceEntity ? 
+                                        (letterMaps[sourceEntity.sub_type]?.[sourceEntity.id] ||
+                                            sourceEntity.id.charAt(0).toUpperCase()) :
+                                        (event.event_type ? event.event_type.charAt(0).toUpperCase() : "E");
 
-                            // Add letters when expanded (not collapsed)
-                            if (!bandCollapsedState[day]) {
-                                const fontSize = "10px";
+                                    clippedGroup.append("text")
+                                        .attr("class", "event-letter")
+                                        .attr("x", effectiveMarkerSizes.markerSize_h / 2)
+                                        .attr("y", effectiveMarkerSizes.markerSize_v / 2)
+                                        .attr("dy", "0.35em")
+                                        .attr("text-anchor", "middle")
+                                        .attr("fill", "white")
+                                        .attr("font-weight", "bold")
+                                        .attr("font-size", fontSize)
+                                        .text(eventLetter);
+                                }
+                            } else {
+                                // Draw double square for communication events with proper source/target
+                                const sourceLetter = sourceEntity ?
+                                    (letterMaps[sourceEntity.sub_type]?.[sourceEntity.id] ||
+                                        sourceEntity.id.charAt(0).toUpperCase()) : "?";
 
-                                // Source letter (left box)
-                                clippedGroup.append("text")
-                                    .attr("class", "source-letter")
-                                    .attr("x", effectiveMarkerSizes.markerSize_h / 4)
-                                    .attr("y", effectiveMarkerSizes.markerSize_v / 2)
-                                    .attr("dy", "0.35em")
-                                    .attr("text-anchor", "middle")
-                                    .attr("fill", "white")
-                                    .attr("font-weight", "bold")
-                                    .attr("font-size", fontSize)
-                                    .text(sourceLetter);
+                                const targetLetter = targetEntity ?
+                                    (letterMaps[targetEntity.sub_type]?.[targetEntity.id] ||
+                                        targetEntity.id.charAt(0).toUpperCase()) : "?";
 
-                                // Target letter (right box)
-                                clippedGroup.append("text")
-                                    .attr("class", "target-letter")
-                                    .attr("x", effectiveMarkerSizes.markerSize_h * 0.75)
-                                    .attr("y", effectiveMarkerSizes.markerSize_v / 2)
-                                    .attr("dy", "0.35em")
-                                    .attr("text-anchor", "middle")
-                                    .attr("fill", "white")
-                                    .attr("font-weight", "bold")
-                                    .attr("font-size", fontSize)
-                                    .text(targetLetter);
+                                // Draw source box (left side)
+                                clippedGroup.append("rect")
+                                    .attr("class", "source-box")
+                                    .attr("x", 0)
+                                    .attr("y", 0)
+                                    .attr("width", effectiveMarkerSizes.markerSize_h / 2)
+                                    .attr("height", effectiveMarkerSizes.markerSize_v)
+                                    .attr("fill", sourceEntity ? colors[sourceEntity.sub_type] || "#777" : "#999")
+                                    .style("shape-rendering", "crispEdges");
+
+                                // Draw target box (right side) with crisp edges to avoid white lines
+                                clippedGroup.append("rect")
+                                    .attr("class", "target-box")
+                                    .attr("x", effectiveMarkerSizes.markerSize_h / 2)
+                                    .attr("y", 0)
+                                    .attr("width", effectiveMarkerSizes.markerSize_h / 2)
+                                    .attr("height", effectiveMarkerSizes.markerSize_v)
+                                    .attr("fill", targetEntity ? colors[targetEntity.sub_type] || "#999" : "#bbb")
+                                    .style("shape-rendering", "crispEdges");
+
+                                // Add letters when expanded (not collapsed)
+                                if (!bandCollapsedState[day]) {
+                                    const fontSize = "10px";
+
+                                    // Source letter (left box)
+                                    clippedGroup.append("text")
+                                        .attr("class", "source-letter")
+                                        .attr("x", effectiveMarkerSizes.markerSize_h / 4)
+                                        .attr("y", effectiveMarkerSizes.markerSize_v / 2)
+                                        .attr("dy", "0.35em")
+                                        .attr("text-anchor", "middle")
+                                        .attr("fill", "white")
+                                        .attr("font-weight", "bold")
+                                        .attr("font-size", fontSize)
+                                        .text(sourceLetter);
+
+                                    // Target letter (right box)
+                                    clippedGroup.append("text")
+                                        .attr("class", "target-letter")
+                                        .attr("x", effectiveMarkerSizes.markerSize_h * 0.75)
+                                        .attr("y", effectiveMarkerSizes.markerSize_v / 2)
+                                        .attr("dy", "0.35em")
+                                        .attr("text-anchor", "middle")
+                                        .attr("fill", "white")
+                                        .attr("font-weight", "bold")
+                                        .attr("font-size", fontSize)
+                                        .text(targetLetter);
+                                }
                             }
                         });
                     });
@@ -893,6 +1103,13 @@ function init_daily_patterns() {
             // Start with all events
             let filteredEvents = allEvents;
 
+            // Filter by event types first
+            if (selectedEventTypes.length > 0) {
+                filteredEvents = filteredEvents.filter(event =>
+                    selectedEventTypes.includes(event.event_type)
+                );
+            }
+
             // Filter by selected entities
             if (selectedEntityIds.length > 0) {
                 filteredEvents = filteredEvents.filter(event =>
@@ -1018,10 +1235,9 @@ function init_daily_patterns() {
                 const letter = letterMaps[d.sub_type]?.[d.id] || d.id.charAt(0).toUpperCase();
                 const count = commCount[d.id] || 0;
                 return `
-                    <div class="font-medium">${d.id}</div>
+                    <div class="font-medium">${d.id} (${letter})</div>
                     <div class="text-xs text-gray-600">
-                        <span>(${letter})</span> 
-                        <span class="ml-2">${count} comms</span>
+                        <span>${count} comms</span>
                     </div>
                 `;
             });
@@ -1181,7 +1397,7 @@ function init_daily_patterns() {
 
             // Initialize dropdown behavior
             setupDropdownBehavior();
-            
+
             // Update button text based on current selection
             if (selectedTopicId !== null) {
                 const selectedTopic = allTopics.find(t => t.id === selectedTopicId);
@@ -1368,6 +1584,42 @@ function init_daily_patterns() {
                     drawVisualization();
                     updateTopicSelection();
                 });
+
+            // Event Type Filter Section
+            const eventTypeContainer = topicContainer.append("div")
+                .attr("class", "mt-4 pt-3 border-t border-gray-200");
+
+            eventTypeContainer.append("div")
+                .attr("class", "text-xs font-medium text-gray-700 mb-2")
+                .text("Event Types:");
+
+            const eventTypeSelect = eventTypeContainer.append("select")
+                .attr("id", "event-type-filter")
+                .attr("class", "filter-select w-full text-xs")
+                .attr("multiple", "")
+                .attr("size", "4")
+                .on("change", function () {
+                    updateEventTypeFilter();
+                });
+
+            // Add event type options from loaded data
+            allEventTypes.forEach(eventType => {
+                const option = eventTypeSelect.append("option")
+                    .attr("value", eventType)
+                    .text(eventType);
+
+                // Set Communication as default selected
+                if (eventType === "Communication") {
+                    option.property("selected", true);
+                }
+            });
+
+            // Function to update event type filter
+            function updateEventTypeFilter() {
+                const selectedOptions = Array.from(eventTypeSelect.node().selectedOptions);
+                selectedEventTypes = selectedOptions.map(option => option.value);
+                drawVisualization();
+            }
         }
 
     }).catch(error => {

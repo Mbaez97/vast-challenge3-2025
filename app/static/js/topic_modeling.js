@@ -286,9 +286,11 @@ function init_topic_modeling() {
                     // Clear messages
                     d3.select("#messages-container").html("<p class='text-gray-500'>Select a topic to view related messages</p>");
                     d3.select("#message-count").text("0");
-                    d3.select("#page-info").text("Page 1 of 1");
+                    d3.select("#page-start").text("0");
+                    d3.select("#page-end").text("0");
                     d3.select("#prev-page").attr("disabled", true);
                     d3.select("#next-page").attr("disabled", true);
+                    d3.select("#page-buttons").html("");
 
                     return;
                 }
@@ -376,12 +378,61 @@ function init_topic_modeling() {
                     return matchesTopic && matchesEntity;
                 });
 
-                // Update message count
-                d3.select("#message-count").text(filteredMessages.length);
+                // Update message count will be handled in updatePagination
 
                 // Reset to first page
                 currentPage = 1;
                 displayMessages();
+            }
+
+            // Update pagination controls
+            function updatePagination() {
+                const totalPages = Math.ceil(filteredMessages.length / messagesPerPage);
+                
+                // Update message count
+                d3.select("#message-count").text(filteredMessages.length);
+                
+                // Clear page buttons
+                const pageButtons = d3.select("#page-buttons");
+                pageButtons.html("");
+                
+                if (totalPages <= 1) {
+                    d3.select("#page-start").text(filteredMessages.length > 0 ? "1" : "0");
+                    d3.select("#page-end").text(filteredMessages.length);
+                    d3.select("#prev-page").attr("disabled", true);
+                    d3.select("#next-page").attr("disabled", true);
+                    return;
+                }
+                
+                // Calculate range of pages to show (max 5 pages)
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, startPage + 4);
+                
+                // Adjust if we're at the beginning
+                if (endPage - startPage < 4 && startPage > 1) {
+                    startPage = Math.max(1, endPage - 4);
+                }
+                
+                // Create page buttons
+                for (let i = startPage; i <= endPage; i++) {
+                    const button = pageButtons.append("button")
+                        .attr("class", `px-3 py-1 border rounded-md ${i === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`)
+                        .text(i)
+                        .on("click", () => {
+                            currentPage = i;
+                            displayMessages();
+                        });
+                }
+                
+                // Update start/end indicators
+                const startIdx = (currentPage - 1) * messagesPerPage + 1;
+                const endIdx = Math.min(currentPage * messagesPerPage, filteredMessages.length);
+                d3.select("#page-start").text(startIdx);
+                d3.select("#page-end").text(endIdx);
+                
+                // Enable/disable navigation buttons
+                d3.select("#prev-page").attr("disabled", currentPage <= 1);
+                d3.select("#next-page").attr("disabled", currentPage >= totalPages);
             }
 
             // Display paginated messages
@@ -391,7 +442,8 @@ function init_topic_modeling() {
 
                 if (filteredMessages.length === 0) {
                     messagesContainer.html("<p class='text-gray-500'>No messages found for current filters</p>");
-                    d3.select("#page-info").text("Page 1 of 1");
+                    d3.select("#page-start").text("0");
+                    d3.select("#page-end").text("0");
                     d3.select("#prev-page").attr("disabled", true);
                     d3.select("#next-page").attr("disabled", true);
                     return;
@@ -401,11 +453,6 @@ function init_topic_modeling() {
                 const startIdx = (currentPage - 1) * messagesPerPage;
                 const endIdx = Math.min(startIdx + messagesPerPage, filteredMessages.length);
                 const pageMessages = filteredMessages.slice(startIdx, endIdx);
-
-                // Update pagination info
-                d3.select("#page-info").text(`Page ${currentPage} of ${totalPages}`);
-                d3.select("#prev-page").attr("disabled", currentPage <= 1);
-                d3.select("#next-page").attr("disabled", currentPage >= totalPages);
 
                 // Display messages
                 pageMessages.forEach(msg => {
@@ -423,6 +470,9 @@ function init_topic_modeling() {
                             </div>
                         `);
                 });
+                
+                // Update pagination controls
+                updatePagination();
             }
 
             // Drag handlers

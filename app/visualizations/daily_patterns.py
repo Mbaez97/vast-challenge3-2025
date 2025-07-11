@@ -194,15 +194,15 @@ def get_data(include_topics=False, method="bertopic", **kwargs):
 
     october_events = []
     entities = {}
+    event_types = set()
 
-    # Process nodes to find communication events in October 2040
+    # Process nodes to find all events in October 2040
     for node_id, node_data in G.nodes(data=True):
-        if (
-            node_data.get("type") == "Event"
-            and node_data.get("sub_type") == "Communication"
-        ):
+        if node_data.get("type") == "Event":
             # Handle different timestamp formats
             timestamp = node_data.get("timestamp") or node_data.get("date")
+            event_sub_type = node_data.get("sub_type")
+            event_types.add(event_sub_type)
 
             if timestamp:
                 try:
@@ -219,7 +219,7 @@ def get_data(include_topics=False, method="bertopic", **kwargs):
 
                     # Filter for October 2040
                     if dt.year == 2040 and dt.month == 10:
-                        # Find source entity by looking for "sent" edges
+                        # Find source entity by looking for "sent" edges (for Communication events)
                         source_entity = None
                         target_entities = []
                         content = node_data.get("content", "")
@@ -250,14 +250,52 @@ def get_data(include_topics=False, method="bertopic", **kwargs):
                                     entities[successor] = target_entity
                                     target_entities.append(successor)
 
-                        if source_entity:
+                        # For non-Communication events, try to find any connected entities
+                        if not source_entity and event_sub_type != "Communication":
+                            # Look for any connected entities (incoming or outgoing)
+                            for predecessor, _, edge_data in G.in_edges(
+                                node_id, data=True
+                            ):
+                                pred_data = G.nodes[predecessor]
+                                if pred_data.get("type") == "Entity":
+                                    source_entity = {
+                                        "id": predecessor,
+                                        "sub_type": pred_data.get("sub_type"),
+                                        "label": pred_data.get("label", ""),
+                                    }
+                                    entities[predecessor] = source_entity
+                                    break
+
+                            # If still no source entity, look at outgoing edges
+                            if not source_entity:
+                                for _, successor, edge_data in G.out_edges(
+                                    node_id, data=True
+                                ):
+                                    succ_data = G.nodes[successor]
+                                    if succ_data.get("type") == "Entity":
+                                        source_entity = {
+                                            "id": successor,
+                                            "sub_type": succ_data.get("sub_type"),
+                                            "label": succ_data.get("label", ""),
+                                        }
+                                        entities[successor] = source_entity
+                                        break
+
+                        # Include event if we have a source entity OR if it's a standalone event
+                        if source_entity or event_sub_type != "Communication":
+                            # For events with source entities, use the real entity ID
+                            # For truly standalone events, use synthetic ID
+                            entity_id = source_entity["id"] if source_entity else f"standalone_{node_id}"
+                            entity_sub_type = source_entity["sub_type"] if source_entity else "Standalone"
+                            
                             # Convert datetime objects to string representations
                             october_events.append(
                                 {
                                     "id": node_id,
                                     "timestamp": timestamp,
-                                    "entity_id": source_entity["id"],
-                                    "entity_sub_type": source_entity["sub_type"],
+                                    "entity_id": entity_id,
+                                    "entity_sub_type": entity_sub_type,
+                                    "event_type": event_sub_type,
                                     "time": dt.time().isoformat(),  # Convert to ISO time string
                                     "day": dt.day,
                                     "datetime": dt.isoformat(),  # Full datetime for frontend
@@ -269,7 +307,8 @@ def get_data(include_topics=False, method="bertopic", **kwargs):
                     logger.debug(f"Skipping invalid timestamp: {timestamp} - {str(e)}")
                     continue
 
-    logger.info(f"Found {len(october_events)} communication events in October 2040")
+    logger.info(f"Found {len(october_events)} events in October 2040")
+    logger.info(f"Found event types: {sorted(event_types)}")
 
     # Calculate hourly density data for visualization
     hourly_density_data = calculate_hourly_density(october_events)
@@ -278,6 +317,7 @@ def get_data(include_topics=False, method="bertopic", **kwargs):
     response = {
         "events": october_events,
         "entities": list(entities.values()),
+        "event_types": sorted([t for t in event_types if t is not None]),
         "hourly_density": hourly_density_data,
     }
 
