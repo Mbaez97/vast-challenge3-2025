@@ -22,7 +22,7 @@
       "name": "Kelly",
       "sub_type": "Person",
       "id": "Kelly",
-      "is_pseudonym": true
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
@@ -38,7 +38,7 @@
       "name": "Mrs. Money",
       "sub_type": "Person",
       "id": "Mrs. Money",
-      "is_pseudonym": false
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
@@ -302,7 +302,7 @@
       "name": "Elise",
       "sub_type": "Person",
       "id": "Elise",
-      "is_pseudonym": true
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
