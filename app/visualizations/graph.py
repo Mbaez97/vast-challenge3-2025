@@ -1,4 +1,3 @@
-import networkx as nx
 import logging
 import json
 import pandas as pd
@@ -9,7 +8,9 @@ logger = logging.getLogger(__name__)
 # Visualization metadata
 NAME = "graph"
 TITLE = "Network Exploration"
-DESCRIPTION = "Vizualize the interaction between entities and their relationships."
+DESCRIPTION = (
+    "Vizualize the interaction between entities and their relationships."  # noqa
+)
 
 
 def get_data():
