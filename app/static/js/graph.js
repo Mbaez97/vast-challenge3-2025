@@ -23,7 +23,6 @@ function init_graph() {
     .attr("class", "bg-white rounded-lg shadow-md");
   const relG = relSvg.append("g");
 
-
   // ── Static Shape Legend on Communication ────────────────────────────
   const shapeLegend = commSvg.append("g")
     .attr("transform", "translate(20,20)");
@@ -47,8 +46,8 @@ function init_graph() {
         .attr("font-size", "12px")
         .attr("alignment-baseline", "middle");
     });
-  // ─────────────────────────────────────────────────────────────────
 
+  
   d3.json("/data/graph").then(data => {
     // Shared state
     let selectedNodes = new Set();
@@ -156,17 +155,28 @@ function init_graph() {
     const color = d3.scaleOrdinal(d3.schemeCategory10);
     const entityTypeMap = new Map(commNodes.map(d => [d.id, d.type]));
 
+    // Radial radii for nodes
+    const radialRadius = {
+      Person: 350,
+      Vessel: 200,
+      Location: 100,
+      Organization: 50,
+      Group: 50
+    }
+
     // Tooltip for heatmap
     const tooltip = d3.select("body").append("div")
       .attr("class", "heatmap-tooltip")
       .style("visibility", "hidden");
 
+    console.log(commNodes);
     // ── COMMUNICATION GRAPH ────────────────────────────────────────────
     const commSim = d3.forceSimulation(commNodes)
       .force("link", d3.forceLink(commLinks).id(d => d.id).distance(100))
       .force("charge", d3.forceManyBody().strength(-300))
       .force("center", d3.forceCenter(commWidth/2, height/2))
-      .force("collision", d3.forceCollide().radius(30));
+      .force("collision", d3.forceCollide().radius(30))
+      .force("radial", d3.forceRadial(d => radialRadius[d.type] || 150, commWidth/2, height/2).strength(0.8));
 
     const commLinkSel = commG.append("g").attr("class", "links")
       .selectAll("line")
@@ -185,7 +195,7 @@ function init_graph() {
                          .size(100)()
         )
         .attr("fill", d => color(d.type))
-        .attr("stroke", "#1e40af")
+        .attr("stroke", "#333")
         .attr("stroke-width", 2)
         .style("cursor", "pointer")
         .call(d3.drag()
@@ -228,7 +238,8 @@ function init_graph() {
       .force("link", d3.forceLink(relLinks).id(d => d.id).distance(80))
       .force("charge", d3.forceManyBody().strength(-200))
       .force("center", d3.forceCenter(relWidth/2, height/2))
-      .force("collision", d3.forceCollide().radius(25));
+      .force("collision", d3.forceCollide().radius(25))
+      .force("radial", d3.forceRadial(d => radialRadius[d.type] || 150, relWidth/2, height/2).strength(0.8));
 
     const relLinkSel = relG.append("g").attr("class", "links")
       .selectAll("path")
@@ -436,7 +447,8 @@ function init_graph() {
 
         // COMM NODES: fade & resize
         commNode
-          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2)
+          .style("display", d => nbr.has(d.id) ? null : "none")
+          // .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2)
           .attr("d", d => d3.symbol()
                           .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
                           // <-- double the area for selected nodes (200 vs. 100)
@@ -444,41 +456,47 @@ function init_graph() {
           );
 
         commLabel
-          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2);
+          .style("display", d => nbr.has(d.id) ? null : "none")
+          .attr("dx",    d => selectedNodes.has(d.id) ? 32 : 12);
+          // .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2);
 
         commLinkSel
-          .attr("opacity", l =>
+          .style("display", l =>
             (selectedNodes.has(l.source.id) || selectedNodes.has(l.target.id))
-              ? 1 : 0.1
+              ? null : "none"
           );
 
       } else if (selectedTypes.size) {
         // reset to default size & opacity when using type-filter
         commNode
-          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2)
+          .style("display", d => selectedTypes.has(d.type) ? null : "none")
           .attr("d", d => d3.symbol()
                           .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
                           .size(100)()
           );
         commLabel
-          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2);
+          .style("display", d => selectedTypes.has(d.type) ? null : "none")
+          .attr("dx", 12)
+          // .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2);
         commLinkSel
-          .attr("opacity", l => {
+          .style("display", l => {
             const t0 = entityTypeMap.get(l.source.id),
                   t1 = entityTypeMap.get(l.target.id);
-            return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? 1 : 0.1;
+            return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? null : "none";
           });
 
       } else {
         // no filter → all default
         commNode
-          .attr("opacity", 1)
+          .style("display", null)
           .attr("d", d => d3.symbol()
                           .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
                           .size(100)()
           );
-        commLabel.attr("opacity", 1);
-        commLinkSel.attr("opacity", 0.6);
+        
+        commLabel.style("display", null)
+          .attr("dx", 12);
+        commLinkSel.style("display", null);
       }
          
       // ── REL GRAPH: highlight like COMM graph ──
@@ -490,49 +508,52 @@ function init_graph() {
         });
 
         relNode
-          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2)
+          .style("display", d => nbr.has(d.id) ? null : "none")
           .attr("d", d => d3.symbol()
         .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
         .size(selectedNodes.has(d.id) ? 2000 : 80)()
           );
 
         relLabel
-          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2);
+          .style("display", d => nbr.has(d.id) ? null : "none")
+          .attr("dx",    d => selectedNodes.has(d.id) ? 32 : 12);
 
         relLinkSel
-          .attr("opacity", l =>
+          .style("display", l =>
         (selectedNodes.has(l.source.id) || selectedNodes.has(l.target.id))
-          ? 1 : 0.1
+          ? null : "none"
           );
 
       } else if (selectedTypes.size) {
         relNode
-          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2)
+          .style("display", d => selectedTypes.has(d.type) ? null : "none")
           .attr("d", d => d3.symbol()
         .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
         .size(80)()
           );
 
         relLabel
-          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2);
+          .style("display", d => selectedTypes.has(d.type) ? null : "none")
+          .attr("dx", 12);
 
         relLinkSel
-          .attr("opacity", l => {
+          .style("display", l => {
         const t0 = entityTypeMap.get(l.source.id);
         const t1 = entityTypeMap.get(l.target.id);
-        return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? 1 : 0.1;
+        return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? null : "none";
           });
 
       } else {
         relNode
-          .attr("opacity", 1)
+          .style("display", null)
           .attr("d", d => d3.symbol()
         .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
         .size(80)()
           );
 
-        relLabel.attr("opacity", 1);
-        relLinkSel.attr("opacity", 0.6);
+        relLabel.style("display", null)
+          .attr("dx", 12);
+        relLinkSel.style("display", null);
       }
     }
 
