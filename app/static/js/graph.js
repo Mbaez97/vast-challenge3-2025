@@ -670,8 +670,15 @@ function init_graph() {
       .attr("transform", (_, i) => `translate(0,${i * 20})`)
       .style("cursor", "pointer")
       .on("click", (e, t) => {
-        if (selectedTypes.has(t)) selectedTypes.delete(t);
-        else selectedTypes.add(t);
+        console.log(`🎯 Legend clicked:`, t);
+        if (selectedTypes.has(t)) {
+          selectedTypes.delete(t);
+          console.log(`❌ Removed type:`, t);
+        } else {
+          selectedTypes.add(t);
+          console.log(`✅ Added type:`, t);
+        }
+        console.log(`📋 Current selectedTypes:`, Array.from(selectedTypes));
         updateHighlights();
         updateLegendStyles();
         renderHeatmap();
@@ -811,7 +818,7 @@ function init_graph() {
             .size(80)()
           );
         commLabel
-          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2);
+          .style("display", d => selectedTypes.has(d.type) ? null : "none");
         commLinkSel
           .style("display", l => {
             const t0 = entityTypeMap.get(l.source.id),
@@ -919,15 +926,30 @@ function init_graph() {
 
     // Heatmap rendering
     function renderHeatmap() {
+      console.log(`🔄 renderHeatmap() called`);
       const hm = data.heatmap;
       let ents = hm.entities.slice(),
         mat = hm.matrix.map(r => r.slice());
+      
+      console.log(`🗺️ Heatmap entities sample:`, ents.slice(0, 5));
+      console.log(`🗺️ EntityTypeMap sample:`, Array.from(entityTypeMap.entries()).slice(0, 5));
+      console.log(`📊 selectedTypes.size:`, selectedTypes.size, `selectedNodes.size:`, selectedNodes.size);
 
-      // filter rows & cols by type
+      // filter rows & cols by type or selected nodes
       if (selectedTypes.size) {
+        console.log(`🔍 Filtering heatmap by selected types:`, Array.from(selectedTypes));
         const keep = ents
           .map((e, i) => selectedTypes.has(entityTypeMap.get(e)) ? i : -1)
           .filter(i => i >= 0);
+        console.log(`📊 Original entities: ${ents.length}, Filtered entities: ${keep.length}`);
+        ents = keep.map(i => hm.entities[i]);
+        mat = keep.map(i => keep.map(j => hm.matrix[i][j]));
+      } else if (selectedNodes.size) {
+        console.log(`🔍 Filtering heatmap by selected nodes:`, Array.from(selectedNodes));
+        const keep = ents
+          .map((e, i) => selectedNodes.has(e) ? i : -1)
+          .filter(i => i >= 0);
+        console.log(`📊 Original entities: ${ents.length}, Filtered entities: ${keep.length}`);
         ents = keep.map(i => hm.entities[i]);
         mat = keep.map(i => keep.map(j => hm.matrix[i][j]));
       }
