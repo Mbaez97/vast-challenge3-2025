@@ -1,4 +1,5 @@
 function init_graph() {
+  console.log('🚀 Initializing hierarchical edge bundling graph...');
   // ── Containers and SVG setup ─────────────────────────────────────────
   const commContainer = d3.select("#graph-container-2");
   const relContainer  = d3.select("#relationship-container");
@@ -23,32 +24,11 @@ function init_graph() {
     .attr("class", "bg-white rounded-lg shadow-md");
   const relG = relSvg.append("g");
 
-  // ── Static Shape Legend on Communication ────────────────────────────
-  const shapeLegend = commSvg.append("g")
-    .attr("transform", "translate(20,20)");
-  const shapeItems = [
-    { label: "Real Name",  symbol: d3.symbolCircle },
-    { label: "Pseudonym",  symbol: d3.symbolStar   }
-  ];
-  shapeLegend.selectAll("g.legend-shape-item")
-    .data(shapeItems)
-    .join("g")
-      .attr("transform", (_, i) => `translate(0,${i * 24})`)
-    .call(item => {
-      item.append("path")
-        .attr("d", d3.symbol().type(d => d.symbol).size(100))
-        .attr("fill", "#eee")
-        .attr("stroke", "#333");
-      item.append("text")
-        .attr("x", 20)
-        .attr("y", 4)
-        .text(d => d.label)
-        .attr("font-size", "12px")
-        .attr("alignment-baseline", "middle");
-    });
 
-  
+  // Clean visualization without duplicate legend - using only category labels
+
   d3.json("/data/graph").then(data => {
+    console.log('📊 Graph data loaded:', data);
     // Shared state
     let selectedNodes = new Set();
     let selectedTypes = new Set();
@@ -151,82 +131,425 @@ function init_graph() {
           .attr("font-size", "12px");
       });
 
-    // Type → color
+    // Type → color - use consistent domain ordering
     const color = d3.scaleOrdinal(d3.schemeCategory10);
     const entityTypeMap = new Map(commNodes.map(d => [d.id, d.type]));
-
-    // Radial radii for nodes
-    const radialRadius = {
-      Person: 350,
-      Vessel: 200,
-      Location: 100,
-      Organization: 50,
-      Group: 50
-    }
+    
+    // Debug: Check types order - maintain original order from data
+    const allTypes = Array.from(new Set(commNodes.map(d => d.type)));
+    
+    // Set explicit domain for color scale to ensure consistent ordering
+    color.domain(allTypes);
+    
+    console.log(`📋 All entity types found (sorted):`, allTypes);
+    console.log(`🎨 Color mapping:`, allTypes.map(t => ({ type: t, color: color(t) })));
 
     // Tooltip for heatmap
     const tooltip = d3.select("body").append("div")
       .attr("class", "heatmap-tooltip")
       .style("visibility", "hidden");
 
-    console.log(commNodes);
-    // ── COMMUNICATION GRAPH ────────────────────────────────────────────
-    const commSim = d3.forceSimulation(commNodes)
-      .force("link", d3.forceLink(commLinks).id(d => d.id).distance(100))
-      .force("charge", d3.forceManyBody().strength(-300))
-      .force("center", d3.forceCenter(commWidth/2, height/2))
-      .force("collision", d3.forceCollide().radius(30))
-      .force("radial", d3.forceRadial(d => radialRadius[d.type] || 150, commWidth/2, height/2).strength(0.8));
-
-    const commLinkSel = commG.append("g").attr("class", "links")
+    // ── COMMUNICATION GRAPH - CITATION PATTERNS (WELL-FORMED STYLE) ──────────
+    
+    // Group nodes by type for citation-style arrangement
+    const nodesByType = d3.group(commNodes, d => d.type);
+    
+    // Calculate positions for elegant circular hierarchical edge bundling
+    const centerX = commWidth / 2;
+    const centerY = height / 2;
+    const radius = Math.min(commWidth, height) / 2 - 80; // Single perimeter circle
+    const bundlingRadius = radius * 0.15; // Much tighter bundling radius for elegant curves
+    
+    // Create nodes with connection counts for sizing
+    const nodeConnectionCounts = new Map();
+    commLinks.forEach(link => {
+      nodeConnectionCounts.set(link.source, (nodeConnectionCounts.get(link.source) || 0) + 1);
+      nodeConnectionCounts.set(link.target, (nodeConnectionCounts.get(link.target) || 0) + 1);
+    });
+    
+    // Create sophisticated radial layout - use allTypes directly in sorted order
+    let allLeafNodes = [];
+    let nodePositions = new Map();
+    let typeGroups = [];
+    
+    // Use only types that have nodes, but maintain the sorted order
+    const activeTypes = allTypes.filter(typeName => nodesByType.has(typeName));
+    console.log(`🔄 ActiveTypes order:`, activeTypes);
+    
+    // Arrange all nodes on the perimeter, grouped by type
+    const totalNodes = commNodes.length;
+    
+    // Calculate how much arc each type should occupy
+    const typeAngles = new Map();
+    let currentAngle = -Math.PI / 2; // Start at top
+    
+    activeTypes.forEach((typeName) => {
+      const nodesOfType = nodesByType.get(typeName) || [];
+      if (nodesOfType.length === 0) return;
+      
+      // Allocate angle proportional to number of nodes
+      const proportion = nodesOfType.length / totalNodes;
+      const sectorAngle = 2 * Math.PI * proportion;
+      
+      typeAngles.set(typeName, {
+        startAngle: currentAngle,
+        endAngle: currentAngle + sectorAngle,
+        sectorAngle: sectorAngle
+      });
+      
+      currentAngle += sectorAngle;
+    });
+    
+    activeTypes.forEach((typeName, typeIndex) => {
+      const nodesOfType = nodesByType.get(typeName) || [];
+      if (nodesOfType.length === 0) return;
+      
+      const angleInfo = typeAngles.get(typeName);
+      const { startAngle, sectorAngle } = angleInfo;
+      
+      // Sort nodes by connection count for better visual hierarchy
+      const sortedNodes = nodesOfType.sort((a, b) => 
+        (nodeConnectionCounts.get(b.id) || 0) - (nodeConnectionCounts.get(a.id) || 0)
+      );
+      
+      const nodeCount = sortedNodes.length;
+      
+      sortedNodes.forEach((node, nodeIndex) => {
+        const connectionCount = nodeConnectionCounts.get(node.id) || 1;
+        const maxConnections = Math.max(...Array.from(nodeConnectionCounts.values()));
+        const importance = connectionCount / maxConnections;
+        
+        // Distribute nodes evenly along the arc assigned to this type
+        const t = nodeCount > 1 ? nodeIndex / (nodeCount - 1) : 0.5;
+        const angle = startAngle + (t * sectorAngle * 0.95); // Use 95% of arc to leave small gaps
+        
+        // All nodes on the same radius (perimeter)
+        const x = centerX + Math.cos(angle) * radius;
+        const y = centerY + Math.sin(angle) * radius;
+        
+        const nodeData = { 
+          x, y, 
+          angle,
+          radius,
+          typeCategory: typeName,
+          sectorStart: startAngle,
+          sectorEnd: startAngle + sectorAngle,
+          ...node,
+          connectionCount,
+          size: connectionCount,
+          typeColor: color(typeName),
+          typeLightColor: color(typeName),
+          typeSymbol: d3.symbolCircle,
+          importance
+        };
+        
+        nodePositions.set(node.id, nodeData);
+        allLeafNodes.push(nodeData);
+      });
+      
+      // Store type group info for sector labels
+      typeGroups.push({
+        name: typeName,
+        color: color(typeName), // Use same color scale as legend
+        lightColor: color(typeName),
+        angle: angleInfo.startAngle + angleInfo.sectorAngle / 2,
+        radius: radius + 60, // Outside the perimeter
+        nodeCount: nodesOfType.length,
+        sectorStart: angleInfo.startAngle,
+        sectorEnd: angleInfo.endAngle,
+        sectorAngle: angleInfo.sectorAngle
+      });
+    });
+    
+    console.log(`🌐 Created ${allLeafNodes.length} nodes in circular layout`);
+    console.log(`🗺️ Entity types:`, typeGroups.map(t => `${t.name}: ${t.nodeCount}`));
+    console.log(`🎨 Type groups with angles:`, typeGroups.map(t => ({
+      name: t.name,
+      color: t.color,
+      startAngle: t.sectorStart,
+      endAngle: t.sectorEnd,
+      angleInDegrees: (t.angle * 180 / Math.PI)
+    })));
+    console.log(`🔄 TypeGroups order:`, typeGroups.map(t => t.name));
+    
+    // Debug: Check specific nodes and their sectors
+    const debugNodes = ["Nadia Conti", "Himark Harbor", "The Intern"];
+    debugNodes.forEach(nodeName => {
+      const node = allLeafNodes.find(n => n.id === nodeName);
+      if (node) {
+        const sector = typeGroups.find(t => t.name === node.type);
+        console.log(`🔍 ${nodeName} debug:`, {
+          id: node.id,
+          type: node.type,
+          typeCategory: node.typeCategory,
+          angle: node.angle,
+          angleInDegrees: (node.angle * 180 / Math.PI),
+          color: color(node.type),
+          sectorStart: node.sectorStart,
+          sectorEnd: node.sectorEnd,
+          sectorColor: sector ? sector.color : 'NOT_FOUND',
+          sectorAngle: sector ? (sector.angle * 180 / Math.PI) : 'NOT_FOUND'
+        });
+      }
+    });
+    
+    // Classic Hierarchical Edge Bundling algorithm
+    function createHierarchicalBundledPath(source, target) {
+      const sx = source.x, sy = source.y;
+      const tx = target.x, ty = target.y;
+      
+      // Calculate angles for source and target
+      const sourceAngle = Math.atan2(sy - centerY, sx - centerX);
+      const targetAngle = Math.atan2(ty - centerY, tx - centerX);
+      
+      // Calculate angular distance (shortest path)
+      let angleSpan = Math.abs(targetAngle - sourceAngle);
+      if (angleSpan > Math.PI) {
+        angleSpan = 2 * Math.PI - angleSpan;
+      }
+      
+      // Create elegant bundling like the reference image
+      const bundlingIntensity = Math.min(angleSpan / Math.PI, 1.0);
+      
+      // Multiple control points for very smooth curves
+      const steps = 5;
+      const controlPoints = [];
+      
+      for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        const currentAngle = sourceAngle + (targetAngle - sourceAngle) * t;
+        
+        // Variable radius for smooth bundling toward center
+        let currentRadius;
+        if (i === 0) {
+          currentRadius = radius; // Start at perimeter
+        } else if (i === steps) {
+          currentRadius = radius; // End at perimeter
+        } else {
+          // Curve toward center with varying intensity
+          const bundleDepth = Math.sin(t * Math.PI) * bundlingIntensity;
+          currentRadius = radius - (bundleDepth * (radius - bundlingRadius));
+        }
+        
+        controlPoints.push({
+          x: centerX + Math.cos(currentAngle) * currentRadius,
+          y: centerY + Math.sin(currentAngle) * currentRadius
+        });
+      }
+      
+      // Create smooth spline through control points
+      let path = `M${sx},${sy}`;
+      
+      if (controlPoints.length > 2) {
+        // Use quadratic curves for smoothness
+        for (let i = 1; i < controlPoints.length - 1; i++) {
+          const cp = controlPoints[i];
+          const nextCp = controlPoints[i + 1];
+          const midX = (cp.x + nextCp.x) / 2;
+          const midY = (cp.y + nextCp.y) / 2;
+          path += ` Q${cp.x},${cp.y} ${midX},${midY}`;
+        }
+        path += ` Q${controlPoints[controlPoints.length - 1].x},${controlPoints[controlPoints.length - 1].y} ${tx},${ty}`;
+      } else {
+        path += ` Q${centerX},${centerY} ${tx},${ty}`;
+      }
+      
+      return path;
+    }
+    
+    // Create links with hierarchical edge bundling
+    console.log(`📊 Creating ${commLinks.length} bundled links`);
+    const bundledLinks = commLinks.map(link => {
+      const source = nodePositions.get(link.source);
+      const target = nodePositions.get(link.target);
+      if (source && target) {
+        return {
+          ...link,
+          source: source,
+          target: target,
+          path: createHierarchicalBundledPath(source, target)
+        };
+      }
+      return null;
+    }).filter(d => d !== null);
+    console.log(`✅ Created ${bundledLinks.length} valid bundled links`);
+    
+    // Optional: sector separators (commented out for cleaner look like reference)
+    /*
+    const sectorLines = commG.append("g").attr("class", "sector-lines")
       .selectAll("line")
-      .data(commLinks)
+      .data(typeGroups)
       .join("line")
-        .attr("stroke", "#999")
-        .attr("stroke-width", 2);
+        .attr("x1", d => centerX + Math.cos(d.sectorStart) * bundlingRadius)
+        .attr("y1", d => centerY + Math.sin(d.sectorStart) * bundlingRadius)
+        .attr("x2", d => centerX + Math.cos(d.sectorStart) * (radius + 30))
+        .attr("y2", d => centerY + Math.sin(d.sectorStart) * (radius + 30))
+        .attr("stroke", d => d.color)
+        .attr("stroke-width", 0.5)
+        .attr("opacity", 0.2);
+    */
+    
+    // Remove colored arcs - show only individual nodes with their colors
+    
+    // Draw elegant hierarchical edge bundling connections like the reference
+    const commLinkSel = commG.append("g").attr("class", "links")
+      .selectAll("path")
+      .data(bundledLinks)
+      .join("path")
+        .attr("d", d => d.path)
+        .attr("fill", "none")
+        .attr("stroke", "#888888")
+        .attr("stroke-width", 0.8)
+        .attr("opacity", 0.4)
+        .style("stroke-linecap", "round")
+        .style("stroke-linejoin", "round");
 
-    // Nodes (circle vs star)
+    // Visible nodes with colors and shapes based on type and pseudonym status
+    // Circles for normal entities, stars for pseudonyms, colored by type
     const commNode = commG.append("g").attr("class", "nodes")
       .selectAll("path")
-      .data(commNodes)
+      .data(allLeafNodes)
       .join("path")
-        .attr("d", d => d3.symbol()
-                         .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
-                         .size(100)()
-        )
+        .attr("d", d => {
+          const size = 80; // Base size for nodes
+          const symbolType = d.is_pseudonym ? d3.symbolStar : d3.symbolCircle;
+          return d3.symbol().type(symbolType).size(size)();
+        })
+        .attr("transform", d => `translate(${d.x},${d.y})`)
         .attr("fill", d => color(d.type))
         .attr("stroke", "#333")
-        .attr("stroke-width", 2)
-        .style("cursor", "pointer")
-        .call(d3.drag()
-          .on("start", e => { if (!e.active) commSim.alphaTarget(0.3).restart(); e.subject.fx = e.subject.x; e.subject.fy = e.subject.y; })
-          .on("drag",  e => { e.subject.fx = e.x; e.subject.fy = e.y; })
-          .on("end",   e => { if (!e.active) commSim.alphaTarget(0); e.subject.fx = null; e.subject.fy = null; })
-        );
+        .attr("stroke-width", 1.5)
+        .attr("opacity", 0.9)
+        .attr("data-type", d => d.type)
+        .attr("data-pseudonym", d => d.is_pseudonym)
+        .attr("data-category", d => d.typeCategory)
+        .style("cursor", "pointer");
 
-    // Labels
+    // Individual node labels with pseudonym indicators
     const commLabel = commG.append("g").attr("class", "labels")
       .selectAll("text")
-      .data(commNodes)
+      .data(allLeafNodes)
       .join("text")
-        .text(d => d.id)
-        .attr("dx", 12)
-        .attr("dy", 4)
-        .attr("font-size", "12px");
+        .text(d => {
+          // Truncate long names for cleaner look
+          const maxLength = 10;
+          return d.id.length > maxLength ? d.id.substring(0, maxLength) + "..." : d.id;
+        })
+        .attr("x", d => {
+          // Position labels at fixed distance outside circle
+          const labelRadius = radius + 30;
+          return centerX + Math.cos(d.angle) * labelRadius;
+        })
+        .attr("y", d => {
+          const labelRadius = radius + 30;
+          return centerY + Math.sin(d.angle) * labelRadius;
+        })
+        .attr("text-anchor", d => {
+          // Proper text anchoring based on quadrant
+          const degrees = (d.angle * 180 / Math.PI + 360) % 360;
+          if (degrees > 90 && degrees < 270) {
+            return "end"; // Right side of circle
+          }
+          return "start"; // Left side of circle
+        })
+        .attr("dy", "0.35em")
+        .attr("font-size", "10px")
+        .attr("font-weight", "500")
+        .attr("fill", d => color(d.type))
+        .attr("opacity", 1)
+        .style("font-family", "'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif")
+        .style("text-shadow", "1px 1px 2px rgba(255,255,255,0.8)");
+    
+    // Category labels removed - shown in legend only
+    
+    // Communication graph tooltip
+    const commTooltip = d3.select("body").append("div")
+      .attr("class", "comm-tooltip")
+      .style("position", "absolute")
+      .style("visibility", "hidden")
+      .style("background", "rgba(0, 0, 0, 0.8)")
+      .style("color", "white")
+      .style("padding", "8px 12px")
+      .style("border-radius", "4px")
+      .style("font-size", "12px")
+      .style("pointer-events", "none")
+      .style("z-index", "1000");
 
-    // Tick
-    commSim.on("tick", () => {
-      commLinkSel
-        .attr("x1", d => d.source.x)
-        .attr("y1", d => d.source.y)
-        .attr("x2", d => d.target.x)
-        .attr("y2", d => d.target.y);
-      commNode
-        .attr("transform", d => `translate(${d.x},${d.y})`);
-      commLabel
-        .attr("x", d => d.x)
-        .attr("y", d => d.y);
-    });
+    // Interactive features
+    commNode
+      .on("mouseover", function(event, d) {
+        // Visual feedback handled by CSS hover
+        
+        // Show tooltip
+        const connections = bundledLinks.filter(link => 
+          link.source.id === d.id || link.target.id === d.id).length;
+        
+        commTooltip
+          .html(`
+            <strong>${d.id}</strong><br/>
+            Category: ${d.typeCategory}<br/>
+            ${d.is_pseudonym ? 'Pseudonym' : 'Real Name'}<br/>
+            Connections: ${connections}
+          `)
+          .style("visibility", "visible");
+        
+        // Highlight connected edges
+        commLinkSel
+          .attr("opacity", link => 
+            (link.source.id === d.id || link.target.id === d.id) ? 1 : 0.1
+          )
+          .attr("stroke-width", link =>
+            (link.source.id === d.id || link.target.id === d.id) ? 3 : 1.5
+          )
+          .attr("stroke", link =>
+            (link.source.id === d.id || link.target.id === d.id) ? "#1f4e79" : 
+            (link.source.type ? color(link.source.type) : "#6c757d")
+          );
+          
+        // Highlight connected nodes
+        commNode
+          .attr("opacity", node => {
+            if (node.id === d.id) return 1;
+            const isConnected = bundledLinks.some(link =>
+              (link.source.id === d.id && link.target.id === node.id) ||
+              (link.target.id === d.id && link.source.id === node.id)
+            );
+            return isConnected ? 1 : 0.3;
+          });
+      })
+      .on("mousemove", function(event) {
+        commTooltip
+          .style("top", (event.pageY - 10) + "px")
+          .style("left", (event.pageX + 10) + "px");
+      })
+      .on("mouseout", function(event, d) {
+        d3.select(this).attr("stroke-width", 2);
+        
+        // Hide tooltip
+        commTooltip.style("visibility", "hidden");
+        
+        // Reset edge highlighting
+        commLinkSel
+          .attr("opacity", 0.6)
+          .attr("stroke-width", 1.5)
+          .attr("stroke", "#999999");
+          
+        // Reset node opacity
+        commNode.attr("opacity", 1);
+      });
+    
+    // Add edge bundling animation on load
+    commLinkSel
+      .attr("stroke-dasharray", function() {
+        return this.getTotalLength() + " " + this.getTotalLength();
+      })
+      .attr("stroke-dashoffset", function() {
+        return this.getTotalLength();
+      })
+      .transition()
+      .duration(2000)
+      .ease(d3.easeLinear)
+      .attr("stroke-dashoffset", 0);
 
     // Zoom
     commSvg.call(d3.zoom().on("zoom", ev => {
@@ -238,8 +561,7 @@ function init_graph() {
       .force("link", d3.forceLink(relLinks).id(d => d.id).distance(80))
       .force("charge", d3.forceManyBody().strength(-200))
       .force("center", d3.forceCenter(relWidth/2, height/2))
-      .force("collision", d3.forceCollide().radius(25))
-      .force("radial", d3.forceRadial(d => radialRadius[d.type] || 150, relWidth/2, height/2).strength(0.8));
+      .force("collision", d3.forceCollide().radius(25));
 
     const relLinkSel = relG.append("g").attr("class", "links")
       .selectAll("path")
@@ -298,7 +620,9 @@ function init_graph() {
         .text(d => d.id)
         .attr("dx", 12)
         .attr("dy", 4)
-        .attr("font-size", "11px");
+        .attr("font-size", "11px")
+        .attr("font-weight", "400")
+        .attr("fill", "#333");
 
     relSim.on("tick", () => {
       relLinkSel.attr("d", d => {
@@ -324,7 +648,8 @@ function init_graph() {
     }));
 
     // ── Interactive Type Legend on Communication ──────────────────────
-    const types = Array.from(new Set(commNodes.map(d => d.type)));
+    const types = allTypes; // Use same order as arcs
+    console.log(`🔄 Legend types order:`, types);
     const legend = commSvg.append("g")
       .attr("transform", `translate(12,65)`)
       // .attr("transform", `translate(${commWidth - 130},20)`);
@@ -447,56 +772,49 @@ function init_graph() {
 
         // COMM NODES: fade & resize
         commNode
-          .style("display", d => nbr.has(d.id) ? null : "none")
-          // .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2)
+          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2)
           .attr("d", d => d3.symbol()
                           .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
                           // <-- double the area for selected nodes (200 vs. 100)
-                          .size(selectedNodes.has(d.id) ? 2000 : 100)()
+                          .size(selectedNodes.has(d.id) ? 200 : 80)()
           );
 
         commLabel
-          .style("display", d => nbr.has(d.id) ? null : "none")
-          .attr("dx",    d => selectedNodes.has(d.id) ? 32 : 12);
-          // .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2);
+          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2);
 
         commLinkSel
-          .style("display", l =>
+          .attr("opacity", l =>
             (selectedNodes.has(l.source.id) || selectedNodes.has(l.target.id))
-              ? null : "none"
+              ? 1 : 0.1
           );
 
       } else if (selectedTypes.size) {
         // reset to default size & opacity when using type-filter
         commNode
-          .style("display", d => selectedTypes.has(d.type) ? null : "none")
+          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2)
           .attr("d", d => d3.symbol()
                           .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
-                          .size(100)()
+                          .size(80)()
           );
         commLabel
-          .style("display", d => selectedTypes.has(d.type) ? null : "none")
-          .attr("dx", 12)
-          // .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2);
+          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2);
         commLinkSel
-          .style("display", l => {
+          .attr("opacity", l => {
             const t0 = entityTypeMap.get(l.source.id),
                   t1 = entityTypeMap.get(l.target.id);
-            return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? null : "none";
+            return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? 1 : 0.1;
           });
 
       } else {
         // no filter → all default
         commNode
-          .style("display", null)
+          .attr("opacity", 1)
           .attr("d", d => d3.symbol()
                           .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
-                          .size(100)()
+                          .size(80)()
           );
-        
-        commLabel.style("display", null)
-          .attr("dx", 12);
-        commLinkSel.style("display", null);
+        commLabel.attr("opacity", 1);
+        commLinkSel.attr("opacity", 0.6);
       }
          
       // ── REL GRAPH: highlight like COMM graph ──
@@ -508,52 +826,49 @@ function init_graph() {
         });
 
         relNode
-          .style("display", d => nbr.has(d.id) ? null : "none")
+          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2)
           .attr("d", d => d3.symbol()
         .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
         .size(selectedNodes.has(d.id) ? 2000 : 80)()
           );
 
         relLabel
-          .style("display", d => nbr.has(d.id) ? null : "none")
-          .attr("dx",    d => selectedNodes.has(d.id) ? 32 : 12);
+          .attr("opacity", d => nbr.has(d.id) ? 1 : 0.2);
 
         relLinkSel
-          .style("display", l =>
+          .attr("opacity", l =>
         (selectedNodes.has(l.source.id) || selectedNodes.has(l.target.id))
-          ? null : "none"
+          ? 1 : 0.1
           );
 
       } else if (selectedTypes.size) {
         relNode
-          .style("display", d => selectedTypes.has(d.type) ? null : "none")
+          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2)
           .attr("d", d => d3.symbol()
         .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
         .size(80)()
           );
 
         relLabel
-          .style("display", d => selectedTypes.has(d.type) ? null : "none")
-          .attr("dx", 12);
+          .attr("opacity", d => selectedTypes.has(d.type) ? 1 : 0.2);
 
         relLinkSel
-          .style("display", l => {
+          .attr("opacity", l => {
         const t0 = entityTypeMap.get(l.source.id);
         const t1 = entityTypeMap.get(l.target.id);
-        return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? null : "none";
+        return (selectedTypes.has(t0) && selectedTypes.has(t1)) ? 1 : 0.1;
           });
 
       } else {
         relNode
-          .style("display", null)
+          .attr("opacity", 1)
           .attr("d", d => d3.symbol()
         .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
         .size(80)()
           );
 
-        relLabel.style("display", null)
-          .attr("dx", 12);
-        relLinkSel.style("display", null);
+        relLabel.attr("opacity", 1);
+        relLinkSel.attr("opacity", 0.6);
       }
     }
 
@@ -651,11 +966,7 @@ function init_graph() {
       // column labels rotated
       svgHM.append("g")
           .selectAll("text")
-          .data(ents, d => {
-            let entityNode = commNodes.find(n => n.id === d);
-            if (!entityNode) return d; // skip if not found
-            return `* ${entityNode.id}` ? entityNode.is_pseudonym : d; // add asterisk for pseudonyms
-          })
+          .data(ents)
           .join("text")
             .attr("transform", (d,i) =>
               // place at mid‐cell, down near bottom margin, then rotate
@@ -664,7 +975,25 @@ function init_graph() {
             .text(d => d)
             .attr("font-size", "10px")
             .attr("text-anchor", "end")
-            .attr("pointer-events", "none");
+            .attr("pointer-events", "none")
+            .attr("font-weight", "400")
+            .attr("fill", "#333");
+
+      // row labels (left side) - made invisible
+      svgHM.append("g")
+          .selectAll("text")
+          .data(ents)
+          .join("text")
+            .attr("x", -5)
+            .attr("y", d => yScale(d) + yScale.bandwidth()/2)
+            .attr("dy", "0.35em")
+            .text(d => d)
+            .attr("font-size", "10px")
+            .attr("text-anchor", "end")
+            .attr("pointer-events", "none")
+            .attr("font-weight", "400")
+            .attr("fill", "#333")
+            .style("opacity", 0); // Make row labels invisible
 
       // right‐side vertical legend
       const fullH = W,
@@ -701,3 +1030,6 @@ function init_graph() {
 
   }).catch(err=>console.error("Error loading graph data:",err));
 }
+
+// Confirm function is loaded
+console.log('✅ init_graph function defined and ready');
