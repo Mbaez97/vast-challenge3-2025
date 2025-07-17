@@ -25,7 +25,34 @@ function init_graph() {
   const relG = relSvg.append("g");
 
 
-  // Clean visualization without duplicate legend - using only category labels
+  const shapeLegend = commSvg.append("g")
+  .attr("transform", "translate(20,20)");
+  const shapeItems = [
+    { label: "Real Name",  symbol: d3.symbolCircle },
+    { label: "Pseudonym",  symbol: d3.symbolStar   }
+  ];
+  shapeLegend.selectAll("g.legend-shape-item")
+    .data(shapeItems)
+    .join("g")
+      .attr("class", "legend-shape-item")
+      .attr("transform", (_, i) => `translate(0,${i * 24})`)
+    .call(item => {
+      item.append("path")
+        .attr("d", d => 
+          d3.symbol()
+            .type(d.symbol)   // <-- use the bound datum’s symbol
+            .size(100)()
+        )
+        .attr("fill", "#eee")
+        .attr("stroke", "#333")
+        .attr("stroke-width", 1.5);
+      item.append("text")
+        .attr("x", 24)
+        .attr("y", 4)
+        .text(d => d.label)
+        .attr("font-size", "12px")
+        .attr("alignment-baseline", "middle");
+    });
 
 
   d3.json("/data/graph").then(data => {
@@ -573,7 +600,6 @@ function init_graph() {
     const relCenterX = relWidth / 2;
     const relCenterY = height / 2;
     const relRadius = Math.min(relWidth, height) / 2 - 80;
-    const relBundlingRadius = relRadius * 0.15;
     
     // Group relationship nodes by type
     const relNodesByType = d3.group(relNodes, d => d.type);
