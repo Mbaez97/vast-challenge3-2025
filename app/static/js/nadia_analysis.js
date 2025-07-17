@@ -1297,7 +1297,7 @@ function init_nadia_analysis() {
             .style("font-size", "18px")
             .style("font-weight", "600")
             .style("flex-shrink", "0")
-            .text("Analysis: Nadia Conti");
+            .text("Message analysis");
 
         // Guardar comunicaciones globalmente para acceso desde wordcloud y análisis
         window.directCommunications = directCommunications;
