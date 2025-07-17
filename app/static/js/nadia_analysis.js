@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 // app/static/js/nadia_analysis.js - Final clean version for Network Analysis only
 function init_nadia_analysis() {
     console.log("Initializing Nadia Conti analysis...");
@@ -24,7 +23,7 @@ function init_nadia_analysis() {
         });
     
     function showError(errorMessage) {
-        d3.select("#network-tab").html(`
+        d3.select("#network-graph").html(`
             <div class="bg-red-50 border border-red-200 rounded-lg p-4">
                 <h3 class="text-red-800 font-semibold">Error Loading Data</h3>
                 <p class="text-red-600">${errorMessage}</p>
@@ -970,7 +969,7 @@ function init_nadia_analysis() {
 }
 
 // Export the init function
-=======
+
 // app/static/js/nadia_analysis.js - Final clean version for Network Analysis only
 function init_nadia_analysis() {
     console.log("🚀 Initializing Nadia Conti analysis...");
@@ -1000,7 +999,7 @@ function init_nadia_analysis() {
         });
     
     function showError(errorMessage) {
-        d3.select("#network-tab").html(`
+        d3.select("#network-graph").html(`
             <div class="bg-red-50 border border-red-200 rounded-lg p-4">
                 <h3 class="text-red-800 font-semibold">Error Loading Data</h3>
                 <p class="text-red-600">${errorMessage}</p>
@@ -3463,5 +3462,4 @@ function init_nadia_analysis() {
 }
 
 // Export the init function
->>>>>>> Stashed changes
 window.init_nadia_analysis = init_nadia_analysis;
