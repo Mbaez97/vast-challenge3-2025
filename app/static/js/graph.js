@@ -979,7 +979,7 @@ function init_graph() {
             .attr("font-weight", "400")
             .attr("fill", "#333");
 
-      // row labels (left side)
+      // row labels (left side) - made invisible
       svgHM.append("g")
           .selectAll("text")
           .data(ents)
@@ -992,7 +992,8 @@ function init_graph() {
             .attr("text-anchor", "end")
             .attr("pointer-events", "none")
             .attr("font-weight", "400")
-            .attr("fill", "#333");
+            .attr("fill", "#333")
+            .style("opacity", 0); // Make row labels invisible
 
       // right‐side vertical legend
       const fullH = W,
