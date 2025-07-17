@@ -1,0 +1,77 @@
+[33m039bbdc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mNadiaConti[m[33m, [m[1;31morigin/NadiaConti[m[33m)[m update
+[33mea981b5[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33m104c1a4[m new graph view implementation
+[33mbbf60d0[m I've added the new graph relationship file in the configuration
+[33md362392[m Adding the improved version of relationship graph
+[33mbe8fadb[m Export visualizations
+[33mfd5afbd[m Parameters adjustment
+[33mc632c4f[m Parameters adjustment + added legend
+[33mc34b3e6[m Parameter ajustment
+[33m7836d7c[m Improvements on daily patterns visualization
+[33m0a8e7b5[m Improvements on daily comunication pattenrs visualization
+[33me9f8df1[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33m82eb20b[m I've add the communication dataset and add a entities.csv
+[33me310ecb[m Fix execution counts and correct variable names in question3 notebook
+[33m05d432f[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33m8928497[m Better topic loading on daily patterns
+[33m48f54dd[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33m5cc75b4[m fixed
+[33m3b63625[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33m64b59fb[m Integrated topic modeing on daily patterns visualization.
+[33mc285f28[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33me1d7d16[m I've update the notebook question 3
+[33mb1691bf[m I've fix the comunication graph
+[33m980a65e[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33m0cf3743[m Fixed topic modeling
+[33m659b117[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33m3b7d2ed[m Better description
+[33mea967b1[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33mc8bc09e[m remove the decription
+[33m3df7b87[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33mfef2a40[m Fix del bugsito
+[33m2793a8a[m Adding filters on the chat and improvin a little bit the view
+[33m331bfb1[m Relationship graph
+[33mbdfa5ca[m Adding the first approach for relationship graph
+[33m0426702[m I've change the name of the module
+[33m146db35[m I've modify the endpoint to serve the relation graph
+[33m420641f[m Adding the relationship graph on the flask project for reading
+[33m4ce0a63[m Relationship graph
+[33m2c6e9c1[m Adding the legend for the node shape, and improving some part of the code
+[33m980425e[m Adding Pseudonym on the json data
+[33mb53e9b0[m Cleaning the results of the spacy model for pseudonym detection
+[33m895d8bf[m Implementation of the graph view,  chat view, heatmap and their interactions
+[33mbff0fa2[m Different calculations to obtain a similarity between entities
+[33md69bebe[m I've modified the graph endpoint to send the similarity matrix for frontend
+[33mb8278ad[m i've added the entity similarity matrix for the graph visualization
+[33ma131737[m Still broken topic modeling
+[33m39792df[m Deleting pahovis
+[33m48c3862[m Added important term highlight to daily patern visualiation
+[33m48f9f6e[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33m268ff6c[m Added keywords visualization
+[33m6c43605[m last changes before class
+[33m79a1a2e[m First approach of the graph visualization
+[33m37c651a[m Improvements on daily patterns visualization.
+[33mee1e25c[m Improvements on daily pattens visualization.
+[33me4dea7a[m New things
+[33mb36ef03[m i've added the csv parsed data for paohvis visualization
+[33md0637b0[m I've added the communication file parsed in the graph format
+[33m52de536[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33m4ec36f4[m Updating the notebook of question 3
+[33ma481487[m Updated titles
+[33m4638bc5[m Updated daily patterns visualization
+[33mbdcf8a6[m Merge branch 'master' of github.com:Mbaez97/vast-challenge3-2025
+[33m427d5ff[m Implement feature X to enhance user experience and improve performance
+[33m827ddfd[m Added daily pattern visualization prototype
+[33mce2e905[m Merge branch 'master' of https://github.com/Mbaez97/vast-challenge3-2025
+[33m61c3b5e[m avance
+[33m1394e21[m addding scripts for question3
+[33m05cbead[m Added flask/d3 app for visualizations.
+[33m089d719[m Add data parsing functions and CSV export for event data - Introduced functions to collect unique entity names and extract time slots from timestamps. - Implemented participant detection based on content analysis. - Added logic to create a CSV file with relevant event data, including edge IDs, node names, time slots, and descriptions. - Ensured fallback handling for unknown participants in the output.
+[33m43ca79b[m i've added paohvis and a data parser for use it
+[33meb7cd63[m EDA + slides
+[33m21018da[m Exploration on question1
+[33m073529f[m Added uv to manage dependencies and notebook to explore question 1
+[33m3e29f26[m Adding the data into repo
+[33md146a2a[m Update README
+[33m2bf6037[m Update README.md
+[33mcf87ae3[m Initial commit

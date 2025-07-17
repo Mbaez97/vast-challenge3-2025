@@ -1,3 +1,4 @@
+
 {
   "nodes": [
     {
@@ -22,7 +23,7 @@
       "name": "Kelly",
       "sub_type": "Person",
       "id": "Kelly",
-      "is_pseudonym": true
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
@@ -38,7 +39,7 @@
       "name": "Mrs. Money",
       "sub_type": "Person",
       "id": "Mrs. Money",
-      "is_pseudonym": false
+      "is_pseudonym": true
     },
     {
       "type": "Entity",
@@ -302,7 +303,7 @@
       "name": "Elise",
       "sub_type": "Person",
       "id": "Elise",
-      "is_pseudonym": true
+      "is_pseudonym": false
     },
     {
       "type": "Entity",
@@ -1405,13 +1406,6 @@
       "source": "The Middleman",
       "target": "Mrs. Money",
       "event_id": "Event_Communication_278",
-      "datetime": "2040-10-04 10:21:00",
-      "content": "Mrs. Money, this is Middleman. I've redirected Council's attention to other areas. Meeting with Boss tonight at 9PM to discuss new focus. Have you secured those alternative funding channels you mentioned? Need status update."
-    },
-    {
-      "source": "The Middleman",
-      "target": "Boss",
-      "event_id": "Event_Communication_279",
       "datetime": "2040-10-04 10:21:00",
       "content": "Mrs. Money, this is Middleman. I've redirected Council's attention to other areas. Meeting with Boss tonight at 9PM to discuss new focus. Have you secured those alternative funding channels you mentioned? Need status update."
     },
@@ -3614,13 +3608,6 @@
       "content": "Rodriguez, Davis here. Maintain current position with Mako at Nemo Reef. Security team arriving at 0600. Continue operating under permit #CR-7844 and keep tourism appearance. I'll update after meeting with Nadia tonight."
     },
     {
-      "source": "Rodriguez",
-      "target": "Nadia Conti",
-      "event_id": "Event_Communication_805",
-      "datetime": "2040-10-12 09:24:00",
-      "content": "Rodriguez, Davis here. Maintain current position with Mako at Nemo Reef. Security team arriving at 0600. Continue operating under permit #CR-7844 and keep tourism appearance. I'll update after meeting with Nadia tonight."
-    },
-    {
       "source": "Osprey",
       "target": "Mako",
       "event_id": "Event_Communication_808",
@@ -3796,13 +3783,6 @@
       "content": "Davis here to V. Miesel Shipping. Crew reallocation from Remora to Neptune underway as requested. Will maintain confidentiality regarding permit #CR-7844. Security team arrives 0600 tomorrow. Meeting Nadia tonight to finalize documentation."
     },
     {
-      "source": "Davis",
-      "target": "Nadia Conti",
-      "event_id": "Event_Communication_845",
-      "datetime": "2040-10-12 11:14:00",
-      "content": "Davis here to V. Miesel Shipping. Crew reallocation from Remora to Neptune underway as requested. Will maintain confidentiality regarding permit #CR-7844. Security team arrives 0600 tomorrow. Meeting Nadia tonight to finalize documentation."
-    },
-    {
       "source": "V. Miesel Shipping",
       "target": "Nadia Conti",
       "event_id": "Event_Communication_846",
@@ -3897,13 +3877,6 @@
       "source": "The Accountant",
       "target": "Boss",
       "event_id": "Event_Communication_866",
-      "datetime": "2040-10-13 08:19:00",
-      "content": "Boss, The Accountant here. Conservation vessels deploying underwater microphones around Nemo Reef. Meeting V. Miesel management at 10AM tomorrow. The Middleman confirms our 0500 meeting with enhanced encryption. Southwest clearance urgent after council pressure increased."
-    },
-    {
-      "source": "The Middleman",
-      "target": "The Accountant",
-      "event_id": "Event_Communication_867",
       "datetime": "2040-10-13 08:19:00",
       "content": "Boss, The Accountant here. Conservation vessels deploying underwater microphones around Nemo Reef. Meeting V. Miesel management at 10AM tomorrow. The Middleman confirms our 0500 meeting with enhanced encryption. Southwest clearance urgent after council pressure increased."
     },
