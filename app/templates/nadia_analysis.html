@@ -1,0 +1,21 @@
+<!-- Analysis of Nadia Conti Visualization -->
+<div id="nadia-content" class="w-full">
+    <div id="network-graph" class="mb-6 w-full" style="min-height:600px;"></div>
+    <div id="contacts-list" class="w-full"></div>
+</div>
+
+<script>
+if (typeof init_nadia_analysis === 'undefined') {
+    console.log('Loading Nadia analysis script...');
+    const script = document.createElement('script');
+    script.src = "{{ url_for('static', filename='js/nadia_analysis.js') }}";
+    script.onload = function() {
+        if (typeof init_nadia_analysis === 'function') {
+            init_nadia_analysis();
+        }
+    };
+    document.head.appendChild(script);
+} else if (typeof init_nadia_analysis === 'function') {
+    init_nadia_analysis();
+}
+</script>
