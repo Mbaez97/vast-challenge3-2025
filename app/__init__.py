@@ -35,7 +35,7 @@ app.config["HEATMAP_SIMILARITY_FILE"] = HEATMAP_SIMILARITY_FILE
 app.config["RELATIONSHIPS_FILE"] = RELATIONSHIPS_FILE
 
 # List of visualization modules
-VISUALIZATIONS = ["daily_patterns", "topic_modeling", "graph", "nadia_analysis"]
+VISUALIZATIONS = ["daily_patterns", "graph", "topic_modeling", "nadia_analysis"]
 
 # Cache for loaded modules
 visualization_modules = {}
