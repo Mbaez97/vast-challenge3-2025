@@ -566,21 +566,88 @@ function init_graph() {
       commG.attr("transform", ev.transform);
     }));
 
-    // ── RELATIONSHIP GRAPH (static) ───────────────────────────────────
-    const relSim = d3.forceSimulation(relNodes)
-      .force("link", d3.forceLink(relLinks).id(d => d.id).distance(80))
-      .force("charge", d3.forceManyBody().strength(-200))
-      .force("center", d3.forceCenter(relWidth / 2, height / 2))
-      .force("collision", d3.forceCollide().radius(25))
-      .force("radial", d3.forceRadial(d => radialRadius[d.type] || 150, relWidth / 2, height / 2).strength(0.8));
-
+    // ── RELATIONSHIP GRAPH (hierarchical edge bundling) ───────────────────────────────────
+    console.log('🚀 Creating Relationship Graph with hierarchical edge bundling...');
+    
+    // Calculate positions for relationship nodes using same logic as communication
+    const relCenterX = relWidth / 2;
+    const relCenterY = height / 2;
+    const relRadius = Math.min(relWidth, height) / 2 - 80;
+    const relBundlingRadius = relRadius * 0.15;
+    
+    // Group relationship nodes by type
+    const relNodesByType = d3.group(relNodes, d => d.type);
+    const relActiveTypes = allTypes.filter(typeName => relNodesByType.has(typeName));
+    
+    // Create circular layout for relationship nodes
+    let relAllLeafNodes = [];
+    let relNodePositions = new Map();
+    
+    const relTotalNodes = relNodes.length;
+    let relCurrentAngle = -Math.PI / 2; // Start at top
+    
+    relActiveTypes.forEach((typeName) => {
+      const nodesOfType = relNodesByType.get(typeName) || [];
+      if (nodesOfType.length === 0) return;
+      
+      // Allocate angle proportional to number of nodes
+      const proportion = nodesOfType.length / relTotalNodes;
+      const sectorAngle = 2 * Math.PI * proportion;
+      
+      // Sort nodes by id for consistent positioning
+      const sortedNodes = nodesOfType.sort((a, b) => a.id.localeCompare(b.id));
+      const nodeCount = sortedNodes.length;
+      
+      sortedNodes.forEach((node, nodeIndex) => {
+        // Distribute nodes evenly along the arc assigned to this type
+        const t = nodeCount > 1 ? nodeIndex / (nodeCount - 1) : 0.5;
+        const angle = relCurrentAngle + (t * sectorAngle * 0.95);
+        
+        // Position on perimeter
+        const x = relCenterX + Math.cos(angle) * relRadius;
+        const y = relCenterY + Math.sin(angle) * relRadius;
+        
+        const nodeData = {
+          x, y,
+          angle,
+          radius: relRadius,
+          ...node
+        };
+        
+        relNodePositions.set(node.id, nodeData);
+        relAllLeafNodes.push(nodeData);
+      });
+      
+      relCurrentAngle += sectorAngle;
+    });
+    
+    // Create bundled relationship links
+    const relBundledLinks = relLinks.map(link => {
+      const source = relNodePositions.get(link.source);
+      const target = relNodePositions.get(link.target);
+      if (source && target) {
+        return {
+          ...link,
+          source: source,
+          target: target,
+          path: createHierarchicalBundledPath(source, target)
+        };
+      }
+      return null;
+    }).filter(d => d !== null);
+    
+    // Draw relationship links with hierarchical edge bundling
     const relLinkSel = relG.append("g").attr("class", "links")
       .selectAll("path")
-      .data(relLinks)
+      .data(relBundledLinks)
       .join("path")
+      .attr("d", d => d.path)
       .attr("fill", "none")
       .attr("stroke", d => linkColor(d.type))
-      .attr("stroke-width", 2)
+      .attr("stroke-width", 1.2)
+      .attr("opacity", 0.6)
+      .style("stroke-linecap", "round")
+      .style("stroke-linejoin", "round")
       .on("mouseover", (e, d) => {
         tooltip
           .html(
@@ -606,57 +673,63 @@ function init_graph() {
       })
       .on("mouseout", () => tooltip.style("visibility", "hidden"));
 
+    // Draw relationship nodes with same style as communication graph
     const relNode = relG.append("g").attr("class", "nodes")
       .selectAll("path")
-      .data(relNodes)
+      .data(relAllLeafNodes)
       .join("path")
-      .attr("d", d => d3.symbol()
-        .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
-        .size(80)()
-      )
+      .attr("d", d => {
+        const size = 80;
+        const symbolType = d.is_pseudonym ? d3.symbolStar : d3.symbolCircle;
+        return d3.symbol().type(symbolType).size(size)();
+      })
+      .attr("transform", d => `translate(${d.x},${d.y})`)
       .attr("fill", d => color(d.type))
       .attr("stroke", "#333")
       .attr("stroke-width", 1.5)
-      .style("cursor", "grab")
-      .call(d3.drag()
-        .on("start", e => { if (!e.active) relSim.alphaTarget(0.3).restart(); e.subject.fx = e.subject.x; e.subject.fy = e.subject.y; })
-        .on("drag", e => { e.subject.fx = e.x; e.subject.fy = e.y; })
-        .on("end", e => { if (!e.active) relSim.alphaTarget(0); e.subject.fx = null; e.subject.fy = null; })
-      );
+      .attr("opacity", 0.9)
+      .attr("data-type", d => d.type)
+      .attr("data-pseudonym", d => d.is_pseudonym)
+      .style("cursor", "pointer");
 
+    // Add relationship node labels
     const relLabel = relG.append("g").attr("class", "labels")
       .selectAll("text")
-      .data(relNodes)
+      .data(relAllLeafNodes)
       .join("text")
-      .text(d => d.id)
-      .attr("dx", 12)
-      .attr("dy", 4)
-      .attr("font-size", "11px")
-      .attr("font-weight", "400")
-      .attr("fill", "#333");
+      .text(d => {
+        const maxLength = 10;
+        return d.id.length > maxLength ? d.id.substring(0, maxLength) + "..." : d.id;
+      })
+      .attr("x", d => {
+        const labelRadius = relRadius + 30;
+        return relCenterX + Math.cos(d.angle) * labelRadius;
+      })
+      .attr("y", d => {
+        const labelRadius = relRadius + 30;
+        return relCenterY + Math.sin(d.angle) * labelRadius;
+      })
+      .attr("text-anchor", d => {
+        const degrees = (d.angle * 180 / Math.PI + 360) % 360;
+        if (degrees > 90 && degrees < 270) {
+          return "end";
+        }
+        return "start";
+      })
+      .attr("dy", "0.35em")
+      .attr("font-size", "10px")
+      .attr("font-weight", "500")
+      .attr("fill", d => color(d.type))
+      .attr("opacity", 1)
+      .style("font-family", "'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif")
+      .style("text-shadow", "1px 1px 2px rgba(255,255,255,0.8)");
 
-    relSim.on("tick", () => {
-      relLinkSel.attr("d", d => {
-        const sx = d.source.x, sy = d.source.y;
-        const tx = d.target.x, ty = d.target.y;
-        const dx = tx - sx, dy = ty - sy;
-        const dr = Math.hypot(dx, dy)
-          / (1 + Math.abs(d._parallelIndex - (d._parallelTotal - 1) / 2));
-        // the denominator staggers the radius for each parallel link
-
-        // SVG arc: rx, ry, x-axis-rotation, large-arc-flag, sweep-flag, x, y
-        return `M${sx},${sy}A${dr},${dr} 0 0,1 ${tx},${ty}`;
-      });
-      relNode
-        .attr("transform", d => `translate(${d.x},${d.y})`);
-      relLabel
-        .attr("x", d => d.x)
-        .attr("y", d => d.y);
-    });
-
+    // Add zoom for relationship graph
     relSvg.call(d3.zoom().on("zoom", ev => {
       relG.attr("transform", ev.transform);
     }));
+    
+    console.log(`✅ Relationship graph: ${relAllLeafNodes.length} nodes, ${relBundledLinks.length} bundled links`);
 
     // ── Interactive Type Legend on Communication ──────────────────────
     const types = allTypes; // Use same order as arcs
@@ -852,12 +925,11 @@ function init_graph() {
           .style("display", d => nbr.has(d.id) ? null : "none")
           .attr("d", d => d3.symbol()
             .type(d.is_pseudonym ? d3.symbolStar : d3.symbolCircle)
-            .size(selectedNodes.has(d.id) ? 2000 : 80)()
+            .size(selectedNodes.has(d.id) ? 200 : 80)()
           );
 
         relLabel
-          .style("display", d => nbr.has(d.id) ? null : "none")
-          .attr("dx", d => selectedNodes.has(d.id) ? 32 : 12);
+          .style("display", d => nbr.has(d.id) ? null : "none");
 
         relLinkSel
           .style("display", l =>
@@ -874,8 +946,7 @@ function init_graph() {
           );
 
         relLabel
-          .style("display", d => selectedTypes.has(d.type) ? null : "none")
-          .attr("dx", 12);
+          .style("display", d => selectedTypes.has(d.type) ? null : "none");
 
         relLinkSel
           .style("display", l => {
@@ -892,8 +963,7 @@ function init_graph() {
             .size(80)()
           );
 
-        relLabel.style("display", null)
-          .attr("dx", 12);
+        relLabel.style("display", null);
         relLinkSel.style("display", null);
       }
     }
