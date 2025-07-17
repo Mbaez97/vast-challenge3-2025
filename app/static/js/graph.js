@@ -138,26 +138,26 @@ function init_graph() {
     const linkTypes = Array.from(new Set(relLinks.map(d => d.type)));
     const linkColor = d3.scaleOrdinal(d3.schemeCategory10)
       .domain(linkTypes);
-    const legendRelation = relSvg.append("g")
-      .attr("class", "link-legend")
-      .attr("transform", "translate(20,20)");
+    // const legendRelation = relSvg.append("g")
+    //   .attr("class", "link-legend")
+    //   .attr("transform", "translate(20,20)");
 
-    legendRelation.selectAll("g")
-      .data(linkTypes)
-      .join("g")
-      .attr("transform", (_, i) => `translate(0,${i * 20})`)
-      .call(g => {
-        g.append("line")
-          .attr("x1", 0).attr("y1", 5)
-          .attr("x2", 20).attr("y2", 5)
-          .attr("stroke", d => linkColor(d))
-          .attr("stroke-width", 2);
-        g.append("text")
-          .attr("x", 25).attr("y", 5)
-          .text(d => d)
-          .attr("alignment-baseline", "middle")
-          .attr("font-size", "12px");
-      });
+    // legendRelation.selectAll("g")
+    //   .data(linkTypes)
+    //   .join("g")
+    //   .attr("transform", (_, i) => `translate(0,${i * 20})`)
+    //   .call(g => {
+    //     g.append("line")
+    //       .attr("x1", 0).attr("y1", 5)
+    //       .attr("x2", 20).attr("y2", 5)
+    //       .attr("stroke", d => linkColor(d))
+    //       .attr("stroke-width", 2);
+    //     g.append("text")
+    //       .attr("x", 25).attr("y", 5)
+    //       .text(d => d)
+    //       .attr("alignment-baseline", "middle")
+    //       .attr("font-size", "12px");
+    //   });
 
     // Type → color - use consistent domain ordering
     const color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -168,9 +168,6 @@ function init_graph() {
 
     // Set explicit domain for color scale to ensure consistent ordering
     color.domain(allTypes);
-
-    console.log(`📋 All entity types found (sorted):`, allTypes);
-    console.log(`🎨 Color mapping:`, allTypes.map(t => ({ type: t, color: color(t) })));
 
     // Radial radii for nodes
     const radialRadius = {
@@ -211,7 +208,6 @@ function init_graph() {
 
     // Use only types that have nodes, but maintain the sorted order
     const activeTypes = allTypes.filter(typeName => nodesByType.has(typeName));
-    console.log(`🔄 ActiveTypes order:`, activeTypes);
 
     // Arrange all nodes on the perimeter, grouped by type
     const totalNodes = commNodes.length;
@@ -298,38 +294,6 @@ function init_graph() {
       });
     });
 
-    console.log(`🌐 Created ${allLeafNodes.length} nodes in circular layout`);
-    console.log(`🗺️ Entity types:`, typeGroups.map(t => `${t.name}: ${t.nodeCount}`));
-    console.log(`🎨 Type groups with angles:`, typeGroups.map(t => ({
-      name: t.name,
-      color: t.color,
-      startAngle: t.sectorStart,
-      endAngle: t.sectorEnd,
-      angleInDegrees: (t.angle * 180 / Math.PI)
-    })));
-    console.log(`🔄 TypeGroups order:`, typeGroups.map(t => t.name));
-
-    // Debug: Check specific nodes and their sectors
-    const debugNodes = ["Nadia Conti", "Himark Harbor", "The Intern"];
-    debugNodes.forEach(nodeName => {
-      const node = allLeafNodes.find(n => n.id === nodeName);
-      if (node) {
-        const sector = typeGroups.find(t => t.name === node.type);
-        console.log(`🔍 ${nodeName} debug:`, {
-          id: node.id,
-          type: node.type,
-          typeCategory: node.typeCategory,
-          angle: node.angle,
-          angleInDegrees: (node.angle * 180 / Math.PI),
-          color: color(node.type),
-          sectorStart: node.sectorStart,
-          sectorEnd: node.sectorEnd,
-          sectorColor: sector ? sector.color : 'NOT_FOUND',
-          sectorAngle: sector ? (sector.angle * 180 / Math.PI) : 'NOT_FOUND'
-        });
-      }
-    });
-
     // Classic Hierarchical Edge Bundling algorithm
     function createHierarchicalBundledPath(source, target) {
       const sx = source.x, sy = source.y;
@@ -395,7 +359,6 @@ function init_graph() {
     }
 
     // Create links with hierarchical edge bundling
-    console.log(`📊 Creating ${commLinks.length} bundled links`);
     const bundledLinks = commLinks.map(link => {
       const source = nodePositions.get(link.source);
       const target = nodePositions.get(link.target);
@@ -409,7 +372,6 @@ function init_graph() {
       }
       return null;
     }).filter(d => d !== null);
-    console.log(`✅ Created ${bundledLinks.length} valid bundled links`);
 
     // Optional: sector separators (commented out for cleaner look like reference)
     /*
@@ -425,8 +387,6 @@ function init_graph() {
         .attr("stroke-width", 0.5)
         .attr("opacity", 0.2);
     */
-
-    // Remove colored arcs - show only individual nodes with their colors
 
     // Draw elegant hierarchical edge bundling connections like the reference
     const commLinkSel = commG.append("g").attr("class", "links")
@@ -594,7 +554,6 @@ function init_graph() {
     }));
 
     // ── RELATIONSHIP GRAPH (hierarchical edge bundling) ───────────────────────────────────
-    console.log('🚀 Creating Relationship Graph with hierarchical edge bundling...');
     
     // Calculate positions for relationship nodes using same logic as communication
     const relCenterX = relWidth / 2;
@@ -755,8 +714,6 @@ function init_graph() {
       relG.attr("transform", ev.transform);
     }));
     
-    console.log(`✅ Relationship graph: ${relAllLeafNodes.length} nodes, ${relBundledLinks.length} bundled links`);
-
     // ── Interactive Type Legend on Communication ──────────────────────
     const types = allTypes; // Use same order as arcs
     console.log(`🔄 Legend types order:`, types);
@@ -769,13 +726,10 @@ function init_graph() {
       .attr("transform", (_, i) => `translate(0,${i * 20})`)
       .style("cursor", "pointer")
       .on("click", (e, t) => {
-        console.log(`🎯 Legend clicked:`, t);
         if (selectedTypes.has(t)) {
           selectedTypes.delete(t);
-          console.log(`❌ Removed type:`, t);
         } else {
           selectedTypes.add(t);
-          console.log(`✅ Added type:`, t);
         }
         console.log(`📋 Current selectedTypes:`, Array.from(selectedTypes));
         updateHighlights();
@@ -1001,7 +955,7 @@ function init_graph() {
       updateSelectedDisplay();
       renderChat();
       updateHighlights();
-      renderHeatmap();
+      // renderHeatmap();
     });
     relNode.on("click", (e, d) => {
       if (selectedNodes.has(d.id)) selectedNodes.delete(d.id);
@@ -1009,7 +963,7 @@ function init_graph() {
       updateSelectedDisplay();
       renderChat();
       updateHighlights();
-      renderHeatmap();
+      // renderHeatmap();
     });
 
     d3.select("#clear-filter-btn").on("click", () => {
@@ -1022,30 +976,21 @@ function init_graph() {
 
     // Heatmap rendering
     function renderHeatmap() {
-      console.log(`🔄 renderHeatmap() called`);
       const hm = data.heatmap;
       let ents = hm.entities.slice(),
         mat = hm.matrix.map(r => r.slice());
       
-      console.log(`🗺️ Heatmap entities sample:`, ents.slice(0, 5));
-      console.log(`🗺️ EntityTypeMap sample:`, Array.from(entityTypeMap.entries()).slice(0, 5));
-      console.log(`📊 selectedTypes.size:`, selectedTypes.size, `selectedNodes.size:`, selectedNodes.size);
-
       // filter rows & cols by type or selected nodes
       if (selectedTypes.size) {
-        console.log(`🔍 Filtering heatmap by selected types:`, Array.from(selectedTypes));
         const keep = ents
           .map((e, i) => selectedTypes.has(entityTypeMap.get(e)) ? i : -1)
           .filter(i => i >= 0);
-        console.log(`📊 Original entities: ${ents.length}, Filtered entities: ${keep.length}`);
         ents = keep.map(i => hm.entities[i]);
         mat = keep.map(i => keep.map(j => hm.matrix[i][j]));
       } else if (selectedNodes.size) {
-        console.log(`🔍 Filtering heatmap by selected nodes:`, Array.from(selectedNodes));
         const keep = ents
           .map((e, i) => selectedNodes.has(e) ? i : -1)
           .filter(i => i >= 0);
-        console.log(`📊 Original entities: ${ents.length}, Filtered entities: ${keep.length}`);
         ents = keep.map(i => hm.entities[i]);
         mat = keep.map(i => keep.map(j => hm.matrix[i][j]));
       }
@@ -1143,8 +1088,15 @@ function init_graph() {
         .attr("x1", "0%").attr("y1", "100%")
         .attr("x2", "0%").attr("y2", "0%");
       grad.append("stop").attr("offset", "0%").attr("stop-color", scale(0));
+      grad.append("stop").attr("offset", "50%").attr("stop-color", scale(0.5));
       grad.append("stop").attr("offset", "100%").attr("stop-color", scale(1));
-
+      // const nStops = 32;
+      // for (let i = 0; i < nStops; i++) {
+      //   const t = i/(nStops-1);
+      //   grad.append("stop")
+      //     .attr("offset", `${(1 - t)*100}%`)
+      //     .attr("stop-color", colorScale(t));
+      // }
       svgHM.append("rect")
         .attr("class", "heatmap-legend")
         .attr("x", W + 20)
@@ -1168,5 +1120,3 @@ function init_graph() {
   }).catch(err => console.error("Error loading graph data:", err));
 }
 
-// Confirm function is loaded
-console.log('✅ init_graph function defined and ready');
