@@ -1303,7 +1303,7 @@ function init_nadia_analysis() {
         window.directCommunications = directCommunications;
         window.indirectCommunications = indirectCommunications;
         
-        console.log('🌐 Global communications saved:', {
+        console.log('Global communications saved:', {
             directCount: directCommunications.length,
             indirectCount: indirectCommunications.length
         });
