@@ -90,19 +90,19 @@ def is_meaningful_text(text, min_words=3):
     return len(meaningful_words) >= min_words
 
 
-def get_data(method="bertopic", **kwargs):
+def get_data(method="lda", **kwargs):
     logger.debug(f"Generating topic modeling data with method: {method}")
 
     # Parse vectorizer for LDA
-    vectorizer_type = "tfidf"
+    vectorizer_type = "bow"
     if method.startswith("lda"):
         parts = method.split("?")
         method = "lda"
         if len(parts) > 1:
-            vectorizer_type = parts[1].split("=")[1] if "=" in parts[1] else "tfidf"
+            vectorizer_type = parts[1].split("=")[1] if "=" in parts[1] else "bow"
 
     # Get topic count parameters
-    num_topics = kwargs.get("num_topics", "auto")
+    num_topics = kwargs.get("num_topics", 14)
     min_topic_size = kwargs.get("min_topic_size", 5)
 
     # Load communication data
