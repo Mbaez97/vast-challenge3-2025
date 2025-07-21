@@ -27,7 +27,7 @@ We have a knowledge graph describing the last two weeks on the island, this grap
 ## Submission
 
 The submission consists of:
-- `index.htm`: Contains the written answers to all four challenge questions along with images of the visualizaions and analysis.
+- [`index.htm`](index.htm): Contains the written answers to all four challenge questions along with images of the visualizaions and analysis.
 - Video demonstration: [https://youtu.be/ibX6Hd1Dvuc](https://youtu.be/ibX6Hd1Dvuc) showing the interactive visualization tools and their usage.
 
 ## Project structure:
