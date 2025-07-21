@@ -91,4 +91,4 @@ All team members are affiliated with Escola de Matemática Aplicada - Fundação
 
 ## Acknowledgments
 
-This work was completed as part of the Visualization for Machine Learning - Graduate Course (2025.1) by Prof. Jorge Poco at Escola de Matemática Aplicada - Fundação Getúlio Vargas (EMAp - FGV). We thank the VAST Challenge organizers for providing this opportunity to apply visual analytics techniques to real-world problems.
+This work was completed as part of the Visualization for Machine Learning - Graduate Course (2025.1) by Prof. Jorge Poco at Escola de Matemática Aplicada - Fundação Getúlio Vargas (EMAp - FGV). We thank the [VAST Challenge](https://vast-challenge.github.io/2025/index.html) organizers for providing this opportunity to apply visual analytics techniques to real-world problems.
