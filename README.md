@@ -24,14 +24,26 @@ We have a knowledge graph describing the last two weeks on the island, this grap
     - Through visual analytics, provide evidence that Nadia is, or is not, doing something illegal.
     - Summarize Nadia's actions visually. Are Clepper's suspicions justified?
 
+## Submission
+
+The submission consists of:
+- `index.htm`: Contains the written answers to all four challenge questions along with images of the visualizaions and analysis.
+- Video demonstration: [https://youtu.be/ibX6Hd1Dvuc](https://youtu.be/ibX6Hd1Dvuc) showing the interactive visualization tools and their usage.
+
 ## Project structure:
-- `data/`: Contains the knowledge graph data in JSON format.
-- `notebooks/`: Jupyter notebooks for data analysis and previous visualization.
-- `src/`: Source code for data processing and visualization .
-  - `backend/`: Backend code for data processing and analysis.
-  - `frontend/`: Frontend code for visualizations and user interface.
+- `app/`: Flask application containing the main visualization system.
+  - `static/`: Static files (CSS and JavaScript) for visualizations.
+    - `css/`: Stylesheets for different visualization components.
+    - `js/`: JavaScript files for interactive visualizations.
+  - `templates/`: HTML templates for the Flask web interface.
+  - `visualizations/`: Python modules for data processing and visualization logic.
+- `data/`: Contains the knowledge graph data in JSON and CSV formats.
+- `notebooks/`: Jupyter notebooks for data analysis and exploration.
+- `images/`: Project images and diagrams.
+- `index.htm`: Main submission file.
 - `README.md`: This file, providing an overview of the project.
-- `pyproject.toml`: List of Python dependencies for the project.
+- `pyproject.toml`: Python dependencies and project configuration.
+- `uv.lock`: Lock file for UV package manager.
 
 ## Running flask app
 
@@ -65,4 +77,18 @@ uv sync
 uv add numpy
 ```
 
-I also recomend pyenv installed on the machine to manage the instalation of different python versions.
+We also recomend pyenv installed on the machine to manage the instalation of different python versions.
+
+## Team
+
+- Victor Andres de la Puente - andres.puente@fgv.br
+- Juliano Genari - araujo.juliano@fgv.edu.br
+- Marcelo Báez - marcelo.baez@fgv.br
+- Felipe Moreno-Vera - felipe.moreno@fgv.br
+- Jorge Poco - jorge.poco@fgv.br (Corresponding author)
+
+All team members are affiliated with Escola de Matemática Aplicada - Fundação Getúlio Vargas (EMAp - FGV).
+
+## Acknowledgments
+
+This work was completed as part of the Visualization for Machine Learning - Graduate Course (2025.1) by Prof. Jorge Poco at Escola de Matemática Aplicada - Fundação Getúlio Vargas (EMAp - FGV). We thank the VAST Challenge organizers for providing this opportunity to apply visual analytics techniques to real-world problems.
